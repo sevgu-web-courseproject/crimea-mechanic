@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BusinessLogic.Managers.Abstraction;
+using BusinessLogic.Objects.User;
+using Common.Constants;
 using DataAccessLayer.Models.Abstraction;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -38,28 +40,15 @@ namespace BusinessLogic.Managers
         /// Create Properties
         /// </summary>
         /// <param name="user">user</param>
-        /// <param name="isRegular">является ли пользователь с ролью Regular</param>
-        /// <param name="isOperator">является ли пользователь с ролью оператора</param>
         /// <returns></returns>
-        private AuthenticationProperties CreateProperties(IApplicationUser user, bool isRegular, bool isOperator)
+        private AuthenticationProperties CreateProperties(IApplicationUser user)
         {
-
-            var roles = new List<string>();
-            if (isRegular)
-            {
-                roles.Add(CommonRoles.RegularRole);
-            }
-            if (isOperator)
-            {
-                roles.Add(CommonRoles.OperatorRole);
-            }
 
             IDictionary<string, string> data = new Dictionary<string, string>
             {
                 {ClaimsConstants.ClaimUserId, user.Id},
                 {ClaimsConstants.ClaimUserName, user.UserName},
-                {ClaimsConstants.ClaimUNeedToChangePassword, user.NeedToChangePassword.ToString()},
-                {ClaimsConstants.ClaimRoles, string.Join(ClaimsConstants.ClaimRolesSeparator,roles.ToArray())}
+                {ClaimsConstants.ClaimRole, "TODO"}
             };
             return new AuthenticationProperties(data);
         }
@@ -74,27 +63,25 @@ namespace BusinessLogic.Managers
             }
             catch (Exception)
             {
-                context.SetError(UserResources.InvalidGrant, UserResources.WrongUserNameOrPasswordError);
+                context.SetError("Неверные права", "Неверный логин или пароль");
                 return;
             }
             if (user == null)
             {
-                context.SetError(UserResources.InvalidGrant, UserResources.WrongUserNameOrPasswordError);
-                return;
-            }
-            if (!user.EmailConfirmed)
-            {
-                context.SetError(UserResources.InvalidGrant, UserResources.UserEmailIsNotConfirmedError);
+                context.SetError("Неверные права", "Неверный логин или пароль");
                 return;
             }
             var oAuthIdentity = await userManager.CreateIdentityAsync(user, OAuthDefaults.AuthenticationType);
-            var isRegular = await userManager.IsInRoleAsync(user.Id, CommonRoles.RegularRole);
-            var isOperator = await userManager.IsInRoleAsync(user.Id, CommonRoles.OperatorRole);
-            var properties = CreateProperties(user, isRegular, isOperator);
+            var properties = CreateProperties(user);
             var ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             var cookiesIdentity = await userManager.CreateIdentityAsync(user, CookieAuthenticationDefaults.AuthenticationType);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
+        }
+
+        public Task Register(RegisterUserDto dto)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Core.4.2.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Windsor.4.1.0\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -56,7 +62,10 @@
       <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -65,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogicInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserManager.cs" />
   </ItemGroup>
@@ -73,6 +83,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.Constants\Common.Constants.csproj">
+      <Project>{bcf8b083-3754-49e3-8d48-208c9342ec78}</Project>
+      <Name>Common.Constants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\DAL\DataAccessLayer.Models.Abstraction\DataAccessLayer.Models.Abstraction.csproj">
       <Project>{bc903fc4-80bd-4afc-83dd-d0797f306e44}</Project>
       <Name>DataAccessLayer.Models.Abstraction</Name>
@@ -80,6 +94,10 @@
     <ProjectReference Include="..\BusinessLogic.Managers.Abstraction\BusinessLogic.Managers.Abstraction.csproj">
       <Project>{1d713ec7-81e5-402d-aa4e-b9bd7643b6a7}</Project>
       <Name>BusinessLogic.Managers.Abstraction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessLogic.Objects\BusinessLogic.Objects.csproj">
+      <Project>{83f2b36c-a43e-4b1a-921b-3769de2f8ae7}</Project>
+      <Name>BusinessLogic.Objects</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -21,6 +21,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic.Managers", "B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic.Managers.Abstraction", "BusinessLogic\BusinessLogic.Managers.Abstraction\BusinessLogic.Managers.Abstraction.csproj", "{1D713EC7-81E5-402D-AA4E-B9BD7643B6A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalContainer", "Infrastructure\GlobalContainer\GlobalContainer.csproj", "{E754E731-F89E-438D-844F-7DA926F67221}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjector", "Infrastructure\DependencyInjector\DependencyInjector.csproj", "{8BF31CA4-D938-4284-91CF-55A6F218FE2A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{D3AC73A9-1F67-49DE-BCD2-CDEADA8A0694}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Constants", "Common\Common.Constants\Common.Constants.csproj", "{BCF8B083-3754-49E3-8D48-208C9342EC78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic.Objects", "BusinessLogic\BusinessLogic.Objects\BusinessLogic.Objects.csproj", "{83F2B36C-A43E-4B1A-921B-3769DE2F8AE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +61,22 @@ Global
 		{1D713EC7-81E5-402D-AA4E-B9BD7643B6A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D713EC7-81E5-402D-AA4E-B9BD7643B6A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D713EC7-81E5-402D-AA4E-B9BD7643B6A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E754E731-F89E-438D-844F-7DA926F67221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E754E731-F89E-438D-844F-7DA926F67221}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E754E731-F89E-438D-844F-7DA926F67221}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E754E731-F89E-438D-844F-7DA926F67221}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BF31CA4-D938-4284-91CF-55A6F218FE2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BF31CA4-D938-4284-91CF-55A6F218FE2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BF31CA4-D938-4284-91CF-55A6F218FE2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BF31CA4-D938-4284-91CF-55A6F218FE2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCF8B083-3754-49E3-8D48-208C9342EC78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCF8B083-3754-49E3-8D48-208C9342EC78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCF8B083-3754-49E3-8D48-208C9342EC78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCF8B083-3754-49E3-8D48-208C9342EC78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83F2B36C-A43E-4B1A-921B-3769DE2F8AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83F2B36C-A43E-4B1A-921B-3769DE2F8AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83F2B36C-A43E-4B1A-921B-3769DE2F8AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83F2B36C-A43E-4B1A-921B-3769DE2F8AE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +87,10 @@ Global
 		{BC903FC4-80BD-4AFC-83DD-D0797F306E44} = {5A1BECF7-EEFA-4BC5-9777-0F2C1509AEBF}
 		{1B281D22-CD3E-4849-A282-EC52D6B80B04} = {12ADB935-FEE4-47D7-B66D-10F785C6AEAE}
 		{1D713EC7-81E5-402D-AA4E-B9BD7643B6A7} = {12ADB935-FEE4-47D7-B66D-10F785C6AEAE}
+		{E754E731-F89E-438D-844F-7DA926F67221} = {C4137C2A-58F0-46EC-A85D-4C9F7C861770}
+		{8BF31CA4-D938-4284-91CF-55A6F218FE2A} = {C4137C2A-58F0-46EC-A85D-4C9F7C861770}
+		{BCF8B083-3754-49E3-8D48-208C9342EC78} = {D3AC73A9-1F67-49DE-BCD2-CDEADA8A0694}
+		{83F2B36C-A43E-4B1A-921B-3769DE2F8AE7} = {12ADB935-FEE4-47D7-B66D-10F785C6AEAE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1B8B0B53-7769-42F6-BDF2-4AFADCC9A084}
