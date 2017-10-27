@@ -6,7 +6,7 @@ namespace DataAccessLayer
 {
     public class DatabaseContext : IdentityDbContext<ApplicationUser>
     {
-        public DatabaseContext() : base("DatabaseConnection")
+        public DatabaseContext() : base("DatabaseConnectionString")
         {
 
         }

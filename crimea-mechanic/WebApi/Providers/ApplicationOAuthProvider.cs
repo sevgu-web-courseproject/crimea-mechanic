@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using BusinessLogic.Managers.Abstraction;
-using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 
 namespace WebApi.Providers
@@ -61,15 +60,6 @@ namespace WebApi.Providers
             }
 
             return Task.FromResult<object>(null);
-        }
-
-        public static AuthenticationProperties CreateProperties(string userName)
-        {
-            IDictionary<string, string> data = new Dictionary<string, string>
-            {
-                { "userName", userName }
-            };
-            return new AuthenticationProperties(data);
         }
     }
 }

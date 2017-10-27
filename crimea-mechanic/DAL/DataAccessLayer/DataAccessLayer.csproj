@@ -81,6 +81,11 @@
     <Compile Include="AppUserStore.cs" />
     <Compile Include="DatabaseContext.cs" />
     <Compile Include="EntityFrameworkInstaller.cs" />
+    <Compile Include="Migrations\201710272046475_Init.cs" />
+    <Compile Include="Migrations\201710272046475_Init.Designer.cs">
+      <DependentUpon>201710272046475_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +105,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.Constants\Common.Constants.csproj">
+      <Project>{bcf8b083-3754-49e3-8d48-208c9342ec78}</Project>
+      <Name>Common.Constants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataAccessLayer.Models.Abstraction\DataAccessLayer.Models.Abstraction.csproj">
       <Project>{bc903fc4-80bd-4afc-83dd-d0797f306e44}</Project>
       <Name>DataAccessLayer.Models.Abstraction</Name>
@@ -108,6 +117,11 @@
       <Project>{7c63af51-21cd-4029-a989-6a795ff0db19}</Project>
       <Name>DataAccessLayer.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201710272046475_Init.resx">
+      <DependentUpon>201710272046475_Init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

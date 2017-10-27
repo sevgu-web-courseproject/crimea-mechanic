@@ -40,15 +40,16 @@ namespace BusinessLogic.Managers
         /// Create Properties
         /// </summary>
         /// <param name="user">user</param>
+        /// <param name="roles"></param>
         /// <returns></returns>
-        private AuthenticationProperties CreateProperties(IApplicationUser user)
+        private AuthenticationProperties CreateProperties(IApplicationUser user, IList<string> roles)
         {
 
             IDictionary<string, string> data = new Dictionary<string, string>
             {
                 {ClaimsConstants.ClaimUserId, user.Id},
                 {ClaimsConstants.ClaimUserName, user.UserName},
-                {ClaimsConstants.ClaimRole, "TODO"}
+                {ClaimsConstants.ClaimRole, string.Join("|", roles)}
             };
             return new AuthenticationProperties(data);
         }
@@ -72,7 +73,8 @@ namespace BusinessLogic.Managers
                 return;
             }
             var oAuthIdentity = await userManager.CreateIdentityAsync(user, OAuthDefaults.AuthenticationType);
-            var properties = CreateProperties(user);
+            var roles = userManager.GetRoles(user.Id);
+            var properties = CreateProperties(user, roles);
             var ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             var cookiesIdentity = await userManager.CreateIdentityAsync(user, CookieAuthenticationDefaults.AuthenticationType);

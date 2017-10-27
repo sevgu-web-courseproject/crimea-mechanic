@@ -258,6 +258,10 @@
       <Project>{83F2B36C-A43E-4B1A-921B-3769DE2F8AE7}</Project>
       <Name>BusinessLogic.Objects</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common\Common.Constants\Common.Constants.csproj">
+      <Project>{bcf8b083-3754-49e3-8d48-208c9342ec78}</Project>
+      <Name>Common.Constants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\DependencyInjector\DependencyInjector.csproj">
       <Project>{8bf31ca4-d938-4284-91cf-55a6f218fe2a}</Project>
       <Name>DependencyInjector</Name>
