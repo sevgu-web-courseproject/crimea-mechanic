@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "SignIn";
+}
+
+<form class="form-horizontal" role="form" method="post">
+    <div class="form-group">
+        <label for="login" class="control-label">Логин</label>
+        <input type="text" id="login "name="Login" class="form-control" placeholder="Логин">
+    </div>
+    <div class="form-group">
+        <label for="password" class="control-label">Пароль</label>
+        <input type="password" id="password "name="Password" class="form-control" placeholder="Пароль">
+    </div>
+    <div class="form-group">
+        <label class="checkbox-inline">
+            <input type="checkbox" name="RememberMe" value="true">
+            Запомнить меня
+        </label>
+    </div>
+    <div class="form-row">
+        <div class="col-4">
+            <input id="submit" type="submit" value="Отправить" class="btn btn-primary">
+        </div>
+    </div>
+</form>
