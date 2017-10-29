@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic.Objects", "Bu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI", "WebUI\WebUI.csproj", "{9A970319-7E8B-4867-A7FE-D3299E7EFC40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Enums", "Common\Common.Enums\Common.Enums.csproj", "{3E10FA50-2CB7-45EE-B004-F1A805DD99B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{9A970319-7E8B-4867-A7FE-D3299E7EFC40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A970319-7E8B-4867-A7FE-D3299E7EFC40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A970319-7E8B-4867-A7FE-D3299E7EFC40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E10FA50-2CB7-45EE-B004-F1A805DD99B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E10FA50-2CB7-45EE-B004-F1A805DD99B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E10FA50-2CB7-45EE-B004-F1A805DD99B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E10FA50-2CB7-45EE-B004-F1A805DD99B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,6 +103,7 @@ Global
 		{8BF31CA4-D938-4284-91CF-55A6F218FE2A} = {C4137C2A-58F0-46EC-A85D-4C9F7C861770}
 		{BCF8B083-3754-49E3-8D48-208C9342EC78} = {D3AC73A9-1F67-49DE-BCD2-CDEADA8A0694}
 		{83F2B36C-A43E-4B1A-921B-3769DE2F8AE7} = {12ADB935-FEE4-47D7-B66D-10F785C6AEAE}
+		{3E10FA50-2CB7-45EE-B004-F1A805DD99B2} = {D3AC73A9-1F67-49DE-BCD2-CDEADA8A0694}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1B8B0B53-7769-42F6-BDF2-4AFADCC9A084}

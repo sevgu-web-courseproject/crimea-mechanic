@@ -18,10 +18,10 @@ namespace DataAccessLayer.Migrations
         protected override void Seed(DatabaseContext context)
         {
             CheckAndCreateRole(context, CommonRoles.Regular);
-            CheckAndCreateRole(context, CommonRoles.Mechanic);
+            CheckAndCreateRole(context, CommonRoles.CarService);
             CheckAndCreateRole(context, CommonRoles.Administrator);
             CheckAndCreateUser(context, "user@user.com", "password", CommonRoles.Regular);
-            CheckAndCreateUser(context, "mechanic@mechanic.com", "password", CommonRoles.Mechanic);
+            CheckAndCreateUser(context, "car-service@car-service.com", "password", CommonRoles.CarService);
             CheckAndCreateUser(context, "admin@admin.com", "password", CommonRoles.Administrator);
         }
 

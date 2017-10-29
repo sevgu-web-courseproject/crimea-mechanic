@@ -35,7 +35,7 @@ namespace WebApi.Controllers
         [HttpPost]
         [Route("Register")]
         [AllowAnonymous]
-        public Task<IHttpActionResult> Register(RegisterUserDto dto)
+        public Task<IHttpActionResult> Register(RegistrationDto dto)
         {
             return CallBusinessLogicActionAsync(() => _userManager.Register(dto));
         }

@@ -81,7 +81,7 @@ namespace BusinessLogic.Managers
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
         }
 
-        public Task Register(RegisterUserDto dto)
+        public Task Register(RegistrationDto dto)
         {
             throw new NotImplementedException();
         }
