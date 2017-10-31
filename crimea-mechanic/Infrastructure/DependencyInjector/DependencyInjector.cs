@@ -2,6 +2,7 @@
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using DataAccessLayer;
+using DataAccessLayer.Repositories;
 
 namespace DependencyInjector
 {
@@ -13,6 +14,7 @@ namespace DependencyInjector
 
             container.Install(new BusinessLogicInstaller());
             container.Install(new EntityFrameworkInstaller());
+            container.Install(new RepositoriesInstaller());
 
             if (installer != null)
             {
