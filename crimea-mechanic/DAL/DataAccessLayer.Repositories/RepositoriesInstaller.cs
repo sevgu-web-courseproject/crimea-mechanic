@@ -10,8 +10,8 @@ namespace DataAccessLayer.Repositories
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Classes.FromThisAssembly().BasedOn<IRepositoryBase>().LifestyleTransient());
-            container.Register(Component.For<IUnitOfWork>().ImplementedBy<UnitOfWork>().LifestyleTransient());
-            container.Register(Component.For<RepositoryFactory>().ImplementedBy<RepositoryFactory>().LifestyleTransient());
+            container.Register(Component.For<IUnitOfWork>().ImplementedBy<UnitOfWork>());
+            container.Register(Component.For<IRepositoryFactory>().ImplementedBy<RepositoryFactory>().LifestyleTransient());
         }
     }
 }

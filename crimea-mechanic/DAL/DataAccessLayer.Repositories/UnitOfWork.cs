@@ -1,13 +1,14 @@
-﻿using DataAccessLayer.Repositories.Abstraction;
+﻿using System.Data.Entity;
+using DataAccessLayer.Repositories.Abstraction;
 
 namespace DataAccessLayer.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DatabaseContext _dbcontext;
+        private readonly DbContext _dbcontext;
         public IRepositoryFactory RepositoryFactory { get; }
 
-        public UnitOfWork(DatabaseContext dbcontext, IRepositoryFactory repositoryFactory)
+        public UnitOfWork(DbContext dbcontext, IRepositoryFactory repositoryFactory)
         {
             _dbcontext = dbcontext;
             RepositoryFactory = repositoryFactory;
