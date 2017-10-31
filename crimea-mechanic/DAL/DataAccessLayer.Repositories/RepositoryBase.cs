@@ -8,58 +8,58 @@ namespace DataAccessLayer.Repositories
 {
     public abstract class RepositoryBase<T, TPrimaryKey> : IRepositoryBase<T, TPrimaryKey> where T : class, IEntity<TPrimaryKey>
     {
-        protected readonly DbContext _dbContext;
-        protected DbSet<T> _entitySet;
+        protected readonly DbContext DbContext;
+        protected readonly DbSet<T> EntitySet;
 
         protected RepositoryBase(DbContext dbContext)
         {
-            _dbContext = dbContext;
-            _entitySet = _dbContext.Set<T>();
+            DbContext = dbContext;
+            EntitySet = DbContext.Set<T>();
         }
 
         public virtual IQueryable<T> GetAll(bool noTracking)
         {
-            return noTracking ? _entitySet.AsNoTracking() : _entitySet;
+            return noTracking ? EntitySet.AsNoTracking() : EntitySet;
         }
 
-        public T Get(TPrimaryKey key)
+        public virtual T Get(TPrimaryKey key)
         {
-            return _entitySet.Find(key);
+            return EntitySet.Find(key);
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
-            _dbContext.Entry(entity).State = EntityState.Modified;
+            DbContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public void Add(T entity)
+        public virtual void Add(T entity)
         {
-            _entitySet.Add(entity);
+            EntitySet.Add(entity);
         }
 
-        public void AddRange(List<T> entities)
+        public virtual void AddRange(List<T> entities)
         {
-            _entitySet.AddRange(entities);
+            EntitySet.AddRange(entities);
         }
 
-        public bool Delete(TPrimaryKey key)
+        public virtual bool Delete(TPrimaryKey key)
         {
-            var obj = _entitySet.Find(key);
+            var obj = EntitySet.Find(key);
             if (obj == null)
             {
                 return false;
             }
-            _entitySet.Remove(obj);
+            EntitySet.Remove(obj);
             return true;
         }
 
-        public bool Delete(T entity)
+        public virtual bool Delete(T entity)
         {
             if (entity == null)
             {
                 return false;
             }
-            _dbContext.Entry(entity).State = EntityState.Deleted;
+            DbContext.Entry(entity).State = EntityState.Deleted;
             return true;
         }
     }

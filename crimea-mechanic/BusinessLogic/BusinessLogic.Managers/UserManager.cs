@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using BusinessLogic.Managers.Abstraction;
 using BusinessLogic.Objects.User;
 using Common.Constants;
+using DataAccessLayer.Models;
 using DataAccessLayer.Models.Abstraction;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -14,7 +15,7 @@ using Microsoft.Owin.Security.OAuth;
 
 namespace BusinessLogic.Managers
 {
-    public class UserManager : UserManager<IApplicationUser>, IUserManager
+    public class UserManager : UserManager<IApplicationUser>, IUserManager, IUserInternalManager
     {
         public UserManager(IUserStore<IApplicationUser> store) : base(store)
         {
@@ -82,6 +83,16 @@ namespace BusinessLogic.Managers
         }
 
         public Task Register(RegistrationDto dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ApplicationUser CheckAndGet(string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsInRole(string userId, string role)
         {
             throw new NotImplementedException();
         }

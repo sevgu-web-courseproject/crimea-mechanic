@@ -91,6 +91,10 @@
       <Project>{bc903fc4-80bd-4afc-83dd-d0797f306e44}</Project>
       <Name>DataAccessLayer.Models.Abstraction</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\DAL\DataAccessLayer.Models\DataAccessLayer.Models.csproj">
+      <Project>{7c63af51-21cd-4029-a989-6a795ff0db19}</Project>
+      <Name>DataAccessLayer.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BusinessLogic.Managers.Abstraction\BusinessLogic.Managers.Abstraction.csproj">
       <Project>{1d713ec7-81e5-402d-aa4e-b9bd7643b6a7}</Project>
       <Name>BusinessLogic.Managers.Abstraction</Name>

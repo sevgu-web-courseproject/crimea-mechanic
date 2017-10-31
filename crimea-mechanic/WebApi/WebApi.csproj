@@ -262,6 +262,18 @@
       <Project>{bcf8b083-3754-49e3-8d48-208c9342ec78}</Project>
       <Name>Common.Constants</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DAL\DataAccessLayer.Models.Abstraction\DataAccessLayer.Models.Abstraction.csproj">
+      <Project>{bc903fc4-80bd-4afc-83dd-d0797f306e44}</Project>
+      <Name>DataAccessLayer.Models.Abstraction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DataAccessLayer.Models\DataAccessLayer.Models.csproj">
+      <Project>{7c63af51-21cd-4029-a989-6a795ff0db19}</Project>
+      <Name>DataAccessLayer.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DataAccessLayer.Repositories.Abstraction\DataAccessLayer.Repositories.Abstraction.csproj">
+      <Project>{142f5b0f-94c0-4332-84d2-40c1fcf67406}</Project>
+      <Name>DataAccessLayer.Repositories.Abstraction</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\DependencyInjector\DependencyInjector.csproj">
       <Project>{8bf31ca4-d938-4284-91cf-55a6f218fe2a}</Project>
       <Name>DependencyInjector</Name>

@@ -117,6 +117,10 @@
       <Project>{7c63af51-21cd-4029-a989-6a795ff0db19}</Project>
       <Name>DataAccessLayer.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataAccessLayer.Repositories.Abstraction\DataAccessLayer.Repositories.Abstraction.csproj">
+      <Project>{142f5b0f-94c0-4332-84d2-40c1fcf67406}</Project>
+      <Name>DataAccessLayer.Repositories.Abstraction</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710272046475_Init.resx">

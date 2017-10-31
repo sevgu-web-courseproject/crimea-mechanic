@@ -3,7 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DataAccessLayer.Models
 {
-    public class ApplicationUser : IdentityUser, IApplicationUser
+    public class ApplicationUser : IdentityUser, IApplicationUser, IEntity<string>
     {
     }
 }
