@@ -262,6 +262,14 @@
       <Project>{bcf8b083-3754-49e3-8d48-208c9342ec78}</Project>
       <Name>Common.Constants</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common\Common.Exceptions\Common.Exceptions.csproj">
+      <Project>{19b61fca-a912-436f-9418-2e9f8032f553}</Project>
+      <Name>Common.Exceptions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.Validation\Common.Validation.csproj">
+      <Project>{97f0d987-0d65-4f9a-909d-31db4fe054f9}</Project>
+      <Name>Common.Validation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DAL\DataAccessLayer.Models.Abstraction\DataAccessLayer.Models.Abstraction.csproj">
       <Project>{bc903fc4-80bd-4afc-83dd-d0797f306e44}</Project>
       <Name>DataAccessLayer.Models.Abstraction</Name>

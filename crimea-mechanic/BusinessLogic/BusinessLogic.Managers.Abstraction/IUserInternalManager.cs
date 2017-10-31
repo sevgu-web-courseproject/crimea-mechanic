@@ -6,6 +6,6 @@ namespace BusinessLogic.Managers.Abstraction
     {
         ApplicationUser CheckAndGet(string userId);
 
-        bool IsInRole(string userId, string role);
+        bool IsUserInRole(string userId, string role);
     }
 }

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BusinessLogic.Managers.Abstraction;
 using BusinessLogic.Objects.User;
+using BusinessLogic.Resources;
 using Common.Constants;
+using Common.Exceptions;
 using DataAccessLayer.Models;
 using DataAccessLayer.Models.Abstraction;
+using DataAccessLayer.Repositories.Abstraction;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -17,8 +20,18 @@ namespace BusinessLogic.Managers
 {
     public class UserManager : UserManager<IApplicationUser>, IUserManager, IUserInternalManager
     {
-        public UserManager(IUserStore<IApplicationUser> store) : base(store)
+        #region Fields
+
+        private readonly IUnitOfWork _unitOfWork;
+
+        #endregion
+
+        #region Constructor
+
+        public UserManager(IUserStore<IApplicationUser> store, IUnitOfWork unitOfWork) : base(store)
         {
+            _unitOfWork = unitOfWork;
+
             UserValidator = new UserValidator<IApplicationUser>(this)
             {
                 AllowOnlyAlphanumericUserNames = false,
@@ -37,6 +50,10 @@ namespace BusinessLogic.Managers
             UserTokenProvider = new DataProtectorTokenProvider<IApplicationUser, string>(provider.Create("UserToken"));
         }
 
+        #endregion
+
+        #region Private Methods
+
         /// <summary>
         /// Create Properties
         /// </summary>
@@ -54,6 +71,10 @@ namespace BusinessLogic.Managers
             };
             return new AuthenticationProperties(data);
         }
+
+        #endregion
+
+        #region Implementation of IUserManager
 
         public async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
@@ -87,14 +108,29 @@ namespace BusinessLogic.Managers
             throw new NotImplementedException();
         }
 
+        #endregion
+
+        #region Implementation of IUserInternalManager
+
         public ApplicationUser CheckAndGet(string userId)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new BusinessFaultException(BusinessLogicExceptionResources.UserNotFound);
+            }
+            var user = _unitOfWork.Repository<IApplicationUserRepository>().Get(userId);
+            if (user == null)
+            {
+                throw new BusinessFaultException(BusinessLogicExceptionResources.UserNotFound);
+            }
+            return user;
         }
 
-        public bool IsInRole(string userId, string role)
+        public bool IsUserInRole(string userId, string role)
         {
-            throw new NotImplementedException();
+            return this.IsInRole(userId, role);
         }
+
+        #endregion
     }
 }

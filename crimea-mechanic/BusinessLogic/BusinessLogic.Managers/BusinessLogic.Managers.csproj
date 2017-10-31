@@ -36,8 +36,17 @@
     <Reference Include="Castle.Windsor, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Castle.Windsor.4.1.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
@@ -62,6 +71,7 @@
       <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Remoting" />
@@ -74,9 +84,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseManager.cs" />
     <Compile Include="BusinessLogicInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserManager.cs" />
+    <Compile Include="ValidationManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -87,6 +99,14 @@
       <Project>{bcf8b083-3754-49e3-8d48-208c9342ec78}</Project>
       <Name>Common.Constants</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.Exceptions\Common.Exceptions.csproj">
+      <Project>{19b61fca-a912-436f-9418-2e9f8032f553}</Project>
+      <Name>Common.Exceptions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.Validation\Common.Validation.csproj">
+      <Project>{97f0d987-0d65-4f9a-909d-31db4fe054f9}</Project>
+      <Name>Common.Validation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\DAL\DataAccessLayer.Models.Abstraction\DataAccessLayer.Models.Abstraction.csproj">
       <Project>{bc903fc4-80bd-4afc-83dd-d0797f306e44}</Project>
       <Name>DataAccessLayer.Models.Abstraction</Name>
@@ -95,6 +115,10 @@
       <Project>{7c63af51-21cd-4029-a989-6a795ff0db19}</Project>
       <Name>DataAccessLayer.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\DAL\DataAccessLayer.Repositories.Abstraction\DataAccessLayer.Repositories.Abstraction.csproj">
+      <Project>{142f5b0f-94c0-4332-84d2-40c1fcf67406}</Project>
+      <Name>DataAccessLayer.Repositories.Abstraction</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BusinessLogic.Managers.Abstraction\BusinessLogic.Managers.Abstraction.csproj">
       <Project>{1d713ec7-81e5-402d-aa4e-b9bd7643b6a7}</Project>
       <Name>BusinessLogic.Managers.Abstraction</Name>
@@ -102,6 +126,10 @@
     <ProjectReference Include="..\BusinessLogic.Objects\BusinessLogic.Objects.csproj">
       <Project>{83f2b36c-a43e-4b1a-921b-3769de2f8ae7}</Project>
       <Name>BusinessLogic.Objects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessLogic.Resources\BusinessLogic.Resources.csproj">
+      <Project>{0c540d0a-f61d-46c7-a6fb-d7000b13bd13}</Project>
+      <Name>BusinessLogic.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -9,7 +9,11 @@ namespace BusinessLogic.Managers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IUserManager>().ImplementedBy<UserManager>().LifestyleTransient());
+            container.Register(Classes.FromThisAssembly().BasedOn<BaseManager>()
+                .WithService
+                .DefaultInterfaces()
+                .LifestyleTransient());
+            container.Register(Component.For<IUserManager, IUserInternalManager>().ImplementedBy<UserManager>().LifestyleTransient());
         }
     }
 }
