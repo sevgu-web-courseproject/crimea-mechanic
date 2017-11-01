@@ -9,21 +9,6 @@ namespace BusinessLogic.Objects.User
     public class RegistrationCarServiceDto : RegistrationDto
     {
         /// <summary>
-        /// Логин пользователя
-        /// </summary>
-        public string Login { get; set; }
-
-        /// <summary>
-        /// Пароль
-        /// </summary>
-        public string Password { get; set; }
-
-        /// <summary>
-        /// Подтверждение пароля
-        /// </summary>
-        public string PasswordСonfirmation { get; set; }
-
-        /// <summary>
         /// Наименнование автосервиса
         /// </summary>
         public string Name { get; set; }

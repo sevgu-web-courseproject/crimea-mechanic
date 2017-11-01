@@ -18,15 +18,16 @@ namespace BusinessLogic.Managers
 
         #region Implementation of IValidationManager
 
-        public ValidationResult ValidateRegistrationUserDto(RegistrationUserDto dto)
+        public ValidationResult ValidateRegistrationDto(RegistrationDto dto)
         {
             throw new System.NotImplementedException();
         }
 
-        public ValidationResult ValidateRegistrationCarServiceDto(RegistrationCarServiceDto dto)
-        {
-            throw new System.NotImplementedException();
-        }
+        #endregion
+
+        #region Private methods
+
+        
 
         #endregion
     }

@@ -5,7 +5,6 @@ namespace BusinessLogic.Managers.Abstraction
 {
     public interface IValidationManager
     {
-        ValidationResult ValidateRegistrationUserDto(RegistrationUserDto dto);
-        ValidationResult ValidateRegistrationCarServiceDto(RegistrationCarServiceDto dto);
+        ValidationResult ValidateRegistrationDto(RegistrationDto dto);
     }
 }
