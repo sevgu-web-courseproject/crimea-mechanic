@@ -71,6 +71,10 @@
       <Project>{83f2b36c-a43e-4b1a-921b-3769de2f8ae7}</Project>
       <Name>BusinessLogic.Objects</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\BusinessLogic\BusinessLogic.Resources\BusinessLogic.Resources.csproj">
+      <Project>{0c540d0a-f61d-46c7-a6fb-d7000b13bd13}</Project>
+      <Name>BusinessLogic.Resources</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Common\Common.Enums\Common.Enums.csproj">
       <Project>{3e10fa50-2cb7-45ee-b004-f1a805dd99b2}</Project>
       <Name>Common.Enums</Name>
