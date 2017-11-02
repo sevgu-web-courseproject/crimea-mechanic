@@ -61,6 +61,69 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Адрес автосервиса не заполнен.
+        /// </summary>
+        public static string CarServiceAddressIsEmpty {
+            get {
+                return ResourceManager.GetString("CarServiceAddressIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Неверный контактный email адрес.
+        /// </summary>
+        public static string CarServiceContactEmailIsInvalid {
+            get {
+                return ResourceManager.GetString("CarServiceContactEmailIsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Контактное имя менеджера автосервиса не заполнено.
+        /// </summary>
+        public static string CarServiceManagerNameIsEmpty {
+            get {
+                return ResourceManager.GetString("CarServiceManagerNameIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Наименнование автосервиса не заполнено.
+        /// </summary>
+        public static string CarServiceNameIsEmpty {
+            get {
+                return ResourceManager.GetString("CarServiceNameIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Номер {0} имеет неправильный формат.
+        /// </summary>
+        public static string CarServicePhoneIsIncorrect {
+            get {
+                return ResourceManager.GetString("CarServicePhoneIsIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Необходимо указать хотя бы один контактный мобильный номер.
+        /// </summary>
+        public static string CarServicePhonesIsEmpty {
+            get {
+                return ResourceManager.GetString("CarServicePhonesIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Неккоректный адрес сайта автосервиса.
+        /// </summary>
+        public static string CarServiceSiteIsIncorrect {
+            get {
+                return ResourceManager.GetString("CarServiceSiteIsIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отсутсвует контактное имя пользователя.
         /// </summary>
         public static string ContactNameIsEmpty {

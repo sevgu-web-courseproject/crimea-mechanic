@@ -39,5 +39,14 @@ namespace WebApi.Controllers
         {
             return CallBusinessLogicActionAsync(() => _userManager.Register(dto));
         }
+
+        [HttpPost]
+        [Route("Test")]
+        [AllowAnonymous]
+        public IHttpActionResult Test(RegistrationUserDto dto)
+        {
+
+            return Ok();
+        }
     }
 }

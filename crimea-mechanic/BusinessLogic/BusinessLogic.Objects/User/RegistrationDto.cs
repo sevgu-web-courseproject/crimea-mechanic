@@ -1,11 +1,9 @@
-﻿using Common.Enums;
-
-namespace BusinessLogic.Objects.User
+﻿namespace BusinessLogic.Objects.User
 {
     /// <summary>
     /// ДТО регистарации пользователя
     /// </summary>
-    public abstract class RegistrationDto
+    public  class RegistrationDto
     {
         /// <summary>
         /// Логин пользователя
@@ -21,10 +19,5 @@ namespace BusinessLogic.Objects.User
         /// Подтверждение пароля
         /// </summary>
         public string PasswordСonfirmation { get; set; }
-
-        /// <summary>
-        /// Тип регистрации
-        /// </summary>
-        public RegistrationTypeEnum Type { get; set; }
     }
 }

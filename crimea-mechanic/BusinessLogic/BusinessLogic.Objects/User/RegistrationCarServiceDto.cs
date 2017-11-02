@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Web;
 
 namespace BusinessLogic.Objects.User
 {
@@ -56,12 +55,12 @@ namespace BusinessLogic.Objects.User
         /// <summary>
         /// Логотип автосервиса
         /// </summary>
-        public HttpPostedFileBase Logo { get; set; }
+        public FileDto Logo { get; set; }
 
         /// <summary>
         /// Фотографии автосервиса
         /// </summary>
-        public List<HttpPostedFileBase> Photos { get; set; }
+        public List<FileDto> Photos { get; set; }
 
         /// <summary>
         /// Текстовое поле "Об автосервисе"

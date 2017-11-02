@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using BusinessLogic.Managers.Abstraction;
 using BusinessLogic.Objects.User;
@@ -21,25 +22,81 @@ namespace BusinessLogic.Managers
 
         #region Implementation of IValidationManager
 
-        public ValidationResult ValidateRegistrationDto(RegistrationDto dto)
+        public ValidationResult ValidateRegistrationUserDto(RegistrationUserDto dto)
         {
             if (dto == null)
             {
                 throw new ArgumentNullException(ArgumentExceptionResources.RegistrationDtoNotFound);
             }
-            var validatioResult = new ValidationResult("Регистрация пользователя");
-            var isRegular = dto is RegistrationUserDto;
+            var validationResult = new ValidationResult("Регистрация пользователя");
 
-            ValidateRegistartionBaseDto(dto, validatioResult);
-            if (isRegular)
+            ValidateRegistartionBaseDto(dto, validationResult);
+
+            if (string.IsNullOrEmpty(dto.ContactName))
             {
-                ValidateRegistrationUserDto((RegistrationUserDto) dto, validatioResult);
+                validationResult.AddError(ValidationErrorResources.ContactNameIsEmpty);
             }
-            else
+            if (IsInvalidPhoneNumber(dto.Phone))
             {
-                ValidateRegistrationCarServiceDto((RegistrationCarServiceDto) dto, validatioResult);
+                validationResult.AddError(ValidationErrorResources.PhoneNumberIsIncorrect);
             }
-            return validatioResult;
+
+            return validationResult;
+        }
+
+        public ValidationResult ValidateRegistrationCarServiceDto(RegistrationCarServiceDto dto)
+        {
+            if (dto == null)
+            {
+                throw new ArgumentNullException(ArgumentExceptionResources.RegistrationDtoNotFound);
+            }
+            var validationResult = new ValidationResult("Регистрация автосервиса");
+
+            ValidateRegistartionBaseDto(dto, validationResult);
+
+            if (string.IsNullOrEmpty(dto.Name))
+            {
+                validationResult.AddError(ValidationErrorResources.CarServiceNameIsEmpty);
+            }
+
+            if (string.IsNullOrEmpty(dto.Address))
+            {
+                validationResult.AddError(ValidationErrorResources.CarServiceAddressIsEmpty);
+            }
+
+            if (IsInvalidEmail(dto.Email))
+            {
+                validationResult.AddError(ValidationErrorResources.CarServiceContactEmailIsInvalid);
+            }
+
+            if (dto.Phones == null || !dto.Phones.Any())
+            {
+                validationResult.AddError(ValidationErrorResources.CarServicePhonesIsEmpty);
+            }
+            if (dto.Phones != null)
+            {
+                foreach (var phone in dto.Phones)
+                {
+                    if (IsInvalidPhoneNumber(phone))
+                    {
+                        validationResult.AddError(string.Format(ValidationErrorResources.CarServicePhoneIsIncorrect, phone));
+                    }
+                }
+            }
+
+            if (string.IsNullOrEmpty(dto.ManagerName))
+            {
+                validationResult.AddError(ValidationErrorResources.CarServiceManagerNameIsEmpty);
+            }
+
+            var regex = new Regex("^(http|https)://");
+            if (string.IsNullOrEmpty(dto.Site) || !regex.IsMatch(dto.Site))
+            {
+                validationResult.AddError(ValidationErrorResources.CarServiceSiteIsIncorrect);
+            }
+
+
+            return validationResult;
         }
 
         #endregion
@@ -48,8 +105,7 @@ namespace BusinessLogic.Managers
 
         private void ValidateRegistartionBaseDto(RegistrationDto dto, ValidationResult validationResult)
         {
-            var loginRegex = new Regex("^\\w[\\w-\\.]*@\\w+\\.\\w{2,4}$", RegexOptions.IgnoreCase);
-            if (!string.IsNullOrEmpty(dto.Login) && !loginRegex.IsMatch(dto.Login))
+            if (IsInvalidEmail(dto.Login))
             {
                 validationResult.AddError(ValidationErrorResources.LoginIsNotValid);
             }
@@ -59,24 +115,18 @@ namespace BusinessLogic.Managers
             }
         }
 
-        private void ValidateRegistrationUserDto(RegistrationUserDto dto, ValidationResult validationResult)
+        private bool IsInvalidEmail(string email)
         {
-            if (string.IsNullOrEmpty(dto.ContactName))
-            {
-                validationResult.AddError(ValidationErrorResources.ContactNameIsEmpty);
-            }
-            var phoneRegex = new Regex("^\\+7(\\d{3}|\\(\\d{3}\\))\\-?\\d{3}\\-?\\d{2}\\-?\\d{2}$");
-            if (!string.IsNullOrEmpty(dto.Phone) && !phoneRegex.IsMatch(dto.Phone))
-            {
-                validationResult.AddError(ValidationErrorResources.PhoneNumberIsIncorrect);
-            }
+            var regex = new Regex("^\\w[\\w-\\.]*@\\w+\\.\\w{2,4}$", RegexOptions.IgnoreCase);
+            return string.IsNullOrEmpty(email) || !regex.IsMatch(email);
         }
 
-        private void ValidateRegistrationCarServiceDto(RegistrationCarServiceDto dto, ValidationResult validationResult)
+        private bool IsInvalidPhoneNumber(string phoneNumber)
         {
-
+            var regex = new Regex("^\\+7(\\d{3}|\\(\\d{3}\\))\\-?\\d{3}\\-?\\d{2}\\-?\\d{2}$");
+            return string.IsNullOrEmpty(phoneNumber) || !regex.IsMatch(phoneNumber);
         }
-
+            
         #endregion
     }
 }
