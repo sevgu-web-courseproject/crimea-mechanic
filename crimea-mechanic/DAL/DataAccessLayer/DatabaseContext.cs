@@ -11,6 +11,13 @@ namespace DataAccessLayer
 
         }
 
+        public DbSet<CarService> CarServices { get; set; }
+        public DbSet<CarServicePhone> CarServicePhones { get; set; }
+        public DbSet<CarServiceFile> CarServiceFiles { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<CarModelTag> CarModelTags { get; set; }
+        public DbSet<WorkTag> WorkTags { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             Database.SetInitializer<DatabaseContext>(null);
