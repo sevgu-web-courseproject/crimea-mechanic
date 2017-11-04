@@ -1,5 +1,4 @@
-﻿
-namespace DataAccessLayer.Models
+﻿namespace DataAccessLayer.Models
 {
     /// <summary>
     /// Контактный мобильный номер автосервиса

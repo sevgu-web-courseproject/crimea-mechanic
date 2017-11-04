@@ -85,6 +85,10 @@
     <Compile Include="Migrations\201710272046475_Init.Designer.cs">
       <DependentUpon>201710272046475_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711041357215_AddUserProfileAndCarService.cs" />
+    <Compile Include="Migrations\201711041357215_AddUserProfileAndCarService.Designer.cs">
+      <DependentUpon>201711041357215_AddUserProfileAndCarService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -125,6 +129,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710272046475_Init.resx">
       <DependentUpon>201710272046475_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711041357215_AddUserProfileAndCarService.resx">
+      <DependentUpon>201711041357215_AddUserProfileAndCarService.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

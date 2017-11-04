@@ -21,7 +21,8 @@ namespace DataAccessLayer.Migrations
             CheckAndCreateRole(context, CommonRoles.CarService);
             CheckAndCreateRole(context, CommonRoles.Administrator);
             CheckAndCreateUser(context, "user@user.com", "password", CommonRoles.Regular);
-            CheckAndCreateUser(context, "car-service@car-service.com", "password", CommonRoles.CarService);
+            CheckAndCreateUserProfile(context, "user@user.com", "Test", "+7(978)-111-11-11");
+            CheckAndCreateUser(context, "mechanic@mechanic.com", "password", CommonRoles.CarService);
             CheckAndCreateUser(context, "admin@admin.com", "password", CommonRoles.Administrator);
         }
 
@@ -30,8 +31,6 @@ namespace DataAccessLayer.Migrations
         /// <summary>
         /// Создает роль по умолчанию
         /// </summary>
-        /// <param name="context">контекст</param>
-        /// <param name="roleName">роль</param>
         private void CheckAndCreateRole(DatabaseContext context, string roleName)
         {
             if (context.Roles.Any(r => r.Name == roleName))
@@ -50,10 +49,6 @@ namespace DataAccessLayer.Migrations
         /// <summary>
         /// Создает пользователя по умолчанию
         /// </summary>
-        /// <param name="context">контекст</param>
-        /// <param name="userName">имя полоьзователя</param>
-        /// <param name="password">пароль</param>
-        /// <param name="roleName">роль</param>
         private void CheckAndCreateUser(DatabaseContext context, string userName, string password, string roleName)
         {
             var user = context.Users.FirstOrDefault(u => u.UserName == userName);
@@ -72,6 +67,26 @@ namespace DataAccessLayer.Migrations
                 };
                 manager.Create(user, password);
                 manager.AddToRole(user.Id, roleName);
+            }
+        }
+
+        /// <summary>
+        /// Создает профайл пользователя по умолчанию
+        /// </summary>
+        private void CheckAndCreateUserProfile(DatabaseContext context, string userName, string contactName, string phoneNumber)
+        {
+            var user = context.Users.FirstOrDefault(u => u.UserName == userName);
+            if (user != null)
+            {
+                var profile = new UserProfile
+                {
+                    Created = DateTime.UtcNow,
+                    Updated = DateTime.UtcNow,
+                    Name = contactName,
+                    Phone = phoneNumber
+                };
+                user.UserProfile = profile;
+                context.SaveChanges();
             }
         }
 

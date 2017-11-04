@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace DataAccessLayer.Models
 {
     public class UserProfile : BaseEntity<long>
@@ -12,6 +13,11 @@ namespace DataAccessLayer.Models
         /// Номер мобильного телефона
         /// </summary>
         public string Phone { get; set; }
+
+        /// <summary>
+        /// Дата последнего обновления модели
+        /// </summary>
+        public DateTime Updated { get; set; }
 
         /// <summary>
         /// Пользователь
