@@ -1,8 +1,11 @@
-﻿using System.Net.Http;
+﻿using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using BusinessLogic.Managers.Abstraction;
-using BusinessLogic.Objects.User;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
@@ -32,21 +35,27 @@ namespace WebApi.Controllers
             return Ok();
         }
 
-        [HttpPost]
-        [Route("Register")]
+        [HttpGet]
+        [Route("Image")]
         [AllowAnonymous]
-        public Task<IHttpActionResult> Register(RegistrationDto dto)
+        public async Task<HttpResponseMessage> Image()
         {
-            return CallBusinessLogicActionAsync(() => _userManager.Register(dto));
-        }
+            var path = HttpContext.Current.Server.MapPath("~/Files/test.png");
+            using (var stream = new FileStream(path, FileMode.Open))
+            {
+                var streamContent = new StreamContent(stream);
+                var result = new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ByteArrayContent(await streamContent.ReadAsByteArrayAsync())
+                };
+                result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = "test.png"
+                };
+                result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 
-        [HttpPost]
-        [Route("Test")]
-        [AllowAnonymous]
-        public IHttpActionResult Test(RegistrationUserDto dto)
-        {
-
-            return Ok();
+                return result;
+            }
         }
     }
 }

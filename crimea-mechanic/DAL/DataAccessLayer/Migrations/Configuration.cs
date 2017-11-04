@@ -2,6 +2,7 @@ using System;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using Common.Constants;
+using Common.Enums;
 using DataAccessLayer.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -23,6 +24,7 @@ namespace DataAccessLayer.Migrations
             CheckAndCreateUser(context, "user@user.com", "password", CommonRoles.Regular);
             CheckAndCreateUserProfile(context, "user@user.com", "Test", "+7(978)-111-11-11");
             CheckAndCreateUser(context, "mechanic@mechanic.com", "password", CommonRoles.CarService);
+            CheckAndCreateCarService(context, "mechanic@mechanic.com");
             CheckAndCreateUser(context, "admin@admin.com", "password", CommonRoles.Administrator);
         }
 
@@ -76,7 +78,7 @@ namespace DataAccessLayer.Migrations
         private void CheckAndCreateUserProfile(DatabaseContext context, string userName, string contactName, string phoneNumber)
         {
             var user = context.Users.FirstOrDefault(u => u.UserName == userName);
-            if (user != null)
+            if (user != null && user.UserProfile == null)
             {
                 var profile = new UserProfile
                 {
@@ -86,6 +88,32 @@ namespace DataAccessLayer.Migrations
                     Phone = phoneNumber
                 };
                 user.UserProfile = profile;
+                context.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Создать автосервис по умолчанию
+        /// </summary>
+        private void CheckAndCreateCarService(DatabaseContext context, string userName)
+        {
+            var user = context.Users.FirstOrDefault(u => u.UserName == userName);
+            if (user != null && user.CarService == null)
+            {
+                var carService = new CarService
+                {
+                    Name = "Test",
+                    Address = "Test",
+                    Created = DateTime.UtcNow,
+                    Updated = DateTime.UtcNow,
+                    Email = "test@test.com",
+                    ManagerName = "Test",
+                    About = "Test test test",
+                    TimetableWorks = "Test",
+                    Site = "http://test.com",
+                    State = CarServiceState.Active
+                };
+                user.CarService = carService;
                 context.SaveChanges();
             }
         }

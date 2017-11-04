@@ -113,6 +113,10 @@
       <Project>{bcf8b083-3754-49e3-8d48-208c9342ec78}</Project>
       <Name>Common.Constants</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.Enums\Common.Enums.csproj">
+      <Project>{3e10fa50-2cb7-45ee-b004-f1a805dd99b2}</Project>
+      <Name>Common.Enums</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataAccessLayer.Models.Abstraction\DataAccessLayer.Models.Abstraction.csproj">
       <Project>{bc903fc4-80bd-4afc-83dd-d0797f306e44}</Project>
       <Name>DataAccessLayer.Models.Abstraction</Name>

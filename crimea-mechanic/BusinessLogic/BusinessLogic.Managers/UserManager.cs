@@ -23,6 +23,7 @@ namespace BusinessLogic.Managers
         #region Fields
 
         private readonly IUnitOfWork _unitOfWork;
+        //private readonly IValidationManager _validationManager;
 
         #endregion
 
@@ -31,6 +32,7 @@ namespace BusinessLogic.Managers
         public UserManager(IUserStore<IApplicationUser> store, IUnitOfWork unitOfWork) : base(store)
         {
             _unitOfWork = unitOfWork;
+            //_validationManager = validationManager;
 
             UserValidator = new UserValidator<IApplicationUser>(this)
             {
@@ -103,7 +105,12 @@ namespace BusinessLogic.Managers
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
         }
 
-        public Task Register(RegistrationDto dto)
+        public void RegistrationUser(RegistrationUserDto dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RegistrationCarService(RegistrationCarServiceDto dto)
         {
             throw new NotImplementedException();
         }
