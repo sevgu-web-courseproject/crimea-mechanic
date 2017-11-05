@@ -34,28 +34,5 @@ namespace WebApi.Controllers
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return Ok();
         }
-
-        [HttpGet]
-        [Route("Image")]
-        [AllowAnonymous]
-        public async Task<HttpResponseMessage> Image()
-        {
-            var path = HttpContext.Current.Server.MapPath("~/Files/test.png");
-            using (var stream = new FileStream(path, FileMode.Open))
-            {
-                var streamContent = new StreamContent(stream);
-                var result = new HttpResponseMessage(HttpStatusCode.OK)
-                {
-                    Content = new ByteArrayContent(await streamContent.ReadAsByteArrayAsync())
-                };
-                result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                {
-                    FileName = "test.png"
-                };
-                result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-
-                return result;
-            }
-        }
     }
 }
