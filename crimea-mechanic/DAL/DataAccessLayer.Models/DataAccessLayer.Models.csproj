@@ -55,8 +55,9 @@
   <ItemGroup>
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="BaseEntity.cs" />
+    <Compile Include="CarMark.cs" />
+    <Compile Include="CarModel.cs" />
     <Compile Include="CarService.cs" />
-    <Compile Include="CarModelTag.cs" />
     <Compile Include="CarServiceFile.cs" />
     <Compile Include="CarServicePhone.cs" />
     <Compile Include="WorkTag.cs" />

@@ -56,6 +56,7 @@
     <Compile Include="ValidationManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +87,10 @@
     <ProjectReference Include="..\..\Common\Common.Validation\Common.Validation.csproj">
       <Project>{97f0d987-0d65-4f9a-909d-31db4fe054f9}</Project>
       <Name>Common.Validation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DAL\DataAccessLayer.Models\DataAccessLayer.Models.csproj">
+      <Project>{7c63af51-21cd-4029-a989-6a795ff0db19}</Project>
+      <Name>DataAccessLayer.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DAL\DataAccessLayer.Repositories.Abstraction\DataAccessLayer.Repositories.Abstraction.csproj">
       <Project>{142f5b0f-94c0-4332-84d2-40c1fcf67406}</Project>

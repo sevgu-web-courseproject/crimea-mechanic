@@ -43,6 +43,7 @@
     <Compile Include="CarServiceState.cs" />
     <Compile Include="FileType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserState.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

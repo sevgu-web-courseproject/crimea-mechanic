@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using BusinessLogic.Managers.Abstraction;
 using BusinessLogic.Objects.User;
 using BusinessLogic.Resources;
 using Common.Constants;
+using Common.Enums;
 using Common.Exceptions;
+using Common.Validation;
 using DataAccessLayer.Models;
 using DataAccessLayer.Models.Abstraction;
 using DataAccessLayer.Repositories.Abstraction;
@@ -23,16 +28,16 @@ namespace BusinessLogic.Managers
         #region Fields
 
         private readonly IUnitOfWork _unitOfWork;
-        //private readonly IValidationManager _validationManager;
+        private readonly IValidationManager _validationManager;
 
         #endregion
 
         #region Constructor
 
-        public UserManager(IUserStore<IApplicationUser> store, IUnitOfWork unitOfWork) : base(store)
+        public UserManager(IUserStore<IApplicationUser> store, IUnitOfWork unitOfWork, IValidationManager validationManager) : base(store)
         {
             _unitOfWork = unitOfWork;
-            //_validationManager = validationManager;
+            _validationManager = validationManager;
 
             UserValidator = new UserValidator<IApplicationUser>(this)
             {
@@ -44,34 +49,12 @@ namespace BusinessLogic.Managers
             PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
+                RequireNonLetterOrDigit = false,
                 RequireDigit = true
             };
 
             var provider = new DpapiDataProtectionProvider("Crimea-Mechanic");
             UserTokenProvider = new DataProtectorTokenProvider<IApplicationUser, string>(provider.Create("UserToken"));
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        /// <summary>
-        /// Create Properties
-        /// </summary>
-        /// <param name="user">user</param>
-        /// <param name="roles"></param>
-        /// <returns></returns>
-        private AuthenticationProperties CreateProperties(IApplicationUser user, IList<string> roles)
-        {
-
-            IDictionary<string, string> data = new Dictionary<string, string>
-            {
-                {ClaimsConstants.ClaimUserId, user.Id},
-                {ClaimsConstants.ClaimUserName, user.UserName},
-                {ClaimsConstants.ClaimRole, string.Join("|", roles)}
-            };
-            return new AuthenticationProperties(data);
         }
 
         #endregion
@@ -105,14 +88,53 @@ namespace BusinessLogic.Managers
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
         }
 
-        public void RegistrationUser(RegistrationUserDto dto)
+        public async Task RegistrationUser(RegistrationUserDto dto)
         {
-            throw new NotImplementedException();
+            ValidationResult validationResult;
+            try
+            {
+                validationResult = _validationManager.ValidateRegistrationUserDto(dto);
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new BusinessFaultException(ex.ParamName);
+            }
+            if (validationResult.HasErrors)
+            {
+                throw new BusinessFaultException(validationResult.GetErrors());
+            }
+
+            var user = Mapper.Map<ApplicationUser>(dto);
+            user.UserProfile = Mapper.Map<UserProfile>(dto);
+            user.Id = Guid.NewGuid().ToString();
+            user.EmailConfirmed = true;
+
+            await CreateUser(user, dto.Password, CommonRoles.Regular);
         }
 
-        public void RegistrationCarService(RegistrationCarServiceDto dto)
+        public async Task RegistrationCarService(RegistrationCarServiceDto dto, string directory)
         {
-            throw new NotImplementedException();
+            ValidationResult validationResult;
+            try
+            {
+                validationResult = _validationManager.ValidateRegistrationCarServiceDto(dto);
+            }
+            catch (ArgumentNullException ex)
+            {
+                DeleteDirectoryWithFiles(directory);
+                throw new BusinessFaultException(ex.ParamName);
+            }
+            if (validationResult.HasErrors)
+            {
+                DeleteDirectoryWithFiles(directory);
+                throw new BusinessFaultException(validationResult.GetErrors());
+            }
+            var user = Mapper.Map<ApplicationUser>(dto);
+            user.CarService = CreateCarService(dto);
+            user.Id = Guid.NewGuid().ToString();
+            user.EmailConfirmed = true;
+
+            await CreateUser(user, dto.Password, CommonRoles.CarService);
         }
 
         #endregion
@@ -136,6 +158,109 @@ namespace BusinessLogic.Managers
         public bool IsUserInRole(string userId, string role)
         {
             return this.IsInRole(userId, role);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Create Properties
+        /// </summary>
+        /// <param name="user">user</param>
+        /// <param name="roles"></param>
+        /// <returns></returns>
+        private AuthenticationProperties CreateProperties(IApplicationUser user, IList<string> roles)
+        {
+
+            IDictionary<string, string> data = new Dictionary<string, string>
+            {
+                {ClaimsConstants.ClaimUserId, user.Id},
+                {ClaimsConstants.ClaimUserName, user.UserName},
+                {ClaimsConstants.ClaimRole, string.Join("|", roles)}
+            };
+            return new AuthenticationProperties(data);
+        }
+
+        private void DeleteDirectoryWithFiles(string directory)
+        {
+            var filesDirInfo = new DirectoryInfo(directory);
+            if (filesDirInfo.Exists)
+            {
+                filesDirInfo.Delete(true);
+            }
+        }
+
+        private CarService CreateCarService(RegistrationCarServiceDto dto)
+        {
+            var carService = Mapper.Map<CarService>(dto);
+
+            carService.Phones = Mapper.Map<List<CarServicePhone>>(dto.Phones);
+
+            if (dto.WorkTags != null && dto.WorkTags.Any())
+            {
+                var repository = _unitOfWork.Repository<IWorkTagsRepository>();
+                carService.WorkTags = new List<WorkTag>();
+                foreach (var tagId in dto.WorkTags)
+                {
+                    carService.WorkTags.Add(repository.Get(tagId));
+                }
+            }
+
+            if (dto.CarTags != null && dto.CarTags.Any())
+            {
+                var repository = _unitOfWork.Repository<ICarMarksRepository>();
+                carService.CarTags = new List<CarMark>();
+                foreach (var carTagId in dto.CarTags)
+                {
+                    carService.CarTags.Add(repository.Get(carTagId));
+                }
+            }
+
+            carService.Files = new List<CarServiceFile>();
+
+            if (dto.Logo != null)
+            {
+                var logo = Mapper.Map<CarServiceFile>(dto.Logo);
+                logo.Type = FileType.Logo;
+                carService.Files.Add(logo);
+            }
+
+            if (dto.Photos != null && dto.Photos.Any())
+            {
+                ((List<CarServiceFile>)carService.Files).AddRange(Mapper.Map<List<CarServiceFile>>(dto.Photos));
+            }
+
+            return carService;
+        }
+
+        private async Task CreateUser(ApplicationUser user, string password, string role)
+        {
+            IdentityResult result;
+            try
+            {
+                result = await CreateAsync(user, password);
+            }
+            catch (Exception ex)
+            {
+                throw new BusinessFaultException(ex.Message);
+            }
+            if (!result.Succeeded)
+            {
+                throw new BusinessFaultException(string.Join(";", result.Errors.ToList()));
+            }
+            try
+            {
+                result = await AddToRoleAsync(user.Id, role);
+            }
+            catch (Exception ex)
+            {
+                throw new BusinessFaultException(ex.Message);
+            }
+            if (!result.Succeeded)
+            {
+                throw new BusinessFaultException(string.Join(";", result.Errors.ToList()));
+            }
         }
 
         #endregion

@@ -1,4 +1,5 @@
 ﻿using System;
+using Common.Enums;
 
 namespace DataAccessLayer.Models
 {
@@ -18,6 +19,11 @@ namespace DataAccessLayer.Models
         /// Дата последнего обновления модели
         /// </summary>
         public DateTime Updated { get; set; }
+
+        /// <summary>
+        /// Состояние пользователя
+        /// </summary>
+        public UserState State { get; set; }
 
         /// <summary>
         /// Пользователь

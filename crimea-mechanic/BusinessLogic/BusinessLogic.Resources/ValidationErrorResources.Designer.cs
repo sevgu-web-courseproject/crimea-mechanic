@@ -61,6 +61,15 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Марка автомобиля с номером {0} не найдена.
+        /// </summary>
+        public static string CarMarkNotFound {
+            get {
+                return ResourceManager.GetString("CarMarkNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Адрес автосервиса не заполнен.
         /// </summary>
         public static string CarServiceAddressIsEmpty {
@@ -133,6 +142,15 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Файл &quot;{0}&quot; содержит недопустимое расширение.
+        /// </summary>
+        public static string InvalidFileExtension {
+            get {
+                return ResourceManager.GetString("InvalidFileExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Неверный логин пользователя.
         /// </summary>
         public static string LoginIsNotValid {
@@ -156,6 +174,15 @@ namespace BusinessLogic.Resources {
         public static string PhoneNumberIsIncorrect {
             get {
                 return ResourceManager.GetString("PhoneNumberIsIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вид работы с номером {0} не найден.
+        /// </summary>
+        public static string WorkTagNotFound {
+            get {
+                return ResourceManager.GetString("WorkTagNotFound", resourceCulture);
             }
         }
     }

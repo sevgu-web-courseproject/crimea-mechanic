@@ -61,7 +61,7 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Данные для регистарции не найдены.
+        ///   Looks up a localized string similar to Данные для регистрации не найдены.
         /// </summary>
         public static string RegistrationDtoNotFound {
             get {

@@ -52,7 +52,7 @@ namespace DataAccessLayer.Models
         /// <summary>
         /// Теги марок автомобилей
         /// </summary>
-        public virtual ICollection<CarModelTag> CarModelTags { get; set; }
+        public virtual ICollection<CarMark> CarTags { get; set; }
 
         /// <summary>
         /// Файлы автосервиса

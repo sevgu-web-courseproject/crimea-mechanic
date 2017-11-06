@@ -6,6 +6,7 @@ using BusinessLogic.Objects;
 using BusinessLogic.Objects.User;
 using BusinessLogic.Resources;
 using Common.Validation;
+using DataAccessLayer.Models;
 using DataAccessLayer.Repositories.Abstraction;
 using Moq;
 using NUnit.Framework;
@@ -30,7 +31,7 @@ namespace BusinessLogic.UnitTests
         {
             _unitOfWorkMock = new Mock<IUnitOfWork>();
             _userManager = new Mock<IUserInternalManager>();
-            _manager = new ValidationManager(_unitOfWorkMock.Object, _userManager.Object);
+            _manager = new ValidationManager(_unitOfWorkMock.Object);
         }
 
         [SetUp]
@@ -131,34 +132,43 @@ namespace BusinessLogic.UnitTests
                 ManagerName = "Test",
                 Site = "https://test.com",
                 TimetableWorks = "Test",
-                WorkTags = new List<string>
+                WorkTags = new List<long>
                 {
-                    "test", "test"
+                    1, 2
                 },
-                CarModelTags = new List<string>
+                CarTags = new List<long>
                 {
-                    "test", "test"
+                    1, 2
                 },
                 Logo = new FileDto
                 {
-                    Name = "Test",
+                    Name = "Test.png",
                     Path = "Test"
                 },
                 Photos = new List<FileDto>
                 {
                     new FileDto
                     {
-                        Name = "test",
+                        Name = "test.png",
                         Path = "test"
                     },
                     new FileDto
                     {
-                        Name = "test",
+                        Name = "test.png",
                         Path = "test"
                     }
                 },
                 About = "test"
             };
+
+            var workTagsRepository = new Mock<IWorkTagsRepository>();
+            workTagsRepository.Setup(act => act.Get(It.IsAny<long>())).Returns(new WorkTag());
+            _unitOfWorkMock.Setup(act => act.Repository<IWorkTagsRepository>()).Returns(workTagsRepository.Object);
+
+            var marksRepository = new Mock<ICarMarksRepository>();
+            marksRepository.Setup(act => act.Get(It.IsAny<long>())).Returns(new CarMark());
+            _unitOfWorkMock.Setup(act => act.Repository<ICarMarksRepository>()).Returns(marksRepository.Object);
+
             //Act
             ValidationResult result = null;
             Assert.DoesNotThrow(() => result = _manager.ValidateRegistrationCarServiceDto(dto));
@@ -187,8 +197,37 @@ namespace BusinessLogic.UnitTests
                     ? new List<string> { phone1, phone2 } 
                     : new List<string>(),
                 ManagerName = "",
-                Site = "http12s://test.com"
+                Site = "http12s://test.com",
+                CarTags = new List<long> { 1 },
+                WorkTags = new List<long> { 1 },
+                Logo = new FileDto
+                {
+                    Name = "Test.exe",
+                    Path = "Test"
+                },
+                Photos = new List<FileDto>
+                {
+                    new FileDto
+                    {
+                        Name = "test.txt",
+                        Path = "test"
+                    },
+                    new FileDto
+                    {
+                        Name = "test.raw",
+                        Path = "test"
+                    }
+                }
             };
+
+            var workTagsRepository = new Mock<IWorkTagsRepository>();
+            workTagsRepository.Setup(act => act.Get(It.IsAny<long>())).Returns((WorkTag) null);
+            _unitOfWorkMock.Setup(act => act.Repository<IWorkTagsRepository>()).Returns(workTagsRepository.Object);
+
+            var marksRepository = new Mock<ICarMarksRepository>();
+            marksRepository.Setup(act => act.Get(It.IsAny<long>())).Returns((CarMark) null);
+            _unitOfWorkMock.Setup(act => act.Repository<ICarMarksRepository>()).Returns(marksRepository.Object);
+
             //Act
             ValidationResult result = null;
             Assert.DoesNotThrow(() => result = _manager.ValidateRegistrationCarServiceDto(dto));
@@ -206,12 +245,22 @@ namespace BusinessLogic.UnitTests
                 Assert.AreEqual(string.Format(ValidationErrorResources.CarServicePhoneIsIncorrect, phone2), result.Errors[6]);
                 Assert.AreEqual(ValidationErrorResources.CarServiceManagerNameIsEmpty, result.Errors[7]);
                 Assert.AreEqual(ValidationErrorResources.CarServiceSiteIsIncorrect, result.Errors[8]);
+                Assert.AreEqual(string.Format(ValidationErrorResources.CarMarkNotFound, "1"), result.Errors[9]);
+                Assert.AreEqual(string.Format(ValidationErrorResources.WorkTagNotFound, "1"), result.Errors[10]);
+                Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Logo.Name), result.Errors[11]);
+                Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Photos[0].Name), result.Errors[12]);
+                Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Photos[1].Name), result.Errors[13]);
             }
             else
             {
                 Assert.AreEqual(ValidationErrorResources.CarServicePhonesIsEmpty, result.Errors[5]);
                 Assert.AreEqual(ValidationErrorResources.CarServiceManagerNameIsEmpty, result.Errors[6]);
                 Assert.AreEqual(ValidationErrorResources.CarServiceSiteIsIncorrect, result.Errors[7]);
+                Assert.AreEqual(string.Format(ValidationErrorResources.CarMarkNotFound, "1"), result.Errors[8]);
+                Assert.AreEqual(string.Format(ValidationErrorResources.WorkTagNotFound, "1"), result.Errors[9]);
+                Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Logo.Name), result.Errors[10]);
+                Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Photos[0].Name), result.Errors[11]);
+                Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Photos[1].Name), result.Errors[12]);
             }
         }
 

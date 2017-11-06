@@ -7,7 +7,7 @@ namespace DataAccessLayer.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.CarModelTags",
+                "dbo.CarMarks",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
@@ -47,6 +47,7 @@ namespace DataAccessLayer.Migrations
                         Name = c.String(),
                         Phone = c.String(),
                         Updated = c.DateTime(nullable: false),
+                        State = c.Byte(nullable: false),
                         Created = c.DateTime(nullable: false),
                         ApplicationUser_Id = c.String(nullable: false, maxLength: 128),
                     })
@@ -99,17 +100,32 @@ namespace DataAccessLayer.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.CarServiceCarModelTags",
+                "dbo.CarModels",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        Name = c.String(),
+                        IsDeleted = c.Boolean(nullable: false),
+                        Updated = c.DateTime(nullable: false),
+                        Created = c.DateTime(nullable: false),
+                        Mark_Id = c.Long(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.CarMarks", t => t.Mark_Id)
+                .Index(t => t.Mark_Id);
+            
+            CreateTable(
+                "dbo.CarServiceCarMarks",
                 c => new
                     {
                         CarService_Id = c.Long(nullable: false),
-                        CarModelTag_Id = c.Long(nullable: false),
+                        CarMark_Id = c.Long(nullable: false),
                     })
-                .PrimaryKey(t => new { t.CarService_Id, t.CarModelTag_Id })
+                .PrimaryKey(t => new { t.CarService_Id, t.CarMark_Id })
                 .ForeignKey("dbo.CarServices", t => t.CarService_Id, cascadeDelete: true)
-                .ForeignKey("dbo.CarModelTags", t => t.CarModelTag_Id, cascadeDelete: true)
+                .ForeignKey("dbo.CarMarks", t => t.CarMark_Id, cascadeDelete: true)
                 .Index(t => t.CarService_Id)
-                .Index(t => t.CarModelTag_Id);
+                .Index(t => t.CarMark_Id);
             
             CreateTable(
                 "dbo.WorkTagCarServices",
@@ -128,30 +144,33 @@ namespace DataAccessLayer.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.CarModels", "Mark_Id", "dbo.CarMarks");
             DropForeignKey("dbo.WorkTagCarServices", "CarService_Id", "dbo.CarServices");
             DropForeignKey("dbo.WorkTagCarServices", "WorkTag_Id", "dbo.WorkTags");
             DropForeignKey("dbo.CarServicePhones", "CarService_Id", "dbo.CarServices");
             DropForeignKey("dbo.CarServiceFiles", "CarService_Id", "dbo.CarServices");
-            DropForeignKey("dbo.CarServiceCarModelTags", "CarModelTag_Id", "dbo.CarModelTags");
-            DropForeignKey("dbo.CarServiceCarModelTags", "CarService_Id", "dbo.CarServices");
+            DropForeignKey("dbo.CarServiceCarMarks", "CarMark_Id", "dbo.CarMarks");
+            DropForeignKey("dbo.CarServiceCarMarks", "CarService_Id", "dbo.CarServices");
             DropForeignKey("dbo.CarServices", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.UserProfiles", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropIndex("dbo.WorkTagCarServices", new[] { "CarService_Id" });
             DropIndex("dbo.WorkTagCarServices", new[] { "WorkTag_Id" });
-            DropIndex("dbo.CarServiceCarModelTags", new[] { "CarModelTag_Id" });
-            DropIndex("dbo.CarServiceCarModelTags", new[] { "CarService_Id" });
+            DropIndex("dbo.CarServiceCarMarks", new[] { "CarMark_Id" });
+            DropIndex("dbo.CarServiceCarMarks", new[] { "CarService_Id" });
+            DropIndex("dbo.CarModels", new[] { "Mark_Id" });
             DropIndex("dbo.CarServicePhones", new[] { "CarService_Id" });
             DropIndex("dbo.CarServiceFiles", new[] { "CarService_Id" });
             DropIndex("dbo.UserProfiles", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.CarServices", new[] { "ApplicationUser_Id" });
             DropTable("dbo.WorkTagCarServices");
-            DropTable("dbo.CarServiceCarModelTags");
+            DropTable("dbo.CarServiceCarMarks");
+            DropTable("dbo.CarModels");
             DropTable("dbo.WorkTags");
             DropTable("dbo.CarServicePhones");
             DropTable("dbo.CarServiceFiles");
             DropTable("dbo.UserProfiles");
             DropTable("dbo.CarServices");
-            DropTable("dbo.CarModelTags");
+            DropTable("dbo.CarMarks");
         }
     }
 }

@@ -54,9 +54,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IApplicationUserRepository.cs" />
+    <Compile Include="ICarMarksRepository.cs" />
+    <Compile Include="ICarServiceRepository.cs" />
     <Compile Include="IRepositoryBase.cs" />
     <Compile Include="IRepositoryFactory.cs" />
     <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="IUserProfileRepository.cs" />
+    <Compile Include="IWorkTagsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

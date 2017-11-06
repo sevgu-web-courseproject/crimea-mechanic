@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using BusinessLogic.Managers.Abstraction;
@@ -9,13 +11,20 @@ using DataAccessLayer.Repositories.Abstraction;
 
 namespace BusinessLogic.Managers
 {
-    public class ValidationManager : BaseManager, IValidationManager
+    public class ValidationManager : IValidationManager
     {
+
+        #region Fields
+
+        private readonly IUnitOfWork _unitOfWork;
+
+        #endregion
+
         #region Constructor
 
-        public ValidationManager(IUnitOfWork unitOfWork, IUserInternalManager userManager)
-            : base(unitOfWork, userManager)
+        public ValidationManager(IUnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
         }
 
         #endregion
@@ -95,6 +104,47 @@ namespace BusinessLogic.Managers
                 validationResult.AddError(ValidationErrorResources.CarServiceSiteIsIncorrect);
             }
 
+            if (dto.CarTags != null && dto.CarTags.Any())
+            {
+                var repository = _unitOfWork.Repository<ICarMarksRepository>();
+                foreach (var carTagId in dto.CarTags)
+                {
+                    var mark = repository.Get(carTagId);
+                    if (mark == null)
+                    {
+                        validationResult.AddError(string.Format(ValidationErrorResources.CarMarkNotFound, carTagId));
+                    }
+                }
+            }
+
+            if (dto.WorkTags != null && dto.WorkTags.Any())
+            {
+                var repository = _unitOfWork.Repository<IWorkTagsRepository>();
+                foreach (var workTagId in dto.WorkTags)
+                {
+                    var workTag = repository.Get(workTagId);
+                    if (workTag == null)
+                    {
+                        validationResult.AddError(string.Format(ValidationErrorResources.WorkTagNotFound, workTagId));
+                    }
+                }
+            }
+
+            if (dto.Logo != null && !IsImage(dto.Logo.Name))
+            {
+                validationResult.AddError(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Logo.Name));
+            }
+
+            if (dto.Photos != null && dto.Photos.Any())
+            {
+                foreach (var photo in dto.Photos)
+                {
+                    if (!IsImage(photo.Name))
+                    {
+                        validationResult.AddError(string.Format(ValidationErrorResources.InvalidFileExtension, photo.Name));
+                    }
+                }
+            }
 
             return validationResult;
         }
@@ -125,6 +175,16 @@ namespace BusinessLogic.Managers
         {
             var regex = new Regex("^\\+7(\\d{3}|\\(\\d{3}\\))\\-?\\d{3}\\-?\\d{2}\\-?\\d{2}$");
             return string.IsNullOrEmpty(phoneNumber) || !regex.IsMatch(phoneNumber);
+        }
+
+        private bool IsImage(string fileName)
+        {
+            var validExtensions = new List<string>
+            {
+                ".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".gif"
+            };
+            var extension = Path.GetExtension(fileName);
+            return validExtensions.Contains(extension);
         }
             
         #endregion

@@ -45,12 +45,12 @@ namespace BusinessLogic.Objects.User
         /// <summary>
         /// Теги характера работ
         /// </summary>
-        public List<string> WorkTags { get; set; }
+        public List<long> WorkTags { get; set; }
 
         /// <summary>
         /// Теги марок автомобилей
         /// </summary>
-        public List<string> CarModelTags { get; set; }
+        public List<long> CarTags { get; set; }
 
         /// <summary>
         /// Логотип автосервиса

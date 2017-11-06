@@ -14,6 +14,7 @@ namespace BusinessLogic.Managers
                 .DefaultInterfaces()
                 .LifestyleTransient());
             container.Register(Component.For<IUserManager, IUserInternalManager>().ImplementedBy<UserManager>().LifestyleTransient());
+            container.Register(Component.For<IValidationManager>().ImplementedBy<ValidationManager>().LifestyleTransient());
         }
     }
 }

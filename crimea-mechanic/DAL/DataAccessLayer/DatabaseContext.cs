@@ -18,8 +18,9 @@ namespace DataAccessLayer
         public DbSet<CarServicePhone> CarServicePhones { get; set; }
         public DbSet<CarServiceFile> CarServiceFiles { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
-        public DbSet<CarModelTag> CarModelTags { get; set; }
         public DbSet<WorkTag> WorkTags { get; set; }
+        public DbSet<CarMark> CarMarks { get; set; }
+        public DbSet<CarModel> CarModels { get; set; }
 
         #endregion
 

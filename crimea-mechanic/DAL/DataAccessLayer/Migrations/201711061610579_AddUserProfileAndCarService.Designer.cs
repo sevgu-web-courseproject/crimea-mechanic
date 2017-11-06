@@ -13,7 +13,7 @@ namespace DataAccessLayer.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201711041357215_AddUserProfileAndCarService"; }
+            get { return "201711061610579_AddUserProfileAndCarService"; }
         }
         
         string IMigrationMetadata.Source
