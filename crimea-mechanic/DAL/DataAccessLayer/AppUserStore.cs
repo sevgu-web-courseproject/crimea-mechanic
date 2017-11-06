@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using DataAccessLayer.Models;
@@ -9,7 +8,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DataAccessLayer
 {
-    public class AppUserStore : UserStore<ApplicationUser>, IUserStore<IApplicationUser>, IUserRoleStore<IApplicationUser>, IUserPasswordStore<IApplicationUser>
+    public class AppUserStore : UserStore<ApplicationUser>, IUserStore<IApplicationUser>, IUserRoleStore<IApplicationUser>, IUserPasswordStore<IApplicationUser>, IUserEmailStore<IApplicationUser>
     {
         public AppUserStore(DbContext context) : base(context)
         {
@@ -64,7 +63,7 @@ namespace DataAccessLayer
 
         public Task RemoveFromRoleAsync(IApplicationUser user, string roleName)
         {
-            throw new NotImplementedException();
+            return base.RemoveFromRoleAsync(user as ApplicationUser, roleName);
         }
 
         public Task<IList<string>> GetRolesAsync(IApplicationUser user)
@@ -75,6 +74,31 @@ namespace DataAccessLayer
         public Task<bool> IsInRoleAsync(IApplicationUser user, string roleName)
         {
             return base.IsInRoleAsync(user as ApplicationUser, roleName);
+        }
+
+        public Task SetEmailAsync(IApplicationUser user, string email)
+        {
+            return base.SetEmailAsync(user as ApplicationUser, email);
+        }
+
+        public Task<string> GetEmailAsync(IApplicationUser user)
+        {
+            return base.GetEmailAsync(user as ApplicationUser);
+        }
+
+        public Task<bool> GetEmailConfirmedAsync(IApplicationUser user)
+        {
+            return base.GetEmailConfirmedAsync(user as ApplicationUser);
+        }
+
+        public Task SetEmailConfirmedAsync(IApplicationUser user, bool confirmed)
+        {
+            return base.SetEmailConfirmedAsync(user as ApplicationUser, confirmed);
+        }
+
+        public new async Task<IApplicationUser> FindByEmailAsync(string email)
+        {
+            return await base.FindByEmailAsync(email);
         }
     }
 }

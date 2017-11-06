@@ -56,13 +56,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IUserInternalManager.cs" />
     <Compile Include="IUserManager.cs" />
+    <Compile Include="IValidationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.Validation\Common.Validation.csproj">
+      <Project>{97f0d987-0d65-4f9a-909d-31db4fe054f9}</Project>
+      <Name>Common.Validation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DAL\DataAccessLayer.Models.Abstraction\DataAccessLayer.Models.Abstraction.csproj">
+      <Project>{bc903fc4-80bd-4afc-83dd-d0797f306e44}</Project>
+      <Name>DataAccessLayer.Models.Abstraction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DAL\DataAccessLayer.Models\DataAccessLayer.Models.csproj">
+      <Project>{7c63af51-21cd-4029-a989-6a795ff0db19}</Project>
+      <Name>DataAccessLayer.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BusinessLogic.Objects\BusinessLogic.Objects.csproj">
       <Project>{83f2b36c-a43e-4b1a-921b-3769de2f8ae7}</Project>
       <Name>BusinessLogic.Objects</Name>

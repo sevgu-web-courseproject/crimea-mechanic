@@ -8,6 +8,8 @@ namespace BusinessLogic.Managers.Abstraction
     {
         Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context);
 
-        Task Register(RegisterUserDto dto);
+        Task RegistrationUser(RegistrationUserDto dto);
+
+        Task RegistrationCarService(RegistrationCarServiceDto dto, string directory);
     }
 }

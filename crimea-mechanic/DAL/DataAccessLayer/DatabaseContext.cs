@@ -6,10 +6,25 @@ namespace DataAccessLayer
 {
     public class DatabaseContext : IdentityDbContext<ApplicationUser>
     {
-        public DatabaseContext() : base("DatabaseConnectionString")
-        {
+        #region Constructor
 
-        }
+        public DatabaseContext() : base("DatabaseConnectionString") { }
+
+        #endregion
+
+        #region DbSets
+
+        public DbSet<CarService> CarServices { get; set; }
+        public DbSet<CarServicePhone> CarServicePhones { get; set; }
+        public DbSet<CarServiceFile> CarServiceFiles { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<WorkTag> WorkTags { get; set; }
+        public DbSet<CarMark> CarMarks { get; set; }
+        public DbSet<CarModel> CarModels { get; set; }
+
+        #endregion
+
+        #region OnModelCreating
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -21,6 +36,16 @@ namespace DataAccessLayer
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins");
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
+
+            modelBuilder.Entity<CarService>()
+                .HasRequired(c => c.ApplicationUser)
+                .WithOptional(c => c.CarService);
+
+            modelBuilder.Entity<UserProfile>()
+                .HasRequired(c => c.ApplicationUser)
+                .WithOptional(c => c.UserProfile);
         }
+
+        #endregion
     }
 }

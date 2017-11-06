@@ -85,6 +85,10 @@
     <Compile Include="Migrations\201710272046475_Init.Designer.cs">
       <DependentUpon>201710272046475_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711061610579_AddUserProfileAndCarService.cs" />
+    <Compile Include="Migrations\201711061610579_AddUserProfileAndCarService.Designer.cs">
+      <DependentUpon>201711061610579_AddUserProfileAndCarService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -109,6 +113,10 @@
       <Project>{bcf8b083-3754-49e3-8d48-208c9342ec78}</Project>
       <Name>Common.Constants</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.Enums\Common.Enums.csproj">
+      <Project>{3e10fa50-2cb7-45ee-b004-f1a805dd99b2}</Project>
+      <Name>Common.Enums</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataAccessLayer.Models.Abstraction\DataAccessLayer.Models.Abstraction.csproj">
       <Project>{bc903fc4-80bd-4afc-83dd-d0797f306e44}</Project>
       <Name>DataAccessLayer.Models.Abstraction</Name>
@@ -117,10 +125,17 @@
       <Project>{7c63af51-21cd-4029-a989-6a795ff0db19}</Project>
       <Name>DataAccessLayer.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataAccessLayer.Repositories.Abstraction\DataAccessLayer.Repositories.Abstraction.csproj">
+      <Project>{142f5b0f-94c0-4332-84d2-40c1fcf67406}</Project>
+      <Name>DataAccessLayer.Repositories.Abstraction</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710272046475_Init.resx">
       <DependentUpon>201710272046475_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711061610579_AddUserProfileAndCarService.resx">
+      <DependentUpon>201711061610579_AddUserProfileAndCarService.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

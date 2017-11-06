@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Castle.Core.4.2.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
@@ -60,6 +63,10 @@
     <ProjectReference Include="..\..\BusinessLogic\BusinessLogic.Managers\BusinessLogic.Managers.csproj">
       <Project>{1B281D22-CD3E-4849-A282-EC52D6B80B04}</Project>
       <Name>BusinessLogic.Managers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DAL\DataAccessLayer.Repositories\DataAccessLayer.Repositories.csproj">
+      <Project>{37cc6dc4-b558-4837-a5fa-85e9b37b16d9}</Project>
+      <Name>DataAccessLayer.Repositories</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DAL\DataAccessLayer\DataAccessLayer.csproj">
       <Project>{63dd5b4d-acc1-4c01-8d66-147d4d17291f}</Project>

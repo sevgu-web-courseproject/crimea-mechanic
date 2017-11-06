@@ -12,7 +12,7 @@ namespace DataAccessLayer
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<DbContext>().ImplementedBy<DatabaseContext>().LifestyleTransient());
+            container.Register(Component.For<DbContext>().ImplementedBy<DatabaseContext>());
             container.Register(Component.For<IUserStore<IApplicationUser>>().ImplementedBy<AppUserStore>().LifestyleTransient());
             container.Register(Component.For<IRoleStore<IdentityRole, string>>().ImplementedBy<AppRoleStore>().LifestyleTransient());
         }

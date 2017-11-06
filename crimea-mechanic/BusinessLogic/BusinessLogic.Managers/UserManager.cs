@@ -1,10 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using BusinessLogic.Managers.Abstraction;
 using BusinessLogic.Objects.User;
+using BusinessLogic.Resources;
 using Common.Constants;
+using Common.Enums;
+using Common.Exceptions;
+using Common.Validation;
+using DataAccessLayer.Models;
 using DataAccessLayer.Models.Abstraction;
+using DataAccessLayer.Repositories.Abstraction;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -14,10 +23,22 @@ using Microsoft.Owin.Security.OAuth;
 
 namespace BusinessLogic.Managers
 {
-    public class UserManager : UserManager<IApplicationUser>, IUserManager
+    public class UserManager : UserManager<IApplicationUser>, IUserManager, IUserInternalManager
     {
-        public UserManager(IUserStore<IApplicationUser> store) : base(store)
+        #region Fields
+
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IValidationManager _validationManager;
+
+        #endregion
+
+        #region Constructor
+
+        public UserManager(IUserStore<IApplicationUser> store, IUnitOfWork unitOfWork, IValidationManager validationManager) : base(store)
         {
+            _unitOfWork = unitOfWork;
+            _validationManager = validationManager;
+
             UserValidator = new UserValidator<IApplicationUser>(this)
             {
                 AllowOnlyAlphanumericUserNames = false,
@@ -28,7 +49,7 @@ namespace BusinessLogic.Managers
             PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
+                RequireNonLetterOrDigit = false,
                 RequireDigit = true
             };
 
@@ -36,23 +57,9 @@ namespace BusinessLogic.Managers
             UserTokenProvider = new DataProtectorTokenProvider<IApplicationUser, string>(provider.Create("UserToken"));
         }
 
-        /// <summary>
-        /// Create Properties
-        /// </summary>
-        /// <param name="user">user</param>
-        /// <param name="roles"></param>
-        /// <returns></returns>
-        private AuthenticationProperties CreateProperties(IApplicationUser user, IList<string> roles)
-        {
+        #endregion
 
-            IDictionary<string, string> data = new Dictionary<string, string>
-            {
-                {ClaimsConstants.ClaimUserId, user.Id},
-                {ClaimsConstants.ClaimUserName, user.UserName},
-                {ClaimsConstants.ClaimRole, string.Join("|", roles)}
-            };
-            return new AuthenticationProperties(data);
-        }
+        #region Implementation of IUserManager
 
         public async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
@@ -81,9 +88,181 @@ namespace BusinessLogic.Managers
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
         }
 
-        public Task Register(RegisterUserDto dto)
+        public async Task RegistrationUser(RegistrationUserDto dto)
         {
-            throw new NotImplementedException();
+            ValidationResult validationResult;
+            try
+            {
+                validationResult = _validationManager.ValidateRegistrationUserDto(dto);
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new BusinessFaultException(ex.ParamName);
+            }
+            if (validationResult.HasErrors)
+            {
+                throw new BusinessFaultException(validationResult.GetErrors());
+            }
+
+            var user = Mapper.Map<ApplicationUser>(dto);
+            user.UserProfile = Mapper.Map<UserProfile>(dto);
+            user.Id = Guid.NewGuid().ToString();
+            user.EmailConfirmed = true;
+
+            await CreateUser(user, dto.Password, CommonRoles.Regular);
         }
+
+        public async Task RegistrationCarService(RegistrationCarServiceDto dto, string directory)
+        {
+            ValidationResult validationResult;
+            try
+            {
+                validationResult = _validationManager.ValidateRegistrationCarServiceDto(dto);
+            }
+            catch (ArgumentNullException ex)
+            {
+                DeleteDirectoryWithFiles(directory);
+                throw new BusinessFaultException(ex.ParamName);
+            }
+            if (validationResult.HasErrors)
+            {
+                DeleteDirectoryWithFiles(directory);
+                throw new BusinessFaultException(validationResult.GetErrors());
+            }
+            var user = Mapper.Map<ApplicationUser>(dto);
+            user.CarService = CreateCarService(dto);
+            user.Id = Guid.NewGuid().ToString();
+            user.EmailConfirmed = true;
+
+            await CreateUser(user, dto.Password, CommonRoles.CarService);
+        }
+
+        #endregion
+
+        #region Implementation of IUserInternalManager
+
+        public ApplicationUser CheckAndGet(string userId)
+        {
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new BusinessFaultException(BusinessLogicExceptionResources.UserNotFound);
+            }
+            var user = _unitOfWork.Repository<IApplicationUserRepository>().Get(userId);
+            if (user == null)
+            {
+                throw new BusinessFaultException(BusinessLogicExceptionResources.UserNotFound);
+            }
+            return user;
+        }
+
+        public bool IsUserInRole(string userId, string role)
+        {
+            return this.IsInRole(userId, role);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Create Properties
+        /// </summary>
+        /// <param name="user">user</param>
+        /// <param name="roles"></param>
+        /// <returns></returns>
+        private AuthenticationProperties CreateProperties(IApplicationUser user, IList<string> roles)
+        {
+
+            IDictionary<string, string> data = new Dictionary<string, string>
+            {
+                {ClaimsConstants.ClaimUserId, user.Id},
+                {ClaimsConstants.ClaimUserName, user.UserName},
+                {ClaimsConstants.ClaimRole, string.Join("|", roles)}
+            };
+            return new AuthenticationProperties(data);
+        }
+
+        private void DeleteDirectoryWithFiles(string directory)
+        {
+            var filesDirInfo = new DirectoryInfo(directory);
+            if (filesDirInfo.Exists)
+            {
+                filesDirInfo.Delete(true);
+            }
+        }
+
+        private CarService CreateCarService(RegistrationCarServiceDto dto)
+        {
+            var carService = Mapper.Map<CarService>(dto);
+
+            carService.Phones = Mapper.Map<List<CarServicePhone>>(dto.Phones);
+
+            if (dto.WorkTags != null && dto.WorkTags.Any())
+            {
+                var repository = _unitOfWork.Repository<IWorkTagsRepository>();
+                carService.WorkTags = new List<WorkTag>();
+                foreach (var tagId in dto.WorkTags)
+                {
+                    carService.WorkTags.Add(repository.Get(tagId));
+                }
+            }
+
+            if (dto.CarTags != null && dto.CarTags.Any())
+            {
+                var repository = _unitOfWork.Repository<ICarMarksRepository>();
+                carService.CarTags = new List<CarMark>();
+                foreach (var carTagId in dto.CarTags)
+                {
+                    carService.CarTags.Add(repository.Get(carTagId));
+                }
+            }
+
+            carService.Files = new List<CarServiceFile>();
+
+            if (dto.Logo != null)
+            {
+                var logo = Mapper.Map<CarServiceFile>(dto.Logo);
+                logo.Type = FileType.Logo;
+                carService.Files.Add(logo);
+            }
+
+            if (dto.Photos != null && dto.Photos.Any())
+            {
+                ((List<CarServiceFile>)carService.Files).AddRange(Mapper.Map<List<CarServiceFile>>(dto.Photos));
+            }
+
+            return carService;
+        }
+
+        private async Task CreateUser(ApplicationUser user, string password, string role)
+        {
+            IdentityResult result;
+            try
+            {
+                result = await CreateAsync(user, password);
+            }
+            catch (Exception ex)
+            {
+                throw new BusinessFaultException(ex.Message);
+            }
+            if (!result.Succeeded)
+            {
+                throw new BusinessFaultException(string.Join(";", result.Errors.ToList()));
+            }
+            try
+            {
+                result = await AddToRoleAsync(user.Id, role);
+            }
+            catch (Exception ex)
+            {
+                throw new BusinessFaultException(ex.Message);
+            }
+            if (!result.Succeeded)
+            {
+                throw new BusinessFaultException(string.Join(";", result.Errors.ToList()));
+            }
+        }
+
+        #endregion
     }
 }

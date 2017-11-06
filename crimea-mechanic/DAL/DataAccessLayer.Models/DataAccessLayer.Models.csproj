@@ -54,9 +54,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationUser.cs" />
+    <Compile Include="BaseEntity.cs" />
+    <Compile Include="CarMark.cs" />
+    <Compile Include="CarModel.cs" />
+    <Compile Include="CarService.cs" />
+    <Compile Include="CarServiceFile.cs" />
+    <Compile Include="CarServicePhone.cs" />
+    <Compile Include="WorkTag.cs" />
+    <Compile Include="DeletableBaseEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserProfile.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.Enums\Common.Enums.csproj">
+      <Project>{3e10fa50-2cb7-45ee-b004-f1a805dd99b2}</Project>
+      <Name>Common.Enums</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataAccessLayer.Models.Abstraction\DataAccessLayer.Models.Abstraction.csproj">
       <Project>{bc903fc4-80bd-4afc-83dd-d0797f306e44}</Project>
       <Name>DataAccessLayer.Models.Abstraction</Name>
