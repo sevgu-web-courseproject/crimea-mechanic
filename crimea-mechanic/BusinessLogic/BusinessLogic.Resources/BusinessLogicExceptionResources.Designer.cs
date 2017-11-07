@@ -61,6 +61,15 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Марка автомобиля не найдена.
+        /// </summary>
+        public static string CarMarkNotFound {
+            get {
+                return ResourceManager.GetString("CarMarkNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пользователь не найден.
         /// </summary>
         public static string UserNotFound {
