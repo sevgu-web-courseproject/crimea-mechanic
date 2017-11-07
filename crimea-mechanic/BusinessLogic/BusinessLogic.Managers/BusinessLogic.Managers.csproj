@@ -91,6 +91,7 @@
     <Compile Include="BusinessLogicInstaller.cs" />
     <Compile Include="MapProfiles\RegistrationProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StorageManager.cs" />
     <Compile Include="UserManager.cs" />
     <Compile Include="ValidationManager.cs" />
   </ItemGroup>

@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IStorageManager.cs" />
     <Compile Include="IUserInternalManager.cs" />
     <Compile Include="IUserManager.cs" />
     <Compile Include="IValidationManager.cs" />
