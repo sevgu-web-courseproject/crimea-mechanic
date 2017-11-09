@@ -104,6 +104,10 @@
       <Project>{142f5b0f-94c0-4332-84d2-40c1fcf67406}</Project>
       <Name>DataAccessLayer.Repositories.Abstraction</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\DependencyInjector\DependencyInjector.csproj">
+      <Project>{8bf31ca4-d938-4284-91cf-55a6f218fe2a}</Project>
+      <Name>DependencyInjector</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

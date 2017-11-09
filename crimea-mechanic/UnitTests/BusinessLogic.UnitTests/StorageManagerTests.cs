@@ -8,6 +8,7 @@ using BusinessLogic.UnitTests.Utils;
 using Common.Exceptions;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repositories.Abstraction;
+using DependencyInjector;
 using Moq;
 using NUnit.Framework;
 
@@ -32,6 +33,8 @@ namespace BusinessLogic.UnitTests
             _unitOfWorkMock = new Mock<IUnitOfWork>();
             _userManager = new Mock<IUserInternalManager>();
             _manager = new StorageManager(_unitOfWorkMock.Object, _userManager.Object);
+
+            InitializationAutomapper.Init();
         }
 
         [SetUp]
@@ -67,10 +70,10 @@ namespace BusinessLogic.UnitTests
             var result = _manager.GetCarMarks(null);
 
             //Assert
-            Assert.AreEqual(3, result.Count);
-            Assert.AreEqual(marks[0].Name, result[0].Name);
-            Assert.AreEqual(marks[1].Name, result[1].Name);
-            Assert.AreEqual(marks[4].Name, result[2].Name);
+            Assert.AreEqual(3, result.Count());
+            Assert.AreEqual(marks[0].Name, result.ElementAt(0).Name);
+            Assert.AreEqual(marks[1].Name, result.ElementAt(1).Name);
+            Assert.AreEqual(marks[4].Name, result.ElementAt(2).Name);
         }
 
         [Test(Description = "GetCarMarks должен вернуть все марки автомобилей содержащие текст поиска")]
@@ -98,11 +101,11 @@ namespace BusinessLogic.UnitTests
             var result = _manager.GetCarMarks(searchText);
 
             //Assert
-            Assert.AreEqual(4, result.Count);
-            Assert.AreEqual(marks[0].Name, result[0].Name);
-            Assert.AreEqual(marks[4].Name, result[1].Name);
-            Assert.AreEqual(marks[5].Name, result[2].Name);
-            Assert.AreEqual(marks[6].Name, result[3].Name);
+            Assert.AreEqual(4, result.Count());
+            Assert.AreEqual(marks[0].Name, result.ElementAt(0).Name);
+            Assert.AreEqual(marks[4].Name, result.ElementAt(1).Name);
+            Assert.AreEqual(marks[5].Name, result.ElementAt(2).Name);
+            Assert.AreEqual(marks[6].Name, result.ElementAt(3).Name);
         }
 
         #endregion
@@ -132,8 +135,8 @@ namespace BusinessLogic.UnitTests
         public void GetModels_Must_Returns_All_Models_For_A_Certain_Mark_Without_Errors()
         {
             //Arrange
-            var markId = 1;
-            var models = new List<CarModel>
+            var mark = CarMarksUtils.Create(1, "test");
+            mark.Models = new List<CarModel>
             {
                 CarModelUtils.Create(0, "Aaaa"),
                 CarModelUtils.Create(1, "Bbbb"),
@@ -143,23 +146,19 @@ namespace BusinessLogic.UnitTests
             };
 
             var markRepository = new Mock<ICarMarksRepository>();
-            markRepository.Setup(act => act.Get(markId)).Returns(new CarMark());
+            markRepository.Setup(act => act.Get(mark.Id)).Returns(mark);
             _unitOfWorkMock.Setup(act => act.Repository<ICarMarksRepository>()).Returns(markRepository.Object);
 
-            var modelRepository = new Mock<ICarModelsRepository>();
-            modelRepository.Setup(act => act.GetAll(true)).Returns(models.AsQueryable);
-            _unitOfWorkMock.Setup(act => act.Repository<ICarModelsRepository>()).Returns(modelRepository.Object);
-
             //Act
-            List<CarModelDto> result = null;
-            Assert.DoesNotThrow(() => result = _manager.GetModels(markId));
+            IEnumerable<CarModelDto> result = null;
+            Assert.DoesNotThrow(() => result = _manager.GetModels(mark.Id));
 
             //Assert
             Assert.NotNull(result);
-            Assert.AreEqual(3, result.Count);
-            Assert.AreEqual(models[0].Name, result[0].Name);
-            Assert.AreEqual(models[1].Name, result[1].Name);
-            Assert.AreEqual(models[3].Name, result[2].Name);
+            Assert.AreEqual(3, result.Count());
+            Assert.AreEqual(mark.Models.ElementAt(0).Name, result.ElementAt(0).Name);
+            Assert.AreEqual(mark.Models.ElementAt(1).Name, result.ElementAt(1).Name);
+            Assert.AreEqual(mark.Models.ElementAt(3).Name, result.ElementAt(2).Name);
         }
 
         #endregion
@@ -184,15 +183,15 @@ namespace BusinessLogic.UnitTests
             _unitOfWorkMock.Setup(act => act.Repository<IWorkTagsRepository>()).Returns(repository.Object);
 
             //Act
-            List<WorkTagDto> result = null;
+            IEnumerable<WorkTagDto> result = null;
             Assert.DoesNotThrow(() => result = _manager.GetWorkTags());
 
             //Assert
             Assert.NotNull(result);
-            Assert.AreEqual(3, result.Count);
-            Assert.AreEqual(workTags[2].Name, result[0].Name);
-            Assert.AreEqual(workTags[3].Name, result[1].Name);
-            Assert.AreEqual(workTags[4].Name, result[2].Name);
+            Assert.AreEqual(3, result.Count());
+            Assert.AreEqual(workTags[2].Name, result.ElementAt(0).Name);
+            Assert.AreEqual(workTags[3].Name, result.ElementAt(1).Name);
+            Assert.AreEqual(workTags[4].Name, result.ElementAt(2).Name);
         }
 
         #endregion

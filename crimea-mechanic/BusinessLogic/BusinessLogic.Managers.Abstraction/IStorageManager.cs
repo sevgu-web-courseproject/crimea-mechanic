@@ -13,19 +13,19 @@ namespace BusinessLogic.Managers.Abstraction
         /// </summary>
         /// <param name="searchText">Текст для поиска</param>
         /// <returns></returns>
-        List<CarMarkDto> GetCarMarks(string searchText);
+        IEnumerable<CarMarkDto> GetCarMarks(string searchText);
 
         /// <summary>
         /// Получить все модели по идентификатору марки
         /// </summary>
         /// <param name="markId"></param>
         /// <returns></returns>
-        List<CarModelDto> GetModels(long markId);
+        IEnumerable<CarModelDto> GetModels(long markId);
 
         /// <summary>
         /// Получить все виды работ
         /// </summary>
         /// <returns></returns>
-        List<WorkTagDto> GetWorkTags();
+        IEnumerable<WorkTagDto> GetWorkTags();
     }
 }
