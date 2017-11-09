@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="IApplicationUserRepository.cs" />
     <Compile Include="ICarMarksRepository.cs" />
+    <Compile Include="ICarModelsRepository.cs" />
     <Compile Include="ICarServiceRepository.cs" />
     <Compile Include="IRepositoryBase.cs" />
     <Compile Include="IRepositoryFactory.cs" />

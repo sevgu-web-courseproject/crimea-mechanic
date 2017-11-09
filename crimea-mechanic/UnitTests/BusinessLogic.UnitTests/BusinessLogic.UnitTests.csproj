@@ -53,6 +53,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StorageManagerTests.cs" />
+    <Compile Include="Utils\CarMarksUtils.cs" />
+    <Compile Include="Utils\CarModelUtils.cs" />
+    <Compile Include="Utils\WorkTagsUtils.cs" />
     <Compile Include="ValidationManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +92,10 @@
       <Project>{97f0d987-0d65-4f9a-909d-31db4fe054f9}</Project>
       <Name>Common.Validation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\DAL\DataAccessLayer.Models.Abstraction\DataAccessLayer.Models.Abstraction.csproj">
+      <Project>{bc903fc4-80bd-4afc-83dd-d0797f306e44}</Project>
+      <Name>DataAccessLayer.Models.Abstraction</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\DAL\DataAccessLayer.Models\DataAccessLayer.Models.csproj">
       <Project>{7c63af51-21cd-4029-a989-6a795ff0db19}</Project>
       <Name>DataAccessLayer.Models</Name>
@@ -95,6 +103,10 @@
     <ProjectReference Include="..\..\DAL\DataAccessLayer.Repositories.Abstraction\DataAccessLayer.Repositories.Abstraction.csproj">
       <Project>{142f5b0f-94c0-4332-84d2-40c1fcf67406}</Project>
       <Name>DataAccessLayer.Repositories.Abstraction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\DependencyInjector\DependencyInjector.csproj">
+      <Project>{8bf31ca4-d938-4284-91cf-55a6f218fe2a}</Project>
+      <Name>DependencyInjector</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

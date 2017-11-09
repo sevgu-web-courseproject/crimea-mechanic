@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
-using BusinessLogic.Managers;
-using BusinessLogic.Managers.MapProfiles;
+﻿using BusinessLogic.Managers;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using DataAccessLayer;
@@ -24,18 +21,7 @@ namespace DependencyInjector
                 container.Install(installer);
             }
 
-            var profiles = new List<Profile>
-            {
-                new RegistrationProfile()
-            };
-            Mapper.Initialize(cfg =>
-            {
-                foreach (var profile in profiles)
-                {
-                    cfg.AddProfile(profile);
-                }
-            });
-            Mapper.AssertConfigurationIsValid();
+            InitializationAutomapper.Init();
 
             return container;
         }

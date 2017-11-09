@@ -13,7 +13,7 @@ namespace WebApi.Controllers
 {
     public abstract class ApiControllerBase : ApiController
     {
-        protected virtual IHttpActionResult CallBusinessLogicActionWithResult<T>(Func<string> bllAction)
+        protected virtual IHttpActionResult CallBusinessLogicActionWithResult<T>(Func<T> bllAction)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace WebApi.Controllers
             }
         }
 
-        protected virtual async Task<IHttpActionResult> CallBusinessLogicActionAsyncWithResult<T>(Func<Task<string>> bllAction)
+        protected virtual async Task<IHttpActionResult> CallBusinessLogicActionAsyncWithResult<T>(Func<Task<T>> bllAction)
         {
             try
             {

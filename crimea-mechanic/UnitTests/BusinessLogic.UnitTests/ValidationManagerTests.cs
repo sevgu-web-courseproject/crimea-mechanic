@@ -19,7 +19,6 @@ namespace BusinessLogic.UnitTests
         #region Fields
 
         private Mock<IUnitOfWork> _unitOfWorkMock;
-        private Mock<IUserInternalManager> _userManager;
         private ValidationManager _manager;
 
         #endregion
@@ -30,7 +29,6 @@ namespace BusinessLogic.UnitTests
         public void ConfigureSet()
         {
             _unitOfWorkMock = new Mock<IUnitOfWork>();
-            _userManager = new Mock<IUserInternalManager>();
             _manager = new ValidationManager(_unitOfWorkMock.Object);
         }
 
@@ -38,7 +36,6 @@ namespace BusinessLogic.UnitTests
         public void Init()
         {
             _unitOfWorkMock.Reset();
-            _userManager.Reset();
         }
 
         #endregion
