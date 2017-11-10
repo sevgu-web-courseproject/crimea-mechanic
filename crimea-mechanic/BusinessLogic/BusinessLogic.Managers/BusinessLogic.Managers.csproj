@@ -91,6 +91,7 @@
     <Compile Include="BusinessLogicInstaller.cs" />
     <Compile Include="MapProfiles\CarMarkProfile.cs" />
     <Compile Include="MapProfiles\CarModelProfile.cs" />
+    <Compile Include="MapProfiles\CityProfile.cs" />
     <Compile Include="MapProfiles\RegistrationProfile.cs" />
     <Compile Include="MapProfiles\WorkTagProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

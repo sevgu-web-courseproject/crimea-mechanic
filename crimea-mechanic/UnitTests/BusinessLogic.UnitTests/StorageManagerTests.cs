@@ -21,7 +21,7 @@ namespace BusinessLogic.UnitTests
 
         private Mock<IUnitOfWork> _unitOfWorkMock;
         private Mock<IUserInternalManager> _userManager;
-        private StorageManager _manager;
+        private IStorageManager _manager;
 
         #endregion
 
@@ -192,6 +192,36 @@ namespace BusinessLogic.UnitTests
             Assert.AreEqual(workTags[2].Name, result.ElementAt(0).Name);
             Assert.AreEqual(workTags[3].Name, result.ElementAt(1).Name);
             Assert.AreEqual(workTags[4].Name, result.ElementAt(2).Name);
+        }
+
+        #endregion
+
+        #region GetCities
+
+        [Test(Description = "GetCities должен вернуть список всех городов")]
+        public void GetCities_Must_Return_List_Of_All_Cities()
+        {
+            //Arrange
+            var cities = new List<City>
+            {
+                CityUtils.Create(1, "aaaa"),
+                CityUtils.Create(2, "bbbb", true),
+                CityUtils.Create(3, "dddd"),
+                CityUtils.Create(4, "eeee")
+            };
+
+            var repository = new Mock<ICityRepository>();
+            repository.Setup(act => act.GetAll(true)).Returns(cities.AsQueryable);
+            _unitOfWorkMock.Setup(act => act.Repository<ICityRepository>()).Returns(repository.Object);
+
+            //Act
+            var result = _manager.GetCities();
+
+            //Assert
+            Assert.AreEqual(3, result.Count());
+            Assert.AreEqual(cities[0].Name, result.ElementAt(0).Name);
+            Assert.AreEqual(cities[2].Name, result.ElementAt(1).Name);
+            Assert.AreEqual(cities[3].Name, result.ElementAt(2).Name);
         }
 
         #endregion

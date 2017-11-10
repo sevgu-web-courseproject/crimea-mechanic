@@ -27,5 +27,11 @@ namespace BusinessLogic.Managers.Abstraction
         /// </summary>
         /// <returns></returns>
         IEnumerable<WorkTagDto> GetWorkTags();
+
+        /// <summary>
+        /// Получить список городов
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<CityDto> GetCities();
     }
 }

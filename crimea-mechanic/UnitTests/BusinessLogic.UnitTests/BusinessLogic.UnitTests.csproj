@@ -56,6 +56,7 @@
     <Compile Include="StorageManagerTests.cs" />
     <Compile Include="Utils\CarMarksUtils.cs" />
     <Compile Include="Utils\CarModelUtils.cs" />
+    <Compile Include="Utils\CityUtils.cs" />
     <Compile Include="Utils\WorkTagsUtils.cs" />
     <Compile Include="ValidationManagerTests.cs" />
   </ItemGroup>
