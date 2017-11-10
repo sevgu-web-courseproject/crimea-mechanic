@@ -310,13 +310,34 @@ namespace DataAccessLayer.Migrations
             CheckAndCreateWorkTag(context, "Ремонт глушителей"); 
             CheckAndCreateWorkTag(context, "Салонные работы"); 
             CheckAndCreateWorkTag(context, "Диагностические работы"); 
-            CheckAndCreateWorkTag(context, "Тюннинг"); 
+            CheckAndCreateWorkTag(context, "Тюннинг");
+
+            #endregion
+
+            #region Cities
+
+            CheckAndCreateCity(context, "Алупка");
+            CheckAndCreateCity(context, "Алушта");
+            CheckAndCreateCity(context, "Армянск");
+            CheckAndCreateCity(context, "Белогорск");
+            CheckAndCreateCity(context, "Джанкой");
+            CheckAndCreateCity(context, "Евпатория");
+            CheckAndCreateCity(context, "Керчь");
+            CheckAndCreateCity(context, "Красноперекопск");
+            CheckAndCreateCity(context, "Саки");
+            CheckAndCreateCity(context, "Севастополь");
+            CheckAndCreateCity(context, "Симферополь");
+            CheckAndCreateCity(context, "Старый Крым");
+            CheckAndCreateCity(context, "Судак");
+            CheckAndCreateCity(context, "Феодосия");
+            CheckAndCreateCity(context, "Щелкино");
+            CheckAndCreateCity(context, "Ялта");
 
             #endregion
 
         }
 
-        #region User and Roles
+        #region Private methods
 
         /// <summary>
         /// Создает роль по умолчанию
@@ -458,6 +479,26 @@ namespace DataAccessLayer.Migrations
             }
         }
 
-        #endregion User and Roles
+        /// <summary>
+        /// Создать город
+        /// </summary>
+        private void CheckAndCreateCity(DatabaseContext context, string name)
+        {
+            var city = context.Cities.FirstOrDefault(x => x.Name == name);
+            if (city == null)
+            {
+                city = new City
+                {
+                    Created = DateTime.UtcNow,
+                    Updated = DateTime.UtcNow,
+                    IsDeleted = false,
+                    Name = name
+                };
+                context.Cities.Add(city);
+                context.SaveChanges();
+            }
+        }
+
+        #endregion Private methods
     }
 }

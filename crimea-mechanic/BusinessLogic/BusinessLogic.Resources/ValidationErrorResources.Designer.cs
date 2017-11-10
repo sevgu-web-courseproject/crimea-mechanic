@@ -133,6 +133,15 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Город не найден.
+        /// </summary>
+        public static string CityNotFound {
+            get {
+                return ResourceManager.GetString("CityNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отсутсвует контактное имя пользователя.
         /// </summary>
         public static string ContactNameIsEmpty {

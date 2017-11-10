@@ -194,6 +194,7 @@ namespace BusinessLogic.Managers
         private CarService CreateCarService(RegistrationCarServiceDto dto)
         {
             var carService = Mapper.Map<CarService>(dto);
+            carService.City = _unitOfWork.Repository<ICityRepository>().Get(dto.CityId);
 
             carService.Phones = Mapper.Map<List<CarServicePhone>>(dto.Phones);
 

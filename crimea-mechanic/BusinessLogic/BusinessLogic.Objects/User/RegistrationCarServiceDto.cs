@@ -13,6 +13,11 @@ namespace BusinessLogic.Objects.User
         public string Name { get; set; }
 
         /// <summary>
+        /// Идентификатор города
+        /// </summary>
+        public long CityId { get; set; }
+
+        /// <summary>
         /// Адрес автосервиса
         /// </summary>
         public string Address { get; set; }

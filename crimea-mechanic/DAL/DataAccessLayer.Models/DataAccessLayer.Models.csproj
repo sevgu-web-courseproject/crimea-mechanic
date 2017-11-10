@@ -60,6 +60,7 @@
     <Compile Include="CarService.cs" />
     <Compile Include="CarServiceFile.cs" />
     <Compile Include="CarServicePhone.cs" />
+    <Compile Include="City.cs" />
     <Compile Include="WorkTag.cs" />
     <Compile Include="DeletableBaseEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

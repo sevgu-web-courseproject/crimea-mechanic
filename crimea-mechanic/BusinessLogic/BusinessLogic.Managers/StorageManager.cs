@@ -55,6 +55,14 @@ namespace BusinessLogic.Managers
                 .Select(Mapper.Map<WorkTagDto>);
         }
 
+        public IEnumerable<CityDto> GetCities()
+        {
+            return UnitOfWork.Repository<ICityRepository>().GetAll(true)
+                .Where(city => !city.IsDeleted)
+                .ToList()
+                .Select(Mapper.Map<CityDto>);
+        }
+
         #endregion
     }
 }
