@@ -104,7 +104,19 @@ namespace WebUI.Controllers
             }
         }
 
-        // TODO Сделать регистрацию
+        // GET /Account/RegistrationUser
+        [HttpGet]
+        public ActionResult RegistrationUser()
+        {
+            return View();
+        }
+
+        // GET /Account/RegistrationCarService
+        [HttpGet]
+        public ActionResult RegistrationCarService()
+        {
+            return View();
+        }
 
         [Authorize]
         public async Task<ActionResult> SignOut()
