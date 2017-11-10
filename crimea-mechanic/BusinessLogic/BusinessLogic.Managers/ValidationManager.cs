@@ -68,6 +68,12 @@ namespace BusinessLogic.Managers
                 validationResult.AddError(ValidationErrorResources.CarServiceNameIsEmpty);
             }
 
+            var city = _unitOfWork.Repository<ICityRepository>().Get(dto.CityId);
+            if (city == null)
+            {
+                validationResult.AddError(ValidationErrorResources.CityNotFound);
+            }
+
             if (string.IsNullOrEmpty(dto.Address))
             {
                 validationResult.AddError(ValidationErrorResources.CarServiceAddressIsEmpty);
@@ -173,7 +179,7 @@ namespace BusinessLogic.Managers
 
         private bool IsInvalidPhoneNumber(string phoneNumber)
         {
-            var regex = new Regex("^\\+7(\\d{3}|\\(\\d{3}\\))\\-?\\d{3}\\-?\\d{2}\\-?\\d{2}$");
+            var regex = new Regex("^\\+7(\\d{3}|\\(\\d{3}\\)) ?\\d{3}\\-?\\d{2}\\-?\\d{2}$");
             return string.IsNullOrEmpty(phoneNumber) || !regex.IsMatch(phoneNumber);
         }
 

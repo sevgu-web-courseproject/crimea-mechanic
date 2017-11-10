@@ -141,6 +141,9 @@
   <data name="CarServiceSiteIsIncorrect" xml:space="preserve">
     <value>Неккоректный адрес сайта автосервиса</value>
   </data>
+  <data name="CityNotFound" xml:space="preserve">
+    <value>Город не найден</value>
+  </data>
   <data name="ContactNameIsEmpty" xml:space="preserve">
     <value>Отсутсвует контактное имя пользователя</value>
   </data>

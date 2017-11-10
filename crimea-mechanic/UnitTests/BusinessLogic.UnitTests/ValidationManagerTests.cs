@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using BusinessLogic.Managers;
-using BusinessLogic.Managers.Abstraction;
 using BusinessLogic.Objects;
 using BusinessLogic.Objects.User;
 using BusinessLogic.Resources;
@@ -61,7 +60,7 @@ namespace BusinessLogic.UnitTests
                 Login = "test@test.com",
                 Password = "qwerty",
                 PasswordСonfirmation = "qwerty",
-                Phone = "+7(111)-111-11-11",
+                Phone = "+7(111) 111-11-11",
             };
 
             //Act
@@ -82,7 +81,7 @@ namespace BusinessLogic.UnitTests
                 Login = "test@@test.com",
                 Password = "qwerty",
                 PasswordСonfirmation = "qwerty1",
-                Phone = "+7(111)-111-11-11312",
+                Phone = "+7(111)-111-11-11",
             };
 
             //Act
@@ -117,6 +116,7 @@ namespace BusinessLogic.UnitTests
             var dto = new RegistrationCarServiceDto
             {
                 Login = "test@test.com",
+                CityId = 1,
                 Password = "qwerty",
                 PasswordСonfirmation = "qwerty",
                 Name = "Test",
@@ -166,6 +166,10 @@ namespace BusinessLogic.UnitTests
             marksRepository.Setup(act => act.Get(It.IsAny<long>())).Returns(new CarMark());
             _unitOfWorkMock.Setup(act => act.Repository<ICarMarksRepository>()).Returns(marksRepository.Object);
 
+            var cityRepository = new Mock<ICityRepository>();
+            cityRepository.Setup(act => act.Get(dto.CityId)).Returns(new City());
+            _unitOfWorkMock.Setup(act => act.Repository<ICityRepository>()).Returns(cityRepository.Object);
+
             //Act
             ValidationResult result = null;
             Assert.DoesNotThrow(() => result = _manager.ValidateRegistrationCarServiceDto(dto));
@@ -188,6 +192,7 @@ namespace BusinessLogic.UnitTests
                 Password = "qwerty",
                 PasswordСonfirmation = "qwerty1",
                 Name = null,
+                CityId = 1,
                 Address = "",
                 Email = "test@@test.com",
                 Phones = withPhones 
@@ -225,6 +230,10 @@ namespace BusinessLogic.UnitTests
             marksRepository.Setup(act => act.Get(It.IsAny<long>())).Returns((CarMark) null);
             _unitOfWorkMock.Setup(act => act.Repository<ICarMarksRepository>()).Returns(marksRepository.Object);
 
+            var cityRepository = new Mock<ICityRepository>();
+            cityRepository.Setup(act => act.Get(dto.CityId)).Returns((City) null);
+            _unitOfWorkMock.Setup(act => act.Repository<ICityRepository>()).Returns(cityRepository.Object);
+
             //Act
             ValidationResult result = null;
             Assert.DoesNotThrow(() => result = _manager.ValidateRegistrationCarServiceDto(dto));
@@ -234,12 +243,24 @@ namespace BusinessLogic.UnitTests
             Assert.AreEqual(ValidationErrorResources.LoginIsNotValid, result.Errors[0]);
             Assert.AreEqual(ValidationErrorResources.PasswordsNotMatch, result.Errors[1]);
             Assert.AreEqual(ValidationErrorResources.CarServiceNameIsEmpty, result.Errors[2]);
-            Assert.AreEqual(ValidationErrorResources.CarServiceAddressIsEmpty, result.Errors[3]);
-            Assert.AreEqual(ValidationErrorResources.CarServiceContactEmailIsInvalid, result.Errors[4]);
+            Assert.AreEqual(ValidationErrorResources.CityNotFound, result.Errors[3]);
+            Assert.AreEqual(ValidationErrorResources.CarServiceAddressIsEmpty, result.Errors[4]);
+            Assert.AreEqual(ValidationErrorResources.CarServiceContactEmailIsInvalid, result.Errors[5]);
             if (withPhones)
             {
-                Assert.AreEqual(string.Format(ValidationErrorResources.CarServicePhoneIsIncorrect, phone1), result.Errors[5]);
-                Assert.AreEqual(string.Format(ValidationErrorResources.CarServicePhoneIsIncorrect, phone2), result.Errors[6]);
+                Assert.AreEqual(string.Format(ValidationErrorResources.CarServicePhoneIsIncorrect, phone1), result.Errors[6]);
+                Assert.AreEqual(string.Format(ValidationErrorResources.CarServicePhoneIsIncorrect, phone2), result.Errors[7]);
+                Assert.AreEqual(ValidationErrorResources.CarServiceManagerNameIsEmpty, result.Errors[8]);
+                Assert.AreEqual(ValidationErrorResources.CarServiceSiteIsIncorrect, result.Errors[9]);
+                Assert.AreEqual(string.Format(ValidationErrorResources.CarMarkNotFound, "1"), result.Errors[10]);
+                Assert.AreEqual(string.Format(ValidationErrorResources.WorkTagNotFound, "1"), result.Errors[11]);
+                Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Logo.Name), result.Errors[12]);
+                Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Photos[0].Name), result.Errors[13]);
+                Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Photos[1].Name), result.Errors[14]);
+            }
+            else
+            {
+                Assert.AreEqual(ValidationErrorResources.CarServicePhonesIsEmpty, result.Errors[6]);
                 Assert.AreEqual(ValidationErrorResources.CarServiceManagerNameIsEmpty, result.Errors[7]);
                 Assert.AreEqual(ValidationErrorResources.CarServiceSiteIsIncorrect, result.Errors[8]);
                 Assert.AreEqual(string.Format(ValidationErrorResources.CarMarkNotFound, "1"), result.Errors[9]);
@@ -247,17 +268,6 @@ namespace BusinessLogic.UnitTests
                 Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Logo.Name), result.Errors[11]);
                 Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Photos[0].Name), result.Errors[12]);
                 Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Photos[1].Name), result.Errors[13]);
-            }
-            else
-            {
-                Assert.AreEqual(ValidationErrorResources.CarServicePhonesIsEmpty, result.Errors[5]);
-                Assert.AreEqual(ValidationErrorResources.CarServiceManagerNameIsEmpty, result.Errors[6]);
-                Assert.AreEqual(ValidationErrorResources.CarServiceSiteIsIncorrect, result.Errors[7]);
-                Assert.AreEqual(string.Format(ValidationErrorResources.CarMarkNotFound, "1"), result.Errors[8]);
-                Assert.AreEqual(string.Format(ValidationErrorResources.WorkTagNotFound, "1"), result.Errors[9]);
-                Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Logo.Name), result.Errors[10]);
-                Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Photos[0].Name), result.Errors[11]);
-                Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Photos[1].Name), result.Errors[12]);
             }
         }
 
