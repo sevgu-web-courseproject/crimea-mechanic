@@ -15,6 +15,11 @@ namespace DataAccessLayer.Models
         public string Name { get; set; }
 
         /// <summary>
+        /// Город нахождения автосервиса
+        /// </summary>
+        public City City { get; set; }
+
+        /// <summary>
         /// Адрес автосервиса
         /// </summary>
         public string Address { get; set; }
