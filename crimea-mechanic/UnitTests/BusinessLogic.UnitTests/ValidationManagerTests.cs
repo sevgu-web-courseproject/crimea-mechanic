@@ -332,8 +332,8 @@ namespace BusinessLogic.UnitTests
             Assert.NotNull(result);
             Assert.True(result.HasErrors);
             Assert.AreEqual(ValidationErrorResources.CarModelNotFound, result.Errors[0]);
-            Assert.AreEqual(ValidationErrorResources.VinNumberIsIncorrect, result.Errors[1]);
-            Assert.AreEqual(ValidationErrorResources.FuelTypeNotFound, result.Errors[2]);
+            Assert.AreEqual(ValidationErrorResources.FuelTypeNotFound, result.Errors[1]);
+            Assert.AreEqual(ValidationErrorResources.VinNumberIsIncorrect, result.Errors[2]);
         }
 
         [Test(Description = "ValidateUserCarDto должен провалидировать дто редактирования автомобиля пользователя без ошибок")]
@@ -379,9 +379,9 @@ namespace BusinessLogic.UnitTests
                 EngineCapacity = 1.5f
             };
 
-            var repository = new Mock<ICarModelsRepository>();
-            repository.Setup(act => act.Get(dto.ModelId.Value)).Returns((CarModel)null);
-            _unitOfWorkMock.Setup(act => act.Repository<ICarModelsRepository>()).Returns(repository.Object);
+            var repository = new Mock<IUserCarRepository>();
+            repository.Setup(act => act.Get(dto.Id.Value)).Returns((UserCar)null);
+            _unitOfWorkMock.Setup(act => act.Repository<IUserCarRepository>()).Returns(repository.Object);
 
             //Act
             ValidationResult result = null;
@@ -391,8 +391,8 @@ namespace BusinessLogic.UnitTests
             Assert.NotNull(result);
             Assert.True(result.HasErrors);
             Assert.AreEqual(ValidationErrorResources.UserCarNotFound, result.Errors[0]);
-            Assert.AreEqual(ValidationErrorResources.VinNumberIsIncorrect, result.Errors[1]);
-            Assert.AreEqual(ValidationErrorResources.FuelTypeNotFound, result.Errors[2]);
+            Assert.AreEqual(ValidationErrorResources.FuelTypeNotFound, result.Errors[1]);
+            Assert.AreEqual(ValidationErrorResources.VinNumberIsIncorrect, result.Errors[2]);
         }
 
         #endregion
