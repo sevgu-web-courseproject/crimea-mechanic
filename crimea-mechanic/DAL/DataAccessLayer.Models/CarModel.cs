@@ -1,4 +1,6 @@
-﻿namespace DataAccessLayer.Models
+﻿using System.Collections.Generic;
+
+namespace DataAccessLayer.Models
 {
     /// <summary>
     /// Модель автомобиля
@@ -14,5 +16,10 @@
         /// Марка автомобиля
         /// </summary>
         public virtual CarMark Mark { get; set; }
+
+        /// <summary>
+        /// Машины пользователей данной модели
+        /// </summary>
+        public virtual ICollection<UserCar> UserCars { get; set; }
     }
 }
