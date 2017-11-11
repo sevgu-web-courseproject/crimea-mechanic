@@ -1,21 +1,27 @@
 ﻿using Common.Enums;
 
-namespace DataAccessLayer.Models
+namespace BusinessLogic.Objects.Car
 {
     /// <summary>
-    /// Машина пользователя
+    /// ДТО добавления машины пользователя
     /// </summary>
-    public class UserCar : DeletableBaseEntity<long>
+    public class AddOrEditUserCarDto
     {
+        /// <summary>
+        /// Идентификатор пользовательской машины
+        /// В случае редактирования заполнен
+        /// </summary>
+        public long? Id { get; set; }
+
         /// <summary>
         /// Наименнование машины (пользовательское)
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Модель машины
+        /// Идентификатор модели
         /// </summary>
-        public virtual CarModel Model { get; set; }
+        public long ModelId { get; set; }
 
         /// <summary>
         /// Год выпуска автомобиля
@@ -36,10 +42,5 @@ namespace DataAccessLayer.Models
         /// Объем двигателя
         /// </summary>
         public float EngineCapacity { get; set; }
-
-        /// <summary>
-        /// Пользователь
-        /// </summary>
-        public virtual UserProfile User { get; set; }
     }
 }
