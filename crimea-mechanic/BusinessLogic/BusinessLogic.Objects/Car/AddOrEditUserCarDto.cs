@@ -20,8 +20,9 @@ namespace BusinessLogic.Objects.Car
 
         /// <summary>
         /// Идентификатор модели
+        /// В случае добавления заполнен
         /// </summary>
-        public long ModelId { get; set; }
+        public long? ModelId { get; set; }
 
         /// <summary>
         /// Год выпуска автомобиля

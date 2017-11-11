@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Objects.User;
+﻿using BusinessLogic.Objects.Car;
+using BusinessLogic.Objects.User;
 using Common.Validation;
 
 namespace BusinessLogic.Managers.Abstraction
@@ -7,5 +8,6 @@ namespace BusinessLogic.Managers.Abstraction
     {
         ValidationResult ValidateRegistrationUserDto(RegistrationUserDto dto);
         ValidationResult ValidateRegistrationCarServiceDto(RegistrationCarServiceDto dto);
+        ValidationResult ValidateUserCarDto(AddOrEditUserCarDto dto);
     }
 }

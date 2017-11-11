@@ -120,6 +120,9 @@
   <data name="CarMarkNotFound" xml:space="preserve">
     <value>Марка автомобиля с номером {0} не найдена</value>
   </data>
+  <data name="CarModelNotFound" xml:space="preserve">
+    <value>Модель машины не найдена</value>
+  </data>
   <data name="CarServiceAddressIsEmpty" xml:space="preserve">
     <value>Адрес автосервиса не заполнен</value>
   </data>
@@ -147,6 +150,9 @@
   <data name="ContactNameIsEmpty" xml:space="preserve">
     <value>Отсутсвует контактное имя пользователя</value>
   </data>
+  <data name="FuelTypeNotFound" xml:space="preserve">
+    <value>Не был указан тип топливной системы автомобиля</value>
+  </data>
   <data name="InvalidFileExtension" xml:space="preserve">
     <value>Файл "{0}" содержит недопустимое расширение</value>
   </data>
@@ -158,6 +164,12 @@
   </data>
   <data name="PhoneNumberIsIncorrect" xml:space="preserve">
     <value>Неправильный номер мобильного телефона</value>
+  </data>
+  <data name="UserCarNotFound" xml:space="preserve">
+    <value>Машина пользователя не найдена</value>
+  </data>
+  <data name="VinNumberIsIncorrect" xml:space="preserve">
+    <value>Неправильный VIN номер автомобиля</value>
   </data>
   <data name="WorkTagNotFound" xml:space="preserve">
     <value>Вид работы с номером {0} не найден</value>

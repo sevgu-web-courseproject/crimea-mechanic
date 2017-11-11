@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using BusinessLogic.Managers.Abstraction;
+using BusinessLogic.Objects.Car;
 using BusinessLogic.Objects.User;
 using BusinessLogic.Resources;
 using Common.Validation;
@@ -155,6 +156,11 @@ namespace BusinessLogic.Managers
             return validationResult;
         }
 
+        public ValidationResult ValidateUserCarDto(AddOrEditUserCarDto dto)
+        {
+            throw new System.NotImplementedException();
+        }
+
         #endregion
 
         #region Private methods
@@ -191,6 +197,16 @@ namespace BusinessLogic.Managers
             };
             var extension = Path.GetExtension(fileName);
             return validExtensions.Contains(extension);
+        }
+
+        private void ValidateAddUserCarDto(AddOrEditUserCarDto dto)
+        {
+            
+        }
+
+        private void ValidateEditUserCarDto(AddOrEditUserCarDto dto)
+        {
+            
         }
             
         #endregion

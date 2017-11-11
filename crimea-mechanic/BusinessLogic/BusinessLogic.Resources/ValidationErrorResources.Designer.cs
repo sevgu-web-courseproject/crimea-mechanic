@@ -70,6 +70,15 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Модель машины не найдена.
+        /// </summary>
+        public static string CarModelNotFound {
+            get {
+                return ResourceManager.GetString("CarModelNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Адрес автосервиса не заполнен.
         /// </summary>
         public static string CarServiceAddressIsEmpty {
@@ -151,6 +160,15 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не был указан тип топливной системы автомобиля.
+        /// </summary>
+        public static string FuelTypeNotFound {
+            get {
+                return ResourceManager.GetString("FuelTypeNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Файл &quot;{0}&quot; содержит недопустимое расширение.
         /// </summary>
         public static string InvalidFileExtension {
@@ -183,6 +201,24 @@ namespace BusinessLogic.Resources {
         public static string PhoneNumberIsIncorrect {
             get {
                 return ResourceManager.GetString("PhoneNumberIsIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Машина пользователя не найдена.
+        /// </summary>
+        public static string UserCarNotFound {
+            get {
+                return ResourceManager.GetString("UserCarNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Неправильный VIN номер автомобиля.
+        /// </summary>
+        public static string VinNumberIsIncorrect {
+            get {
+                return ResourceManager.GetString("VinNumberIsIncorrect", resourceCulture);
             }
         }
         
