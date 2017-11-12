@@ -93,6 +93,10 @@
     <Compile Include="Migrations\201711101929383_AddCitiesAndCityInCarService.Designer.cs">
       <DependentUpon>201711101929383_AddCitiesAndCityInCarService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711121152486_AddUserCars.cs" />
+    <Compile Include="Migrations\201711121152486_AddUserCars.Designer.cs">
+      <DependentUpon>201711121152486_AddUserCars.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -143,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711101929383_AddCitiesAndCityInCarService.resx">
       <DependentUpon>201711101929383_AddCitiesAndCityInCarService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711121152486_AddUserCars.resx">
+      <DependentUpon>201711121152486_AddUserCars.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
