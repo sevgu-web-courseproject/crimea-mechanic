@@ -159,6 +159,10 @@ namespace BusinessLogic.Managers
 
         public ValidationResult ValidateUserCarDto(AddOrEditUserCarDto dto)
         {
+            if (dto == null)
+            {
+                throw new ArgumentNullException(ArgumentExceptionResources.RegistrationDtoNotFound);
+            }
             ValidationResult validationResult;
             if (!dto.Id.HasValue)
             {

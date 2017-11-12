@@ -142,6 +142,11 @@ namespace BusinessLogic.Managers
             UserManager.IsUserInRegularRole(currentUserId);
             var user = UserManager.CheckAndGet(currentUserId);
 
+            if (filter == null)
+            {
+                filter = new FilterUserCar();
+            }
+
             if (filter.Deleted.HasValue && filter.Deleted.Value)
             {
                 return Mapper.Map<IEnumerable<UserCarDto>>(user.UserProfile.Cars.Where(car => car.IsDeleted));
