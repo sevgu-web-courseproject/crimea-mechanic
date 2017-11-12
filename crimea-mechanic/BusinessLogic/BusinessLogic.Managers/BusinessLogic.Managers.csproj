@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="BaseManager.cs" />
     <Compile Include="BusinessLogicInstaller.cs" />
+    <Compile Include="CarManager.cs" />
     <Compile Include="MapProfiles\CarMarkProfile.cs" />
     <Compile Include="MapProfiles\CarModelProfile.cs" />
     <Compile Include="MapProfiles\CityProfile.cs" />

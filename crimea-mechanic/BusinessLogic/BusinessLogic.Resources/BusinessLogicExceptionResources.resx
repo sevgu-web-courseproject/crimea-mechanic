@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CarDoesNotBelongToUser" xml:space="preserve">
+    <value>Машина не принадлежит пользователю</value>
+  </data>
   <data name="CarMarkNotFound" xml:space="preserve">
     <value>Марка автомобиля не найдена</value>
+  </data>
+  <data name="UserCarNotFound" xml:space="preserve">
+    <value>Машина пользвателя не найдена</value>
+  </data>
+  <data name="UserHasDifferentRole" xml:space="preserve">
+    <value>Невозможно выполнить данное действие, пользователь находится в другой роли</value>
   </data>
   <data name="UserNotFound" xml:space="preserve">
     <value>Пользователь не найден</value>

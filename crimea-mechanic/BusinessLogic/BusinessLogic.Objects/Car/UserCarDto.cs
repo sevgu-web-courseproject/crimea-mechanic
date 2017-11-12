@@ -6,6 +6,11 @@
     public class UserCarDto
     {
         /// <summary>
+        /// Идентификатор машины
+        /// </summary>
+        public long Id { get; set; }
+
+        /// <summary>
         /// Наименнование (пользовательское) машины
         /// </summary>
         public string Name { get; set; }

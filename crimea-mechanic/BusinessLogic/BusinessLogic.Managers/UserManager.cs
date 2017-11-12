@@ -160,6 +160,30 @@ namespace BusinessLogic.Managers
             return this.IsInRole(userId, role);
         }
 
+        public void IsUserInRegularRole(string userId)
+        {
+            if (!IsUserInRole(userId, CommonRoles.Regular))
+            {
+                throw new BusinessFaultException(BusinessLogicExceptionResources.UserHasDifferentRole);
+            }
+        }
+
+        public void IsUserInCarServiceRole(string userId)
+        {
+            if (!IsUserInRole(userId, CommonRoles.CarService))
+            {
+                throw new BusinessFaultException(BusinessLogicExceptionResources.UserHasDifferentRole);
+            }
+        }
+
+        public void IsUserInAdministrationRole(string userId)
+        {
+            if (!IsUserInRole(userId, CommonRoles.Administrator))
+            {
+                throw new BusinessFaultException(BusinessLogicExceptionResources.UserHasDifferentRole);
+            }
+        }
+
         #endregion
 
         #region Private Methods
