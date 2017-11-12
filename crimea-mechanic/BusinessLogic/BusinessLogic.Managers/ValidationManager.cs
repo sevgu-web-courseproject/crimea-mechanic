@@ -4,8 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using BusinessLogic.Managers.Abstraction;
+using BusinessLogic.Objects.Car;
 using BusinessLogic.Objects.User;
 using BusinessLogic.Resources;
+using Common.Enums;
 using Common.Validation;
 using DataAccessLayer.Repositories.Abstraction;
 
@@ -155,6 +157,26 @@ namespace BusinessLogic.Managers
             return validationResult;
         }
 
+        public ValidationResult ValidateUserCarDto(AddOrEditUserCarDto dto)
+        {
+            if (dto == null)
+            {
+                throw new ArgumentNullException(ArgumentExceptionResources.RegistrationDtoNotFound);
+            }
+            ValidationResult validationResult;
+            if (!dto.Id.HasValue)
+            {
+                validationResult = new ValidationResult("Добавление машины пользователя");
+                ValidateAddUserCarDto(dto, validationResult);
+            }
+            else
+            {
+                validationResult = new ValidationResult("Редактирование машины пользователя");
+                ValidateEditUserCarDto(dto, validationResult);
+            }
+            return validationResult;
+        }
+
         #endregion
 
         #region Private methods
@@ -191,6 +213,52 @@ namespace BusinessLogic.Managers
             };
             var extension = Path.GetExtension(fileName);
             return validExtensions.Contains(extension);
+        }
+
+        private void ValidateCommonFieldsForAddOrEditUserDto(AddOrEditUserCarDto dto, ValidationResult validationResult)
+        {
+            if (dto.FuelType == FuelType.Unknown)
+            {
+                validationResult.AddError(ValidationErrorResources.FuelTypeNotFound);
+            }
+            if (dto.Vin.Length != 17)
+            {
+                validationResult.AddError(ValidationErrorResources.VinNumberIsIncorrect);
+            }
+        }
+
+        private void ValidateAddUserCarDto(AddOrEditUserCarDto dto, ValidationResult validationResult)
+        {
+            if (dto.ModelId.HasValue)
+            {
+                var model = _unitOfWork.Repository<ICarModelsRepository>().Get(dto.ModelId.Value);
+                if (model == null)
+                {
+                    validationResult.AddError(ValidationErrorResources.CarModelNotFound);
+                }
+            }
+            else
+            {
+                validationResult.AddError(ValidationErrorResources.CarModelNotFound);
+            }
+            ValidateCommonFieldsForAddOrEditUserDto(dto, validationResult);
+        }
+
+        private void ValidateEditUserCarDto(AddOrEditUserCarDto dto, ValidationResult validationResult)
+        {
+            if (dto.Id.HasValue)
+            {
+                var car = _unitOfWork.Repository<IUserCarRepository>().Get(dto.Id.Value);
+                if (car == null)
+                {
+                    validationResult.AddError(ValidationErrorResources.UserCarNotFound);
+                }
+            }
+            else
+            {
+                validationResult.AddError(ValidationErrorResources.UserCarNotFound);
+            }
+            ValidateCommonFieldsForAddOrEditUserDto(dto, validationResult);
         }
             
         #endregion

@@ -14,7 +14,8 @@ namespace DependencyInjector
                 new CarMarkProfile(),
                 new CarModelProfile(),
                 new WorkTagProfile(),
-                new CityProfile()
+                new CityProfile(),
+                new UserCarProfile()
             };
             Mapper.Initialize(cfg =>
             {

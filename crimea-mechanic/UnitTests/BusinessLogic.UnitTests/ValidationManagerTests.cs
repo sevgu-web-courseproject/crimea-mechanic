@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using BusinessLogic.Managers;
 using BusinessLogic.Objects;
+using BusinessLogic.Objects.Car;
 using BusinessLogic.Objects.User;
 using BusinessLogic.Resources;
+using Common.Enums;
 using Common.Validation;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repositories.Abstraction;
@@ -269,6 +271,128 @@ namespace BusinessLogic.UnitTests
                 Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Photos[0].Name), result.Errors[12]);
                 Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Photos[1].Name), result.Errors[13]);
             }
+        }
+
+        #endregion
+
+        #region ValidateUserCarDto
+
+        [Test(Description = "ValidateUserCarDto должен провалидировать дто добавления нового автомобиля без ошибок")]
+        public void ValidateUserCarDto_Must_Validate_Dto_For_Add_New_User_Car_Wihtout_Errors()
+        {
+            //Arrange
+            var dto = new AddOrEditUserCarDto
+            {
+                Id = null,
+                Name = "Test",
+                ModelId = 1,
+                Year = 2015,
+                Vin = "ABVGDTT0123456789",
+                FuelType = FuelType.Benzine,
+                EngineCapacity = 1.5f
+            };
+
+            var repository = new Mock<ICarModelsRepository>();
+            repository.Setup(act => act.Get(dto.ModelId.Value)).Returns(new CarModel());
+            _unitOfWorkMock.Setup(act => act.Repository<ICarModelsRepository>()).Returns(repository.Object);
+
+            //Act
+            ValidationResult result = null;
+            Assert.DoesNotThrow(() => result = _manager.ValidateUserCarDto(dto));
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.False(result.HasErrors);
+        }
+
+        [Test(Description = "ValidateUserCarDto должен выдать все возможные ошибки при валидировании дто добавления нового автомобиля")]
+        public void ValidateUserCarDto_Must_Throw_All_Possible_Errors_When_Validate_Add_User_Car_Dto()
+        {
+            //Arrange
+            var dto = new AddOrEditUserCarDto
+            {
+                Id = null,
+                Name = null,
+                ModelId = 1,
+                Year = 2015,
+                Vin = "ABVGDTT012345678900",
+                FuelType = FuelType.Unknown,
+                EngineCapacity = 1.5f
+            };
+
+            var repository = new Mock<ICarModelsRepository>();
+            repository.Setup(act => act.Get(dto.ModelId.Value)).Returns((CarModel) null);
+            _unitOfWorkMock.Setup(act => act.Repository<ICarModelsRepository>()).Returns(repository.Object);
+
+            //Act
+            ValidationResult result = null;
+            Assert.DoesNotThrow(() => result = _manager.ValidateUserCarDto(dto));
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.True(result.HasErrors);
+            Assert.AreEqual(ValidationErrorResources.CarModelNotFound, result.Errors[0]);
+            Assert.AreEqual(ValidationErrorResources.FuelTypeNotFound, result.Errors[1]);
+            Assert.AreEqual(ValidationErrorResources.VinNumberIsIncorrect, result.Errors[2]);
+        }
+
+        [Test(Description = "ValidateUserCarDto должен провалидировать дто редактирования автомобиля пользователя без ошибок")]
+        public void ValidateUserCarDto_Must_Validate_Dto_For_Edit_User_Car_Without_Errors()
+        {
+            //Arrange
+            var dto = new AddOrEditUserCarDto
+            {
+                Id = 1,
+                Name = "Test",
+                ModelId = null,
+                Year = 2015,
+                Vin = "ABVGDTT0123456789",
+                FuelType = FuelType.Benzine,
+                EngineCapacity = 1.5f
+            };
+
+            var repository = new Mock<IUserCarRepository>();
+            repository.Setup(act => act.Get(dto.Id.Value)).Returns(new UserCar());
+            _unitOfWorkMock.Setup(act => act.Repository<IUserCarRepository>()).Returns(repository.Object);
+
+            //Act
+            ValidationResult result = null;
+            Assert.DoesNotThrow(() => result = _manager.ValidateUserCarDto(dto));
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.False(result.HasErrors);
+        }
+
+        [Test(Description = "ValidateUserCarDto должен выдать все возможные ошибки при валидации дто редактирования машины пользователя")]
+        public void ValidateUserCarDto_Must_Throw_All_Possible_Error_When_Validate_Edit_User_Car_Dto()
+        {
+            //Arrange
+            var dto = new AddOrEditUserCarDto
+            {
+                Id = 1,
+                Name = null,
+                ModelId = null,
+                Year = 2015,
+                Vin = "ABVGDTT012345678900",
+                FuelType = FuelType.Unknown,
+                EngineCapacity = 1.5f
+            };
+
+            var repository = new Mock<IUserCarRepository>();
+            repository.Setup(act => act.Get(dto.Id.Value)).Returns((UserCar)null);
+            _unitOfWorkMock.Setup(act => act.Repository<IUserCarRepository>()).Returns(repository.Object);
+
+            //Act
+            ValidationResult result = null;
+            Assert.DoesNotThrow(() => result = _manager.ValidateUserCarDto(dto));
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.True(result.HasErrors);
+            Assert.AreEqual(ValidationErrorResources.UserCarNotFound, result.Errors[0]);
+            Assert.AreEqual(ValidationErrorResources.FuelTypeNotFound, result.Errors[1]);
+            Assert.AreEqual(ValidationErrorResources.VinNumberIsIncorrect, result.Errors[2]);
         }
 
         #endregion

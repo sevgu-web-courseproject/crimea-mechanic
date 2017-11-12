@@ -61,11 +61,38 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Машина не принадлежит пользователю.
+        /// </summary>
+        public static string CarDoesNotBelongToUser {
+            get {
+                return ResourceManager.GetString("CarDoesNotBelongToUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Марка автомобиля не найдена.
         /// </summary>
         public static string CarMarkNotFound {
             get {
                 return ResourceManager.GetString("CarMarkNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Машина пользвателя не найдена.
+        /// </summary>
+        public static string UserCarNotFound {
+            get {
+                return ResourceManager.GetString("UserCarNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Невозможно выполнить данное действие, пользователь находится в другой роли.
+        /// </summary>
+        public static string UserHasDifferentRole {
+            get {
+                return ResourceManager.GetString("UserHasDifferentRole", resourceCulture);
             }
         }
         

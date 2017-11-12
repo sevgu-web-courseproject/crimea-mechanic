@@ -22,6 +22,7 @@ namespace DataAccessLayer
         public DbSet<CarMark> CarMarks { get; set; }
         public DbSet<CarModel> CarModels { get; set; }
         public DbSet<City> Cities { get; set; }
+        public DbSet<UserCar> UserCars { get; set; }
 
         #endregion
 

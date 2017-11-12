@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Common.Enums;
 
 namespace DataAccessLayer.Models
@@ -29,5 +30,10 @@ namespace DataAccessLayer.Models
         /// Пользователь
         /// </summary>
         public virtual ApplicationUser ApplicationUser { get; set; }
+
+        /// <summary>
+        /// Машины пользователя
+        /// </summary>
+        public virtual ICollection<UserCar> Cars { get; set; }
     }
 }

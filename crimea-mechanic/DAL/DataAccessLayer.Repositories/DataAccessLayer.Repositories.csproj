@@ -72,6 +72,7 @@
     <Compile Include="RepositoryBase.cs" />
     <Compile Include="RepositoryFactory.cs" />
     <Compile Include="UnitOfWork.cs" />
+    <Compile Include="UserCarRepository.cs" />
     <Compile Include="UserProfileRepository.cs" />
     <Compile Include="WorkTagsRepository.cs" />
   </ItemGroup>

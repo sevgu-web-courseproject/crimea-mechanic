@@ -20,7 +20,7 @@ namespace BusinessLogic.UnitTests
         #region Fields
 
         private Mock<IUnitOfWork> _unitOfWorkMock;
-        private Mock<IUserInternalManager> _userManager;
+        private Mock<IUserInternalManager> _userManagerMock;
         private IStorageManager _manager;
 
         #endregion
@@ -31,8 +31,8 @@ namespace BusinessLogic.UnitTests
         public void ConfigureSet()
         {
             _unitOfWorkMock = new Mock<IUnitOfWork>();
-            _userManager = new Mock<IUserInternalManager>();
-            _manager = new StorageManager(_unitOfWorkMock.Object, _userManager.Object);
+            _userManagerMock = new Mock<IUserInternalManager>();
+            _manager = new StorageManager(_unitOfWorkMock.Object, _userManagerMock.Object);
 
             InitializationAutomapper.Init();
         }
@@ -41,7 +41,7 @@ namespace BusinessLogic.UnitTests
         public void Init()
         {
             _unitOfWorkMock.Reset();
-            _userManager.Reset();
+            _userManagerMock.Reset();
         }
 
         #endregion

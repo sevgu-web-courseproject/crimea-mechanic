@@ -7,5 +7,11 @@ namespace BusinessLogic.Managers.Abstraction
         ApplicationUser CheckAndGet(string userId);
 
         bool IsUserInRole(string userId, string role);
+
+        void IsUserInRegularRole(string userId);
+
+        void IsUserInCarServiceRole(string userId);
+
+        void IsUserInAdministrationRole(string userId);
     }
 }
