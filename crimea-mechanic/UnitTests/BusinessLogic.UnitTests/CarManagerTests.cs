@@ -58,6 +58,14 @@ namespace BusinessLogic.UnitTests
         {
             //Arrange
             var userId = "1";
+            var user = new ApplicationUser
+            {
+                Id = userId,
+                UserProfile = new UserProfile
+                {
+                    Cars = new List<UserCar>()
+                }
+            };
             var dto = new AddOrEditUserCarDto
             {
                 Name = "Test",
@@ -71,7 +79,7 @@ namespace BusinessLogic.UnitTests
             var validationResult = new ValidationResult("test");
 
             _userManagerMock.Setup(act => act.IsUserInRegularRole(userId));
-            _userManagerMock.Setup(act => act.CheckAndGet(userId)).Returns(new ApplicationUser());
+            _userManagerMock.Setup(act => act.CheckAndGet(userId)).Returns(user);
             _validationManagerMock.Setup(act => act.ValidateUserCarDto(dto)).Returns(validationResult);
 
             var repository = new Mock<ICarModelsRepository>();
@@ -130,7 +138,7 @@ namespace BusinessLogic.UnitTests
             };
 
             var validationResult = new ValidationResult("test");
-            var userCar = new UserCar();
+            var userCar = UserCarUtils.Create(1, "TEST", "modelName", "markName", userId);
 
             _userManagerMock.Setup(act => act.IsUserInRegularRole(userId));
             _validationManagerMock.Setup(act => act.ValidateUserCarDto(dto)).Returns(validationResult);
@@ -283,6 +291,76 @@ namespace BusinessLogic.UnitTests
 
         #endregion
 
+        #region RestoreCar
+
+        [Test(Description = "RestoreCar должен восстановить машину пользователя")]
+        public void RestoreCar_Must_Restore_User_Car()
+        {
+            //Arrange
+            var userId = "1";
+            var carId = 1;
+            var userCar = UserCarUtils.CreateWithUser(userId);
+
+            _userManagerMock.Setup(act => act.IsUserInRegularRole(userId));
+
+            var repository = new Mock<IUserCarRepository>();
+            repository.Setup(act => act.Get(carId)).Returns(userCar);
+            repository.Setup(act => act.Update(userCar));
+            _unitOfWorkMock.Setup(act => act.Repository<IUserCarRepository>()).Returns(repository.Object);
+
+            //Act
+            Assert.DoesNotThrow(() => _manager.RestoreCar(carId, userId));
+
+            //Assert
+            repository.Verify(act => act.Get(carId), Times.Once);
+            repository.Verify(act => act.Update(userCar), Times.Once);
+            _unitOfWorkMock.Verify(act => act.Repository<IUserCarRepository>(), Times.Once);
+            _unitOfWorkMock.Verify(act => act.SaveChanges(), Times.Once);
+        }
+
+        [Test(Description = "RestoreCar должен бросить ошибку если машина не найдена")]
+        public void RestoreCar_Must_Throw_Exception_When_User_Car_Not_Found()
+        {
+            //Arrange
+            var userId = "1";
+            var carId = 1;
+
+            _userManagerMock.Setup(act => act.IsUserInRegularRole(userId));
+
+            var repository = new Mock<IUserCarRepository>();
+            repository.Setup(act => act.Get(carId)).Returns((UserCar)null);
+            _unitOfWorkMock.Setup(act => act.Repository<IUserCarRepository>()).Returns(repository.Object);
+
+            //Act
+            var exception = Assert.Throws<BusinessFaultException>(() => _manager.RestoreCar(carId, userId));
+
+            //Assert
+            Assert.AreEqual(BusinessLogicExceptionResources.UserCarNotFound, exception.Message);
+        }
+
+        [Test(Description = "RestoreCar должен бросить ошибку если машина не принадлежит пользователю")]
+        public void RestoreCar_Must_Throw_Exception_When_User_Car_Does_Not_Belong_To_User()
+        {
+            //Arrange
+            var userId = "1";
+            var carId = 1;
+            var userCar = UserCarUtils.CreateWithUser("another");
+
+            _userManagerMock.Setup(act => act.IsUserInRegularRole(userId));
+
+            var repository = new Mock<IUserCarRepository>();
+            repository.Setup(act => act.Get(carId)).Returns(userCar);
+            _unitOfWorkMock.Setup(act => act.Repository<IUserCarRepository>()).Returns(repository.Object);
+
+            //Act
+            var exception = Assert.Throws<BusinessFaultException>(() => _manager.DeleteCar(carId, userId));
+
+            //Assert
+            Assert.AreEqual(BusinessLogicExceptionResources.CarDoesNotBelongToUser, exception.Message);
+        }
+
+        #endregion
+
         #region GetCar
 
         [Test(Description = "GetCar должен вернуть информацию о машине пользователя")]
@@ -307,7 +385,7 @@ namespace BusinessLogic.UnitTests
             Assert.AreEqual(userCar.Name, result.Name);
             Assert.AreEqual(userCar.Model.Name, result.Model);
             Assert.AreEqual(userCar.Model.Mark.Name, result.Mark);
-            Assert.AreEqual(userCar.Year, result.Year);
+            Assert.AreEqual(userCar.Year.ToString(), result.Year);
             Assert.AreEqual(userCar.Vin, result.Vin);
             Assert.AreEqual("Дизель", result.FuelType);
             Assert.AreEqual(userCar.EngineCapacity, result.EngineCapacity);
@@ -359,14 +437,23 @@ namespace BusinessLogic.UnitTests
         #region GetCars
 
         [Test(Description = "GetCars должен вернуть данные по машинам пользователя")]
-        public void GetCars_Must_Return_Info_For_User_Cars()
+        [TestCase(true)]
+        [TestCase(false)]
+        public void GetCars_Must_Return_Info_For_User_Cars(bool showDeleted)
         {
             //Arrange
             var cars = new List<UserCar>
             {
                 UserCarUtils.Create(1, "Test1", "TestModel1", "TestMark1", "1"),
                 UserCarUtils.Create(2, "Test2", "TestModel2", "TestMark2", "1"),
-                UserCarUtils.Create(3, "Test3", "TestModel3", "TestMark3", "1", true)
+                UserCarUtils.Create(3, "Test3", "TestModel3", "TestMark3", "1", true),
+                UserCarUtils.Create(4, "Test4", "TestModel4", "TestMark4", "1", true)
+
+            };
+
+            var filter = new FilterUserCar
+            {
+                Deleted = showDeleted
             };
 
             var user = new ApplicationUser
@@ -382,14 +469,24 @@ namespace BusinessLogic.UnitTests
             _userManagerMock.Setup(act => act.CheckAndGet(user.Id)).Returns(user);
 
             //Act
-            var result = _manager.GetCars(user.Id);
+            var result = _manager.GetCars(filter, user.Id);
 
             //Assert
             Assert.AreEqual(result.Count(), 2);
-            Assert.AreEqual(cars[0].Name, result.ElementAt(0).Name);
-            Assert.AreEqual(cars[1].Name, result.ElementAt(1).Name);
-            Assert.AreEqual(cars[0].Model.Name, result.ElementAt(0).Model);
-            Assert.AreEqual(cars[1].Model.Mark.Name, result.ElementAt(1).Mark);
+            if (!showDeleted)
+            {
+                Assert.AreEqual(cars[0].Name, result.ElementAt(0).Name);
+                Assert.AreEqual(cars[1].Name, result.ElementAt(1).Name);
+                Assert.AreEqual(cars[0].Model.Name, result.ElementAt(0).Model);
+                Assert.AreEqual(cars[1].Model.Mark.Name, result.ElementAt(1).Mark);
+            }
+            else
+            {
+                Assert.AreEqual(cars[2].Name, result.ElementAt(0).Name);
+                Assert.AreEqual(cars[3].Name, result.ElementAt(1).Name);
+                Assert.AreEqual(cars[2].Model.Name, result.ElementAt(0).Model);
+                Assert.AreEqual(cars[3].Model.Mark.Name, result.ElementAt(1).Mark);
+            }
         }
 
         #endregion

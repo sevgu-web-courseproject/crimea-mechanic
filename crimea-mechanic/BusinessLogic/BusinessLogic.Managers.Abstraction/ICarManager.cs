@@ -21,6 +21,11 @@ namespace BusinessLogic.Managers.Abstraction
         void DeleteCar(long userCarId, string currentUserId);
 
         /// <summary>
+        /// Восстановить машину пользователя
+        /// </summary>
+        void RestoreCar(long userCarId, string currentUserId);
+
+        /// <summary>
         /// Получить информацию о машине пользователя
         /// </summary>
         /// <returns></returns>
@@ -30,6 +35,6 @@ namespace BusinessLogic.Managers.Abstraction
         /// Получить информацию о машинах пользователя
         /// </summary>
         /// <returns></returns>
-        IEnumerable<UserCarDto> GetCars(string currentUserId);
+        IEnumerable<UserCarDto> GetCars(FilterUserCar filter, string currentUserId);
     }
 }

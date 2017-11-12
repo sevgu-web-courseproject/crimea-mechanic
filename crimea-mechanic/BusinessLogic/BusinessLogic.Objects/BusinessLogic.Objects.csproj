@@ -44,6 +44,7 @@
     <Compile Include="CarMarkDto.cs" />
     <Compile Include="CarModelDto.cs" />
     <Compile Include="Car\AddOrEditUserCarDto.cs" />
+    <Compile Include="Car\FilterUserCar.cs" />
     <Compile Include="Car\UserCarDto.cs" />
     <Compile Include="CityDto.cs" />
     <Compile Include="FileDto.cs" />
