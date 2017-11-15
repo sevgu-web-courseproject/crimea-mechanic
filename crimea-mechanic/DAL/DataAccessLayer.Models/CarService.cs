@@ -65,6 +65,16 @@ namespace DataAccessLayer.Models
         public virtual ICollection<CarServiceFile> Files { get; set; }
 
         /// <summary>
+        /// Все заявки автосервиса
+        /// </summary>
+        public virtual ICollection<Application> Applications { get; set; }
+
+        /// <summary>
+        /// Все предложения автосервиса
+        /// </summary>
+        public virtual ICollection<ApplicationOffer> Offers { get; set; }
+
+        /// <summary>
         /// Текстовое поле "Об автосервисе"
         /// </summary>
         public string About { get; set; }
