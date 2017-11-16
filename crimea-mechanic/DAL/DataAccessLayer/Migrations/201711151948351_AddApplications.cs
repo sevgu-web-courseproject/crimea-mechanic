@@ -37,12 +37,15 @@ namespace DataAccessLayer.Migrations
                         Created = c.DateTime(nullable: false),
                         Car_Id = c.Long(),
                         Service_Id = c.Long(),
+                        City_Id = c.Long(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.UserCars", t => t.Car_Id)
                 .ForeignKey("dbo.CarServices", t => t.Service_Id)
+                .ForeignKey("dbo.Cities", t => t.City_Id)
                 .Index(t => t.Car_Id)
-                .Index(t => t.Service_Id);
+                .Index(t => t.Service_Id)
+                .Index(t => t.City_Id);
             
         }
         
@@ -50,8 +53,10 @@ namespace DataAccessLayer.Migrations
         {
             DropForeignKey("dbo.ApplicationOffers", "Application_Id", "dbo.Applications");
             DropForeignKey("dbo.ApplicationOffers", "Service_Id", "dbo.CarServices");
+            DropForeignKey("dbo.Applications", "City_Id", "dbo.Cities");
             DropForeignKey("dbo.Applications", "Service_Id", "dbo.CarServices");
             DropForeignKey("dbo.Applications", "Car_Id", "dbo.UserCars");
+            DropIndex("dbo.Applications", new[] { "City_Id" });
             DropIndex("dbo.Applications", new[] { "Service_Id" });
             DropIndex("dbo.Applications", new[] { "Car_Id" });
             DropIndex("dbo.ApplicationOffers", new[] { "Application_Id" });

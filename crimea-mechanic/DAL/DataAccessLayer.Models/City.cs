@@ -16,5 +16,10 @@ namespace DataAccessLayer.Models
         /// Автосервисы находящиеся в городе
         /// </summary>
         public virtual ICollection<CarService> CarServices { get; set; }
+
+        /// <summary>
+        /// Заявки города
+        /// </summary>
+        public virtual ICollection<Application> Applications { get; set; }
     }
 }
