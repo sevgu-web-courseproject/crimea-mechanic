@@ -1,0 +1,21 @@
+
+.test {
+    background-color: aliceblue;
+    opacity: 0.9;
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 70vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+.formblock {
+    padding-top: 20 rem;
+}
+
+.section {
+    padding-top: 70 px;
+}

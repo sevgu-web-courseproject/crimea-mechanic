@@ -3,5 +3,158 @@
     ViewBag.Title = "Регистрация автосервиса";
 }
 
-<h2>RegistrationCarService</h2>
+<div class="container">
+    <div class="col-12 col-offset-1">
+        <div class="jumbotron">
+            <h3>Регистрация пользователя</h3>
 
+            <div class="alert alert-info">
+                <a class="close" href="#" data-dismiss="alert" aria-label="close" title="close">×</a>
+                <strong>Внимание!</strong>
+                Вы находитесь на странице регистрации пользователя - менеджера. Если Вы хотите зарегистрироваться как пользователь - перейдите по  ссылке:
+                <a href="#">регистрация пользователя</a>
+            </div>
+
+            <div class="form-container">
+                <form type="post">
+
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="contactName">Имя менеджера</label>
+                            <input name="contactName" class="form-control" id="contactName" placeholder="Введите имя" required>
+                        </div>
+
+                        <div class="col">
+                            <label for="emailUsername">E-Mail</label>
+                            <input name="email" type="email" class="form-control" id="emailUsername" placeholder="Введите E-Mail" required>
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col">
+                            <label for="password">Пароль</label>
+                            <input name="password" type="password" class="form-control" id="userPassword" placeholder="Введите пароль" required>
+                        </div>
+
+                        <div class="col">
+                            <label for="passwordConfirmation">Повторите пароль</label>
+                            <input name="passwordConfirmation" type="password" class="form-control" id="userPasswordConfirmation" placeholder="Повторите пароль" required>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <br />
+                        <h4>Контакты</h4>
+                        <hr />
+                    </div>
+
+                    <div class="row mt-3">
+
+                        <div class="col">
+                            <label for="cityName"> Выберите город</label>
+                            <br />
+                            <select class="selectpicker" name="cityName" data-live-search="true" data-width="100%">
+                                <option>Севастополь</option>
+                                <option>Симферополь</option>
+                                <option>Ялта</option>
+                                <option>Алушта</option>
+                                <option>Судак</option>
+                                <option>Евпатория</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label for="stoAddress">Адрес</label>
+                            <input name="stoAddress" type="text" class="form-control" id="cityAddress" placeholder="Введите адрес Вашего автосервиса" required>
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-3">
+
+                        <div class="col">
+                            <label for="stoEmail">Контакный E-mail автосервиса</label>
+                            <input name="stoEmail" type="email" class="form-control" id="stoEmail" placeholder="Введите E-mail Вашего автосервиса">
+                        </div>
+
+                        <div class="col" id="phoneNumber">
+                            <label for="stoPhoneNumber">Контакный номер телефона</label>
+                            <div class="input-group">
+                                <input name="stoPhoneNumber" type="text" class="form-control" id="stoPhoneNumber" placeholder="Введите номер телефона Вашего автосервиса" required>
+                                <div class="input-group-addon" onclick="">
+                                    <i class="fa fa-plus" onclick="addPhoneNubmer()"></i>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-3">
+
+                        <div class="col">
+                            <label for="stoPageLink">Ссылка на страницу автосервиса</label>
+                            <input name="stoPageLink" type="text" class="form-control" id="stoPageLink" placeholder="Введите адрес страницы автосервиса">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col">
+                            <label for="stoWorkHours">График работы автосервиса</label>
+                            <div id="businessHoursContainer3"></div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <br />
+                        <h4>Работы</h4>
+                        <hr />
+                    </div>
+
+                    <div class="row mt-3">
+
+                        <div class="col-6">
+                            <label for="cityName"> Выберите виды работ:</label>
+                            <br />
+                            <select class="selectpicker" name="cityName" multiple>
+                                <option>Кузовной ремонт</option>
+                                <option>Ремонт двигателей</option>
+                                <option>Ремонт коробок</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </form>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+   <script>
+       $(function () {
+           var workTimeJson = $("#businessHoursContainer3").businessHours({
+               postInit: function () {
+                   $('.operationTimeFrom, .operationTimeTill').timepicker({
+                       'timeFormat': 'H:i',
+                       'step': 15
+                   });
+               },
+               dayTmpl: '<div class="dayContainer" style="width: 100px;">' +
+               '<div data-original-title="" class="colorBox"><input type="checkbox" class="invisible operationState"></div>' +
+               '<div class="weekday"></div>' +
+               '<div class="operationDayTimeContainer">' +
+               '<div class="operationTime input-group"><span class="input-group-addon"><i class="fa fa-sun-o"></i></span><input type="text" name="startTime" class="mini-time form-control operationTimeFrom" value=""></div>' +
+               '<div class="operationTime input-group"><span class="input-group-addon"><i class="fa fa-moon-o"></i></span><input type="text" name="endTime" class="mini-time form-control operationTimeTill" value=""></div>' +
+               '</div></div>'
+           }); }
+           )
+
+    </script>
+}
