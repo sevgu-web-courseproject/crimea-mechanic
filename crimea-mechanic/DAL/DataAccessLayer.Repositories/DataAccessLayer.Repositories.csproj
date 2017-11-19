@@ -62,6 +62,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationOffersRepository.cs" />
+    <Compile Include="ApplicationRepository.cs" />
     <Compile Include="ApplicationUserRepository.cs" />
     <Compile Include="CarMarksRepository.cs" />
     <Compile Include="CarModelsRepository.cs" />

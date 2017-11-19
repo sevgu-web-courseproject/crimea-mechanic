@@ -16,7 +16,8 @@ namespace BusinessLogic.Managers.MapProfiles
                 .ForMember(d => d.Created, opt => opt.MapFrom(s => DateTime.UtcNow))
                 .ForMember(d => d.Updated, opt => opt.MapFrom(s => DateTime.UtcNow))
                 .ForMember(d => d.IsDeleted, opt => opt.UseValue(false))
-                .ForMember(d => d.User, opt => opt.Ignore());
+                .ForMember(d => d.User, opt => opt.Ignore())
+                .ForMember(d => d.Applications, opt => opt.Ignore());
 
             CreateMap<UserCar, UserCarDto>()
                 .ForMember(d => d.Mark, opt => opt.MapFrom(s => s.Model.Mark.Name))

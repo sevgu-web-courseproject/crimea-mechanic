@@ -17,7 +17,7 @@ namespace DataAccessLayer.Models
         /// <summary>
         /// Город нахождения автосервиса
         /// </summary>
-        public City City { get; set; }
+        public virtual City City { get; set; }
 
         /// <summary>
         /// Адрес автосервиса
@@ -63,6 +63,16 @@ namespace DataAccessLayer.Models
         /// Файлы автосервиса
         /// </summary>
         public virtual ICollection<CarServiceFile> Files { get; set; }
+
+        /// <summary>
+        /// Все заявки автосервиса
+        /// </summary>
+        public virtual ICollection<Application> Applications { get; set; }
+
+        /// <summary>
+        /// Все предложения автосервиса
+        /// </summary>
+        public virtual ICollection<ApplicationOffer> Offers { get; set; }
 
         /// <summary>
         /// Текстовое поле "Об автосервисе"

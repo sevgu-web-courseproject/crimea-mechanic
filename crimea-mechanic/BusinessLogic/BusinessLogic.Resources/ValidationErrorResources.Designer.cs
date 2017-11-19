@@ -61,6 +61,24 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Описание требуемых работ ничего не содержит.
+        /// </summary>
+        public static string ApplicationDescriptionIsEmpty {
+            get {
+                return ResourceManager.GetString("ApplicationDescriptionIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Заявка не найдена.
+        /// </summary>
+        public static string ApplicationNotFound {
+            get {
+                return ResourceManager.GetString("ApplicationNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Марка автомобиля с номером {0} не найдена.
         /// </summary>
         public static string CarMarkNotFound {
@@ -111,6 +129,15 @@ namespace BusinessLogic.Resources {
         public static string CarServiceNameIsEmpty {
             get {
                 return ResourceManager.GetString("CarServiceNameIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Автосервис не найден.
+        /// </summary>
+        public static string CarServiceNotFound {
+            get {
+                return ResourceManager.GetString("CarServiceNotFound", resourceCulture);
             }
         }
         
@@ -183,6 +210,24 @@ namespace BusinessLogic.Resources {
         public static string LoginIsNotValid {
             get {
                 return ResourceManager.GetString("LoginIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Содержание предложения не заполнено.
+        /// </summary>
+        public static string OfferContentNotFound {
+            get {
+                return ResourceManager.GetString("OfferContentNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Цена предложения не указана.
+        /// </summary>
+        public static string OfferPriceNotFound {
+            get {
+                return ResourceManager.GetString("OfferPriceNotFound", resourceCulture);
             }
         }
         

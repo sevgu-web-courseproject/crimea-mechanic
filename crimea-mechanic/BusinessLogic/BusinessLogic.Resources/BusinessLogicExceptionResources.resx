@@ -117,6 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApplicationDoesNotBelongToCarService" xml:space="preserve">
+    <value>Заявка не принадлежит автосервису</value>
+  </data>
+  <data name="ApplicationDoesNotBelongToUser" xml:space="preserve">
+    <value>Заявка не принадлежит пользователю</value>
+  </data>
+  <data name="ApplicationIncorrectState" xml:space="preserve">
+    <value>Состояние заявки не позволяет выполнить данное действие</value>
+  </data>
+  <data name="ApplicationNotFound" xml:space="preserve">
+    <value>Заявка не найдена</value>
+  </data>
+  <data name="ApplicationOfferAlreadyContains" xml:space="preserve">
+    <value>Для данной заявки предложение уже было отправлено</value>
+  </data>
+  <data name="ApplicationOfferDoesNotBelongToCarService" xml:space="preserve">
+    <value>Предложение не принадлежит автосервису</value>
+  </data>
+  <data name="ApplicationOfferNotFound" xml:space="preserve">
+    <value>Предложение на заявку не найдено</value>
+  </data>
   <data name="CarDoesNotBelongToUser" xml:space="preserve">
     <value>Машина не принадлежит пользователю</value>
   </data>

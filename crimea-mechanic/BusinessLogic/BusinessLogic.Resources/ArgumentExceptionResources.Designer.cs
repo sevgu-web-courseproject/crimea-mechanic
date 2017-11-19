@@ -61,6 +61,51 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Данные для добавления предложения не найдены.
+        /// </summary>
+        public static string AddOfferDtoNotFound {
+            get {
+                return ResourceManager.GetString("AddOfferDtoNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Данные для добавления нового автомобиля не найдены.
+        /// </summary>
+        public static string AddUserCarDtoNotFound {
+            get {
+                return ResourceManager.GetString("AddUserCarDtoNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Данные для создания заявки не найдены.
+        /// </summary>
+        public static string CreateApplicationDtoNotFound {
+            get {
+                return ResourceManager.GetString("CreateApplicationDtoNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Данные для редактирования заявки не найдены.
+        /// </summary>
+        public static string EditApplicationDtoNotFound {
+            get {
+                return ResourceManager.GetString("EditApplicationDtoNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Данные для редактирования автомобиля не найдены.
+        /// </summary>
+        public static string EditUserCarDtoNotFound {
+            get {
+                return ResourceManager.GetString("EditUserCarDtoNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Данные для регистрации не найдены.
         /// </summary>
         public static string RegistrationDtoNotFound {

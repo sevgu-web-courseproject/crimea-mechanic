@@ -41,12 +41,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\AddOfferDto.cs" />
+    <Compile Include="Application\ApplicationBaseInfoDto.cs" />
+    <Compile Include="Application\ApplicationInfoForAdministratorDto.cs" />
+    <Compile Include="Application\ApplicationsFilter.cs" />
+    <Compile Include="Application\ApplicationInfoForServiceDto.cs" />
+    <Compile Include="Application\ApplicationInfoForUserDto.cs" />
+    <Compile Include="Application\ApplicationShortInfoForAdministratorDto.cs" />
+    <Compile Include="Application\ApplicationShortInfoForServiceDto.cs" />
+    <Compile Include="Application\ApplicationShortInfoForUserDto.cs" />
+    <Compile Include="Application\ApplicationsPoolFilter.cs" />
+    <Compile Include="BaseFilter.cs" />
+    <Compile Include="Application\CreateApplicationDto.cs" />
+    <Compile Include="Application\EditApplicationDto.cs" />
+    <Compile Include="Application\OfferInfoDto.cs" />
     <Compile Include="CarMarkDto.cs" />
     <Compile Include="CarModelDto.cs" />
     <Compile Include="Car\AddOrEditUserCarDto.cs" />
     <Compile Include="Car\FilterUserCar.cs" />
     <Compile Include="Car\UserCarDto.cs" />
     <Compile Include="CityDto.cs" />
+    <Compile Include="CollectionResult.cs" />
     <Compile Include="FileDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\RegistrationDto.cs" />

@@ -1,4 +1,5 @@
-﻿using Common.Enums;
+﻿using System.Collections.Generic;
+using Common.Enums;
 
 namespace DataAccessLayer.Models
 {
@@ -16,6 +17,11 @@ namespace DataAccessLayer.Models
         /// Модель машины
         /// </summary>
         public virtual CarModel Model { get; set; }
+
+        /// <summary>
+        /// Заявки автомобиля
+        /// </summary>
+        public virtual ICollection<Application> Applications { get; set; }
 
         /// <summary>
         /// Год выпуска автомобиля
@@ -41,5 +47,13 @@ namespace DataAccessLayer.Models
         /// Пользователь
         /// </summary>
         public virtual UserProfile User { get; set; }
+
+        /// <summary>
+        /// Проверка, принадлежит ли машина пользователю?
+        /// </summary>
+        public bool IsBelongToUser(string userId)
+        {
+            return User.ApplicationUser.Id == userId;
+        }
     }
 }

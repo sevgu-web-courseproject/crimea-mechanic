@@ -61,6 +61,69 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Заявка не принадлежит автосервису.
+        /// </summary>
+        public static string ApplicationDoesNotBelongToCarService {
+            get {
+                return ResourceManager.GetString("ApplicationDoesNotBelongToCarService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Заявка не принадлежит пользователю.
+        /// </summary>
+        public static string ApplicationDoesNotBelongToUser {
+            get {
+                return ResourceManager.GetString("ApplicationDoesNotBelongToUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Состояние заявки не позволяет выполнить данное действие.
+        /// </summary>
+        public static string ApplicationIncorrectState {
+            get {
+                return ResourceManager.GetString("ApplicationIncorrectState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Заявка не найдена.
+        /// </summary>
+        public static string ApplicationNotFound {
+            get {
+                return ResourceManager.GetString("ApplicationNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Для данной заявки предложение уже было отправлено.
+        /// </summary>
+        public static string ApplicationOfferAlreadyContains {
+            get {
+                return ResourceManager.GetString("ApplicationOfferAlreadyContains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Предложение не принадлежит автосервису.
+        /// </summary>
+        public static string ApplicationOfferDoesNotBelongToCarService {
+            get {
+                return ResourceManager.GetString("ApplicationOfferDoesNotBelongToCarService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Предложение на заявку не найдено.
+        /// </summary>
+        public static string ApplicationOfferNotFound {
+            get {
+                return ResourceManager.GetString("ApplicationOfferNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Машина не принадлежит пользователю.
         /// </summary>
         public static string CarDoesNotBelongToUser {

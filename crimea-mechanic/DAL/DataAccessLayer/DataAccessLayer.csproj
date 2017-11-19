@@ -97,6 +97,10 @@
     <Compile Include="Migrations\201711121152486_AddUserCars.Designer.cs">
       <DependentUpon>201711121152486_AddUserCars.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711151948351_AddApplications.cs" />
+    <Compile Include="Migrations\201711151948351_AddApplications.Designer.cs">
+      <DependentUpon>201711151948351_AddApplications.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -150,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711121152486_AddUserCars.resx">
       <DependentUpon>201711121152486_AddUserCars.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711151948351_AddApplications.resx">
+      <DependentUpon>201711151948351_AddApplications.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
