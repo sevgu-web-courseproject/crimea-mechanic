@@ -1,4 +1,6 @@
-﻿namespace BusinessLogic.Objects.Application
+﻿using System;
+
+namespace BusinessLogic.Objects.Application
 {
     /// <summary>
     /// ДТО инфомрации о предложении
@@ -29,5 +31,15 @@
         /// Содержание предложения
         /// </summary>
         public string Сontent { get; set; }
+
+        /// <summary>
+        /// Дата направления заявки
+        /// </summary>
+        public DateTime Created { get; set; }
+
+        /// <summary>
+        /// Признак удалённого предложения
+        /// </summary>
+        public bool IsDeleted { get; set; }
     }
 }

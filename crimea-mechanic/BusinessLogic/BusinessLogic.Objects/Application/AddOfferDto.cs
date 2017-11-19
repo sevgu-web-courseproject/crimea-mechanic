@@ -11,11 +11,6 @@
         public long ApplicationId { get; set; }
 
         /// <summary>
-        /// Идентификатор автосервиса
-        /// </summary>
-        public long ServiceId { get; set; }
-
-        /// <summary>
         /// Стоимость
         /// </summary>
         public float Price { get; set; }

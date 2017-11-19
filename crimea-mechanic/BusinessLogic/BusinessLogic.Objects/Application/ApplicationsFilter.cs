@@ -3,7 +3,7 @@
 namespace BusinessLogic.Objects.Application
 {
     /// <summary>
-    /// Фильтр для отображению своих заявок пользователю
+    /// Фильтр для отображению заявок пользователю
     /// </summary>
     public class ApplicationsFilter : BaseFilter
     {

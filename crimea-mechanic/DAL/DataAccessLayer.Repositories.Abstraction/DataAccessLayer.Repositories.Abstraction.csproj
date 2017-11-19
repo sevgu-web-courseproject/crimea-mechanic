@@ -53,6 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IApplicationOffersRepository.cs" />
+    <Compile Include="IApplicationRepository.cs" />
     <Compile Include="IApplicationUserRepository.cs" />
     <Compile Include="ICarMarksRepository.cs" />
     <Compile Include="ICarModelsRepository.cs" />

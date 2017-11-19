@@ -47,5 +47,13 @@ namespace DataAccessLayer.Models
         /// Пользователь
         /// </summary>
         public virtual UserProfile User { get; set; }
+
+        /// <summary>
+        /// Проверка, принадлежит ли машина пользователю?
+        /// </summary>
+        public bool IsBelongToUser(string userId)
+        {
+            return User.ApplicationUser.Id == userId;
+        }
     }
 }

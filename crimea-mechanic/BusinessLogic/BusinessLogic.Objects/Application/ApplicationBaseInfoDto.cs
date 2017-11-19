@@ -27,5 +27,10 @@ namespace BusinessLogic.Objects.Application
         /// Дата и время создания завяки
         /// </summary>
         public DateTime Created { get; set; }
+
+        /// <summary>
+        /// Признак удалённой заявки
+        /// </summary>
+        public bool IsDeleted { get; set; }
     }
 }

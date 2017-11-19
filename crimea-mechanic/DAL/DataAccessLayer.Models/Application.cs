@@ -37,5 +37,13 @@ namespace DataAccessLayer.Models
         /// Описание необходимых работ
         /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// Принадлежит ли заявка автосервису
+        /// </summary>
+        public bool IsBelongToService(string userId)
+        {
+            return Service != null && Service.ApplicationUser.Id == userId;
+        }
     }
 }

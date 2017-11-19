@@ -37,7 +37,7 @@ namespace BusinessLogic.Managers.Abstraction
         /// <summary>
         /// Получить информацию о заявке для администратора
         /// </summary>
-        ApplicationShortInfoForAdministratorDto GetApplicationInfoForAdministrator(long applicationId, string currentUserId);
+        ApplicationInfoForAdministratorDto GetApplicationInfoForAdministrator(long applicationId, string currentUserId);
 
         /// <summary>
         /// Получить информацию о заявках пользователя

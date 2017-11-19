@@ -17,7 +17,7 @@ namespace DataAccessLayer.Models
         /// <summary>
         /// Город нахождения автосервиса
         /// </summary>
-        public City City { get; set; }
+        public virtual City City { get; set; }
 
         /// <summary>
         /// Адрес автосервиса

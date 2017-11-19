@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using BusinessLogic.Managers.Abstraction;
+using BusinessLogic.Objects.Application;
 using BusinessLogic.Objects.Car;
 using BusinessLogic.Objects.User;
 using BusinessLogic.Resources;
@@ -161,7 +162,7 @@ namespace BusinessLogic.Managers
         {
             if (dto == null)
             {
-                throw new ArgumentNullException(ArgumentExceptionResources.RegistrationDtoNotFound);
+                throw new ArgumentNullException(ArgumentExceptionResources.AddUserCarDtoNotFound);
             }
             ValidationResult validationResult;
             if (!dto.Id.HasValue)
@@ -174,6 +175,89 @@ namespace BusinessLogic.Managers
                 validationResult = new ValidationResult("Редактирование машины пользователя");
                 ValidateEditUserCarDto(dto, validationResult);
             }
+            return validationResult;
+        }
+
+        public ValidationResult ValidateCreateApplicationDto(CreateApplicationDto dto)
+        {
+            if (dto == null)
+            {
+                throw new ArgumentNullException(ArgumentExceptionResources.CreateApplicationDtoNotFound);
+            }
+            var validationResult = new ValidationResult("Создание новой заявки");
+
+            var car = _unitOfWork.Repository<IUserCarRepository>().Get(dto.CarId);
+            if (car == null)
+            {
+                validationResult.AddError(ValidationErrorResources.UserCarNotFound);
+            }
+
+            var city = _unitOfWork.Repository<ICityRepository>().Get(dto.CityId);
+            if (city == null)
+            {
+                validationResult.AddError(ValidationErrorResources.CityNotFound);
+            }
+
+            if (string.IsNullOrEmpty(dto.Description))
+            {
+                validationResult.AddError(ValidationErrorResources.ApplicationDescriptionIsEmpty);
+            }
+
+            return validationResult;
+        }
+
+        public ValidationResult ValidateEditApplicationDto(EditApplicationDto dto)
+        {
+            if (dto == null)
+            {
+                throw new ArgumentNullException(ArgumentExceptionResources.EditApplicationDtoNotFound);
+            }
+            var validationResult = new ValidationResult("Редактирование заявки");
+
+            var application = _unitOfWork.Repository<IApplicationRepository>().Get(dto.ApplicationId);
+            if (application == null)
+            {
+                validationResult.AddError(ValidationErrorResources.ApplicationNotFound);
+            }
+
+            var city = _unitOfWork.Repository<ICityRepository>().Get(dto.CityId);
+            if (city == null)
+            {
+                validationResult.AddError(ValidationErrorResources.CityNotFound);
+            }
+
+            if (string.IsNullOrEmpty(dto.Description))
+            {
+                validationResult.AddError(ValidationErrorResources.ApplicationDescriptionIsEmpty);
+            }
+
+            return validationResult;
+        }
+
+        public ValidationResult ValidateAddOfferDto(AddOfferDto dto)
+        {
+            if (dto == null)
+            {
+                throw new ArgumentNullException(ArgumentExceptionResources.AddOfferDtoNotFound);
+            }
+            var validationResult = new ValidationResult("Добавление предложения");
+
+            var application = _unitOfWork.Repository<IApplicationRepository>().Get(dto.ApplicationId);
+            if (application == null)
+            {
+                validationResult.AddError(ValidationErrorResources.ApplicationNotFound);
+            }
+
+            if (dto.Price == default(float))
+            {
+                validationResult.AddError(ValidationErrorResources.OfferPriceNotFound);
+            }
+
+            if (string.IsNullOrEmpty(dto.Content))
+            {
+                validationResult.AddError(ValidationErrorResources.OfferContentNotFound);
+            }
+
             return validationResult;
         }
 
