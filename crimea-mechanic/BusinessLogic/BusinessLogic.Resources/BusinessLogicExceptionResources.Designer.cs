@@ -142,7 +142,16 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Машина пользвателя не найдена.
+        ///   Looks up a localized string similar to Машина не может быть удалёна пока не буду удалены либо завершены все заявки.
+        /// </summary>
+        public static string UserCarCanNotBeRemove {
+            get {
+                return ResourceManager.GetString("UserCarCanNotBeRemove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Машина пользователя не найдена.
         /// </summary>
         public static string UserCarNotFound {
             get {
