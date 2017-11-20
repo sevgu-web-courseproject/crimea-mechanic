@@ -35,5 +35,10 @@ namespace DataAccessLayer.Models
         /// Машины пользователя
         /// </summary>
         public virtual ICollection<UserCar> Cars { get; set; }
+
+        /// <summary>
+        /// Отзывы
+        /// </summary>
+        public virtual ICollection<CarServiceReview> Reviews { get; set; }
     }
 }
