@@ -58,6 +58,8 @@
   <ItemGroup>
     <Compile Include="IApplicationManager.cs" />
     <Compile Include="ICarManager.cs" />
+    <Compile Include="ICarServiceManager.cs" />
+    <Compile Include="ICarServiceReviewManager.cs" />
     <Compile Include="IStorageManager.cs" />
     <Compile Include="IUserInternalManager.cs" />
     <Compile Include="IUserManager.cs" />
