@@ -1,0 +1,28 @@
+﻿@using WebUI.ProjectConstants
+<script>
+
+    @if (ViewData["Token"] != null)
+    {
+        <text>
+            // добавляем ко всем запросам со страницы токен
+            $.ajaxPrefilter(function (options) {
+                if (!options.beforeSend) {
+                    options.beforeSend = function (xhr) {
+                        xhr.setRequestHeader('Authorization', 'Bearer @ViewData["Token"]');
+                    }
+                }
+            });
+            window.userToken = '@ViewData["Token"]';
+        </text>
+    }
+
+    window.resource = {
+        urls: {
+            webApiRegistrationUserUrl: '@ConstantsUrls.WebApiRegistrationUserUrl',
+            webApiRegistrationCarServiceUrl: '@ConstantsUrls.WebApiRegistrationCarServiceUrl',
+            webApiGetCitiesUrl: '@ConstantsUrls.WebApiGetCitiesUrl',
+
+            webUiSignInPageUrl: '@Url.Action("SignIn", "Account")'
+        }
+    }
+</script>

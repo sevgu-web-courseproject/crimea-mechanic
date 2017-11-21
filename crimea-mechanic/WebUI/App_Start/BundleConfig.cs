@@ -24,6 +24,14 @@ namespace WebUI
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/jquery.timepicker.js",
                 "~/Scripts/knockout.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/registrationUserVM").Include(
+                "~/Scripts/ViewModels/registrationUserVM.js",
+                "~/Scripts/Helpers/ajaxHelper.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/registrationCarServiceVM").Include(
+                "~/Scripts/ViewModels/registrationCarServiceVM.js",
+                "~/Scripts/Helpers/ajaxHelper.js"));
         }
     }
 }
