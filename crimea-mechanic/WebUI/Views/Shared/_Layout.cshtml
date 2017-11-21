@@ -2,33 +2,21 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
 </head>
 <body>
-    <div class="container">
-        <nav class="row">
-            <div class="main-page">
-                <a href="@Url.Action("Index", "Home")">Crimea-Mechanic</a>
-            </div>
-            <div class="user-profile-actions">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    @User.Identity.Name
-                    <button class="btn btn-outline-primary">Выйти</button>
-                }
-                else
-                {
-                    <button class="btn btn-outline-primary">Логин</button>
-                }
-            </div>
-        </nav>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+            <img src="@Url.Content("~/Content/Images/gear.svg")" width="32" height="32" class="d-inline-block align-top" alt=""> Crimea-Mechanic
+        </a>
+        <a class="btn btn-success" href="@Url.Action("SignIn", "Account")">
+            <i class="fa fa-sign-in"></i>Войти
+        </a>
+    </nav>
     <div class="container">
         @RenderBody()
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Crimea-Mechanic</p>
-        </footer>
     </div>
 
     @Scripts.Render("~/Scripts/js")

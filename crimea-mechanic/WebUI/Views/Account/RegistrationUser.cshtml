@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Регистрация пользователя";
+}
+
+<div class="container vertical-center">
+    <div class="col-md-12 col-md-offset-1">
+        <div class="jumbotron" style="height: 800px; opacity: 0.75">
+
+            <h3>Регистрация пользователя</h3>
+
+            <div class="alert alert-info" style="margin-top:18px;">
+                <a class="close" href="#" data-dismiss="alert" aria-label="close" title="close">×</a>
+                <strong>Внимание!</strong>
+                Вы находитесь на странице регистрации пользователя - клиента. Если Вы хотите зарегистрироваться как пользователь - автосервис перейдите по  ссылке:
+                <a href="#">регистрация пользователя - автосервиса</a>
+            </div>
+
+            <form method="post" style="padding-left: 5rem">
+                <div class="row">
+                    <div class="form-group col-5 ">
+                        <label for="emailUsername">E-Mail</label>
+                        <input name="Login" type="email" class="form-control" id="emailUsername" placeholder="Введите E-Mail" required />
+                    </div>
+
+                    <div class="form-group col-md-6" style="padding-left: 5rem">
+                        <label for="name">Имя:</label>
+                        <input name="ContactName" type="text" class="form-control" id="name" placeholder="Введите имя" required />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-5">
+                        <label for="password">Пароль:</label>
+                        <input name="Password" type="password" class="form-control" id="password" placeholder="Введите пароль" required />
+                    </div>
+
+                    <div class="form-group col-6" style="padding-left: 5rem">
+                        <label for="password">Подтвердите пароль:</label>
+                        <input name="PasswordConfirmation" type="password" class="form-control" id="passwordcomplete" placeholder="Подтвердите пароль" required />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-5 ">
+                        <label for="phoneNumber">Номер телефона:</label>
+                        <input name="Phone" type="text" class="form-control phone" id="phoneNumber" placeholder="Введите номер телефона" required />
+                    </div>
+                    <div class="form-group col-7" style="padding-top: 2rem; padding-left: 6.5rem">
+                        <button name="submit" type="submit" class="btn btn-success">Зарегистрироваться</button>
+                        <br />
+                        <button name="clear" type="reset" class="btn btn-danger">Очистить форму</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
