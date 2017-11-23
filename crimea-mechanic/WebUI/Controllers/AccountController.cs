@@ -95,12 +95,7 @@ namespace WebUI.Controllers
                 //No 200 OK result, what went wrong?
                 HandleBadRequest(ex);
 
-                if (!ModelState.IsValid)
-                {
-                    return View(model);
-                }
-
-                throw;
+                return View(model);
             }
         }
 

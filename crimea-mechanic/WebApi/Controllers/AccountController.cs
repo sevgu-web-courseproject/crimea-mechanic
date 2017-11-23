@@ -61,7 +61,8 @@ namespace WebApi.Controllers
             {
                 Login = GetStringFromRequest("Login"),
                 Password = GetStringFromRequest("Password"),
-                PasswordСonfirmation = GetStringFromRequest("PasswordConfirmation"),
+                PasswordСonfirmation = GetStringFromRequest("PasswordСonfirmation"),
+                CityId = GetLongFromRequest("CityId"),
                 Name = GetStringFromRequest("Name"),
                 Address = GetStringFromRequest("Address"),
                 Email = GetStringFromRequest("Email"),

@@ -3,89 +3,65 @@
     ViewBag.Title = "Логин";
 }
 
-<form class="form-horizontal panel-bg" role="form" method="POST" action="@Url.Action("SignIn", "Account")">
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-6">
-            <h2>Логин</h2>
-            <hr>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-6">
-            <div class="form-group has-danger">
-                <label class="sr-only" for="email">E-Mail</label>
-                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                    <div class="input-group-addon"><i class="fa fa-at"></i></div>
-                    <input type="email" name="Login" class="form-control" id="email"
-                           placeholder="E-Mail" required autofocus>
+<div class="col-12">
+    <div class="jumbotron">
+        <form class="form-horizontal" role="form" method="POST" action="@Url.Action("SignIn", "Account")">
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <h2>Логин</h2>
+                    <hr>
                 </div>
             </div>
-        </div>
-        <div class="col-3">
-            <div class="form-control-feedback">
-                <span class="text-danger align-middle" style="visibility: hidden">
-                    <i class="fa fa-close"></i> Неправильный логин
-                </span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-6">
-            <div class="form-group">
-                <label class="sr-only" for="password">Пароль</label>
-                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                    <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                    <input type="password" name="Password" class="form-control" id="password"
-                           placeholder="Пароль" required>
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <div class="form-group">
+                        <label class="sr-only" for="email">E-Mail</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon"><i class="fa fa-at"></i></div>
+                            <input type="email" name="Login" class="form-control" id="email" placeholder="E-Mail" aria-describedby="email-error" required autofocus>
+                        </div>
+                        <small id="email-error" class="form-text text-muted">ЧЛЕН</small>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-3">
-            <div class="form-control-feedback">
-                <span class="text-danger align-middle" style="visibility: hidden">
-                    <i class="fa fa-close"></i> Неправильный пароль
-                </span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-6 test">
-            <div class="form-check mb-2 mr-sm-2 mb-sm-0 text-center">
-                <label class="form-check-label">
-                    <input class="form-check-input" name="RememberMe"
-                           type="checkbox">
-                    <span>Запомнить меня</span>
-                </label>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-6 test">&nbsp;</div>
-    </div>
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-6 text-center">
-            <button type="submit" class="btn btn-success">
-                <i class="fa fa-sign-in"></i> Войти
-            </button>
-            <div class="dropdown show">
-                <a class="btn btn-outline-success my-2 my-sm-0" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Регистрация
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="@Url.Action("RegistrationUser", "Account")">Клиент</a>
-                    <a class="dropdown-item" href="@Url.Action("RegistrationCarService", "Account")">Менеджер</a>
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <div class="form-group">
+                        <label class="sr-only" for="password">Пароль</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                            <input type="password" name="Password" class="form-control" id="password" placeholder="Пароль" aria-describedby="password-error" required>
+                        </div>
+                        <small id="password-error" class="form-text text-muted">ЧЛЕН</small>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <div class="form-check text-center">
+                        <label class="form-check-label">
+                            <input class="form-check-input" name="RememberMe" type="checkbox">
+                            <span>Запомнить меня</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center items-center">
+                <div class="col-8">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-sign-in"></i> Войти
+                    </button>
+                    <div class="dropdown show" style="display: inline">
+                        <a class="btn btn-outline-success" href="#" id="dropdown-menu-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Регистрация
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown-menu-link">
+                            <a class="dropdown-item" href="@Url.Action("RegistrationUser", "Account")">Клиент</a>
+                            <a class="dropdown-item" href="@Url.Action("RegistrationCarService", "Account")">Автосервис</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-6 test">&nbsp;</div>
-    </div>
-</form>
+</div>
