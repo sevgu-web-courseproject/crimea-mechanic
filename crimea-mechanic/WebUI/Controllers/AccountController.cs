@@ -95,16 +95,23 @@ namespace WebUI.Controllers
                 //No 200 OK result, what went wrong?
                 HandleBadRequest(ex);
 
-                if (!ModelState.IsValid)
-                {
-                    return View(model);
-                }
-
-                throw;
+                return View(model);
             }
         }
 
-        // TODO Сделать регистрацию
+        // GET /Account/RegistrationUser
+        [HttpGet]
+        public ActionResult RegistrationUser()
+        {
+            return View();
+        }
+
+        // GET /Account/RegistrationCarService
+        [HttpGet]
+        public ActionResult RegistrationCarService()
+        {
+            return View();
+        }
 
         [Authorize]
         public async Task<ActionResult> SignOut()

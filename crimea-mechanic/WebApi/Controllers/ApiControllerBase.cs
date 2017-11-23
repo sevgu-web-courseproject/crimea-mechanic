@@ -96,6 +96,16 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
+        /// Получить целочисленное значение
+        /// </summary>
+        /// <param name="key">Ключ</param>
+        /// <returns></returns>
+        protected long GetLongFromRequest(string key)
+        {
+            return long.Parse(HttpContext.Current.Request.Params[key]);
+        }
+
+        /// <summary>
         /// Получить список из запроса
         /// </summary>
         /// <typeparam name="T">Тип данных в списке</typeparam>

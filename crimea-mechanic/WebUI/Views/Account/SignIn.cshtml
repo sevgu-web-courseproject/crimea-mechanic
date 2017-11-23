@@ -1,26 +1,67 @@
 ﻿
 @{
-    ViewBag.Title = "SignIn";
+    ViewBag.Title = "Логин";
 }
 
-<form class="form-horizontal" role="form" method="post">
-    <div class="form-group">
-        <label for="login" class="control-label">Логин</label>
-        <input type="text" id="login "name="Login" class="form-control" placeholder="Логин">
+<div class="col-12">
+    <div class="jumbotron">
+        <form class="form-horizontal" role="form" method="POST" action="@Url.Action("SignIn", "Account")">
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <h2>Логин</h2>
+                    <hr>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <div class="form-group">
+                        <label class="sr-only" for="email">E-Mail</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon"><i class="fa fa-at"></i></div>
+                            <input type="email" name="Login" class="form-control" id="email" placeholder="E-Mail" aria-describedby="email-error" required autofocus>
+                        </div>
+                        <small id="email-error" class="form-text text-muted">ЧЛЕН</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <div class="form-group">
+                        <label class="sr-only" for="password">Пароль</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                            <input type="password" name="Password" class="form-control" id="password" placeholder="Пароль" aria-describedby="password-error" required>
+                        </div>
+                        <small id="password-error" class="form-text text-muted">ЧЛЕН</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <div class="form-check text-center">
+                        <label class="form-check-label">
+                            <input class="form-check-input" name="RememberMe" type="checkbox">
+                            <span>Запомнить меня</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center items-center">
+                <div class="col-8">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-sign-in"></i> Войти
+                    </button>
+                    <div class="dropdown show" style="display: inline">
+                        <a class="btn btn-outline-success" href="#" id="dropdown-menu-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Регистрация
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown-menu-link">
+                            <a class="dropdown-item" href="@Url.Action("RegistrationUser", "Account")">Клиент</a>
+                            <a class="dropdown-item" href="@Url.Action("RegistrationCarService", "Account")">Автосервис</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="password" class="control-label">Пароль</label>
-        <input type="password" id="password "name="Password" class="form-control" placeholder="Пароль">
-    </div>
-    <div class="form-group">
-        <label class="checkbox-inline">
-            <input type="checkbox" name="RememberMe" value="true">
-            Запомнить меня
-        </label>
-    </div>
-    <div class="form-row">
-        <div class="col-4">
-            <input id="submit" type="submit" value="Отправить" class="btn btn-primary">
-        </div>
-    </div>
-</form>
+</div>

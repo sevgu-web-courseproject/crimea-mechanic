@@ -1,0 +1,148 @@
+﻿
+@{
+    ViewBag.Title = "Регистрация автосервиса";
+}
+
+<div class="col-12">
+    <div class="jumbotron">
+        
+        <h3>Регистрация автосервиса</h3>
+        <hr/>
+        <br/>
+
+        <form>
+            <div class="row">
+                <div class="col">
+                    <label for="email">Логин</label>
+                    <input type="email" class="form-control" id="email" placeholder="E-Mail" data-bind="value: model.Login">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label for="password">Пароль</label>
+                    <input type="password" class="form-control" id="password" placeholder="Пароль" data-bind="value: model.Password">
+                </div>
+                <div class="col">
+                    <label for="password-confirmation">Повторите пароль</label>
+                    <input type="password" class="form-control" id="password-confirmation" placeholder="Повторите пароль" data-bind="value: model.PasswordСonfirmation">
+                </div>
+            </div>
+
+            <br/>
+            <h4>Местоположение</h4>
+            <hr/>
+
+            <div class="row">
+                <div class="col">
+                    <label for="city"> Город</label>
+                    <select class="form-control" id="city" data-bind="options: model.Cities, optionsText: 'Name', optionsValue: 'Id', value: model.CityId, optionsCaption: 'Выберите город'"></select>
+                </div>
+
+                <div class="col">
+                    <label for="address">Адрес</label>
+                    <input type="text" class="form-control" id="address" placeholder="Адрес автосервиса" data-bind="value: model.Address">
+                </div>
+            </div>
+
+            <br/>
+            <h4>Контактная информация</h4>
+            <hr/>
+
+            <div class="row">
+                <div class="col">
+                    <label for="carservice-name">Наименование автосервиса</label>
+                    <input class="form-control" id="carservice-name" placeholder="Наименование автосервиса" data-bind="value: model.Name">
+                </div>
+
+                <div class="col">
+                    <label for="contact-name">Имя менеджера</label>
+                    <input class="form-control" id="contact-name" placeholder="Имя менджера" data-bind="value: model.ManagerName">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label for="contact-email">Контакный E-mail автосервиса</label>
+                    <input type="email" class="form-control" id="contact-email" placeholder="Контактный E-mail" data-bind="value: model.Email">
+                </div>
+
+                <div class="col">
+                    <label for="phone-number">Контактные номера телефонов</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="phone-number" placeholder="Контактный номер" data-bind="value: model.PhoneNumber">
+                        <div class="input-group-addon" data-bind="click: addPhone">
+                            <i class="fa fa-plus"></i>
+                        </div>
+                    </div>
+                    <!-- ko if: model.Phones() -->
+                    <ul class="marks-none">
+                        <!-- ko foreach: model.Phones -->
+                        <li>
+                            <i class="fa fa-phone"></i>
+                            <span data-bind="text: $data"></span>
+                            <i class="fa fa-trash" data-bind="click: function() { viewModel.removePhone($data) }"></i>
+                        </li>
+                        <!-- /ko -->
+                    </ul>
+                    <!-- /ko -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label for="site-link">Ссылка на страницу автосервиса</label>
+                    <input type="text" class="form-control" id="site-link" placeholder="Адрес страницы автосервиса" data-bind="value: model.Site">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label for="timetable-works">График работы автосервиса</label>
+                    <input type="text" class="form-control" id="timetable-works" placeholder="График работы автосервиса" data-bind="value: model.TimetableWorks">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label for="about">Об автосервисе</label>
+                    <textarea class="form-control" id="about" placeholder="Об автосервисе" data-bind="value: model.About"></textarea>
+                </div>
+            </div>
+
+            <br/>
+            <h4>Фотографии</h4>
+            <hr/>
+
+            <div class="form-group">
+                <label for="logo">Логотип автосервиса</label>
+                <input type="file" class="form-control-file" id="logo" accept=".png, .jpeg, .jpg">
+            </div>
+            <div class="form-group">
+                <label for="photos">Фотографии автосервиса</label>
+                <input type="file" class="form-control-file" id="photos" multiple accept=".png, .jpeg, .jpg">
+            </div>
+            
+            <div class="row justify-content-center items-center">
+                <div class="col">
+                    <button class="btn btn-success" data-bind="click: submit">Зарегистрироваться</button>
+                    <button class="btn btn-danger inline">Очистить форму</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/registrationCarServiceVM")
+    <script>
+        
+        var viewModel = registrationCarServiceVM;
+        ko.applyBindings(viewModel);
+
+        $(function() {
+            viewModel.init();
+        });
+
+    </script>
+}

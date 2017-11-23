@@ -4,34 +4,49 @@
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
+    @Html.Partial("_HeaderScript")
 </head>
 <body>
-    <div class="container">
-        <nav class="row">
-            <div class="main-page">
-                <a href="@Url.Action("Index", "Home")">Crimea-Mechanic</a>
-            </div>
-            <div class="user-profile-actions">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    @User.Identity.Name
-                    <button class="btn btn-outline-primary">Выйти</button>
-                }
-                else
-                {
-                    <button class="btn btn-outline-primary">Логин</button>
-                }
-            </div>
-        </nav>
-    </div>
-    <div class="container">
-        @RenderBody()
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Crimea-Mechanic</p>
-        </footer>
-    </div>
+    
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+        <img src="@Url.Content("~/Content/Images/gear.svg")" width="32" height="32" class="d-inline-block align-top" alt=""> Crimean-Mechanic
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    @Scripts.Render("~/Scripts/js")
-    @RenderSection("scripts", required: false)
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Меню<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#"></a>
+            </li>
+        </ul>
+
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <form class="form-inline my-2 my-lg-0" style="padding-right: 0.5rem">
+                <a class="btn btn-outline-success my-2 my-sm-0" href="@Url.Action("SignIn", "Account")">Войти</a>
+            </form>
+        }
+        else
+        {
+            <form class="form-inline my-2 my-lg-0" style="padding-right: 0.5rem">
+                <a class="btn btn-outline-success my-2 my-sm-0" href="@Url.Action("SignOut", "Account")">Выйти</a>
+            </form>
+        }
+
+    </div>
+</nav>
+    <br/>
+
+<div class="container">
+        @RenderBody()
+</div>
+@Scripts.Render("~/Scripts/js")
+@RenderSection("scripts", required: false)
 </body>
 </html>
