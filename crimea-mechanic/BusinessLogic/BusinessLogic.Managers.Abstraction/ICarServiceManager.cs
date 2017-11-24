@@ -16,9 +16,14 @@ namespace BusinessLogic.Managers.Abstraction
         CarServiceInfoDto GetInfo(long carServiceId);
 
         /// <summary>
+        /// Получить информацию об регистрации автосервиса
+        /// </summary>
+        CarServiceInfoDto GetRegistrationRequest(long carServiceId, string currentUserId);
+
+        /// <summary>
         /// Получить список автосервисов
         /// </summary>
-        CollectionResult<CarServiceShortInfoDto> GetInfos();
+        CollectionResult<CarServiceShortInfoDto> GetInfos(CarServiceFilter filter);
 
         /// <summary>
         /// Получить список заявок на регистрацию

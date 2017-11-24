@@ -6,6 +6,8 @@ using System.Text.RegularExpressions;
 using BusinessLogic.Managers.Abstraction;
 using BusinessLogic.Objects.Application;
 using BusinessLogic.Objects.Car;
+using BusinessLogic.Objects.CarService;
+using BusinessLogic.Objects.Review;
 using BusinessLogic.Objects.User;
 using BusinessLogic.Resources;
 using Common.Enums;
@@ -258,6 +260,116 @@ namespace BusinessLogic.Managers
                 validationResult.AddError(ValidationErrorResources.OfferContentNotFound);
             }
 
+            return validationResult;
+        }
+
+        public ValidationResult ValidateEditCarServiceDto(EditCarServiceDto dto)
+        {
+            var validationResult = new ValidationResult("Редактирование автосервиса");
+
+            if (string.IsNullOrEmpty(dto.Name))
+            {
+                validationResult.AddError(ValidationErrorResources.CarServiceNameIsEmpty);
+            }
+
+            var city = _unitOfWork.Repository<ICityRepository>().Get(dto.CityId);
+            if (city == null)
+            {
+                validationResult.AddError(ValidationErrorResources.CityNotFound);
+            }
+
+            if (string.IsNullOrEmpty(dto.Address))
+            {
+                validationResult.AddError(ValidationErrorResources.CarServiceAddressIsEmpty);
+            }
+
+            if (IsInvalidEmail(dto.Email))
+            {
+                validationResult.AddError(ValidationErrorResources.CarServiceContactEmailIsInvalid);
+            }
+
+            if (dto.Phones == null || !dto.Phones.Any())
+            {
+                validationResult.AddError(ValidationErrorResources.CarServicePhonesIsEmpty);
+            }
+            if (dto.Phones != null)
+            {
+                foreach (var phone in dto.Phones)
+                {
+                    if (IsInvalidPhoneNumber(phone))
+                    {
+                        validationResult.AddError(string.Format(ValidationErrorResources.CarServicePhoneIsIncorrect, phone));
+                    }
+                }
+            }
+
+            if (string.IsNullOrEmpty(dto.ManagerName))
+            {
+                validationResult.AddError(ValidationErrorResources.CarServiceManagerNameIsEmpty);
+            }
+
+            var regex = new Regex("^(http|https)://");
+            if (string.IsNullOrEmpty(dto.Site) || !regex.IsMatch(dto.Site))
+            {
+                validationResult.AddError(ValidationErrorResources.CarServiceSiteIsIncorrect);
+            }
+
+            if (dto.CarTags != null && dto.CarTags.Any())
+            {
+                var repository = _unitOfWork.Repository<ICarMarksRepository>();
+                foreach (var carTagId in dto.CarTags)
+                {
+                    var mark = repository.Get(carTagId);
+                    if (mark == null)
+                    {
+                        validationResult.AddError(string.Format(ValidationErrorResources.CarMarkNotFound, carTagId));
+                    }
+                }
+            }
+
+            if (dto.WorkTags != null && dto.WorkTags.Any())
+            {
+                var repository = _unitOfWork.Repository<IWorkTagsRepository>();
+                foreach (var workTagId in dto.WorkTags)
+                {
+                    var workTag = repository.Get(workTagId);
+                    if (workTag == null)
+                    {
+                        validationResult.AddError(string.Format(ValidationErrorResources.WorkTagNotFound, workTagId));
+                    }
+                }
+            }
+
+            if (dto.Logo != null && !IsImage(dto.Logo.Name))
+            {
+                validationResult.AddError(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Logo.Name));
+            }
+
+            if (dto.Photos != null && dto.Photos.Any())
+            {
+                foreach (var photo in dto.Photos)
+                {
+                    if (!IsImage(photo.Name))
+                    {
+                        validationResult.AddError(string.Format(ValidationErrorResources.InvalidFileExtension, photo.Name));
+                    }
+                }
+            }
+
+            return validationResult;
+        }
+
+        public ValidationResult ValidateOperateReviewDto(OperateReviewDto dto)
+        {
+            var validationResult = new ValidationResult("Добавление/Редактирование отзыва");
+            if (dto.Mark == 0)
+            {
+                validationResult.AddError(ValidationErrorResources.ReviewMarkIsEmpty);
+            }
+            if (string.IsNullOrEmpty(dto.Review))
+            {
+                validationResult.AddError(ValidationErrorResources.ReviewContentIsEmpty);
+            }
             return validationResult;
         }
 

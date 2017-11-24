@@ -59,6 +59,7 @@
     <Compile Include="ICarMarksRepository.cs" />
     <Compile Include="ICarModelsRepository.cs" />
     <Compile Include="ICarServiceRepository.cs" />
+    <Compile Include="ICarServiceReviewRepository.cs" />
     <Compile Include="ICityRepository.cs" />
     <Compile Include="IRepositoryBase.cs" />
     <Compile Include="IRepositoryFactory.cs" />

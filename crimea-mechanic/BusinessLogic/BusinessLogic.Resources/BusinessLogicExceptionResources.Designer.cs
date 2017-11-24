@@ -142,6 +142,60 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Автосервис не принадлежит пользователю.
+        /// </summary>
+        public static string CarServiceDoesNotBelongToUser {
+            get {
+                return ResourceManager.GetString("CarServiceDoesNotBelongToUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Состояние автосервиса не позволяет выполнить данное действие.
+        /// </summary>
+        public static string CarServiceIncorrectState {
+            get {
+                return ResourceManager.GetString("CarServiceIncorrectState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Автосервис не найден.
+        /// </summary>
+        public static string CarServiceNotFound {
+            get {
+                return ResourceManager.GetString("CarServiceNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Для данного автосервиса отзыв уже был отправлен.
+        /// </summary>
+        public static string ReviewAlreadyContains {
+            get {
+                return ResourceManager.GetString("ReviewAlreadyContains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отзыв не принадлежит польвателю.
+        /// </summary>
+        public static string ReviewDoesNotBelongToUser {
+            get {
+                return ResourceManager.GetString("ReviewDoesNotBelongToUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отзыв не найден.
+        /// </summary>
+        public static string ReviewNotFound {
+            get {
+                return ResourceManager.GetString("ReviewNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Машина не может быть удалёна пока не буду удалены либо завершены все заявки.
         /// </summary>
         public static string UserCarCanNotBeRemove {

@@ -180,6 +180,12 @@
   <data name="PhoneNumberIsIncorrect" xml:space="preserve">
     <value>Неправильный номер мобильного телефона</value>
   </data>
+  <data name="ReviewContentIsEmpty" xml:space="preserve">
+    <value>Отзыв не задан</value>
+  </data>
+  <data name="ReviewMarkIsEmpty" xml:space="preserve">
+    <value>Оценка не задана</value>
+  </data>
   <data name="UserCarNotFound" xml:space="preserve">
     <value>Машина пользователя не найдена</value>
   </data>

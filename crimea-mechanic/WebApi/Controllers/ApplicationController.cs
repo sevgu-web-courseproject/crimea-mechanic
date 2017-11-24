@@ -174,8 +174,7 @@ namespace WebApi.Controllers
         /// </summary>
         /// <param name="applicationId">Идентификатор заявки</param>
         /// <returns></returns>
-        [Authorize(Roles = Common.Constants.CommonRoles.Regular)]
-        [Authorize(Roles = Common.Constants.CommonRoles.CarService)]
+        [Authorize]
         [Route("RejectApplication/{applicationId}")]
         [HttpGet]
         public IHttpActionResult RejectApplication(long applicationId)
