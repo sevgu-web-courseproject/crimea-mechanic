@@ -1,136 +1,142 @@
-﻿
+﻿@using WebUI.App_LocalResources
+
 @{
-    ViewBag.Title = "Регистрация автосервиса";
+    ViewBag.Title = GlobalResources.CarServiceRegistration;
 }
 
-<div class="col-12">
-    <div class="jumbotron">
-        
-        <h3>Регистрация автосервиса</h3>
-        <hr/>
+@section breadcrumbs {
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">@GlobalResources.Home</a></li>
+        <li class="breadcrumb-item"><a href="@Url.Action("SignIn", "Account")">@GlobalResources.Login</a></li>
+        <li class="breadcrumb-item active">@GlobalResources.CarServiceRegistration</li>
+    </ol>
+}
+
+<div class="jumbotron">
+    <h3>@GlobalResources.CarServiceRegistration</h3>
+    <hr/>
+    <br/>
+
+    <form>
+        <div class="row">
+            <div class="col">
+                <label for="email">@GlobalResources.UserLogin</label>
+                <input type="email" class="form-control" id="email" placeholder="@GlobalResources.UserLogin (e-mail)" data-bind="value: model.Login">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="password">@GlobalResources.Password</label>
+                <input type="password" class="form-control" id="password" placeholder="@GlobalResources.Password" data-bind="value: model.Password">
+            </div>
+            <div class="col">
+                <label for="password-confirmation">@GlobalResources.RepeatPassword</label>
+                <input type="password" class="form-control" id="password-confirmation" placeholder="@GlobalResources.RepeatPassword" data-bind="value: model.PasswordСonfirmation">
+            </div>
+        </div>
+
         <br/>
+        <h4>@GlobalResources.Location</h4>
+        <hr/>
 
-        <form>
-            <div class="row">
-                <div class="col">
-                    <label for="email">Логин</label>
-                    <input type="email" class="form-control" id="email" placeholder="E-Mail" data-bind="value: model.Login">
-                </div>
+        <div class="row">
+            <div class="col">
+                <label for="city">@GlobalResources.City</label>
+                <select class="form-control" id="city" data-bind="options: model.Cities, optionsText: 'Name', optionsValue: 'Id', value: model.CityId, optionsCaption: '@GlobalResources.ChooseCity'"></select>
             </div>
 
-            <div class="row">
-                <div class="col">
-                    <label for="password">Пароль</label>
-                    <input type="password" class="form-control" id="password" placeholder="Пароль" data-bind="value: model.Password">
-                </div>
-                <div class="col">
-                    <label for="password-confirmation">Повторите пароль</label>
-                    <input type="password" class="form-control" id="password-confirmation" placeholder="Повторите пароль" data-bind="value: model.PasswordСonfirmation">
-                </div>
+            <div class="col">
+                <label for="address">@GlobalResources.AddressCarService</label>
+                <input type="text" class="form-control" id="address" placeholder="@GlobalResources.AddressCarService" data-bind="value: model.Address">
+            </div>
+        </div>
+
+        <br/>
+        <h4>@GlobalResources.ContactInformation</h4>
+        <hr/>
+
+        <div class="row">
+            <div class="col">
+                <label for="carservice-name">@GlobalResources.CarServiceName</label>
+                <input class="form-control" id="carservice-name" placeholder="@GlobalResources.CarServiceName" data-bind="value: model.Name">
             </div>
 
-            <br/>
-            <h4>Местоположение</h4>
-            <hr/>
+            <div class="col">
+                <label for="contact-name">@GlobalResources.ManagerName</label>
+                <input class="form-control" id="contact-name" placeholder="@GlobalResources.ManagerName" data-bind="value: model.ManagerName">
+            </div>
+        </div>
 
-            <div class="row">
-                <div class="col">
-                    <label for="city"> Город</label>
-                    <select class="form-control" id="city" data-bind="options: model.Cities, optionsText: 'Name', optionsValue: 'Id', value: model.CityId, optionsCaption: 'Выберите город'"></select>
-                </div>
-
-                <div class="col">
-                    <label for="address">Адрес</label>
-                    <input type="text" class="form-control" id="address" placeholder="Адрес автосервиса" data-bind="value: model.Address">
-                </div>
+        <div class="row">
+            <div class="col">
+                <label for="contact-email">@GlobalResources.ContactEmailCarService</label>
+                <input type="email" class="form-control" id="contact-email" placeholder="@GlobalResources.ContactEmailCarService" data-bind="value: model.Email">
             </div>
 
-            <br/>
-            <h4>Контактная информация</h4>
-            <hr/>
-
-            <div class="row">
-                <div class="col">
-                    <label for="carservice-name">Наименование автосервиса</label>
-                    <input class="form-control" id="carservice-name" placeholder="Наименование автосервиса" data-bind="value: model.Name">
-                </div>
-
-                <div class="col">
-                    <label for="contact-name">Имя менеджера</label>
-                    <input class="form-control" id="contact-name" placeholder="Имя менджера" data-bind="value: model.ManagerName">
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <label for="contact-email">Контакный E-mail автосервиса</label>
-                    <input type="email" class="form-control" id="contact-email" placeholder="Контактный E-mail" data-bind="value: model.Email">
-                </div>
-
-                <div class="col">
-                    <label for="phone-number">Контактные номера телефонов</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="phone-number" placeholder="Контактный номер" data-bind="value: model.PhoneNumber">
-                        <div class="input-group-addon" data-bind="click: addPhone">
-                            <i class="fa fa-plus"></i>
-                        </div>
+            <div class="col">
+                <label for="phone-number">@GlobalResources.ContactPhoneNumbers</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="phone-number" placeholder="@GlobalResources.ContactPhoneNumber" data-bind="value: model.PhoneNumber">
+                    <div class="input-group-addon" data-bind="click: addPhone">
+                        <i class="fa fa-plus"></i>
                     </div>
-                    <!-- ko if: model.Phones() -->
-                    <ul class="marks-none">
-                        <!-- ko foreach: model.Phones -->
-                        <li>
-                            <i class="fa fa-phone"></i>
-                            <span data-bind="text: $data"></span>
-                            <i class="fa fa-trash" data-bind="click: function() { viewModel.removePhone($data) }"></i>
-                        </li>
-                        <!-- /ko -->
-                    </ul>
+                </div>
+                <!-- ko if: model.Phones() -->
+                <ul class="marks-none">
+                    <!-- ko foreach: model.Phones -->
+                    <li>
+                        <i class="fa fa-phone"></i>
+                        <span data-bind="text: $data"></span>
+                        <i class="fa fa-trash" data-bind="click: function() { viewModel.removePhone($data) }"></i>
+                    </li>
                     <!-- /ko -->
-                </div>
+                </ul>
+                <!-- /ko -->
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col">
-                    <label for="site-link">Ссылка на страницу автосервиса</label>
-                    <input type="text" class="form-control" id="site-link" placeholder="Адрес страницы автосервиса" data-bind="value: model.Site">
-                </div>
+        <div class="row">
+            <div class="col">
+                <label for="site-link">@GlobalResources.CarServiceSite</label>
+                <input type="text" class="form-control" id="site-link" placeholder="@GlobalResources.CarServiceSite" data-bind="value: model.Site">
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col">
-                    <label for="timetable-works">График работы автосервиса</label>
-                    <input type="text" class="form-control" id="timetable-works" placeholder="График работы автосервиса" data-bind="value: model.TimetableWorks">
-                </div>
+        <div class="row">
+            <div class="col">
+                <label for="timetable-works">@GlobalResources.CarServiceWorkTime</label>
+                <input type="text" class="form-control" id="timetable-works" placeholder="@GlobalResources.CarServiceWorkTime" data-bind="value: model.TimetableWorks">
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col">
-                    <label for="about">Об автосервисе</label>
-                    <textarea class="form-control" id="about" placeholder="Об автосервисе" data-bind="value: model.About"></textarea>
-                </div>
+        <div class="row">
+            <div class="col">
+                <label for="about">@GlobalResources.AboutCarService</label>
+                <textarea class="form-control" id="about" placeholder="@GlobalResources.AboutCarService" data-bind="value: model.About"></textarea>
             </div>
+        </div>
 
-            <br/>
-            <h4>Фотографии</h4>
-            <hr/>
+        <br/>
+        <h4>@GlobalResources.Photos</h4>
+        <hr/>
 
-            <div class="form-group">
-                <label for="logo">Логотип автосервиса</label>
-                <input type="file" class="form-control-file" id="logo" accept=".png, .jpeg, .jpg">
-            </div>
-            <div class="form-group">
-                <label for="photos">Фотографии автосервиса</label>
-                <input type="file" class="form-control-file" id="photos" multiple accept=".png, .jpeg, .jpg">
-            </div>
+        <div class="form-group">
+            <label for="logo">@GlobalResources.CarServiceLogo</label>
+            <input type="file" class="form-control-file" id="logo" accept=".png, .jpeg, .jpg">
+        </div>
+        <div class="form-group">
+            <label for="photos">@GlobalResources.CarServicePhotos</label>
+            <input type="file" class="form-control-file" id="photos" multiple accept=".png, .jpeg, .jpg">
+        </div>
             
-            <div class="row justify-content-center items-center">
-                <div class="col">
-                    <button class="btn btn-success" data-bind="click: submit">Зарегистрироваться</button>
-                    <button class="btn btn-danger inline">Очистить форму</button>
-                </div>
+        <div class="row justify-content-center items-center">
+            <div class="col">
+                <button class="btn btn-success" data-bind="click: submit">@GlobalResources.RegisterNow</button>
+                <button class="btn btn-danger inline">@GlobalResources.ClearForm</button>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 
 @section scripts {
