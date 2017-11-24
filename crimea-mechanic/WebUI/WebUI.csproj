@@ -229,7 +229,6 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\Images\bg.jpg" />
     <Content Include="Content\Images\gear.svg" />
-    <Content Include="Content\jquery.businessHours.css" />
     <Content Include="Content\jquery.timepicker.min.css" />
     <Content Include="Content\site.css">
       <DependentUpon>site.less</DependentUpon>
@@ -250,11 +249,11 @@
     <Content Include="Scripts\defaults-ru_RU.min.js" />
     <Content Include="Scripts\Helpers\ajaxHelper.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
-    <Content Include="Scripts\jquery.businessHours.min.js" />
     <Content Include="Scripts\jquery.mask.min.js" />
     <Content Include="Scripts\jquery.timepicker.js" />
     <Content Include="Scripts\knockout.js" />
     <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\ViewModels\homePageVM.js" />
     <Content Include="Scripts\ViewModels\registrationCarServiceVM.js" />
     <Content Include="Scripts\ViewModels\registrationUserVM.js" />
     <Content Include="Web.config" />

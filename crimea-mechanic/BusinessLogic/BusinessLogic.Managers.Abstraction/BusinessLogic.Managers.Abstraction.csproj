@@ -60,6 +60,7 @@
     <Compile Include="ICarManager.cs" />
     <Compile Include="ICarServiceManager.cs" />
     <Compile Include="ICarServiceReviewManager.cs" />
+    <Compile Include="IFileManager.cs" />
     <Compile Include="IStorageManager.cs" />
     <Compile Include="IUserInternalManager.cs" />
     <Compile Include="IUserManager.cs" />

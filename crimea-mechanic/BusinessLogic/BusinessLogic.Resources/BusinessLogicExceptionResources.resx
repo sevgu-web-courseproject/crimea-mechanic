@@ -153,6 +153,9 @@
   <data name="CarServiceNotFound" xml:space="preserve">
     <value>Автосервис не найден</value>
   </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>Файл автосервиса не найден</value>
+  </data>
   <data name="ReviewAlreadyContains" xml:space="preserve">
     <value>Для данного автосервиса отзыв уже был отправлен</value>
   </data>

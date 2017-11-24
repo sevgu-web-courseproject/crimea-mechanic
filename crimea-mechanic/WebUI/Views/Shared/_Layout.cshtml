@@ -6,6 +6,7 @@
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
+    @Scripts.Render("~/Scripts/jquery")
     @Html.Partial("_HeaderScript")
 </head>
 <body>
@@ -28,7 +29,7 @@
     }
     else
     {
-        <a class="btn btn-outline-success" href="@Url.Action("SignOut", "Account")">@GlobalResources.Regisration</a>
+        <a class="btn btn-outline-success" href="@Url.Action("SignOut", "Account")">@GlobalResources.LogOut</a>
     }
 
 </nav>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using AutoMapper;
 using BusinessLogic.Managers.Abstraction;
@@ -101,7 +102,7 @@ namespace BusinessLogic.Managers
         }
 
         public CollectionResult<CarServiceShortInfoDto> GetInfos(CarServiceFilter filter)
-        {
+       {
             if (filter == null)
             {
                 filter = new CarServiceFilter
@@ -113,7 +114,15 @@ namespace BusinessLogic.Managers
 
             var infos = Paginate(filter.CurrentPage, filter.ItemsPerPage, BuildQueryForCarServices(filter), out var itemsCount)
                 .ToList()
-                .Select(Mapper.Map<CarServiceShortInfoDto>);
+                .Select(item =>
+                {
+                    var dto = Mapper.Map<CarServiceShortInfoDto>(item);
+                    dto.AverageMark = item.Reviews.Count == 0
+                        ? 0
+                        : item.Points / item.Reviews.Count;
+                    return dto;
+                })
+                .ToList();
 
             return new CollectionResult<CarServiceShortInfoDto>
             {
@@ -216,6 +225,9 @@ namespace BusinessLogic.Managers
         {
             var query = UnitOfWork.Repository<ICarServiceRepository>()
                 .GetAll(true)
+                .Include(q => q.Reviews)
+                .Include(q => q.City)
+                .Include(q => q.Files)
                 .Where(cr => cr.State == CarServiceState.Active)
                 .OrderByDescending(cr => cr.Points);
 

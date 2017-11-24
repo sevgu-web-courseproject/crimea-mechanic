@@ -123,6 +123,9 @@
   <data name="AddressCarService" xml:space="preserve">
     <value>Адрес автосервиса</value>
   </data>
+  <data name="BestServices" xml:space="preserve">
+    <value>Лучшие автосервисы</value>
+  </data>
   <data name="CarService" xml:space="preserve">
     <value>Автосервис</value>
   </data>
@@ -180,14 +183,41 @@
   <data name="FooterText" xml:space="preserve">
     <value>Илья Мжачев &amp; Федор Костюченко</value>
   </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Привет</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Главная</value>
+  </data>
+  <data name="HomeHowItsWork" xml:space="preserve">
+    <value>Как это работает</value>
+  </data>
+  <data name="HomeIntroducing" xml:space="preserve">
+    <value>Мы представляем Вам площадку для взаимодействия автовладельцев с автосервисами Crimean-Mechanic</value>
+  </data>
+  <data name="HomeStep1" xml:space="preserve">
+    <value>Подаете заявку на ремонт</value>
+  </data>
+  <data name="HomeStep2" xml:space="preserve">
+    <value>Заявка попадает в систему</value>
+  </data>
+  <data name="HomeStep3" xml:space="preserve">
+    <value>Атосервисы отправляют предложения</value>
+  </data>
+  <data name="HomeStep4" xml:space="preserve">
+    <value>Выбираете предолжение и принимаете его</value>
+  </data>
+  <data name="HomeStep5" xml:space="preserve">
+    <value>Успех</value>
   </data>
   <data name="Location" xml:space="preserve">
     <value>Местоположение</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Войти</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Выйти</value>
   </data>
   <data name="ManagerName" xml:space="preserve">
     <value>Имя менеджера</value>
@@ -218,5 +248,8 @@
   </data>
   <data name="UserLogin" xml:space="preserve">
     <value>Логин пользователя</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Посмотреть</value>
   </data>
 </root>

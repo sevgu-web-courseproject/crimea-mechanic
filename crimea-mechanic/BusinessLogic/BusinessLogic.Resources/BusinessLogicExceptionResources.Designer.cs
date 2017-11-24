@@ -169,6 +169,15 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Файл автосервиса не найден.
+        /// </summary>
+        public static string FileNotFound {
+            get {
+                return ResourceManager.GetString("FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Для данного автосервиса отзыв уже был отправлен.
         /// </summary>
         public static string ReviewAlreadyContains {

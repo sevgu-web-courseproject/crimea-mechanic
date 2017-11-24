@@ -123,6 +123,9 @@
   <data name="AddressCarService" xml:space="preserve">
     <value>Address car service</value>
   </data>
+  <data name="BestServices" xml:space="preserve">
+    <value>Best car services</value>
+  </data>
   <data name="CarService" xml:space="preserve">
     <value>Car service</value>
   </data>
@@ -180,14 +183,41 @@
   <data name="FooterText" xml:space="preserve">
     <value>Ilya Mzhachev &amp; Fedor Kostyuchenko</value>
   </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello</value>
+  </data>
   <data name="Home" xml:space="preserve">
-    <value>Home</value>
+    <value>Home page</value>
+  </data>
+  <data name="HomeHowItsWork" xml:space="preserve">
+    <value>How it`s work</value>
+  </data>
+  <data name="HomeIntroducing" xml:space="preserve">
+    <value>We are introducing a platform for interaction of car owners with car services - Crimean Mechanic</value>
+  </data>
+  <data name="HomeStep1" xml:space="preserve">
+    <value>You are sending a request for repair</value>
+  </data>
+  <data name="HomeStep2" xml:space="preserve">
+    <value>Application is in the system</value>
+  </data>
+  <data name="HomeStep3" xml:space="preserve">
+    <value>Car services sends offers to you</value>
+  </data>
+  <data name="HomeStep4" xml:space="preserve">
+    <value>You choose the best one and accept it</value>
+  </data>
+  <data name="HomeStep5" xml:space="preserve">
+    <value>Success</value>
   </data>
   <data name="Location" xml:space="preserve">
     <value>Location</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Log out</value>
   </data>
   <data name="ManagerName" xml:space="preserve">
     <value>Manager name</value>
@@ -218,5 +248,8 @@
   </data>
   <data name="UserLogin" xml:space="preserve">
     <value>User login</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
   </data>
 </root>

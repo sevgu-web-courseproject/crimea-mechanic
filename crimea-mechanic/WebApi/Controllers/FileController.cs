@@ -3,8 +3,9 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
+using BusinessLogic.Managers.Abstraction;
+using Common.Exceptions;
 
 namespace WebApi.Controllers
 {
@@ -12,14 +13,30 @@ namespace WebApi.Controllers
     [RoutePrefix("api/File")]
     public class FileController : ApiControllerBase
     {
+
+        #region Fields
+
+        private readonly IFileManager _manager;
+
+        #endregion
+
+        #region Constructor
+
+        public FileController(IFileManager manager)
+        {
+            _manager = manager;
+        }
+
+        #endregion
+
         [HttpGet]
         [Route("{carServiceId:long}/{fileId:long}")]
         public async Task<HttpResponseMessage> Get(long carServiceId, long fileId)
         {
-            var path = HttpContext.Current.Server.MapPath("~/Files/test.png");
             try
             {
-                using (var stream = new FileStream(path, FileMode.Open))
+                var file = _manager.GetCarServiceFile(carServiceId, fileId);
+                using (var stream = new FileStream(file.Path, FileMode.Open))
                 using (var streamContent = new StreamContent(stream))
                 {
                     var result = new HttpResponseMessage(HttpStatusCode.OK)
@@ -28,12 +45,16 @@ namespace WebApi.Controllers
                     };
                     result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
                     {
-                        FileName = "test.png"
+                        FileName = file.Name
                     };
                     result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 
                     return result;
                 }
+            }
+            catch (BusinessFaultException)
+            {
+                return new HttpResponseMessage(HttpStatusCode.NotFound);
             }
             catch (FileNotFoundException)
             {
