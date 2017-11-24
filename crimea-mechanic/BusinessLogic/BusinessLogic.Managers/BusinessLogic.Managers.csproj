@@ -92,9 +92,13 @@
     <Compile Include="BaseManagerWithPagination.cs" />
     <Compile Include="BusinessLogicInstaller.cs" />
     <Compile Include="CarManager.cs" />
+    <Compile Include="CarServiceManager.cs" />
+    <Compile Include="CarServiceReviewManager.cs" />
     <Compile Include="MapProfiles\ApplicationProfile.cs" />
     <Compile Include="MapProfiles\CarMarkProfile.cs" />
     <Compile Include="MapProfiles\CarModelProfile.cs" />
+    <Compile Include="MapProfiles\CarServiceProfile.cs" />
+    <Compile Include="MapProfiles\CarServiceReviewProfile.cs" />
     <Compile Include="MapProfiles\CityProfile.cs" />
     <Compile Include="MapProfiles\RegistrationProfile.cs" />
     <Compile Include="MapProfiles\UserCarProfile.cs" />

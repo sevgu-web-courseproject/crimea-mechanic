@@ -75,6 +75,11 @@ namespace DataAccessLayer.Models
         public virtual ICollection<ApplicationOffer> Offers { get; set; }
 
         /// <summary>
+        /// Отзывы
+        /// </summary>
+        public virtual ICollection<CarServiceReview> Reviews { get; set; }
+
+        /// <summary>
         /// Текстовое поле "Об автосервисе"
         /// </summary>
         public string About { get; set; }
@@ -93,5 +98,10 @@ namespace DataAccessLayer.Models
         /// Состояние автосервиса
         /// </summary>
         public CarServiceState State { get; set; }
+
+        /// <summary>
+        /// Набранные очки рейтинга
+        /// </summary>
+        public long Points { get; set; }
     }
 }

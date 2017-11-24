@@ -61,6 +61,7 @@
     <Compile Include="CarService.cs" />
     <Compile Include="CarServiceFile.cs" />
     <Compile Include="CarServicePhone.cs" />
+    <Compile Include="CarServiceReview.cs" />
     <Compile Include="City.cs" />
     <Compile Include="ApplicationOffer.cs" />
     <Compile Include="UserCar.cs" />

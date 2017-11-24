@@ -57,6 +57,11 @@
     <Compile Include="Application\OfferInfoDto.cs" />
     <Compile Include="CarMarkDto.cs" />
     <Compile Include="CarModelDto.cs" />
+    <Compile Include="CarService\CarServiceFilter.cs" />
+    <Compile Include="CarService\CarServiceInfoDto.cs" />
+    <Compile Include="CarService\CarServiceRegistrationsFilter.cs" />
+    <Compile Include="CarService\CarServiceShortInfoDto.cs" />
+    <Compile Include="CarService\EditCarServiceDto.cs" />
     <Compile Include="Car\AddOrEditUserCarDto.cs" />
     <Compile Include="Car\FilterUserCar.cs" />
     <Compile Include="Car\UserCarDto.cs" />
@@ -64,6 +69,10 @@
     <Compile Include="CollectionResult.cs" />
     <Compile Include="FileDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Review\AddReviewDto.cs" />
+    <Compile Include="Review\EditReviewDto.cs" />
+    <Compile Include="Review\OperateReviewDto.cs" />
+    <Compile Include="Review\ReviewInfoDto.cs" />
     <Compile Include="User\RegistrationDto.cs" />
     <Compile Include="User\RegistrationCarServiceDto.cs" />
     <Compile Include="User\RegistrationUserDto.cs" />

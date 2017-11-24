@@ -144,8 +144,29 @@
   <data name="CarMarkNotFound" xml:space="preserve">
     <value>Марка автомобиля не найдена</value>
   </data>
+  <data name="CarServiceDoesNotBelongToUser" xml:space="preserve">
+    <value>Автосервис не принадлежит пользователю</value>
+  </data>
+  <data name="CarServiceIncorrectState" xml:space="preserve">
+    <value>Состояние автосервиса не позволяет выполнить данное действие</value>
+  </data>
+  <data name="CarServiceNotFound" xml:space="preserve">
+    <value>Автосервис не найден</value>
+  </data>
+  <data name="ReviewAlreadyContains" xml:space="preserve">
+    <value>Для данного автосервиса отзыв уже был отправлен</value>
+  </data>
+  <data name="ReviewDoesNotBelongToUser" xml:space="preserve">
+    <value>Отзыв не принадлежит польвателю</value>
+  </data>
+  <data name="ReviewNotFound" xml:space="preserve">
+    <value>Отзыв не найден</value>
+  </data>
+  <data name="UserCarCanNotBeRemove" xml:space="preserve">
+    <value>Машина не может быть удалёна пока не буду удалены либо завершены все заявки</value>
+  </data>
   <data name="UserCarNotFound" xml:space="preserve">
-    <value>Машина пользвателя не найдена</value>
+    <value>Машина пользователя не найдена</value>
   </data>
   <data name="UserHasDifferentRole" xml:space="preserve">
     <value>Невозможно выполнить данное действие, пользователь находится в другой роли</value>

@@ -250,6 +250,24 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отзыв не задан.
+        /// </summary>
+        public static string ReviewContentIsEmpty {
+            get {
+                return ResourceManager.GetString("ReviewContentIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Оценка не задана.
+        /// </summary>
+        public static string ReviewMarkIsEmpty {
+            get {
+                return ResourceManager.GetString("ReviewMarkIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Машина пользователя не найдена.
         /// </summary>
         public static string UserCarNotFound {

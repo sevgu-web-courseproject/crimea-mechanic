@@ -1,5 +1,7 @@
 ﻿using BusinessLogic.Objects.Application;
 using BusinessLogic.Objects.Car;
+using BusinessLogic.Objects.CarService;
+using BusinessLogic.Objects.Review;
 using BusinessLogic.Objects.User;
 using Common.Validation;
 
@@ -13,5 +15,7 @@ namespace BusinessLogic.Managers.Abstraction
         ValidationResult ValidateCreateApplicationDto(CreateApplicationDto dto);
         ValidationResult ValidateEditApplicationDto(EditApplicationDto dto);
         ValidationResult ValidateAddOfferDto(AddOfferDto dto);
+        ValidationResult ValidateEditCarServiceDto(EditCarServiceDto dto);
+        ValidationResult ValidateOperateReviewDto(OperateReviewDto dto);
     }
 }

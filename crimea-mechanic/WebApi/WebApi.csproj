@@ -215,6 +215,8 @@
     <Compile Include="Controllers\ApiControllerBase.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\CarController.cs" />
+    <Compile Include="Controllers\CarServiceController.cs" />
+    <Compile Include="Controllers\CarServiceReviewController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StorageController.cs" />

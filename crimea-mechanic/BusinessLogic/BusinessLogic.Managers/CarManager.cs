@@ -5,6 +5,7 @@ using AutoMapper;
 using BusinessLogic.Managers.Abstraction;
 using BusinessLogic.Objects.Car;
 using BusinessLogic.Resources;
+using Common.Enums;
 using Common.Exceptions;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repositories.Abstraction;
@@ -107,6 +108,13 @@ namespace BusinessLogic.Managers
             var repository = UnitOfWork.Repository<IUserCarRepository>();
 
             var userCar = CheckAndGetUserCar(repository, userCarId, currentUserId);
+
+            if (userCar.Applications.Any(app => !app.IsDeleted &&
+                                                app.State == ApplicationState.InProcessing ||
+                                                app.State == ApplicationState.InSearch))
+            {
+                throw new BusinessFaultException(BusinessLogicExceptionResources.UserCarCanNotBeRemove);
+            }
 
             userCar.IsDeleted = true;
             userCar.Updated = DateTime.UtcNow;
