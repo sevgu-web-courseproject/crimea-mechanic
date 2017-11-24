@@ -1,5 +1,12 @@
-﻿@{
+﻿@using WebUI.App_LocalResources
+@{
     ViewBag.Title = "Home Page";
+}
+
+@section breadcrumbs {
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active">@GlobalResources.Home</li>
+    </ol>
 }
 
 <h1>HOME PAGE</h1>
