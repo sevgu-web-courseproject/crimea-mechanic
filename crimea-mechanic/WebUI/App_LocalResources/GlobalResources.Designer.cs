@@ -241,20 +241,20 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Илья Мжачев &amp; Федор Костюченко.
+        /// </summary>
+        public static string FooterText {
+            get {
+                return ResourceManager.GetString("FooterText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Главная.
         /// </summary>
         public static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Язык.
-        /// </summary>
-        public static string Language {
-            get {
-                return ResourceManager.GetString("Language", resourceCulture);
             }
         }
         

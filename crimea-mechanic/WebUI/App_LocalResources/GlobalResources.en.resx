@@ -177,11 +177,11 @@
   <data name="EnterPassword" xml:space="preserve">
     <value>Enter password</value>
   </data>
+  <data name="FooterText" xml:space="preserve">
+    <value>Ilya Mzhachev &amp; Fedor Kostyuchenko</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
-  </data>
-  <data name="Language" xml:space="preserve">
-    <value>Language</value>
   </data>
   <data name="Location" xml:space="preserve">
     <value>Location</value>
