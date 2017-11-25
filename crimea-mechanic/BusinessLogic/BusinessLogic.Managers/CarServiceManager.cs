@@ -77,6 +77,9 @@ namespace BusinessLogic.Managers
             infoDto.Phones = service.Phones
                 .Select(p => p.Number)
                 .ToList();
+            infoDto.AverageMark = service.Reviews.Count == 0
+                ? 0
+                : service.Points / service.Reviews.Count;
 
             return infoDto;
         }

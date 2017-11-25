@@ -70,7 +70,7 @@
         <!-- ko foreach: bestServices -->
         <div class="d-flex justify-content-center">
             <div class="card hovercard">
-                <img data-bind="attr: {src: $data.photoUrl}" />
+                <img class="" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + $data.Id + '/' + $data.LogoPhotoId }" />
                 <div class="info">
                     <div class="name">
                         <h5 data-bind="text: $data.Name"></h5>
@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <div class="bottom">
-                    <button class="btn btn-warning">@GlobalResources.View</button>
+                    <a class="btn btn-warning" data-bind="attr: {href: window.resource.urls.webUiCarServiceCardUrl + '/' + $data.Id}">@GlobalResources.View</a>
                 </div>
             </div>
         </div>
@@ -97,10 +97,10 @@
     <script>
         
         var viewModel = homePageVM;
-        ko.applyBindings(viewModel);
-
+        
         $(function() {
             viewModel.init();
+            ko.applyBindings(viewModel);
         });
 
     </script>

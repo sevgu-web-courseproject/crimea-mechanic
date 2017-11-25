@@ -10,23 +10,18 @@
         });
         ajaxHelper.postJson(url, objToSend)
             .then(function (data) {
-                data.Items.forEach(function (item) {
-                    item.photoUrl = getPhotoUrl(item.Id, item.LogoPhotoId);
-                });
                 bestServices(data.Items);
             }, function($xhr) {
-                console.log($xhr);
+                var text = ajaxHelper.extractErrors($xhr);
+                hotificationHelper.error("Ошибка", text);
             });
     };
 
-    var getPhotoUrl = function (serviceId, fileId) {
-        return window.resource.urls.webApiGetPhotoUrl
-            .replace("serviceId", serviceId)
-            .replace("fileId", fileId);
-    };
+    var getPhotoUrl = window.resource.urls.webApiGetPhotoUrl;
 
     return {
         init: init,
-        bestServices: bestServices
+        bestServices: bestServices,
+        getPhotoUrl: getPhotoUrl
     };
 };

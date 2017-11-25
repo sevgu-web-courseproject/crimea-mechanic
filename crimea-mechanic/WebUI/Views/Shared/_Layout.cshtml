@@ -29,6 +29,7 @@
     }
     else
     {
+        <span class="user-name">@User.Identity.Name</span>
         <a class="btn btn-outline-success" href="@Url.Action("SignOut", "Account")">@GlobalResources.LogOut</a>
     }
 
