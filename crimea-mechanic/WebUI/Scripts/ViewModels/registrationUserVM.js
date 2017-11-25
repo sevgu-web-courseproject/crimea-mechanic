@@ -13,8 +13,9 @@
         ajaxHelper.postJsonWithoutResult(window.resource.urls.webApiRegistrationUserUrl, objectToSend)
             .then(function() {
                 window.location.href = window.resource.urls.webUiSignInPageUrl;
-            }, function($xhr) {
-                console.log($xhr);
+            }, function ($xhr) {
+                var text = ajaxHelper.extractErrors($xhr);
+                hotificationHelper.error("Ошибка", text);
             });
     };
 

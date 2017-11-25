@@ -11,27 +11,36 @@ namespace WebUI
                 "~/Content/bootstrap.css",
                 "~/Content/bootstrap-select.css",
                 "~/Content/font-awesome.css",
-                "~/Content/jquery.businessHours.css",
                 "~/Content/jquery.timepicker.min.css",
+                "~/Content/iziToast.min.css",
                 "~/Content/site.css"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/js").Include(
+            bundles.Add(new ScriptBundle("~/Scripts/jquery").Include(
                 "~/Scripts/jquery-3.2.1.js",
                 "~/Scripts/jquery.mask.min.js",
-                "~/Scripts/jquery.businessHours.min.js",
+                "~/Scripts/jquery.timepicker.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/js").Include(
                 "~/Scripts/popper.js",
-                "~/Scripts/bootstrap-select.js",
                 "~/Scripts/bootstrap.js",
-                "~/Scripts/jquery.timepicker.js",
-                "~/Scripts/knockout.js"));
+                "~/Scripts/bootstrap-select.js",
+                "~/Scripts/knockout.js",
+                "~/Scripts/knockout-mapping.js",
+                "~/Scripts/Helpers/ajaxHelper.js",
+                "~/Scripts/Helpers/notificationHelper.js",
+                "~/Scripts/iziToast.min.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/registrationUserVM").Include(
-                "~/Scripts/ViewModels/registrationUserVM.js",
-                "~/Scripts/Helpers/ajaxHelper.js"));
+                "~/Scripts/ViewModels/registrationUserVM.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/registrationCarServiceVM").Include(
-                "~/Scripts/ViewModels/registrationCarServiceVM.js",
-                "~/Scripts/Helpers/ajaxHelper.js"));
+                "~/Scripts/ViewModels/registrationCarServiceVM.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/homePage").Include(
+                "~/Scripts/ViewModels/homePageVM.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/carServiceCard").Include(
+                "~/Scripts/ViewModels/carServiceCardVM.js"));
         }
     }
 }

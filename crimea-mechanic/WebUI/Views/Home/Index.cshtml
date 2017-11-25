@@ -9,4 +9,99 @@
     </ol>
 }
 
-<h1>HOME PAGE</h1>
+<div class="jumbotron">
+    <div class="row justify-content-center">
+        <h3><label>@GlobalResources.Hello!</label></h3>
+    </div>
+    <div class="row justify-content-center">
+        <h5><label>@GlobalResources.HomeIntroducing</label></h5>
+    </div>
+
+    <div class="row justify-content-center">
+        <h5><label>@GlobalResources.HomeHowItsWork:</label></h5>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col align-self-center">
+            @GlobalResources.HomeStep1
+        </div>
+
+        <div class="col-1 align-self-center">
+            <i class="fa fa-arrow-circle-right fa-4x"></i>
+        </div>
+
+        <div class="col align-self-center">
+            @GlobalResources.HomeStep2
+        </div>
+
+        <div class="col-1 align-self-center">
+            <i class="fa fa-arrow-circle-right fa-4x"></i>
+        </div>
+
+        <div class="col align-self-center">
+            @GlobalResources.HomeStep3
+        </div>
+
+        <div class="col-1 align-self-center">
+            <i class="fa fa-arrow-circle-right fa-4x"></i>
+        </div>
+
+        <div class="col-2 align-self-center">
+            @GlobalResources.HomeStep4.
+        </div>
+
+        <div class="col-1 align-self-center">
+            <i class="fa fa-arrow-circle-right fa-4x"></i>
+        </div>
+
+        <div class="col align-self-center">
+            @GlobalResources.HomeStep5!
+        </div>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <div class="row justify-content-center">
+        <h4>
+            <label>@GlobalResources.BestServices:</label>
+        </h4>
+    </div>
+    <div class="card-columns">
+        <!-- ko foreach: bestServices -->
+        <div class="d-flex justify-content-center">
+            <div class="card hovercard">
+                <img class="" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + $data.Id + '/' + $data.LogoPhotoId }" />
+                <div class="info">
+                    <div class="name">
+                        <h5 data-bind="text: $data.Name"></h5>
+                    </div>
+                    <div class="desc" data-bind="text: $data.CityName"></div>
+                    <div class="desc" data-bind="text: $data.Address"></div>
+                    <div class="desc">
+                        <!-- ko foreach: new Array($data.AverageMark)-->
+                        <i class="fa fa-star"></i>
+                        <!-- /ko -->
+                    </div>
+                </div>
+                <div class="bottom">
+                    <a class="btn btn-warning" data-bind="attr: {href: window.resource.urls.webUiCarServiceCardUrl + '/' + $data.Id}">@GlobalResources.View</a>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/homePage")
+    <script>
+        
+        var viewModel = homePageVM;
+        
+        $(function() {
+            viewModel.init();
+            ko.applyBindings(viewModel);
+        });
+
+    </script>
+}

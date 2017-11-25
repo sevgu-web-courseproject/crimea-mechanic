@@ -42,7 +42,8 @@
             .then(function() {
                 window.location.href = window.resource.urls.webUiSignInPageUrl;
             }, function($xhr) {
-                console.log($xhr);
+                var text = ajaxHelper.extractErrors($xhr);
+                hotificationHelper.error("Ошибка", text);
             });
     };
 
@@ -65,6 +66,7 @@
                 model.Cities(results[0]);
             }, function (errors) {
                 console.log(errors);
+                notificationHelper.error("Ошибка", text);
             });
     };
 

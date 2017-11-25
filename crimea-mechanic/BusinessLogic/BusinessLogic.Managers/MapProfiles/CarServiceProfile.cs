@@ -13,7 +13,7 @@ namespace BusinessLogic.Managers.MapProfiles
             CreateMap<CarService, CarServiceShortInfoDto>()
                 .ForMember(d => d.CityName, opt => opt.MapFrom(s => s.City.Name))
                 .ForMember(d => d.LogoPhotoId, opt => opt.MapFrom(s => s.Files.FirstOrDefault(file => file.Type == FileType.Logo).Id))
-                .ForMember(d => d.AverageMark, opt => opt.MapFrom(s => s.Points / s.Reviews.Count));
+                .ForMember(d => d.AverageMark, opt => opt.Ignore());
 
             CreateMap<CarService, CarServiceInfoDto>()
                 .IncludeBase<CarService, CarServiceShortInfoDto>()

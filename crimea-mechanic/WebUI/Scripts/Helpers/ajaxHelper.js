@@ -63,5 +63,38 @@
                     reject($xhr);
                 });
         });
+    },
+    extractErrors: function ($xhr) {
+        if ($xhr.readyState === 0) {
+            return "Не удалось выполнить запрос. Пожалуйста, повторите попытку.";
+        }
+        if ($xhr.status === 403) {
+            return "Недостаточно прав для выполнения операции";
+        }
+        var responceJson = $xhr.responseJSON;
+        var err = '';
+        if (responceJson) {
+            if (responceJson.ModelState === null || responceJson.ModelState === undefined) {
+                if (responceJson.ExceptionMessage) {
+                    err = responceJson.ExceptionMessage;
+                } else {
+                    err = responceJson.Message;
+                }
+            } else {
+                for (var key in responceJson.ModelState) {
+                    if (responceJson.ModelState.hasOwnProperty(key)) {
+                        if (key !== '') {
+                            err += key + ' : ';
+                        }
+                        err += responceJson.ModelState[key] + '<br>';
+                    }
+                }
+            }
+        } else if ($xhr.message) {
+            err = $xhr.message;
+        } else {
+            err = $xhr;
+        }
+        return err;
     }
 };

@@ -94,6 +94,7 @@
     <Compile Include="CarManager.cs" />
     <Compile Include="CarServiceManager.cs" />
     <Compile Include="CarServiceReviewManager.cs" />
+    <Compile Include="FileManager.cs" />
     <Compile Include="MapProfiles\ApplicationProfile.cs" />
     <Compile Include="MapProfiles\CarMarkProfile.cs" />
     <Compile Include="MapProfiles\CarModelProfile.cs" />

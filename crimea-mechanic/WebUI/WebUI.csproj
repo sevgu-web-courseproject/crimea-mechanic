@@ -205,6 +205,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CarServiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Exception\ApiException.cs" />
     <Compile Include="Global.asax.cs">
@@ -229,7 +230,8 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\Images\bg.jpg" />
     <Content Include="Content\Images\gear.svg" />
-    <Content Include="Content\jquery.businessHours.css" />
+    <Content Include="Content\iziToast.min.css" />
+    <Content Include="Content\jquery.fancybox.min.css" />
     <Content Include="Content\jquery.timepicker.min.css" />
     <Content Include="Content\site.css">
       <DependentUpon>site.less</DependentUpon>
@@ -249,12 +251,17 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\defaults-ru_RU.min.js" />
     <Content Include="Scripts\Helpers\ajaxHelper.js" />
+    <Content Include="Scripts\Helpers\notificationHelper.js" />
+    <Content Include="Scripts\iziToast.min.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
-    <Content Include="Scripts\jquery.businessHours.min.js" />
+    <Content Include="Scripts\jquery.fancybox.min.js" />
     <Content Include="Scripts\jquery.mask.min.js" />
     <Content Include="Scripts\jquery.timepicker.js" />
+    <Content Include="Scripts\knockout-mapping.js" />
     <Content Include="Scripts\knockout.js" />
     <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\ViewModels\carServiceCardVM.js" />
+    <Content Include="Scripts\ViewModels\homePageVM.js" />
     <Content Include="Scripts\ViewModels\registrationCarServiceVM.js" />
     <Content Include="Scripts\ViewModels\registrationUserVM.js" />
     <Content Include="Web.config" />
@@ -291,6 +298,7 @@
     <Content Include="Views\Account\RegistrationUser.cshtml" />
     <Content Include="Views\Account\RegistrationCarService.cshtml" />
     <Content Include="Views\Shared\_HeaderScript.cshtml" />
+    <Content Include="Views\CarService\Card.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.Constants\Common.Constants.csproj">

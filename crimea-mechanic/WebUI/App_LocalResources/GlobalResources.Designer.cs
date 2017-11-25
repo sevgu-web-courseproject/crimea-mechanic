@@ -79,6 +79,15 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Лучшие автосервисы.
+        /// </summary>
+        public static string BestServices {
+            get {
+                return ResourceManager.GetString("BestServices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Автосервис.
         /// </summary>
         public static string CarService {
@@ -250,11 +259,83 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Привет.
+        /// </summary>
+        public static string Hello {
+            get {
+                return ResourceManager.GetString("Hello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Главная.
         /// </summary>
         public static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Как это работает.
+        /// </summary>
+        public static string HomeHowItsWork {
+            get {
+                return ResourceManager.GetString("HomeHowItsWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Мы представляем Вам площадку для взаимодействия автовладельцев с автосервисами Crimean-Mechanic.
+        /// </summary>
+        public static string HomeIntroducing {
+            get {
+                return ResourceManager.GetString("HomeIntroducing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подаете заявку на ремонт.
+        /// </summary>
+        public static string HomeStep1 {
+            get {
+                return ResourceManager.GetString("HomeStep1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Заявка попадает в систему.
+        /// </summary>
+        public static string HomeStep2 {
+            get {
+                return ResourceManager.GetString("HomeStep2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Атосервисы отправляют предложения.
+        /// </summary>
+        public static string HomeStep3 {
+            get {
+                return ResourceManager.GetString("HomeStep3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выбираете предолжение и принимаете его.
+        /// </summary>
+        public static string HomeStep4 {
+            get {
+                return ResourceManager.GetString("HomeStep4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Успех.
+        /// </summary>
+        public static string HomeStep5 {
+            get {
+                return ResourceManager.GetString("HomeStep5", resourceCulture);
             }
         }
         
@@ -273,6 +354,15 @@ namespace WebUI.App_LocalResources {
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выйти.
+        /// </summary>
+        public static string LogOut {
+            get {
+                return ResourceManager.GetString("LogOut", resourceCulture);
             }
         }
         
@@ -363,6 +453,15 @@ namespace WebUI.App_LocalResources {
         public static string UserLogin {
             get {
                 return ResourceManager.GetString("UserLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Посмотреть.
+        /// </summary>
+        public static string View {
+            get {
+                return ResourceManager.GetString("View", resourceCulture);
             }
         }
     }

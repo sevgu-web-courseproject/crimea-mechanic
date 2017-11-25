@@ -1,4 +1,5 @@
 ﻿@using WebUI.App_LocalResources
+@model WebUI.Models.User.SignInModel
 
 @{
     ViewBag.Title = GlobalResources.Login;
@@ -25,9 +26,8 @@
                     <label class="sr-only" for="email">E-Mail</label>
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-at"></i></div>
-                        <input type="email" name="Login" class="form-control" id="email" placeholder="E-Mail" aria-describedby="email-error" required autofocus>
+                        <input type="email" name="Login" class="form-control" id="email" placeholder="example@example.com" required autofocus value="@Model.Login">
                     </div>
-                    <small id="email-error" class="form-text text-muted">Тест</small>
                 </div>
             </div>
         </div>
@@ -37,9 +37,8 @@
                     <label class="sr-only" for="password">@GlobalResources.Password</label>
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                        <input type="password" name="Password" class="form-control" id="password" placeholder="@GlobalResources.Password" aria-describedby="password-error" required>
+                        <input type="password" name="Password" class="form-control" id="password" placeholder="123456#a" required>
                     </div>
-                    <small id="password-error" class="form-text text-muted">Тест</small>
                 </div>
             </div>
         </div>
