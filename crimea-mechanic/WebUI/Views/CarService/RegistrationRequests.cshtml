@@ -14,36 +14,41 @@
     <h3>Заявки на регистрацию автосервисов</h3>
     <hr />
     <br />
+    
+    @Html.Partial("_Pagination")
 
-    <!-- ko if: requests() -->
-    <div class="row justify-content-center">
+    <!-- ko if: requests().length -->
+    <div class="justify-content-center">
         <!-- ko foreach: requests -->
-        <div class="card col-4 text-center">
+        <div class="row registration-request">
             <!-- ko if: $data.LogoPhotoId-->
-            <img class="car-service-logo" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + $data.Id + '/' + $data.LogoPhotoId }" />
+                <img data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + $data.Id + '/' + $data.LogoPhotoId }" />
             <!-- /ko -->
-            <div>
-                <h5 data-bind="text: $data.Name"></h5>
-            </div>
-            <div>
-                <span data-bind="text: $data.CityName"></span>
-            </div>
-            <div>
-                <span class="desc" data-bind="text: $data.Address"></span>
-            </div>
-            <div>
-                <!-- ko foreach: new Array($data.AverageMark)-->
-                <i class="fa fa-star"></i>
-                <!-- /ko -->
-            </div>
-            <div>
-                <a class="btn btn-warning" data-bind="attr: {href: window.resource.urls.webUiRegistrationRequestCardUrl + '/' + $data.Id}">@GlobalResources.View</a>
+            <div class="col">
+                <div class="row">
+                    <span>Название автосервиса:</span><span data-bind="text: $data.Name"></span>
+                </div>
+                <div class="row">
+                    <span>Город:</span><span data-bind="text: $data.CityName"></span>
+                </div>
+                <div class="row">
+                    <span>Адрес:</span><span data-bind="text: $data.Address"></span>
+                </div>
+                <div class="row">
+                    <span>Имя менеджера:</span><span data-bind="text: $data.ManagerName"></span>
+                </div>
+                <div class="row">
+                    <span>Дата регистрации:</span><span data-bind="text: $data.Created"></span>
+                </div>
+                <div class="row pull-right">
+                    <a class="btn btn-warning" data-bind="attr: {href: window.resource.urls.webUiRegistrationRequestCardUrl + '/' + $data.Id}">@GlobalResources.View</a>
+                </div>
             </div>
         </div>
         <!-- /ko -->
     </div>
     <!-- /ko -->
-    <!-- ko if: itemsCount() === 0 -->
+    <!-- ko if: !requests().length -->
     <div class="text-center">
         <h2>Записи не найдены</h2>
     </div>
@@ -56,6 +61,7 @@
         var viewModel = registrationRequestsVM;
         ko.applyBindings(viewModel);
         $(function () {
+            $(document).trigger("showLoadingPanel");
             viewModel.init();
         });
     </script>

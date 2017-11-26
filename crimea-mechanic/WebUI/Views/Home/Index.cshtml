@@ -99,12 +99,12 @@
 @section scripts {
     @Scripts.Render("~/Scripts/homePage")
     <script>
-        
         var viewModel = homePageVM;
+        ko.applyBindings(viewModel);
         
-        $(function() {
+        $(function () {
+            $(document).trigger("showLoadingPanel");
             viewModel.init();
-            ko.applyBindings(viewModel);
         });
 
     </script>

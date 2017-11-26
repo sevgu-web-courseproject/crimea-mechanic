@@ -1,0 +1,18 @@
+﻿<!-- ko if: itemsCount() !== 0 -->
+<ul class="pagination justify-content-end">
+    <!-- ko foreach: pages-->
+        <!-- ko if: $root.currentPage() === $data -->
+        <li class="page-item active">
+            <span class="page-link" data-bind="text: $data">
+                <span class="sr-only">(current)</span>
+            </span>
+        </li>
+        <!-- /ko -->
+        <!-- ko if: $root.currentPage() !== $data -->
+            <li class="page-item">
+                <button class="page-link" data-bind="text: $data, click: function() { $root.changePage($data) }"></button>
+            </li>
+        <!-- /ko -->
+    <!-- /ko -->
+</ul>
+<!-- /ko -->

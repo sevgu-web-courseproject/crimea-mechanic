@@ -9,11 +9,13 @@
     };
 
     var submit = function () {
+        $(document).trigger("showLoadingPanel");
         var objectToSend = ko.toJSON(model);
         ajaxHelper.postJsonWithoutResult(window.resource.urls.webApiRegistrationUserUrl, objectToSend)
             .then(function() {
                 window.location.href = window.resource.urls.webUiSignInPageUrl;
             }, function ($xhr) {
+                $(document).trigger("hideLoadingPanel");
                 var text = ajaxHelper.extractErrors($xhr);
                 hotificationHelper.error("Ошибка", text);
             });

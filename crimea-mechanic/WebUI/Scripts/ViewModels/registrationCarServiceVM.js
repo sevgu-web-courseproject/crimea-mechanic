@@ -17,6 +17,7 @@
     };
 
     var submit = function () {
+        $(document).trigger("showLoadingPanel");
         var formData = new FormData();
         formData.append("Login", model.Login());
         formData.append("Password", model.Password());
@@ -41,7 +42,8 @@
         ajaxHelper.postFormData(window.resource.urls.webApiRegistrationCarServiceUrl, formData)
             .then(function() {
                 window.location.href = window.resource.urls.webUiSignInPageUrl;
-            }, function($xhr) {
+            }, function ($xhr) {
+                $(document).trigger("hideLoadingPanel");
                 var text = ajaxHelper.extractErrors($xhr);
                 hotificationHelper.error("Ошибка", text);
             });

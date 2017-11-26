@@ -202,7 +202,8 @@
     @Scripts.Render("~/Scripts/carServiceCard")
     <script>
         var viewModel = carServiceCardVM;
-        $(document).ready(function(){
+        $(document).ready(function () {
+            $(document).trigger("showLoadingPanel");
             viewModel.model.Id(@ViewBag.Id);
             viewModel.init();
             ko.applyBindings(viewModel);

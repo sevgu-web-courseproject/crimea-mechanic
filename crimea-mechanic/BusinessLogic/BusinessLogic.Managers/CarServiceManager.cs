@@ -84,7 +84,7 @@ namespace BusinessLogic.Managers
             return infoDto;
         }
 
-        public CarServiceInfoDto GetRegistrationRequest(long carServiceId, string currentUserId)
+        public RegistrationRequestInfoDto GetRegistrationRequest(long carServiceId, string currentUserId)
         {
             UserManager.IsUserInAdministrationRole(currentUserId);
 
@@ -95,13 +95,7 @@ namespace BusinessLogic.Managers
                 throw new BusinessFaultException(BusinessLogicExceptionResources.CarServiceIncorrectState);
             }
 
-            var infoDto = Mapper.Map<CarServiceInfoDto>(service);
-            infoDto.PhotosId = service.Files
-                .Where(file => file.Type == FileType.Photo)
-                .Select(file => file.Id)
-                .ToList();
-
-            return infoDto;
+            return Mapper.Map<RegistrationRequestInfoDto>(service);
         }
 
         public CollectionResult<CarServiceShortInfoDto> GetInfos(CarServiceFilter filter)
@@ -136,7 +130,7 @@ namespace BusinessLogic.Managers
             };
         }
 
-        public CollectionResult<CarServiceShortInfoDto> GetRegistrationRequests(CarServiceRegistrationsFilter filter, string currentUserId)
+        public CollectionResult<RegistrationRequestShortInfoDto> GetRegistrationRequests(CarServiceRegistrationsFilter filter, string currentUserId)
         {
             UserManager.IsUserInAdministrationRole(currentUserId);
 
@@ -151,9 +145,10 @@ namespace BusinessLogic.Managers
 
             var infos = Paginate(filter.CurrentPage, filter.ItemsPerPage, BuildQueryForRegistrationRequests(filter), out var itemsCount)
                 .ToList()
-                .Select(Mapper.Map<CarServiceShortInfoDto>);
+                .Select(Mapper.Map<RegistrationRequestShortInfoDto>)
+                .ToList();
 
-            return new CollectionResult<CarServiceShortInfoDto>
+            return new CollectionResult<RegistrationRequestShortInfoDto>
             {
                 CurrentPage = filter.CurrentPage,
                 Items = infos,

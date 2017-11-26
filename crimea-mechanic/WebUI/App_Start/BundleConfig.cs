@@ -21,14 +21,21 @@ namespace WebUI
                 "~/Scripts/jquery.timepicker.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/js").Include(
+                "~/Scripts/common-onready.js",
                 "~/Scripts/popper.js",
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/bootstrap-select.js",
+                "~/Scripts/iziToast.min.js",
+                "~/Scripts/moment.min.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/knockout").Include(
                 "~/Scripts/knockout.js",
-                "~/Scripts/knockout-mapping.js",
+                "~/Scripts/knockout-mapping.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/helpers").Include(
                 "~/Scripts/Helpers/ajaxHelper.js",
                 "~/Scripts/Helpers/notificationHelper.js",
-                "~/Scripts/iziToast.min.js"));
+                "~/Scripts/Helpers/timeHelper.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/registrationUserVM").Include(
                 "~/Scripts/ViewModels/registrationUserVM.js"));

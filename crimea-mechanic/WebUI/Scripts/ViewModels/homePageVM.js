@@ -11,7 +11,9 @@
         ajaxHelper.postJson(url, objToSend)
             .then(function (data) {
                 bestServices(data.Items);
-            }, function($xhr) {
+                $(document).trigger("hideLoadingPanel");
+            }, function ($xhr) {
+                $(document).trigger("hideLoadingPanel");
                 var text = ajaxHelper.extractErrors($xhr);
                 hotificationHelper.error("Ошибка", text);
             });
