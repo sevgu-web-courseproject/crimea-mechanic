@@ -24,9 +24,15 @@
             webApiGetCarServicesUrl: '@ConstantsUrls.WebApiGetCarServicesUrl',
             webApiGetPhotoUrl: '@ConstantsUrls.WebApiGetPhotoUrl',
             webApiGetCarServiceCardUrl: '@ConstantsUrls.WebApiGetGetCarServiceCard("carServiceId")',
+            webApiGetRegistrationRequestsUrl: '@ConstantsUrls.WebApiGetRegistrationRequestsUrl',
+            webApiGetRegistrationRequestsCardUrl: '@ConstantsUrls.WebApiGetRegistrationCardUrl("carServiceId")',
+            webApiGetApproveCarServiceUrl: '@ConstantsUrls.WebApiApproveCarServiceUrl("carServiceId")',
+            webApiGetRejectCarServiceUrl: '@ConstantsUrls.WebApiRejectCarServiceUrl("carServiceId")',
+            webApiGetBlockCarServiceUrl: '@ConstantsUrls.WebApiBlockCarServiceUrl("carServiceId")',
 
             webUiSignInPageUrl: '@Url.Action("SignIn", "Account")',
-            webUiCarServiceCardUrl: '@Url.Action("Card", "CarService")'
+            webUiCarServiceCardUrl: '@Url.Action("Card", "CarService")',
+            webUiRegistrationRequestCardUrl: '@Url.Action("RegistrationRequestCard", "CarService")'
         }
     }
 </script>

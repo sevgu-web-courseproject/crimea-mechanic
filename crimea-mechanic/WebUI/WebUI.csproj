@@ -263,6 +263,8 @@
     <Content Include="Scripts\ViewModels\carServiceCardVM.js" />
     <Content Include="Scripts\ViewModels\homePageVM.js" />
     <Content Include="Scripts\ViewModels\registrationCarServiceVM.js" />
+    <Content Include="Scripts\ViewModels\registrationRequestCardVM.js" />
+    <Content Include="Scripts\ViewModels\registrationRequestsVM.js" />
     <Content Include="Scripts\ViewModels\registrationUserVM.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -299,6 +301,8 @@
     <Content Include="Views\Account\RegistrationCarService.cshtml" />
     <Content Include="Views\Shared\_HeaderScript.cshtml" />
     <Content Include="Views\CarService\Card.cshtml" />
+    <Content Include="Views\CarService\RegistrationRequests.cshtml" />
+    <Content Include="Views\CarService\RegistrationRequestCard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.Constants\Common.Constants.csproj">

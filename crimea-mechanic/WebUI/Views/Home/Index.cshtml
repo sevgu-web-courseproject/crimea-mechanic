@@ -66,28 +66,32 @@
             <label>@GlobalResources.BestServices:</label>
         </h4>
     </div>
-    <div class="card-columns">
+    <div class="row justify-content-center">
         <!-- ko foreach: bestServices -->
-        <div class="d-flex justify-content-center">
-            <div class="card hovercard">
-                <img class="" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + $data.Id + '/' + $data.LogoPhotoId }" />
-                <div class="info">
-                    <div class="name">
-                        <h5 data-bind="text: $data.Name"></h5>
-                    </div>
-                    <div class="desc" data-bind="text: $data.CityName"></div>
-                    <div class="desc" data-bind="text: $data.Address"></div>
-                    <div class="desc">
-                        <!-- ko foreach: new Array($data.AverageMark)-->
-                        <i class="fa fa-star"></i>
-                        <!-- /ko -->
-                    </div>
+            <div class="card col-4">
+                <!-- ko if: $data.LogoPhotoId-->
+                <div class="row justify-content-center">
+                    <img class="car-service-photo" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + $data.Id + '/' + $data.LogoPhotoId }" />
                 </div>
-                <div class="bottom">
+                <!-- /ko -->
+                <div class="row justify-content-center">
+                    <h5 data-bind="text: $data.Name"></h5>
+                </div>
+                <div class="row justify-content-center">
+                    <span data-bind="text: $data.CityName"></span>
+                </div>
+                <div class="row justify-content-center">
+                    <span class="desc" data-bind="text: $data.Address"></span>
+                </div>
+                <div class="row justify-content-center">
+                    <!-- ko foreach: new Array($data.AverageMark)-->
+                    <i class="fa fa-star"></i>
+                    <!-- /ko -->
+                </div>
+                <div class="row justify-content-center">
                     <a class="btn btn-warning" data-bind="attr: {href: window.resource.urls.webUiCarServiceCardUrl + '/' + $data.Id}">@GlobalResources.View</a>
                 </div>
             </div>
-        </div>
         <!-- /ko -->
     </div>
 </div>

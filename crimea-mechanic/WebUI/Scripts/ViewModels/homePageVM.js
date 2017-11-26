@@ -17,11 +17,8 @@
             });
     };
 
-    var getPhotoUrl = window.resource.urls.webApiGetPhotoUrl;
-
     return {
         init: init,
-        bestServices: bestServices,
-        getPhotoUrl: getPhotoUrl
+        bestServices: bestServices
     };
 };

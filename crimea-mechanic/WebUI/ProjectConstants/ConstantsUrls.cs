@@ -16,5 +16,14 @@
 
         public static string WebApiGetGetCarServiceCard(string carServiceId) => Flurl.Url.Combine(WebApiUri, "api/CarService/GetCarServiceCard", carServiceId);
 
+        public static string WebApiGetRegistrationRequestsUrl => Flurl.Url.Combine(WebApiUri, "api/CarService/GetRegistrationRequests");
+
+        public static string WebApiGetRegistrationCardUrl(string carServiceId) => Flurl.Url.Combine(WebApiUri, "api/CarService/GetRegistrationCard", carServiceId);
+
+        public static string WebApiApproveCarServiceUrl(string carServiceId) => Flurl.Url.Combine(WebApiUri, "api/CarService/ApproveCarService", carServiceId);
+
+        public static string WebApiRejectCarServiceUrl(string carServiceId) => Flurl.Url.Combine(WebApiUri, "api/CarService/RejectCarService", carServiceId);
+
+        public static string WebApiBlockCarServiceUrl(string carServiceId) => Flurl.Url.Combine(WebApiUri, "api/CarService/BlockCarService", carServiceId);
     }
 }
