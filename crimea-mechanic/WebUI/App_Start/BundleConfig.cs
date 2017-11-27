@@ -17,7 +17,7 @@ namespace WebUI
 
             bundles.Add(new ScriptBundle("~/Scripts/jquery").Include(
                 "~/Scripts/jquery-3.2.1.js",
-                "~/Scripts/jquery.mask.min.js",
+                "~/Scripts/jquery.maskedinput.min.js",
                 "~/Scripts/jquery.timepicker.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/js").Include(
@@ -30,7 +30,8 @@ namespace WebUI
 
             bundles.Add(new ScriptBundle("~/Scripts/knockout").Include(
                 "~/Scripts/knockout.js",
-                "~/Scripts/knockout-mapping.js"));
+                "~/Scripts/knockout-mapping.js",
+                "~/Scripts/knockout.validation.min.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/helpers").Include(
                 "~/Scripts/Helpers/ajaxHelper.js",

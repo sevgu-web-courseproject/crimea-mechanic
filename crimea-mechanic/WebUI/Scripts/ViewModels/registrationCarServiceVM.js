@@ -1,22 +1,66 @@
 ﻿var registrationCarServiceVM = new function() {
     var model = {
-        Login: ko.observable(),
-        Password: ko.observable(),
-        PasswordСonfirmation: ko.observable(),
-        Name: ko.observable(),
-        ManagerName: ko.observable(),
-        CityId: ko.observable(),
+        Login: ko.observable().extend({
+            required: { params: true, message: window.resource.errors.loginIsEmpty },
+            email: { params: true, message: window.resource.errors.loginIsNotEmail }
+        }),
+        Password: ko.observable().extend({
+            required: { params: true, message: window.resource.errors.passwordIsEmpty }
+        }),
+        PasswordСonfirmation: ko.observable().extend({
+            required: { params: true, message: window.resource.errors.passwordIsEmpty }
+        }),
+        Name: ko.observable().extend({
+            required: { params: true, message: window.resource.errors.carServiceNameIsEmpty }
+        }),
+        ManagerName: ko.observable().extend({
+            required: { params: true, message: window.resource.errors.managerNameIsEmpty }
+        }),
+        CityId: ko.observable().extend({
+            required: { params: true, message: window.resource.errors.cityIsNotSelected }
+        }),
         Cities: ko.observableArray([]),
-        Address: ko.observable(),
-        Email: ko.observable(),
+        Address: ko.observable().extend({
+            required: { params: true, message: window.resource.errors.carServiceAddressEmpty }
+        }),
+        Email: ko.observable().extend({
+            required: { params: true, message: window.resource.errors.carServiceEmailIsEmpty }
+        }),
         PhoneNumber: ko.observable(),
-        Phones: ko.observableArray([]),
+        Phones: ko.observableArray([]).extend({
+            validation: {
+                validator: function (val, someOtherVal) {
+                    return val.length >= someOtherVal;
+                },
+                message: window.resource.errors.carServicePhonesIsEmpty,
+                params: 1
+            }
+        }),
         Site: ko.observable(),
         TimetableWorks: ko.observable(),
         About: ko.observable()
     };
 
+    var validationGroup = null;
+
     var submit = function () {
+
+        validationGroup = ko.validation.group([
+            model.Login,
+            model.Password,
+            model.PasswordСonfirmation,
+            model.Name,
+            model.ManagerName,
+            model.CityId,
+            model.Address,
+            model.Email,
+            model.Phones
+        ]);
+        if (validationGroup().length != 0) {
+            validationGroup.showAllMessages();
+            return;
+        }
+
         $(document).trigger("showLoadingPanel");
         var formData = new FormData();
         formData.append("Login", model.Login());
@@ -41,6 +85,7 @@
 
         ajaxHelper.postFormData(window.resource.urls.webApiRegistrationCarServiceUrl, formData)
             .then(function() {
+                localStorage.success = window.resource.texts.successCarServiceRegistration;
                 window.location.href = window.resource.urls.webUiSignInPageUrl;
             }, function ($xhr) {
                 $(document).trigger("hideLoadingPanel");
@@ -60,7 +105,17 @@
         model.Phones.remove(data);
     };
 
+    var clearForm = function () {
+        for (var key in self.model) {
+            self.model[key](null);
+        }
+        if (validationGroup) {
+            validationGroup.showAllMessages(false);
+        }
+    };
+
     var init = function () {
+        $('#phone-number').mask('+7(999) 999-99-99');
         var getCities = ajaxHelper.get(window.resource.urls.webApiGetCitiesUrl);
 
         Promise.all([getCities])
@@ -77,6 +132,7 @@
         submit: submit,
         init: init,
         addPhone: addPhone,
-        removePhone: removePhone
+        removePhone: removePhone,
+        clearForm: clearForm
     };
 };

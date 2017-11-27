@@ -13,39 +13,47 @@
 }
 
 <div class="jumbotron">
-    <h3>@GlobalResources.ClientRegistration</h3>
+    <h3 aria-describedby="help-block">@GlobalResources.ClientRegistration</h3>
+    <small id="help-block" class="form-text text-muted">
+        @GlobalResources.RequiredFields
+    </small>
     <hr/>
     <br/>
 
     <form>
         <div class="row justify-content-center">
             <div class="form-group col-5 ">
-                <label for="email">@GlobalResources.UserLogin</label>
-                <input type="email" class="form-control" id="email" placeholder="@GlobalResources.UserLogin" data-bind="value: model.Login"/>
+                <label for="email">@GlobalResources.UserLogin*</label>
+                <input type="email" class="form-control" id="email" placeholder="example@example.com" data-bind="value: model.Login" aria-describedby="email-error"/>
+                <small id="email-error" class="form-text validation-error-text" data-bind="validationMessage: model.Login"></small>
             </div>
 
             <div class="form-group col-5">
-                <label for="name">@GlobalResources.EnterName:</label>
-                <input type="text" class="form-control" id="name" placeholder="@GlobalResources.EnterName" data-bind="value: model.ContactName"/>
+                <label for="name">@GlobalResources.EnterName*</label>
+                <input type="text" class="form-control" id="name" placeholder="@GlobalResources.SampleName" data-bind="value: model.ContactName" aria-describedby="name-error"/>
+                <small id="name-error" class="form-text validation-error-text" data-bind="validationMessage: model.ContactName"></small>
             </div>
         </div>
 
         <div class="row justify-content-center">
             <div class="form-group col-5">
-                <label for="password">@GlobalResources.EnterPassword:</label>
-                <input type="password" class="form-control" id="password" placeholder="@GlobalResources.EnterPassword" data-bind="value: model.Password"/>
+                <label for="password">@GlobalResources.EnterPassword*</label>
+                <input type="password" class="form-control" id="password" placeholder="123456#a" data-bind="value: model.Password" aria-describedby="password-error"/>
+                <small id="password-error" class="form-text validation-error-text" data-bind="validationMessage: model.Password"></small>
             </div>
 
             <div class="form-group col-5">
-                <label for="password-confirmation">@GlobalResources.RepeatPassword:</label>
-                <input type="password" class="form-control" id="password-confirmation" placeholder="@GlobalResources.RepeatPassword" data-bind="value: model.PasswordСonfirmation"/>
+                <label for="password-confirmation">@GlobalResources.RepeatPassword*</label>
+                <input type="password" class="form-control" id="password-confirmation" placeholder="123456#a" data-bind="value: model.PasswordСonfirmation" aria-describedby="password-confirmation-error"/>
+                <small id="password-confirmation-error" class="form-text validation-error-text" data-bind="validationMessage: model.PasswordСonfirmation"></small>
             </div>
         </div>
 
         <div class="row justify-content-center">
             <div class="form-group col-5 ">
-                <label for="phone">@GlobalResources.PhoneNumber:</label>
-                <input type="text" class="form-control" id="phone" placeholder="@GlobalResources.PhoneNumber" data-bind="value: model.Phone"/>
+                <label for="phone">@GlobalResources.PhoneNumber*</label>
+                <input type="text" class="form-control" id="phone" placeholder="+7(999) 999-99-99" data-bind="value: model.Phone" aria-describedby="phone-error"/>
+                <small id="phone-error" class="form-text validation-error-text" data-bind="validationMessage: model.Phone"></small>
             </div>
         </div>
 
@@ -62,6 +70,12 @@
     @Scripts.Render("~/Scripts/registrationUserVM")
     <script>
         var viewModel = registrationUserVM;
+        ko.validation.init({
+            insertMessages: false,
+            decorateInputElement: true,
+            errorElementClass: "is-invalid"
+        }, true);
         ko.applyBindings(viewModel);
+        viewModel.init();
     </script>
 }

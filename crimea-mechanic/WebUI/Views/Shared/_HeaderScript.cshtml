@@ -1,4 +1,5 @@
 ﻿@using WebUI.ProjectConstants
+@using WebUI.App_LocalResources
 <script>
 
     @if (ViewData["Token"] != null)
@@ -25,14 +26,36 @@
             webApiGetPhotoUrl: '@ConstantsUrls.WebApiGetPhotoUrl',
             webApiGetCarServiceCardUrl: '@ConstantsUrls.WebApiGetGetCarServiceCard("carServiceId")',
             webApiGetRegistrationRequestsUrl: '@ConstantsUrls.WebApiGetRegistrationRequestsUrl',
-            webApiGetRegistrationRequestsCardUrl: '@ConstantsUrls.WebApiGetRegistrationCardUrl("carServiceId")',
-            webApiGetApproveCarServiceUrl: '@ConstantsUrls.WebApiApproveCarServiceUrl("carServiceId")',
-            webApiGetRejectCarServiceUrl: '@ConstantsUrls.WebApiRejectCarServiceUrl("carServiceId")',
-            webApiGetBlockCarServiceUrl: '@ConstantsUrls.WebApiBlockCarServiceUrl("carServiceId")',
+            webApiGetRegistrationCardUrl: '@ConstantsUrls.WebApiGetRegistrationCardUrl("carServiceId")',
+            webApiApproveCarServiceUrl: '@ConstantsUrls.WebApiApproveCarServiceUrl("carServiceId")',
+            webApiRejectCarServiceUrl: '@ConstantsUrls.WebApiRejectCarServiceUrl("carServiceId")',
+            webApiBlockCarServiceUrl: '@ConstantsUrls.WebApiBlockCarServiceUrl("carServiceId")',
 
             webUiSignInPageUrl: '@Url.Action("SignIn", "Account")',
             webUiCarServiceCardUrl: '@Url.Action("Card", "CarService")',
-            webUiRegistrationRequestCardUrl: '@Url.Action("RegistrationRequestCard", "CarService")'
+            webUiRegistrationRequestCardUrl: '@Url.Action("RegistrationRequestCard", "CarService")',
+            webUiRegistrationRequestsUrl: '@Url.Action("RegistrationRequests", "CarService")'
+        },
+
+        texts: {
+            success: '@GlobalResources.Success',
+            successUserRegistration: '@GlobalResources.SuccessUserRegistration',
+            error: '@GlobalResources.Error',
+            successCarServiceRegistration: '@GlobalResources.SuccessCarServiceRegistration'
+        },
+
+        errors: {
+            loginIsEmpty: '@GlobalResources.LoginIsEmpty',
+            loginIsNotEmail: '@GlobalResources.LoginIsNotEmail',
+            contactNameIsEmpty: '@GlobalResources.ContactNameIsEmpty',
+            passwordIsEmpty: '@GlobalResources.PasswordIsEmpty',
+            phoneNumberIsEmpty: '@GlobalResources.PhoneNumberIsEmpty',
+            carServiceNameIsEmpty: '@GlobalResources.CarServiceNameIsEmpty',
+            managerNameIsEmpty: '@GlobalResources.ManagerNameIsEmpty',
+            cityIsNotSelected: '@GlobalResources.CityIsNotSelected',
+            carServiceAddressEmpty: '@GlobalResources.CarServiceAddressEmpty',
+            carServiceEmailIsEmpty: '@GlobalResources.CarServiceEmailIsEmpty',
+            carServicePhonesIsEmpty: '@GlobalResources.CarServicePhonesIsEmpty',
         }
     }
 </script>

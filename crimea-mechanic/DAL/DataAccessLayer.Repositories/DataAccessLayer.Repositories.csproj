@@ -67,6 +67,7 @@
     <Compile Include="ApplicationUserRepository.cs" />
     <Compile Include="CarMarksRepository.cs" />
     <Compile Include="CarModelsRepository.cs" />
+    <Compile Include="CarServiceFileRepository.cs" />
     <Compile Include="CarServiceRepository.cs" />
     <Compile Include="CarServiceReviewRepository.cs" />
     <Compile Include="CityRepository.cs" />

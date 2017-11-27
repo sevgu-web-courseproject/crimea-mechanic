@@ -236,6 +236,8 @@ namespace BusinessLogic.Managers
         {
             var query = UnitOfWork.Repository<ICarServiceRepository>()
                 .GetAll(true)
+                .Include(q => q.City)
+                .Include(q => q.Files)
                 .Where(cr => cr.State == CarServiceState.UnderСonsideration)
                 .OrderByDescending(cr => cr.Created);
 

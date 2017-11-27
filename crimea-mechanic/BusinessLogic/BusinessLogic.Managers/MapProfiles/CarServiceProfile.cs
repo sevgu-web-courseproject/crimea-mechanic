@@ -26,7 +26,8 @@ namespace BusinessLogic.Managers.MapProfiles
 
             CreateMap<CarService, RegistrationRequestInfoDto>()
                 .IncludeBase<CarService, RegistrationRequestShortInfoDto>()
-                .ForMember(d => d.PhotosId, opt => opt.MapFrom(s => s.Files.Where(file => file.Type == FileType.Photo).Select(file => file.Id)));
+                .ForMember(d => d.PhotosId, opt => opt.MapFrom(s => s.Files.Where(file => file.Type == FileType.Photo).Select(file => file.Id)))
+                .ForMember(d => d.Phones, opt => opt.MapFrom(s => s.Phones.Where(p => !p.IsDeleted).Select(p => p.Number)));
         }
     }
 }

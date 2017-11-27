@@ -97,6 +97,24 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Необходимо указать адрес автосервиса.
+        /// </summary>
+        public static string CarServiceAddressEmpty {
+            get {
+                return ResourceManager.GetString("CarServiceAddressEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Необходимо указать email автосервиса.
+        /// </summary>
+        public static string CarServiceEmailIsEmpty {
+            get {
+                return ResourceManager.GetString("CarServiceEmailIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Логотип автосервиса.
         /// </summary>
         public static string CarServiceLogo {
@@ -111,6 +129,24 @@ namespace WebUI.App_LocalResources {
         public static string CarServiceName {
             get {
                 return ResourceManager.GetString("CarServiceName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Необходимо указать название автосервиса.
+        /// </summary>
+        public static string CarServiceNameIsEmpty {
+            get {
+                return ResourceManager.GetString("CarServiceNameIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Необходимо указать мобильные номера автосервиса.
+        /// </summary>
+        public static string CarServicePhonesIsEmpty {
+            get {
+                return ResourceManager.GetString("CarServicePhonesIsEmpty", resourceCulture);
             }
         }
         
@@ -169,6 +205,15 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Необходимо выбрать город автосервиса.
+        /// </summary>
+        public static string CityIsNotSelected {
+            get {
+                return ResourceManager.GetString("CityIsNotSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Очистить форму.
         /// </summary>
         public static string ClearForm {
@@ -214,6 +259,15 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Необходимо заполнить контакное имя.
+        /// </summary>
+        public static string ContactNameIsEmpty {
+            get {
+                return ResourceManager.GetString("ContactNameIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Контактный номер телефона.
         /// </summary>
         public static string ContactPhoneNumber {
@@ -246,6 +300,15 @@ namespace WebUI.App_LocalResources {
         public static string EnterPassword {
             get {
                 return ResourceManager.GetString("EnterPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
             }
         }
         
@@ -313,7 +376,7 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Атосервисы отправляют предложения.
+        ///   Looks up a localized string similar to Автосервисы отправляют предложения.
         /// </summary>
         public static string HomeStep3 {
             get {
@@ -358,6 +421,24 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Необходимо заполнить логин пользователя.
+        /// </summary>
+        public static string LoginIsEmpty {
+            get {
+                return ResourceManager.GetString("LoginIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Логин должен быть e-mail адресом.
+        /// </summary>
+        public static string LoginIsNotEmail {
+            get {
+                return ResourceManager.GetString("LoginIsNotEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выйти.
         /// </summary>
         public static string LogOut {
@@ -372,6 +453,15 @@ namespace WebUI.App_LocalResources {
         public static string ManagerName {
             get {
                 return ResourceManager.GetString("ManagerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Необходимо указать имя менеджера автосервиса.
+        /// </summary>
+        public static string ManagerNameIsEmpty {
+            get {
+                return ResourceManager.GetString("ManagerNameIsEmpty", resourceCulture);
             }
         }
         
@@ -394,11 +484,29 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Необходимо заполнить пароль.
+        /// </summary>
+        public static string PasswordIsEmpty {
+            get {
+                return ResourceManager.GetString("PasswordIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Номер телефона.
         /// </summary>
         public static string PhoneNumber {
             get {
                 return ResourceManager.GetString("PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Необходимо заполнить телефонный номер.
+        /// </summary>
+        public static string PhoneNumberIsEmpty {
+            get {
+                return ResourceManager.GetString("PhoneNumberIsEmpty", resourceCulture);
             }
         }
         
@@ -444,6 +552,60 @@ namespace WebUI.App_LocalResources {
         public static string RepeatPassword {
             get {
                 return ResourceManager.GetString("RepeatPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Поля помеченные символом * - обязательны к заполнению.
+        /// </summary>
+        public static string RequiredFields {
+            get {
+                return ResourceManager.GetString("RequiredFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to улица Ивановича 12.
+        /// </summary>
+        public static string SampleAddress {
+            get {
+                return ResourceManager.GetString("SampleAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Иванов Иван.
+        /// </summary>
+        public static string SampleName {
+            get {
+                return ResourceManager.GetString("SampleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Успех.
+        /// </summary>
+        public static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Заявка на регистрацию автосервиса успешно подана.
+        /// </summary>
+        public static string SuccessCarServiceRegistration {
+            get {
+                return ResourceManager.GetString("SuccessCarServiceRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пользователь успешно прошел регистрацию.
+        /// </summary>
+        public static string SuccessUserRegistration {
+            get {
+                return ResourceManager.GetString("SuccessUserRegistration", resourceCulture);
             }
         }
         

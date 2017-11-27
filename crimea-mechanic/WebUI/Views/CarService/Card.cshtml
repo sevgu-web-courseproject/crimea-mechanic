@@ -25,8 +25,8 @@
 
     <div class="row">
         <!-- ko if: model.Id() && model.LogoPhotoId() -->
-        <div class="col-3 text-center">
-            <img class="car-service-logo" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + model.Id() + '/' + model.LogoPhotoId() }">
+        <div>
+            <img class="car-service-logo" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + model.LogoPhotoId() }">
         </div>
         <!-- /ko -->
         <div class="col-9">
@@ -79,7 +79,7 @@
         <div class='list-group gallery'>
             <div class='col-3'>
                 <div class="thumbnail">
-                    <img class="img-responsive car-service-photo" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + $root.model.Id() + '/' + $data}" />
+                    <img class="img-responsive car-service-photo" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + $data}" />
                     <div class='text-right'>
                     </div>
                 </div>

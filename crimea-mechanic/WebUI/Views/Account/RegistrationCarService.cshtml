@@ -13,26 +13,32 @@
 }
 
 <div class="jumbotron">
-    <h3>@GlobalResources.CarServiceRegistration</h3>
+    <h3 aria-describedby="help-block">@GlobalResources.CarServiceRegistration</h3>
+    <small id="help-block" class="form-text text-muted">
+        @GlobalResources.RequiredFields
+    </small>
     <hr/>
     <br/>
 
     <form>
         <div class="row">
             <div class="col">
-                <label for="email">@GlobalResources.UserLogin</label>
-                <input type="email" class="form-control" id="email" placeholder="@GlobalResources.UserLogin (e-mail)" data-bind="value: model.Login">
+                <label for="email">@GlobalResources.UserLogin*</label>
+                <input type="email" class="form-control" id="email" placeholder="example@example.com" data-bind="value: model.Login" aria-describedby="email-error">
+                <small id="email-error" class="form-text validation-error-text" data-bind="validationMessage: model.Login"></small>
             </div>
         </div>
 
         <div class="row">
             <div class="col">
-                <label for="password">@GlobalResources.Password</label>
-                <input type="password" class="form-control" id="password" placeholder="@GlobalResources.Password" data-bind="value: model.Password">
+                <label for="password">@GlobalResources.Password*</label>
+                <input type="password" class="form-control" id="password" placeholder="123456#a" data-bind="value: model.Password" aria-describedby="password-error">
+                <small id="password-error" class="form-text validation-error-text" data-bind="validationMessage: model.Password"></small>
             </div>
             <div class="col">
-                <label for="password-confirmation">@GlobalResources.RepeatPassword</label>
-                <input type="password" class="form-control" id="password-confirmation" placeholder="@GlobalResources.RepeatPassword" data-bind="value: model.PasswordСonfirmation">
+                <label for="password-confirmation">@GlobalResources.RepeatPassword*</label>
+                <input type="password" class="form-control" id="password-confirmation" placeholder="123456#a" data-bind="value: model.PasswordСonfirmation" aria-describedby="password-confirmation-error">
+                <small id="password-confirmation-error" class="form-text validation-error-text" data-bind="validationMessage: model.PasswordСonfirmation"></small>
             </div>
         </div>
 
@@ -42,13 +48,15 @@
 
         <div class="row">
             <div class="col">
-                <label for="city">@GlobalResources.City</label>
-                <select class="form-control" id="city" data-bind="options: model.Cities, optionsText: 'Name', optionsValue: 'Id', value: model.CityId, optionsCaption: '@GlobalResources.ChooseCity'"></select>
+                <label for="city">@GlobalResources.City*</label>
+                <select class="form-control" id="city" data-bind="options: model.Cities, optionsText: 'Name', optionsValue: 'Id', value: model.CityId, optionsCaption: '@GlobalResources.ChooseCity'" aria-describedby="city-error"></select>
+                <small id="city-error" class="form-text validation-error-text" data-bind="validationMessage: model.CityId"></small>
             </div>
 
             <div class="col">
-                <label for="address">@GlobalResources.AddressCarService</label>
-                <input type="text" class="form-control" id="address" placeholder="@GlobalResources.AddressCarService" data-bind="value: model.Address">
+                <label for="address">@GlobalResources.AddressCarService*</label>
+                <input type="text" class="form-control" id="address" placeholder="@GlobalResources.SampleAddress" data-bind="value: model.Address" aria-describedby="address-error">
+                <small id="address-error" class="form-text validation-error-text" data-bind="validationMessage: model.Address"></small>
             </div>
         </div>
 
@@ -58,30 +66,34 @@
 
         <div class="row">
             <div class="col">
-                <label for="carservice-name">@GlobalResources.CarServiceName</label>
-                <input class="form-control" id="carservice-name" placeholder="@GlobalResources.CarServiceName" data-bind="value: model.Name">
+                <label for="carservice-name">@GlobalResources.CarServiceName*</label>
+                <input class="form-control" id="carservice-name" placeholder="@GlobalResources.CarServiceName" data-bind="value: model.Name" aria-describedby="carservice-name-error">
+                <small id="carservice-name-error" class="form-text validation-error-text" data-bind="validationMessage: model.Name"></small>
             </div>
 
             <div class="col">
-                <label for="contact-name">@GlobalResources.ManagerName</label>
-                <input class="form-control" id="contact-name" placeholder="@GlobalResources.ManagerName" data-bind="value: model.ManagerName">
+                <label for="contact-name">@GlobalResources.ManagerName*</label>
+                <input class="form-control" id="contact-name" placeholder="@GlobalResources.SampleName" data-bind="value: model.ManagerName" aria-describedby="contact-name-error">
+                <small id="contact-name-error" class="form-text validation-error-text" data-bind="validationMessage: model.ManagerName"></small>
             </div>
         </div>
 
         <div class="row">
             <div class="col">
-                <label for="contact-email">@GlobalResources.ContactEmailCarService</label>
-                <input type="email" class="form-control" id="contact-email" placeholder="@GlobalResources.ContactEmailCarService" data-bind="value: model.Email">
+                <label for="contact-email">@GlobalResources.ContactEmailCarService*</label>
+                <input type="email" class="form-control" id="contact-email" placeholder="example@example.com" data-bind="value: model.Email" aria-describedby="contact-email-error">
+                <small id="contact-email-error" class="form-text validation-error-text" data-bind="validationMessage: model.Email"></small>
             </div>
 
             <div class="col">
-                <label for="phone-number">@GlobalResources.ContactPhoneNumbers</label>
+                <label for="phone-number">@GlobalResources.ContactPhoneNumbers*</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="phone-number" placeholder="@GlobalResources.ContactPhoneNumber" data-bind="value: model.PhoneNumber">
+                    <input type="text" class="form-control" id="phone-number" placeholder="+7(999) 999-99-99" data-bind="value: model.PhoneNumber" aria-describedby="phone-number-error">
                     <div class="input-group-addon" data-bind="click: addPhone">
                         <i class="fa fa-plus"></i>
                     </div>
                 </div>
+                <small id="phone-number-error" class="form-text validation-error-text" data-bind="validationMessage: model.Phones"></small>
                 <!-- ko if: model.Phones() -->
                 <ul class="marks-none">
                     <!-- ko foreach: model.Phones -->
@@ -99,7 +111,8 @@
         <div class="row">
             <div class="col">
                 <label for="site-link">@GlobalResources.CarServiceSite</label>
-                <input type="text" class="form-control" id="site-link" placeholder="@GlobalResources.CarServiceSite" data-bind="value: model.Site">
+                <input type="text" class="form-control" id="site-link" placeholder="http://my-site.com" data-bind="value: model.Site" aria-describedby="site-error">
+                <small id="site-error" class="form-text validation-error-text" data-bind="validationMessage: model.Site"></small>
             </div>
         </div>
 
@@ -133,7 +146,7 @@
         <div class="row justify-content-center items-center">
             <div class="col">
                 <button class="btn btn-success" data-bind="click: submit">@GlobalResources.RegisterNow</button>
-                <button class="btn btn-danger inline">@GlobalResources.ClearForm</button>
+                <button class="btn btn-danger inline" data-bind="click: clearForm">@GlobalResources.ClearForm</button>
             </div>
         </div>
     </form>
@@ -144,8 +157,12 @@
     <script>
         
         var viewModel = registrationCarServiceVM;
+        ko.validation.init({
+            insertMessages: false,
+            decorateInputElement: true,
+            errorElementClass: "is-invalid"
+        }, true);
         ko.applyBindings(viewModel);
-
         $(function() {
             viewModel.init();
         });

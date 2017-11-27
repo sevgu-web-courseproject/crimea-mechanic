@@ -1,7 +1,7 @@
 ﻿@using WebUI.App_LocalResources
 
 @{
-    ViewBag.Title = "Карточка регистрации автосервиса";
+    ViewBag.Title = "Карточка заявки регистрации автосервиса";
 }
 
 @section breadcrumbs {
@@ -13,23 +13,23 @@
 }
 
 <div class="jumbotron">
-    <h3><span>Карточка регистрации автосервиса</span></h3>
-    <h4>
+    <h3><span>Карточка заявки регистрации автосервиса</span></h3>
+    <h4 class="inline">
         <span data-bind="text: model.Name"></span>
     </h4>
     <div class="pull-right">
-        <button class="btn" data-bind="click: approve, visible: model.IsApproveButtonVisible()">Потвердить</button>
-        <button class="btn" data-bind="click: reject, visible: model.IsRejectButtonVisible()">Отклонить</button>
+        <button class="btn btn-success" data-bind="click: approve, visible: model.IsApproveButtonVisible()">Потвердить</button>
+        <button class="btn btn-danger" data-bind="click: reject, visible: model.IsRejectButtonVisible()">Отклонить</button>
     </div>
     <hr />
 
     <div class="row">
         <!-- ko if: model.Id() && model.LogoPhotoId() -->
-        <div class="col-3 text-center">
-            <img class="car-service-logo" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + model.Id() + '/' + model.LogoPhotoId() }">
+        <div>
+            <img class="car-service-logo" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + model.LogoPhotoId() }">
         </div>
         <!-- /ko -->
-        <div class="col-9">
+        <div class="col">
             <div>
                 Город:
                 <span data-bind="text: model.CityName"></span>
@@ -69,10 +69,8 @@
     </div>
     <br />
 
-    <div class="section">
-        <h4>Описание автосервиса</h4>
-        <hr />
-    </div>
+    <h4>Описание автосервиса</h4>
+    <hr />
 
     <!-- ko if: model.PhotosId().length-->
     <div class="row justify-content-center">
@@ -80,7 +78,7 @@
         <div class='list-group gallery'>
             <div class='col-3'>
                 <div class="thumbnail">
-                    <img class="img-responsive car-service-photo" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + $root.model.Id() + '/' + $data}" />
+                    <img class="img-responsive car-service-photo" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + $data}" />
                     <div class='text-right'>
                     </div>
                 </div>
@@ -104,10 +102,11 @@
     @Scripts.Render("~/Scripts/registrationRequestCardVM")
     <script>
         var viewModel = registrationRequestCardVM;
-        ko.applyBindings(viewModel);
         $(function () {
-            viewModel.Id(@ViewBag.Id);
+            $(document).trigger("showLoadingPanel");
+            viewModel.model.Id(@ViewBag.Id);
             viewModel.init();
+            ko.applyBindings(viewModel);
         });
     </script>
 }

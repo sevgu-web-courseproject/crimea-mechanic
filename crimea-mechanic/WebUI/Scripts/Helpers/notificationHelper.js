@@ -5,5 +5,12 @@
             message: message,
             position: 'bottomRight'
         });
+    },
+    success: function(title, message) {
+        iziToast.success({
+            title: title,
+            message: message,
+            position: 'bottomRight'
+        });
     }
 };

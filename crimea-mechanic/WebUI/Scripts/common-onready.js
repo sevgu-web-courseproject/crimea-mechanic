@@ -20,4 +20,14 @@
             $("body").css("overflow", "auto");
         }, 500);
     });
+
+    if (localStorage.error) {
+        hotificationHelper.error(window.resource.texts.error, localStorage.error);
+        localStorage.removeItem("error");
+    }
+
+    if (localStorage.success) {
+        hotificationHelper.success(window.resource.texts.success, localStorage.success);
+        localStorage.removeItem("success");
+    }
 });

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DataAccessLayer.Models.Abstraction;
 
 namespace DataAccessLayer.Repositories.Abstraction
@@ -11,6 +12,8 @@ namespace DataAccessLayer.Repositories.Abstraction
         IQueryable<T> GetAll(bool noTracking);
 
         T Get(TPrimaryKey key);
+
+        Task<T> GetAsync(TPrimaryKey key);
 
         void Update(T entity);
 
