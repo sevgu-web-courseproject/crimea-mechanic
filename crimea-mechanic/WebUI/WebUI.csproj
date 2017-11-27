@@ -228,6 +228,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\Images\spinner.gif" />
     <Content Include="Content\Images\bg.jpg" />
     <Content Include="Content\Images\gear.svg" />
     <Content Include="Content\iziToast.min.css" />
@@ -249,20 +250,33 @@
     <Content Include="Scripts\bootstrap-select.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\common-onready.js" />
     <Content Include="Scripts\defaults-ru_RU.min.js" />
     <Content Include="Scripts\Helpers\ajaxHelper.js" />
     <Content Include="Scripts\Helpers\notificationHelper.js" />
+    <Content Include="Scripts\Helpers\timeHelper.js" />
     <Content Include="Scripts\iziToast.min.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery.fancybox.min.js" />
-    <Content Include="Scripts\jquery.mask.min.js" />
+    <Content Include="Scripts\jquery.maskedinput.js" />
+    <Content Include="Scripts\jquery.maskedinput.min.js" />
     <Content Include="Scripts\jquery.timepicker.js" />
+    <Content Include="Scripts\knockout-2.3.0.debug.js" />
+    <Content Include="Scripts\knockout-2.3.0.js" />
     <Content Include="Scripts\knockout-mapping.js" />
     <Content Include="Scripts\knockout.js" />
+    <Content Include="Scripts\knockout.validation.js" />
+    <Content Include="Scripts\knockout.validation.min.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\ViewModels\carServiceCardVM.js" />
     <Content Include="Scripts\ViewModels\homePageVM.js" />
     <Content Include="Scripts\ViewModels\registrationCarServiceVM.js" />
+    <Content Include="Scripts\ViewModels\registrationRequestCardVM.js" />
+    <Content Include="Scripts\ViewModels\registrationRequestsVM.js" />
     <Content Include="Scripts\ViewModels\registrationUserVM.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -299,6 +313,10 @@
     <Content Include="Views\Account\RegistrationCarService.cshtml" />
     <Content Include="Views\Shared\_HeaderScript.cshtml" />
     <Content Include="Views\CarService\Card.cshtml" />
+    <Content Include="Views\CarService\RegistrationRequests.cshtml" />
+    <Content Include="Views\CarService\RegistrationRequestCard.cshtml" />
+    <Content Include="Views\Shared\_Pagination.cshtml" />
+    <Content Include="Scripts\knockout.validation.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.Constants\Common.Constants.csproj">

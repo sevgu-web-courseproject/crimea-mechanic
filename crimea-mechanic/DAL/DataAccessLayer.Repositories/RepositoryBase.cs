@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using DataAccessLayer.Models.Abstraction;
 using DataAccessLayer.Repositories.Abstraction;
 
@@ -25,6 +26,11 @@ namespace DataAccessLayer.Repositories
         public virtual T Get(TPrimaryKey key)
         {
             return EntitySet.Find(key);
+        }
+
+        public virtual Task<T> GetAsync(TPrimaryKey key)
+        {
+            return EntitySet.FindAsync(key);
         }
 
         public virtual void Update(T entity)

@@ -18,7 +18,7 @@ namespace BusinessLogic.Managers.Abstraction
         /// <summary>
         /// Получить информацию об регистрации автосервиса
         /// </summary>
-        CarServiceInfoDto GetRegistrationRequest(long carServiceId, string currentUserId);
+        RegistrationRequestInfoDto GetRegistrationRequest(long carServiceId, string currentUserId);
 
         /// <summary>
         /// Получить список автосервисов
@@ -28,7 +28,7 @@ namespace BusinessLogic.Managers.Abstraction
         /// <summary>
         /// Получить список заявок на регистрацию
         /// </summary>
-        CollectionResult<CarServiceShortInfoDto> GetRegistrationRequests(CarServiceRegistrationsFilter filter, string currentUserId);
+        CollectionResult<RegistrationRequestShortInfoDto> GetRegistrationRequests(CarServiceRegistrationsFilter filter, string currentUserId);
 
         /// <summary>
         /// Подтвердить регистрацию автосервиса

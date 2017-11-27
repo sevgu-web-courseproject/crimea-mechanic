@@ -252,4 +252,58 @@
   <data name="View" xml:space="preserve">
     <value>View</value>
   </data>
+  <data name="ContactNameIsEmpty" xml:space="preserve">
+    <value>You must fill the contact name</value>
+  </data>
+  <data name="LoginIsEmpty" xml:space="preserve">
+    <value>You must fill the user`s login</value>
+  </data>
+  <data name="LoginIsNotEmail" xml:space="preserve">
+    <value>Login must be e-mail address</value>
+  </data>
+  <data name="PasswordIsEmpty" xml:space="preserve">
+    <value>You must fill the password</value>
+  </data>
+  <data name="PhoneNumberIsEmpty" xml:space="preserve">
+    <value>You must fill the phone number</value>
+  </data>
+  <data name="RequiredFields" xml:space="preserve">
+    <value>Fields marked with * are required</value>
+  </data>
+  <data name="SampleName" xml:space="preserve">
+    <value>John Cena</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="SuccessUserRegistration" xml:space="preserve">
+    <value>User successfully registered</value>
+  </data>
+  <data name="CarServiceAddressEmpty" xml:space="preserve">
+    <value>You must fill the address of car service</value>
+  </data>
+  <data name="CarServiceEmailIsEmpty" xml:space="preserve">
+    <value>You must fill the email of car service</value>
+  </data>
+  <data name="CarServiceNameIsEmpty" xml:space="preserve">
+    <value>You must fill the car service name</value>
+  </data>
+  <data name="CarServicePhonesIsEmpty" xml:space="preserve">
+    <value>You must fill car service phone numbers</value>
+  </data>
+  <data name="CityIsNotSelected" xml:space="preserve">
+    <value>Choose the car service city</value>
+  </data>
+  <data name="ManagerNameIsEmpty" xml:space="preserve">
+    <value>You must fill car service manager name</value>
+  </data>
+  <data name="SampleAddress" xml:space="preserve">
+    <value>Grove street 12</value>
+  </data>
+  <data name="SuccessCarServiceRegistration" xml:space="preserve">
+    <value>Application for car service registration successfully submitted</value>
+  </data>
 </root>

@@ -1,11 +1,11 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
 using BusinessLogic.Managers.Abstraction;
-using Common.Exceptions;
 
 namespace WebApi.Controllers
 {
@@ -30,12 +30,12 @@ namespace WebApi.Controllers
         #endregion
 
         [HttpGet]
-        [Route("{carServiceId:long}/{fileId:long}")]
-        public async Task<HttpResponseMessage> Get(long carServiceId, long fileId)
+        [Route("{fileId:long}")]
+        public async Task<HttpResponseMessage> Get(long fileId)
         {
             try
             {
-                var file = _manager.GetCarServiceFile(carServiceId, fileId);
+                var file = _manager.GetFile(fileId);
                 using (var stream = new FileStream(file.Path, FileMode.Open))
                 using (var streamContent = new StreamContent(stream))
                 {
@@ -52,11 +52,7 @@ namespace WebApi.Controllers
                     return result;
                 }
             }
-            catch (BusinessFaultException)
-            {
-                return new HttpResponseMessage(HttpStatusCode.NotFound);
-            }
-            catch (FileNotFoundException)
+            catch (Exception ex)
             {
                 return new HttpResponseMessage(HttpStatusCode.NotFound);
             }

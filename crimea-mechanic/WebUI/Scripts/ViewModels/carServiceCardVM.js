@@ -21,7 +21,9 @@
         ajaxHelper.get(url)
             .then(function (data) {
                 ko.mapping.fromJS(data, {}, model);
-            }, function($xhr) {
+                $(document).trigger("hideLoadingPanel");
+            }, function ($xhr) {
+                $(document).trigger("hideLoadingPanel");
                 var text = ajaxHelper.extractErrors($xhr);
                 hotificationHelper.error("Ошибка", text);
             });

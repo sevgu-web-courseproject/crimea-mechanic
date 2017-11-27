@@ -202,7 +202,7 @@
     <value>Заявка попадает в систему</value>
   </data>
   <data name="HomeStep3" xml:space="preserve">
-    <value>Атосервисы отправляют предложения</value>
+    <value>Автосервисы отправляют предложения</value>
   </data>
   <data name="HomeStep4" xml:space="preserve">
     <value>Выбираете предолжение и принимаете его</value>
@@ -251,5 +251,59 @@
   </data>
   <data name="View" xml:space="preserve">
     <value>Посмотреть</value>
+  </data>
+  <data name="ContactNameIsEmpty" xml:space="preserve">
+    <value>Необходимо заполнить контакное имя</value>
+  </data>
+  <data name="LoginIsEmpty" xml:space="preserve">
+    <value>Необходимо заполнить логин пользователя</value>
+  </data>
+  <data name="LoginIsNotEmail" xml:space="preserve">
+    <value>Логин должен быть e-mail адресом</value>
+  </data>
+  <data name="PasswordIsEmpty" xml:space="preserve">
+    <value>Необходимо заполнить пароль</value>
+  </data>
+  <data name="PhoneNumberIsEmpty" xml:space="preserve">
+    <value>Необходимо заполнить телефонный номер</value>
+  </data>
+  <data name="RequiredFields" xml:space="preserve">
+    <value>Поля помеченные символом * - обязательны к заполнению</value>
+  </data>
+  <data name="SampleName" xml:space="preserve">
+    <value>Иванов Иван</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Успех</value>
+  </data>
+  <data name="SuccessUserRegistration" xml:space="preserve">
+    <value>Пользователь успешно прошел регистрацию</value>
+  </data>
+  <data name="CarServiceAddressEmpty" xml:space="preserve">
+    <value>Необходимо указать адрес автосервиса</value>
+  </data>
+  <data name="CarServiceEmailIsEmpty" xml:space="preserve">
+    <value>Необходимо указать email автосервиса</value>
+  </data>
+  <data name="CarServiceNameIsEmpty" xml:space="preserve">
+    <value>Необходимо указать название автосервиса</value>
+  </data>
+  <data name="CarServicePhonesIsEmpty" xml:space="preserve">
+    <value>Необходимо указать мобильные номера автосервиса</value>
+  </data>
+  <data name="CityIsNotSelected" xml:space="preserve">
+    <value>Необходимо выбрать город автосервиса</value>
+  </data>
+  <data name="ManagerNameIsEmpty" xml:space="preserve">
+    <value>Необходимо указать имя менеджера автосервиса</value>
+  </data>
+  <data name="SampleAddress" xml:space="preserve">
+    <value>улица Ивановича 12</value>
+  </data>
+  <data name="SuccessCarServiceRegistration" xml:space="preserve">
+    <value>Заявка на регистрацию автосервиса успешно подана</value>
   </data>
 </root>

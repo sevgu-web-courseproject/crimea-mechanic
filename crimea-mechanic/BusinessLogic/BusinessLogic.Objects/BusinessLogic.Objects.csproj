@@ -62,6 +62,8 @@
     <Compile Include="CarService\CarServiceRegistrationsFilter.cs" />
     <Compile Include="CarService\CarServiceShortInfoDto.cs" />
     <Compile Include="CarService\EditCarServiceDto.cs" />
+    <Compile Include="CarService\RegistrationRequestInfoDto.cs" />
+    <Compile Include="CarService\RegistrationRequestShortInfoDto.cs" />
     <Compile Include="Car\AddOrEditUserCarDto.cs" />
     <Compile Include="Car\FilterUserCar.cs" />
     <Compile Include="Car\UserCarDto.cs" />

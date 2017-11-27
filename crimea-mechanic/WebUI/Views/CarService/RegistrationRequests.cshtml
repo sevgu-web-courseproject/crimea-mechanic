@@ -1,0 +1,68 @@
+﻿@using WebUI.App_LocalResources
+@{
+    ViewBag.Title = "Заявки на регистрацию";
+}
+
+@section breadcrumbs {
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">@GlobalResources.Home</a></li>
+        <li class="breadcrumb-item active">Заявки на регистрацию</li>
+    </ol>
+}
+
+<div class="jumbotron">
+    <h3>Заявки на регистрацию автосервисов</h3>
+    <hr />
+    <br />
+    
+    @Html.Partial("_Pagination")
+
+    <!-- ko if: requests().length -->
+    <div class="justify-content-center">
+        <!-- ko foreach: requests -->
+        <div class="row registration-request">
+            <!-- ko if: $data.LogoPhotoId-->
+                <img data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + $data.LogoPhotoId }" />
+            <!-- /ko -->
+            <div class="col">
+                <div class="row">
+                    <span>Название автосервиса:</span><span data-bind="text: $data.Name"></span>
+                </div>
+                <div class="row">
+                    <span>Город:</span><span data-bind="text: $data.CityName"></span>
+                </div>
+                <div class="row">
+                    <span>Адрес:</span><span data-bind="text: $data.Address"></span>
+                </div>
+                <div class="row">
+                    <span>Имя менеджера:</span><span data-bind="text: $data.ManagerName"></span>
+                </div>
+                <div class="row">
+                    <span>Дата регистрации:</span><span data-bind="text: $data.Created"></span>
+                </div>
+                <div class="row pull-right">
+                    <a class="btn btn-warning" data-bind="attr: {href: window.resource.urls.webUiRegistrationRequestCardUrl + '/' + $data.Id}">@GlobalResources.View</a>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+    <!-- ko if: !requests().length -->
+    <div class="text-center">
+        <h2>Записи не найдены</h2>
+    </div>
+    <!-- /ko -->
+</div>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/registrationRequestsVM")
+    <script>
+        var viewModel = registrationRequestsVM;
+        ko.applyBindings(viewModel);
+        $(function () {
+            $(document).trigger("showLoadingPanel");
+            viewModel.init();
+        });
+    </script>
+}

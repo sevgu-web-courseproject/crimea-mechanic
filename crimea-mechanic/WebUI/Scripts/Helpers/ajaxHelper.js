@@ -14,6 +14,20 @@
                 });
         });
     },
+    getWithoutResult: function(url) {
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                url: url,
+                type: "GET"
+            })
+                .done(function (data) {
+                    resolve(data);
+                })
+                .fail(function ($xhr) {
+                    reject($xhr);
+                });
+        });
+    },
     postJson: function(url, data) {
         return new Promise(function(resolve, reject) {
             $.ajax({

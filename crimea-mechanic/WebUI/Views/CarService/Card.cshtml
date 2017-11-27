@@ -24,9 +24,9 @@
     <hr />
 
     <div class="row">
-        <!-- ko if: model.Id() !== null && model.LogoPhotoId() !== null -->
-        <div class="col-3 text-center">
-            <img class="car-service-logo" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + model.Id() + '/' + model.LogoPhotoId() }">
+        <!-- ko if: model.Id() && model.LogoPhotoId() -->
+        <div>
+            <img class="car-service-logo" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + model.LogoPhotoId() }">
         </div>
         <!-- /ko -->
         <div class="col-9">
@@ -73,13 +73,13 @@
         <h4>Описание автосервиса</h4>
         <hr />
     </div>
-
+    <!-- ko if: model.PhotosId().length-->
     <div class="row justify-content-center">
         <!-- ko foreach: model.PhotosId-->
         <div class='list-group gallery'>
             <div class='col-3'>
                 <div class="thumbnail">
-                    <img class="img-responsive car-service-photo" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + $root.model.Id() + '/' + $data}" />
+                    <img class="img-responsive car-service-photo" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + $data}" />
                     <div class='text-right'>
                     </div>
                 </div>
@@ -87,6 +87,7 @@
         </div>
         <!-- /ko -->
     </div>
+    <!-- /ko -->
 
 
     <br/>
@@ -98,6 +99,7 @@
 
     <br/>
 
+    <!-- ko if: model.Reviews().length-->
     <div class="section">
         <h4>Отзывы пользователей</h4>
         <hr/>
@@ -122,8 +124,9 @@
                 </p>
             </div>
         </article>
-    <!-- /ko -->
+        <!-- /ko -->
     </section>
+    <!-- /ko -->
 </div>
 
 <div class="modal fade" id="myModal" role="dialog">
@@ -199,7 +202,8 @@
     @Scripts.Render("~/Scripts/carServiceCard")
     <script>
         var viewModel = carServiceCardVM;
-        $(document).ready(function(){
+        $(document).ready(function () {
+            $(document).trigger("showLoadingPanel");
             viewModel.model.Id(@ViewBag.Id);
             viewModel.init();
             ko.applyBindings(viewModel);
