@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
+﻿using System.Web.Http;
 using BusinessLogic.Managers.Abstraction;
 using BusinessLogic.Objects.Car;
 using Microsoft.AspNet.Identity;

@@ -25,5 +25,11 @@
         public static string WebApiRejectCarServiceUrl(string carServiceId) => Flurl.Url.Combine(WebApiUri, "api/CarService/RejectCarService", carServiceId);
 
         public static string WebApiBlockCarServiceUrl(string carServiceId) => Flurl.Url.Combine(WebApiUri, "api/CarService/BlockCarService", carServiceId);
+
+        public static string WebApiGetUserCarsUrl => Flurl.Url.Combine(WebApiUri, "api/Car/GetCars");
+
+        public static string WebApiGetMarksUrl => Flurl.Url.Combine(WebApiUri, "api/Storage/GetMarks");
+
+        public static string WebApiGetModelsUrl(string markId) => Flurl.Url.Combine(WebApiUri, "api/Storage/GetModels", markId);
     }
 }
