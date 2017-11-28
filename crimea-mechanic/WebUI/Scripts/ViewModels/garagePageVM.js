@@ -10,23 +10,40 @@
     var models = ko.observableArray([]);
 
     var fuelTypes = [
+    //TODO Перевести
         { Id: 10, Name: "Бензин" },
         { Id: 20, Name: "Дизель" },
         { Id: 30, Name: "Другой"}
     ];
 
     var newCar = {
-        Name: ko.observable(),
-        ModelId: ko.observable(),
-        Vin: ko.observable(),
-        Year: ko.observable(),
-        FuelType: ko.observable(),
-        EngineCapacity: ko.observable()
+        //TODO Перевести
+        Name: ko.observable().extend({
+            required: {params: true, message: 'Необходимо указать имя автомобиля'}
+        }),
+        ModelId: ko.observable().extend({
+            required: { params: true, message: 'Необходимо указать модель автомобиля' }
+        }),
+        Vin: ko.observable().extend({
+            required: { params: true, message: 'Необходимо указать vin-номер автомобиля' },
+            minLength: { params: 17, message: 'Vin-номер должен содержать 17 символов' }
+        }),
+        Year: ko.observable().extend({
+            required: { params: true, message: 'Необходимо указать год производства автомобиля' },
+            max: { params: 2017, message: 'Недопустимое значение года' },
+            min: { params: 1930, message: 'Недопустимое значение года' }
+        }),
+        FuelType: ko.observable().extend({
+            required: { params: true, message: 'Необходимо указать тип топлива автомобиля' }
+        }),
+        EngineCapacity: ko.observable().extend({
+            required: { params: true, message: 'Необходимо указать объем двигателя автомобиля' }
+        })
     };
 
     var getCars = function () {
         $(document).trigger("showLoadingPanel");
-        var url = window.resource.urls.webApiGetUserCars;
+        var url = window.resource.urls.webApiGetUserCarsUrl;
         var filter = {
             CurrentPage: currentPage(),
             ItemsPerPage: itemsPerPage()
@@ -37,9 +54,10 @@
                 itemsCount(data.ItemsCount);
                 $(document).trigger("hideLoadingPanel");
             }, function ($xhr) {
+                console.log($xhr);
                 $(document).trigger("hideLoadingPanel");
                 var text = ajaxHelper.extractErrors($xhr);
-                hotificationHelper.error(window.resource.texts.error, text);
+                notificationHelper.error(window.resource.texts.error, text);
             });
     };
 
@@ -58,7 +76,7 @@
             }, function($xhr) {
                 $(document).trigger("hideLoadingPanel");
                 var text = ajaxHelper.extractErrors($xhr);
-                hotificationHelper.error(window.resource.texts.error, text);
+                notificationHelper.error(window.resource.texts.error, text);
             });
     };
 
@@ -72,16 +90,19 @@
             }, function ($xhr) {
                 $(document).trigger("hideLoadingPanel");
                 var text = ajaxHelper.extractErrors($xhr);
-                hotificationHelper.error(window.resource.texts.error, text);
+                notificationHelper.error(window.resource.texts.error, text);
             });
     }
 
     mark.subscribe(function (newValue) {
         if (newValue) {
-            var match = ko.utils.arrayFirst(marks(), function (item) {
-                return item.Name === newValue;
-            });
+            var match = ko.utils.arrayFirst(marks(),
+                function(item) {
+                    return item.Name === newValue;
+                });
             getModels(match.Id);
+        } else {
+            models([]);
         }
     });
 
@@ -124,6 +145,48 @@
         getCars();
     };
 
+    var clearNewCarFiels = function () {
+        mark(null);
+        newCar.Name(null);
+        newCar.ModelId(null);
+        newCar.Vin(null);
+        newCar.Year(null);
+        newCar.FuelType(null);
+        newCar.EngineCapacity(null);
+    };
+
+    var addCar = function() {
+        var validationGroup = ko.validation.group([
+            newCar.Name,
+            newCar.ModelId,
+            newCar.Vin,
+            newCar.Year,
+            newCar.FuelType,
+            newCar.EngineCapacity
+        ]);
+        if (validationGroup().length != 0) {
+            validationGroup.showAllMessages();
+            return;
+        }
+
+        $(document).trigger("showLoadingPanel");
+        var url = window.resource.urls.webApiAddCarUrl;
+        var objToSend = ko.mapping.toJSON(newCar);
+        ajaxHelper.postJsonWithoutResult(url, objToSend)
+            .then(function () {
+                //TODO перевести
+                $('#close-button').click();
+                clearNewCarFiels();
+                validationGroup.showAllMessages(false);
+                getCars();
+                notificationHelper.success(window.resource.texts.success, "Машина успешно добавлена вам в гараж");
+            }, function($xhr) {
+                $(document).trigger("hideLoadingPanel");
+                var text = ajaxHelper.extractErrors($xhr);
+                notificationHelper.error(window.resource.texts.error, text);
+            });
+    }
+
     var init = function () {
         getCars();
     };
@@ -141,6 +204,7 @@
         mark: mark,
         models: models,
         newCar: newCar,
-        fuelTypes: fuelTypes
+        fuelTypes: fuelTypes,
+        addCar: addCar
     };
 };

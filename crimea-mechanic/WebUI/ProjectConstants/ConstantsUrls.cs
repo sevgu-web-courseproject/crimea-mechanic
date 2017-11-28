@@ -31,5 +31,9 @@
         public static string WebApiGetMarksUrl => Flurl.Url.Combine(WebApiUri, "api/Storage/GetMarks");
 
         public static string WebApiGetModelsUrl(string markId) => Flurl.Url.Combine(WebApiUri, "api/Storage/GetModels", markId);
+
+        public static string WebApiAddCarUrl => Flurl.Url.Combine(WebApiUri, "api/Car/AddCar");
+
+        public static string WebApiGetCarUrl(string carId) => Flurl.Url.Combine(WebApiUri, "api/Car/GetCar", carId);
     }
 }

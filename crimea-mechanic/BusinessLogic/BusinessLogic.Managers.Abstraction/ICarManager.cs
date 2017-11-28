@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using BusinessLogic.Objects;
 using BusinessLogic.Objects.Car;
 
 namespace BusinessLogic.Managers.Abstraction
@@ -35,6 +35,6 @@ namespace BusinessLogic.Managers.Abstraction
         /// Получить информацию о машинах пользователя
         /// </summary>
         /// <returns></returns>
-        IEnumerable<UserCarDto> GetCars(FilterUserCar filter, string currentUserId);
+        CollectionResult<UserCarDto> GetCars(FilterUserCar filter, string currentUserId);
     }
 }

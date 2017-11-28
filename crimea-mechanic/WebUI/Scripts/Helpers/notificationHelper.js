@@ -1,4 +1,4 @@
-﻿var hotificationHelper = {
+﻿var notificationHelper = {
     error: function(title, message) {
         iziToast.error({
             title: title,

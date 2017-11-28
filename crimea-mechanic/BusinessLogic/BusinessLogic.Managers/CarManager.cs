@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using BusinessLogic.Managers.Abstraction;
+using BusinessLogic.Objects;
 using BusinessLogic.Objects.Car;
 using BusinessLogic.Resources;
 using Common.Enums;
@@ -12,7 +12,7 @@ using DataAccessLayer.Repositories.Abstraction;
 
 namespace BusinessLogic.Managers
 {
-    public class CarManager : BaseManager, ICarManager
+    public class CarManager : BaseManagerWithPagination, ICarManager
     {
         #region Fields
 
@@ -145,22 +145,32 @@ namespace BusinessLogic.Managers
             return Mapper.Map<UserCarDto>(userCar);
         }
 
-        public IEnumerable<UserCarDto> GetCars(FilterUserCar filter, string currentUserId)
+        public CollectionResult<UserCarDto> GetCars(FilterUserCar filter, string currentUserId)
         {
             UserManager.IsUserInRegularRole(currentUserId);
             var user = UserManager.CheckAndGet(currentUserId);
 
             if (filter == null)
             {
-                filter = new FilterUserCar();
+                filter = new FilterUserCar
+                {
+                    ItemsPerPage = Common.Constants.FilterConstants.DefaultItemsPerPage,
+                    CurrentPage = Common.Constants.FilterConstants.DefaultCurrentPage
+                };
             }
 
-            if (filter.Deleted.HasValue && filter.Deleted.Value)
+            var result = Paginate(filter.CurrentPage, filter.ItemsPerPage, user.UserProfile.Cars.Where(car => !car.IsDeleted), out var itemsCount)
+                .ToList()
+                .Select(Mapper.Map<UserCarDto>)
+                .ToList();
+
+            return new CollectionResult<UserCarDto>
             {
-                return Mapper.Map<IEnumerable<UserCarDto>>(user.UserProfile.Cars.Where(car => car.IsDeleted));
-            }
-
-            return Mapper.Map<IEnumerable<UserCarDto>>(user.UserProfile.Cars.Where(car => !car.IsDeleted));
+                CurrentPage = filter.CurrentPage,
+                ItemsPerPage = filter.ItemsPerPage,
+                Items = result,
+                ItemsCount = itemsCount
+            };
         }
 
         #endregion
