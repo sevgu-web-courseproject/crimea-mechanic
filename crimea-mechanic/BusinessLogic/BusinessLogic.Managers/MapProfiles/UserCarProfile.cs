@@ -22,23 +22,15 @@ namespace BusinessLogic.Managers.MapProfiles
             CreateMap<UserCar, UserCarDto>()
                 .ForMember(d => d.Mark, opt => opt.MapFrom(s => s.Model.Mark.Name))
                 .ForMember(d => d.Model, opt => opt.MapFrom(s => s.Model.Name))
-                .ForMember(d => d.FuelType, opt => opt.MapFrom(s => GetFuelTypeDescription(s.FuelType)))
+                .ForMember(d => d.FuelTypeDescription, opt => opt.MapFrom(s => s.FuelType.GetDescription()))
                 .ForMember(d => d.Year, opt => opt.MapFrom(s => s.Year.ToString()));
-        }
 
-        private string GetFuelTypeDescription(FuelType type)
-        {
-            switch (type)
-            {
-                case FuelType.Benzine:
-                    return "Бензин";
-                case FuelType.Diesel:
-                    return "Дизель";
-                case FuelType.Another:
-                    return "Альтернативный вид топлива";
-                default:
-                    return "";
-            }
+            CreateMap<Application, ApplicationForCarHistoryDto>()
+                .ForMember(d => d.StateDescription, opt => opt.MapFrom(s => s.State.GetDescription()));
+
+            CreateMap<UserCar, UserCarFullDto>()
+                .IncludeBase<UserCar, UserCarDto>()
+                .ForMember(d => d.Applications, opt => opt.Ignore());
         }
     }
 }

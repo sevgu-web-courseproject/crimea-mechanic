@@ -49,13 +49,13 @@
                     Год выпуска: <span data-bind="text: $data.Year"></span>
                 </div>
                 <div>
-                    Тип топлива: <span data-bind="text: $data.FuelType"></span>
+                    Тип топлива: <span data-bind="text: $data.FuelTypeDescription"></span>
                 </div>
                 <div>
                     Объем двигателя: <span data-bind="text: $data.EngineCapacity"></span>
                 </div>
                 <div class="row pull-right">
-                    <a class="btn btn-warning">@GlobalResources.View</a>
+                    <a class="btn btn-warning" data-bind="attr: {href: window.resource.urls.webUiUserCarCardUrl + '/' + $data.Id}">@GlobalResources.View</a>
                 </div>
             </div>
         </div>

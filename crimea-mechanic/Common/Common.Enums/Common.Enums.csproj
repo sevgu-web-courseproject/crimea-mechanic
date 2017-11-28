@@ -41,9 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationState.cs" />
+    <Compile Include="ApplicationStateHelper.cs" />
     <Compile Include="CarServiceState.cs" />
     <Compile Include="FileType.cs" />
     <Compile Include="FuelType.cs" />
+    <Compile Include="FuelTypeHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserState.cs" />
   </ItemGroup>

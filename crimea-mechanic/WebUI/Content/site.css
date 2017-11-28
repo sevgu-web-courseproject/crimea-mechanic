@@ -144,8 +144,8 @@ section {
   height: 50px;
   width: 50px;
 }
-.comment-img img {
-  display: block;
+.comment-img i {
+  font-size: 50px;
 }
 .comment-body {
   overflow: hidden;
@@ -156,6 +156,9 @@ section {
   border-radius: 5px;
   background: #fff;
 }
+.comment .text p {
+  word-wrap: break-word;
+}
 .comment .text p:last-child {
   margin: 0;
 }
@@ -163,6 +166,7 @@ section {
   margin: 0.5em 0 0;
   font-size: 14px;
   color: #666;
+  display: inline;
 }
 .comments,
 .comment {

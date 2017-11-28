@@ -9,5 +9,12 @@ namespace WebUI.Controllers
         {
             return View();
         }
+
+        [Authorize(Roles = Common.Constants.CommonRoles.Regular)]
+        public ActionResult Card(long id)
+        {
+            ViewBag.CarId = id;
+            return View();
+        }
     }
 }

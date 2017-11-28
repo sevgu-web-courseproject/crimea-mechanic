@@ -29,7 +29,7 @@ namespace BusinessLogic.Managers.Abstraction
         /// Получить информацию о машине пользователя
         /// </summary>
         /// <returns></returns>
-        UserCarDto GetCar(long userCarId, string currentUserId);
+        UserCarFullDto GetCar(long userCarId, string currentUserId);
 
         /// <summary>
         /// Получить информацию о машинах пользователя

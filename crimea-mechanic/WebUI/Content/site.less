@@ -172,10 +172,10 @@ section {
     overflow: hidden;
     height: 50px;
     width: 50px;
-}
 
-.comment-img img {
-    display: block
+    i {
+        font-size: 50px;
+    }
 }
 
 .comment-body {
@@ -187,16 +187,21 @@ section {
     border: 1px solid #e5e5e5;
     border-radius: 5px;
     background: #fff;
-}
 
-.comment .text p:last-child {
-    margin: 0
+    p {
+        word-wrap: break-word;
+    }
+
+    p:last-child {
+        margin: 0
+    }
 }
 
 .comment .attribution {
     margin: 0.5em 0 0;
     font-size: 14px;
     color: #666;
+    display: inline;
 }
 
 .comments, .comment {

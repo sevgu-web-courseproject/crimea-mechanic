@@ -54,7 +54,6 @@
                 itemsCount(data.ItemsCount);
                 $(document).trigger("hideLoadingPanel");
             }, function ($xhr) {
-                console.log($xhr);
                 $(document).trigger("hideLoadingPanel");
                 var text = ajaxHelper.extractErrors($xhr);
                 notificationHelper.error(window.resource.texts.error, text);

@@ -1,4 +1,6 @@
-﻿namespace BusinessLogic.Objects.Car
+﻿using Common.Enums;
+
+namespace BusinessLogic.Objects.Car
 {
     /// <summary>
     /// ДТО для отображения машины пользователя
@@ -38,7 +40,12 @@
         /// <summary>
         /// Тип топлива
         /// </summary>
-        public string FuelType { get; set; }
+        public FuelType FuelType { get; set; }
+
+        /// <summary>
+        /// Описание типа топлива
+        /// </summary>
+        public string FuelTypeDescription { get; set; }
 
         /// <summary>
         /// Объем двигателя

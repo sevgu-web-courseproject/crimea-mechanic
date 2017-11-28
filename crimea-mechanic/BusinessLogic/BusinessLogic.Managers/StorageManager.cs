@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using AutoMapper;
 using BusinessLogic.Managers.Abstraction;
@@ -38,7 +39,9 @@ namespace BusinessLogic.Managers
 
         public IEnumerable<CarModelDto> GetModels(long markId)
         {
-            var mark = UnitOfWork.Repository<ICarMarksRepository>().Get(markId);
+            var mark = UnitOfWork.Repository<ICarMarksRepository>().GetAll(true)
+                .Include(m => m.Models)
+                .FirstOrDefault(m => !m.IsDeleted && m.Id == markId);
             if (mark == null)
             {
                 throw new BusinessFaultException(BusinessLogicExceptionResources.CarMarkNotFound);

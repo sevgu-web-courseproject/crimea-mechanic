@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using AutoMapper;
 using BusinessLogic.Managers.Abstraction;
@@ -135,14 +137,15 @@ namespace BusinessLogic.Managers
             UnitOfWork.SaveChanges();
         }
 
-        public UserCarDto GetCar(long userCarId, string currentUserId)
+        public UserCarFullDto GetCar(long userCarId, string currentUserId)
         {
             UserManager.IsUserInRegularRole(currentUserId);
             var repository = UnitOfWork.Repository<IUserCarRepository>();
-
             var userCar = CheckAndGetUserCar(repository, userCarId, currentUserId);
-
-            return Mapper.Map<UserCarDto>(userCar);
+            var dto = Mapper.Map<UserCarFullDto>(userCar);
+            var applications = userCar.Applications.Where(app => !app.IsDeleted).OrderByDescending(app => app.Created).ToList();
+            dto.Applications = Mapper.Map<IEnumerable<ApplicationForCarHistoryDto>>(applications);
+            return dto;
         }
 
         public CollectionResult<UserCarDto> GetCars(FilterUserCar filter, string currentUserId)
@@ -179,7 +182,10 @@ namespace BusinessLogic.Managers
 
         private UserCar CheckAndGetUserCar(IUserCarRepository repository, long userCarId, string userId)
         {
-            var userCar = repository.Get(userCarId);
+            var userCar = repository.GetAll(false)
+                .Include(u => u.User)
+                .Include(u => u.Applications)
+                .FirstOrDefault(u => !u.IsDeleted && u.Id == userCarId);
             if (userCar == null)
             {
                 throw new BusinessFaultException(BusinessLogicExceptionResources.UserCarNotFound);
