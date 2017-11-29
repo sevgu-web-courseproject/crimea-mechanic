@@ -22,7 +22,7 @@
                 if (User.IsInRole(Common.Constants.CommonRoles.Administrator))
                 {
                     <li class="nav-item active">
-                        <a class="nav-link" href="@Url.Action("RegistrationRequests", "CarService")">Заявки на регистрацию</a>
+                        <a class="nav-link" href="@Url.Action("RegistrationRequests", "CarService")">@GlobalResources.AppsForRegister</a>
                     </li>
                 }
             }
