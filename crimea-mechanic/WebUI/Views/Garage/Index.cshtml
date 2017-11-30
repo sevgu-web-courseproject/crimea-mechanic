@@ -21,6 +21,13 @@
         </div>
     </div>
     
+    <div class="form-check">
+        <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" data-bind="checked: showDeleted">
+            Показывать удаленные
+        </label>
+    </div>
+    
     <hr />
     
     @Html.Partial("_Pagination")
@@ -28,7 +35,7 @@
     <!-- ko if: cars().length -->
     <div class="justify-content-center">
         <!-- ko foreach: cars -->
-        <div class="row car-info">
+        <div class="row car-info" data-bind="css: {deleted: $data.IsDeleted}">
             <div class="align-self-center">
                 <i class="fa fa-car"></i>
             </div>
@@ -55,7 +62,7 @@
                     Объем двигателя: <span data-bind="text: $data.EngineCapacity"></span>
                 </div>
                 <div class="row pull-right">
-                    <a class="btn btn-warning" data-bind="attr: {href: window.resource.urls.webUiUserCarCardUrl + '/' + $data.Id}">@GlobalResources.View</a>
+                    <button class="btn btn-warning" data-bind="click: $root.saveFilter">@GlobalResources.View</button>
                 </div>
             </div>
         </div>

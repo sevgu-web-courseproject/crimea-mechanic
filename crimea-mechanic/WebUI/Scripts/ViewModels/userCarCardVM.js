@@ -3,34 +3,34 @@
     var model = {
         Id: ko.observable(),
         Name: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать имя автомобиля' }
+            required: { params: true, message: 'Необходимо указать имя автомобиля' } //TODO перевести
         }),
         Mark: ko.observable(),
         Model: ko.observable(),
         Vin: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать vin-номер автомобиля' },
-            minLength: { params: 17, message: 'Vin-номер должен содержать 17 символов' }
+            required: { params: true, message: 'Необходимо указать vin-номер автомобиля' }, //TODO перевести
+            minLength: { params: 17, message: 'Vin-номер должен содержать 17 символов' } //TODO перевести
         }),
         Year: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать год производства автомобиля' },
-            max: { params: 2017, message: 'Недопустимое значение года' },
-            min: { params: 1930, message: 'Недопустимое значение года' }
+            required: { params: true, message: 'Необходимо указать год производства автомобиля' }, //TODO перевести
+            max: { params: 2017, message: 'Недопустимое значение года' }, //TODO перевести
+            min: { params: 1930, message: 'Недопустимое значение года' } //TODO перевести
         }),
-        FuelType: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать тип топлива автомобиля' }
+        FuelType: ko.observable().extend({ 
+            required: { params: true, message: 'Необходимо указать тип топлива автомобиля' } //TODO перевести
         }),
         FuelTypeDescription: ko.observable(),
         EngineCapacity: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать объем двигателя автомобиля' }
+            required: { params: true, message: 'Необходимо указать объем двигателя автомобиля' } //TODO перевести
         }),
-        Applications: ko.observableArray([])
+        Applications: ko.observableArray([]),
+        IsDeleted: ko.observable()
     };
 
     var fuelTypes = [
-        //TODO Перевести
-        { Id: 10, Name: "Бензин" },
-        { Id: 20, Name: "Дизель" },
-        { Id: 30, Name: "Другой" }
+        { Id: 10, Name: "Бензин" }, //TODO перевести
+        { Id: 20, Name: "Дизель" }, //TODO перевести
+        { Id: 30, Name: "Другой" } //TODO перевести
     ];
 
     var getCard = function() {
@@ -101,6 +101,20 @@
             });
     };
 
+    var restoreCar = function() {
+        $(document).trigger("showLoadingPanel");
+        var url = window.resource.urls.webApiRestoreCarUrl.replace("carId", model.Id());
+        ajaxHelper.getWithoutResult(url)
+            .then(function () {
+                localStorage.success = "Машина успешно восстановлена"; //TODO перевести
+                window.location.href = window.resource.urls.webUiGarageUrl;
+            }, function ($xhr) {
+                $(document).trigger("hideLoadingPanel");
+                var text = ajaxHelper.extractErrors($xhr);
+                notificationHelper.error(window.resource.texts.error, text);
+            });
+    };
+
     var init = function () {
         $('#car-year').mask("9999");
         $('#car-engine-capacity').mask("9.9");
@@ -112,6 +126,7 @@
         model: model,
         fuelTypes: fuelTypes,
         editCar: editCar,
-        deleteCar: deleteCar
+        deleteCar: deleteCar,
+        restoreCar: restoreCar
     };
 };

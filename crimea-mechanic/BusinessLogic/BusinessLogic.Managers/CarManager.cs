@@ -151,7 +151,6 @@ namespace BusinessLogic.Managers
         public CollectionResult<UserCarDto> GetCars(FilterUserCar filter, string currentUserId)
         {
             UserManager.IsUserInRegularRole(currentUserId);
-            var user = UserManager.CheckAndGet(currentUserId);
 
             if (filter == null)
             {
@@ -162,7 +161,7 @@ namespace BusinessLogic.Managers
                 };
             }
 
-            var result = Paginate(filter.CurrentPage, filter.ItemsPerPage, user.UserProfile.Cars.Where(car => !car.IsDeleted), out var itemsCount)
+            var result = Paginate(filter.CurrentPage, filter.ItemsPerPage, BuildQueryForCars(currentUserId, filter), out var itemsCount)
                 .ToList()
                 .Select(Mapper.Map<UserCarDto>)
                 .ToList();
@@ -185,7 +184,7 @@ namespace BusinessLogic.Managers
             var userCar = repository.GetAll(false)
                 .Include(u => u.User)
                 .Include(u => u.Applications)
-                .FirstOrDefault(u => !u.IsDeleted && u.Id == userCarId);
+                .FirstOrDefault(u => u.Id == userCarId);
             if (userCar == null)
             {
                 throw new BusinessFaultException(BusinessLogicExceptionResources.UserCarNotFound);
@@ -195,6 +194,22 @@ namespace BusinessLogic.Managers
                 throw new BusinessFaultException(BusinessLogicExceptionResources.CarDoesNotBelongToUser);
             }
             return userCar;
+        }
+
+        private IQueryable<UserCar> BuildQueryForCars(string userId, FilterUserCar filter)
+        {
+            var query = UnitOfWork.Repository<IUserCarRepository>()
+                .GetAll(true)
+                .Include(car => car.Model)
+                .Include(car => car.Model.Mark)
+                .Where(car => car.User.ApplicationUser.Id == userId);
+
+            if (!filter.IsDeleted)
+            {
+                query = query.Where(car => !car.IsDeleted);
+            }
+
+            return query.OrderByDescending(car => car.Created);
         }
 
         #endregion

@@ -19,8 +19,13 @@
         <span data-bind="text: model.Name"></span>
     </h4>
     <div class="pull-right">
+        <!-- ko if: !model.IsDeleted()-->
         <button class="btn btn-success" data-toggle="modal" data-target="#myModal">Редактировать</button>
         <button class="btn btn-danger" data-bind="click: deleteCar">Удалить</button>
+        <!-- /ko -->
+        <!-- ko if: model.IsDeleted()-->
+        <button class="btn btn-success" data-bind="click: restoreCar">Восстановить</button>
+        <!-- /ko-->
     </div>
     <hr />
     <div class="row">

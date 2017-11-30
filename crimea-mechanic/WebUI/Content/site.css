@@ -280,3 +280,6 @@ section {
 .car-info .fa-car {
   font-size: 64px;
 }
+.deleted {
+  background-color: #cecece;
+}

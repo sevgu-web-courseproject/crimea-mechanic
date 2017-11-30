@@ -51,5 +51,10 @@ namespace BusinessLogic.Objects.Car
         /// Объем двигателя
         /// </summary>
         public float EngineCapacity { get; set; }
+
+        /// <summary>
+        /// Признак удаленности
+        /// </summary>
+        public bool IsDeleted { get; set; }
     }
 }
