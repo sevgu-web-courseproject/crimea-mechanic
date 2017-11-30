@@ -133,7 +133,7 @@
     <value>Логотип автосервиса</value>
   </data>
   <data name="CarServiceName" xml:space="preserve">
-    <value>Наименнование автосервиса</value>
+    <value>Наименование автосервиса</value>
   </data>
   <data name="CarServicePhotos" xml:space="preserve">
     <value>Фотографии автосервиса</value>
@@ -305,5 +305,47 @@
   </data>
   <data name="SuccessCarServiceRegistration" xml:space="preserve">
     <value>Заявка на регистрацию автосервиса успешно подана</value>
+  </data>
+  <data name="Applications" xml:space="preserve">
+    <value>Заявки</value>
+  </data>
+  <data name="AppsForRegister" xml:space="preserve">
+    <value>Заявки на регистрацию</value>
+  </data>
+  <data name="AutoserviceCard" xml:space="preserve">
+    <value>Карточка автосервиса</value>
+  </data>
+  <data name="ServiceRegister" xml:space="preserve">
+    <value>Карточка регистрации</value>
+  </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Подтвердить</value>
+  </data>
+  <data name="AcceptedMarksList" xml:space="preserve">
+    <value>Обслуживаемые марки автомобилей</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="Decline" xml:space="preserve">
+    <value>Отклонить</value>
+  </data>
+  <data name="NoRecordsFound" xml:space="preserve">
+    <value>Записи не найдены</value>
+  </data>
+  <data name="RegApplicationCard" xml:space="preserve">
+    <value>Карточка заявки регистрации автосервиса</value>
+  </data>
+  <data name="RegistrationDate" xml:space="preserve">
+    <value>Дата регистрации</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Отзывы</value>
+  </data>
+  <data name="ServiceInformationEdit" xml:space="preserve">
+    <value>Редактирование данных автосервиса</value>
+  </data>
+  <data name="WorkTags" xml:space="preserve">
+    <value>Перечень работ</value>
   </data>
 </root>

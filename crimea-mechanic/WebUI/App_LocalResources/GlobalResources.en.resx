@@ -306,4 +306,46 @@
   <data name="SuccessCarServiceRegistration" xml:space="preserve">
     <value>Application for car service registration successfully submitted</value>
   </data>
+  <data name="Applications" xml:space="preserve">
+    <value>Applications</value>
+  </data>
+  <data name="AppsForRegister" xml:space="preserve">
+    <value>Register applications</value>
+  </data>
+  <data name="AutoserviceCard" xml:space="preserve">
+    <value>Autoservice card</value>
+  </data>
+  <data name="ServiceRegister" xml:space="preserve">
+    <value>Registration card</value>
+  </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="AcceptedMarksList" xml:space="preserve">
+    <value>Accepted marks</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Decline" xml:space="preserve">
+    <value>Decline</value>
+  </data>
+  <data name="NoRecordsFound" xml:space="preserve">
+    <value>No records found</value>
+  </data>
+  <data name="RegApplicationCard" xml:space="preserve">
+    <value>Application for registration card</value>
+  </data>
+  <data name="RegistrationDate" xml:space="preserve">
+    <value>Registration date</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Reviews</value>
+  </data>
+  <data name="ServiceInformationEdit" xml:space="preserve">
+    <value>Service information editing</value>
+  </data>
+  <data name="WorkTags" xml:space="preserve">
+    <value>Work tags</value>
+  </data>
 </root>
