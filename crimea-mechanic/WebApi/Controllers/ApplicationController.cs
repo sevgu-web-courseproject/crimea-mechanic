@@ -39,6 +39,14 @@ namespace WebApi.Controllers
             return CallBusinessLogicAction(() => _manager.CreateApplication(dto, User.Identity.GetUserId()));
         }
 
+        [Authorize(Roles = Common.Constants.CommonRoles.Regular)]
+        [Route("Delete/{applicationId}")]
+        [HttpGet]
+        public IHttpActionResult Delete(long applicationId)
+        {
+            return CallBusinessLogicAction(() => _manager.DeleteApplication(applicationId, User.Identity.GetUserId()));
+        }
+
         /// <summary>
         /// Получить информацию о заявке для пользователя
         /// </summary>

@@ -27,7 +27,8 @@ namespace BusinessLogic.Managers.MapProfiles
             CreateMap<Application, ApplicationShortInfoForUserDto>()
                 .IncludeBase<Application, ApplicationBaseInfoDto>()
                 .ForMember(d => d.ServiceName, opt => opt.MapFrom(s => s.Service != null ? s.Service.Name : string.Empty))
-                .ForMember(d => d.StateDescription, opt => opt.MapFrom(s => GetDescriptionForApplicationState(s.State)));
+                .ForMember(d => d.StateDescription, opt => opt.MapFrom(s => s.State.GetDescription()))
+                .ForMember(d => d.CityName, opt => opt.MapFrom(s => s.City.Name));
 
             CreateMap<Application, ApplicationInfoForUserDto>()
                 .IncludeBase<Application, ApplicationShortInfoForUserDto>();
@@ -42,14 +43,14 @@ namespace BusinessLogic.Managers.MapProfiles
                 .IncludeBase<Application, ApplicationBaseInfoDto>()
                 .ForMember(d => d.ContactName, opt => opt.MapFrom(s => s.Car.User.Name))
                 .ForMember(d => d.ContactPhone, opt => opt.MapFrom(s => s.Car.User.Phone))
-                .ForMember(d => d.StateDescription, opt => opt.MapFrom(s => GetDescriptionForApplicationState(s.State)));
+                .ForMember(d => d.StateDescription, opt => opt.MapFrom(s => s.State.GetDescription()));
 
             CreateMap<Application, ApplicationShortInfoForAdministratorDto>()
                 .IncludeBase<Application, ApplicationBaseInfoDto>()
                 .ForMember(d => d.CarServiceId, opt => opt.MapFrom(s => s.Service != null ? s.Service.Id : 0))
                 .ForMember(d => d.CarServiceName, opt => opt.MapFrom(s => s.Service != null ? s.Service.Name : string.Empty))
                 .ForMember(d => d.CityName, opt => opt.MapFrom(s => s.City.Name))
-                .ForMember(d => d.StateDescription, opt => opt.MapFrom(s => GetDescriptionForApplicationState(s.State)))
+                .ForMember(d => d.StateDescription, opt => opt.MapFrom(s => s.State.GetDescription()))
                 .ForMember(d => d.UserContactName, opt => opt.MapFrom(s => s.Car.User.Name))
                 .ForMember(d => d.UserProfileId, opt => opt.MapFrom(s => s.Car.User.Id));
 
@@ -69,28 +70,5 @@ namespace BusinessLogic.Managers.MapProfiles
                 .ForMember(d => d.ServiceName, opt => opt.MapFrom(s => s.Service.Name))
                 .ForMember(d => d.Сontent, opt => opt.MapFrom(s => s.Content));
         }
-
-        #region Private methods
-
-        private string GetDescriptionForApplicationState(ApplicationState state)
-        {
-            switch (state)
-            {
-                case ApplicationState.InSearch:
-                    return "В поиске автосервиса";
-                case ApplicationState.InProcessing:
-                    return "На исполнении";
-                case ApplicationState.Deleted:
-                    return "Удалена";
-                case ApplicationState.Rejected:
-                    return "Отменена";
-                case ApplicationState.Completed:
-                    return "Завершена";
-                default:
-                    return "Неизвестное состояние";
-            }
-        }
-
-        #endregion
     }
 }

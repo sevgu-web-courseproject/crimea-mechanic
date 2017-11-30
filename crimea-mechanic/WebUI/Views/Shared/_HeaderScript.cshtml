@@ -1,4 +1,5 @@
-﻿@using WebUI.ProjectConstants
+﻿@using Common.Enums
+@using WebUI.ProjectConstants
 @using WebUI.App_LocalResources
 <script>
 
@@ -18,6 +19,14 @@
     }
 
     window.resource = {
+
+        applicationStates: {
+            inSearch: @((long)ApplicationState.InSearch),  
+            inProcessing: @((long)ApplicationState.InProcessing),  
+            completed: @((long)ApplicationState.Completed),
+            rejected: @((long)ApplicationState.Rejected)
+        },
+
         urls: {
             webApiRegistrationUserUrl: '@ConstantsUrls.WebApiRegistrationUserUrl',
             webApiRegistrationCarServiceUrl: '@ConstantsUrls.WebApiRegistrationCarServiceUrl',
@@ -38,13 +47,21 @@
             webApiEditCarUrl: '@ConstantsUrls.WebApiEditCarUrl',
             webApiDeleteCarUrl: '@ConstantsUrls.WebApiDeleteCarUrl("carId")',
             webApiRestoreCarUrl: '@ConstantsUrls.WebApiRestoreCarUrl("carId")',
+            webApiGetUserApplicationsUrl: '@ConstantsUrls.WebApiGetUserApplicationsUrl',
+            webApiGetApplicationCardForUserUrl: '@ConstantsUrls.WebApiGetApplicationCardForUserUrl("applicationId")',
+            webApiDeleteApplicationUrl: '@ConstantsUrls.WebApiDeleteApplicationUrl("applicationId")',
+            webApiAcceptOfferUrl: '@ConstantsUrls.WebApiAcceptOfferUrl("offerId")',
+            webApiRejectApplicationUrl: '@ConstantsUrls.WebApiRejectApplicationUrl("applicationId")',
+            webApiCompleteApplicationUrl: '@ConstantsUrls.WebApiCompleteApplicationUrl("applicationId")',
 
             webUiSignInPageUrl: '@Url.Action("SignIn", "Account")',
             webUiCarServiceCardUrl: '@Url.Action("Card", "CarService")',
             webUiRegistrationRequestCardUrl: '@Url.Action("RegistrationRequestCard", "CarService")',
             webUiRegistrationRequestsUrl: '@Url.Action("RegistrationRequests", "CarService")',
             webUiGarageUrl: '@Url.Action("Index", "Garage")',
-            webUiUserCarCardUrl: '@Url.Action("Card", "Garage")'
+            webUiUserCarCardUrl: '@Url.Action("Card", "Garage")',
+            webUiApplicationCard: '@Url.Action("Card", "Application")',
+            webUiApplicationsUrl: '@Url.Action("Index", "Application")'
         },
 
         texts: {

@@ -41,5 +41,17 @@
         public static string WebApiDeleteCarUrl(string carId) => Flurl.Url.Combine(WebApiUri, "api/Car/DeleteCar", carId);
 
         public static string WebApiRestoreCarUrl(string carId) => Flurl.Url.Combine(WebApiUri, "api/Car/RestoreCar", carId);
+
+        public static string WebApiGetUserApplicationsUrl => Flurl.Url.Combine(WebApiUri, "api/Application/GetInfosForUser");
+
+        public static string WebApiGetApplicationCardForUserUrl(string applicationId) => Flurl.Url.Combine(WebApiUri, "api/Application/GetInfoForUser", applicationId);
+
+        public static string WebApiDeleteApplicationUrl(string applicationId) => Flurl.Url.Combine(WebApiUri, "api/Application/Delete", applicationId);
+
+        public static string WebApiAcceptOfferUrl(string offerId) => Flurl.Url.Combine(WebApiUri, "api/Application/AcceptOffer", offerId);
+
+        public static string WebApiRejectApplicationUrl(string applicationId) => Flurl.Url.Combine(WebApiUri, "api/Application/RejectApplication", applicationId);
+
+        public static string WebApiCompleteApplicationUrl(string applicationId) => Flurl.Url.Combine(WebApiUri, "api/Application/CompleteApplication", applicationId);
     }
 }

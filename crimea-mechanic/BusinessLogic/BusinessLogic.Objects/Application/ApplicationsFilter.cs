@@ -1,4 +1,5 @@
-﻿using Common.Enums;
+﻿using System;
+using Common.Enums;
 
 namespace BusinessLogic.Objects.Application
 {
@@ -11,5 +12,15 @@ namespace BusinessLogic.Objects.Application
         /// Состояние заявки
         /// </summary>
         public ApplicationState? State { get; set; }
+
+        /// <summary>
+        /// Созданные с
+        /// </summary>
+        public DateTime? CreatedFrom { get; set; }
+
+        /// <summary>
+        /// Созданные до
+        /// </summary>
+        public DateTime? CreatedTo { get; set; }
     }
 }

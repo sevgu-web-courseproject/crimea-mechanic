@@ -368,7 +368,7 @@ namespace BusinessLogic.Managers
         {
             var isRegular = UserManager.IsUserInRole(currentUserId, Common.Constants.CommonRoles.Regular);
             var isService = UserManager.IsUserInRole(currentUserId, Common.Constants.CommonRoles.CarService);
-            if (!isRegular || !isService)
+            if (!isRegular && !isService)
             {
                 throw new BusinessFaultException(BusinessLogicExceptionResources.UserHasDifferentRole);
             }
@@ -442,11 +442,29 @@ namespace BusinessLogic.Managers
         private IQueryable<Application> BuildQueryForUser(ApplicationsFilter filter, string currentUserId)
         {
             var query = UnitOfWork.Repository<IApplicationRepository>().GetAll(true)
-                .Where(app => !app.IsDeleted && app.Car.User.ApplicationUser.Id == currentUserId);
+                .Where(app => app.Car.User.ApplicationUser.Id == currentUserId);
 
             if (filter.State.HasValue)
             {
+                if (filter.State.Value != ApplicationState.Deleted)
+                {
+                    query = query.Where(app => !app.IsDeleted);
+                }
                 query = query.Where(app => app.State == filter.State.Value);
+            }
+            else
+            {
+                query = query.Where(app => !app.IsDeleted);
+            }
+
+            if (filter.CreatedFrom.HasValue)
+            {
+                query = query.Where(app => app.Created >= filter.CreatedFrom.Value);
+            }
+
+            if (filter.CreatedTo.HasValue)
+            {
+                query = query.Where(app => app.Created <= filter.CreatedTo.Value);
             }
 
             return query.OrderByDescending(app => app.Created);
