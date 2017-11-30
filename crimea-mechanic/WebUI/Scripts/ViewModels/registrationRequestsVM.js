@@ -55,7 +55,7 @@
             }, function ($xhr) {
                 $(document).trigger("hideLoadingPanel");
                 var text = ajaxHelper.extractErrors($xhr);
-                notificationHelper.error("Ошибка", text);
+                notificationHelper.error(window.resource.errors.error, text);
             });
     };
 

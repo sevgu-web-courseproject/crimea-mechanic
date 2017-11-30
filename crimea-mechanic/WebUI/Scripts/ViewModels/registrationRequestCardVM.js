@@ -24,12 +24,12 @@
         var url = window.resource.urls.webApiApproveCarServiceUrl.replace("carServiceId", model.Id());
         ajaxHelper.getWithoutResult(url)
             .then(function () {
-                localStorage.success = "Заявка принята";
+                localStorage.success = window.resource.texts.applicationAccepted;
                 window.location.href = window.resource.urls.webUiRegistrationRequestsUrl;
             }, function ($xhr) {
                 $(document).trigger("hideLoadingPanel");
                 var text = ajaxHelper.extractErrors($xhr);
-                notificationHelper.error("Ошибка", text);
+                notificationHelper.error(window.resource.texts.error, text);
             });
     };
 
@@ -40,11 +40,11 @@
         var url = window.resource.urls.webApiRejectCarServiceUrl.replace("carServiceId", model.Id());
         ajaxHelper.getWithoutResult(url)
             .then(function () {
-                localStorage.success = "Заявка отклонена";
+                localStorage.success = window.resource.texts.applicationDeclined;
                 window.location.href = window.resource.urls.webUiRegistrationRequestsUrl;
             }, function ($xhr) {
                 var text = ajaxHelper.extractErrors($xhr);
-                notificationHelper.error("Ошибка", text);
+                notificationHelper.error(window.resource.texts.error, text);
             });
     };
 
