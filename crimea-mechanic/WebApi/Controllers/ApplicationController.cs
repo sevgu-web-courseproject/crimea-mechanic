@@ -202,6 +202,15 @@ namespace WebApi.Controllers
         {
             return CallBusinessLogicAction(() => _manager.CompleteApplication(applicationId, User.Identity.GetUserId()));
         }
+
+        [Authorize(Roles = Common.Constants.CommonRoles.CarService)]
+        [Route("GetMarksFromPool")]
+        [HttpGet]
+        public IHttpActionResult GetMarksFromPool()
+        {
+            return CallBusinessLogicActionWithResult(() => _manager.GetAvailableMarksFromPool(User.Identity.GetUserId()));
+        }
+
         #endregion
     }
 }

@@ -53,5 +53,17 @@
         public static string WebApiRejectApplicationUrl(string applicationId) => Flurl.Url.Combine(WebApiUri, "api/Application/RejectApplication", applicationId);
 
         public static string WebApiCompleteApplicationUrl(string applicationId) => Flurl.Url.Combine(WebApiUri, "api/Application/CompleteApplication", applicationId);
+
+        public static string WebApiGetPoolUrl => Flurl.Url.Combine(WebApiUri, "api/Application/GetPool");
+
+        public static string WebApiGetMarksFromPoolUrl => Flurl.Url.Combine(WebApiUri, "api/Application/GetMarksFromPool");
+
+        public static string WebApiAddOfferUrl => Flurl.Url.Combine(WebApiUri, "api/Application/AddOffer");
+
+        public static string WebApiDeleteOfferUrl(string offerId) => Flurl.Url.Combine(WebApiUri, "api/Application/DeleteOffer", offerId);
+
+        public static string WebApiGetActiveCarsUrl => Flurl.Url.Combine(WebApiUri, "api/Car/GetActiveCars");
+
+        public static string WebApiCreateApplicationUrl => Flurl.Url.Combine(WebApiUri, "api/Application/Create");
     }
 }

@@ -71,5 +71,13 @@ namespace WebApi.Controllers
         {
             return CallBusinessLogicActionWithResult(() => _manager.GetCars(filter, User.Identity.GetUserId()));
         }
+
+        [HttpGet]
+        [Authorize(Roles = Common.Constants.CommonRoles.Regular)]
+        [Route("GetActiveCars")]
+        public IHttpActionResult GetActiveCars()
+        {
+            return CallBusinessLogicActionWithResult(() => _manager.GetActiveCars(User.Identity.GetUserId()));
+        }
     }
 }

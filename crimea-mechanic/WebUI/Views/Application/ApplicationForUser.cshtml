@@ -13,14 +13,14 @@
 }
 
 <div class="jumbotron">
-    <h3>Мои заявки</h3>
+    <h3 class="inline">Мои заявки</h3>
+    <div class="pull-right">
+        <button class="btn btn-success" data-toggle="modal" data-target="#create-application" data-bind="click: createNewApplication">Создать заявку</button>
+    </div>
+
     <hr/>
 
     <div class="row">
-        <div class="col">
-            <label for="state">Состояние заявки</label>
-            <select id="state" class="form-control" data-bind="options: applicationStates, optionsValue: 'Id', optionsText: 'Name', value: state, optionsCaption: 'Выберите состояние заявки'"></select>
-        </div>
         <div class="col">
             <label for="created-to">C</label>
             <input type="date" id="created-from" class="form-control" placeholder="01.01.2018" data-bind="value: createdFrom"/>
@@ -30,13 +30,40 @@
             <input type="date" id="created-to" class="form-control" placeholder="01.01.2018" data-bind="value: createdTo"/>
         </div>
     </div>
+    
+    <div class="row">
+        <div class="col">
+            <label for="state">Состояние заявки</label>
+            <select id="state" class="form-control" data-bind="options: applicationStates, optionsValue: 'Id', optionsText: 'Name', value: state, optionsCaption: 'Выберите состояние заявки'"></select>
+        </div>
+        <div class="col">
+            <label for="filter-car">Машина</label>
+            <select id="filter-car" class="form-control" data-bind="options: cars, optionsValue: 'Id',
+                                        optionsText: function(item) {
+                                            return item.Mark + ' ' + item.Model + ' (' + ' ' + item.Name + ' )';
+                                        },
+                                        value: carId,
+                                        optionsCaption: 'Выберите машину'"></select>
+        </div>
+    </div>
+    
+    <br/>
+
+    <div class="row">
+        <div class="col">
+            <div class="pull-right">
+                <button class="btn btn-success" data-bind="click: find">Найти</button>
+                <button class="btn btn-info" data-bind="click: clearFilter">Очистить фильтр</button>
+            </div>
+        </div>
+    </div>
 
     <hr/>
 
     @Html.Partial("_Pagination")
     
     <!-- ko if: applications().length -->
-        <!-- ko foreach: applications -->
+    <!-- ko foreach: applications -->
     <div class="row application-info">
         <div class="col">
             <div>
@@ -77,7 +104,7 @@
             </div>
         </div>
     </div>
-        <!-- /ko -->
+    <!-- /ko -->
     <!-- /ko -->
     <!-- ko if: !applications().length -->
     <div class="text-center">
@@ -86,10 +113,67 @@
     <!-- /ko -->
 </div>
 
+<div class="modal fade" id="create-application" role="dialog">
+    <form>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Создание заявки на ремонт</h4>
+                    <button type="button" class="close" id="close-button" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div>
+                                <label for="car-selector">Выберите автомобиль:</label>
+                                <select class="form-control" id="car-selector" data-bind="options: cars,
+                                        optionsValue: 'Id',
+                                        optionsText: function(item) {
+                                            return item.Mark + ' ' + item.Model + ' (' + ' ' + item.Name + ' )';
+                                        },
+                                        value: newApplication.carId,
+                                        optionsCaption: 'Выберите машину'" aria-describedby="car-id-error">
+                                </select>
+                                <small id="car-id-error" class="form-text validation-error-text" data-bind="validationMessage: newApplication.carId"></small>
+                            </div>
+                            <br/>
+                            <div>
+                                <label for="city-selector">Выберите город:</label>
+                                <select class="form-control" id="city-selector" data-bind="options: cities,
+                                        optionsValue: 'Id',
+                                        optionsText: 'Name',
+                                        value: newApplication.cityId,
+                                        optionsCaption: 'Выберите город'" aria-describedby="city-id-error">
+                                </select>
+                                <small id="city-id-error" class="form-text validation-error-text" data-bind="validationMessage: newApplication.cityId"></small>
+                            </div>
+                            <br/>
+                            <div>
+                                <label for="work-description">Описание работ:</label>
+                                <textarea class="form-control" id="work-description" rows="3" data-bind="value: newApplication.description" aria-describedby="description-error"></textarea>
+                                <small id="description-error" class="form-text validation-error-text" data-bind="validationMessage: newApplication.description"></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="submit" class="btn btn-success" data-bind="click: sendNewApplication">Отправить заявку</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>    
+
 @section scripts {
     @Scripts.Render("~/Scripts/userApplicationsVM")
     <script>
         var viewModel = userApplicationsVM;
+        ko.validation.init({
+            insertMessages: false,
+            decorateInputElement: true,
+            errorElementClass: "is-invalid"
+        }, true);
         ko.applyBindings(viewModel);
         $(function() {
             viewModel.init();

@@ -22,5 +22,10 @@ namespace BusinessLogic.Objects.Application
         /// Созданные до
         /// </summary>
         public DateTime? CreatedTo { get; set; }
+
+        /// <summary>
+        /// Идентификатор машины пользователя
+        /// </summary>
+        public long? CarId { get; set; }
     }
 }

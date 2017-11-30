@@ -128,7 +128,17 @@ namespace BusinessLogic.Managers
 
             var application = CheckAndGetApplicationForUser(applicationId, currentUserId);
 
-            return  Mapper.Map<ApplicationInfoForUserDto>(application);
+            var dto = Mapper.Map<ApplicationInfoForUserDto>(application);
+            if (application.Offers != null)
+            {
+                dto.Offers = application.Offers
+                    .Where(of => !of.IsDeleted)
+                    .OrderByDescending(of => of.Created)
+                    .Select(Mapper.Map<OfferInfoDto>)
+                    .ToList();
+            }
+
+            return dto;
         }
 
         public ApplicationInfoForServiceDto GetApplicationInfoForService(long applicationId, string currentUserId)
@@ -198,8 +208,7 @@ namespace BusinessLogic.Managers
                 .Select(item =>
                 {
                     var dto = Mapper.Map<ApplicationShortInfoForServiceDto>(item);
-                    dto.IsOfferSended = item.Offers != null && item.Offers.Any(of => !of.IsDeleted && of.Service.ApplicationUser.Id == currentUserId);
-                    dto.IsOfferAccepted = item.Service != null && item.Service.ApplicationUser.Id == currentUserId;
+                    dto.OfferId = item.Offers.FirstOrDefault(of => !of.IsDeleted && of.Service.ApplicationUser.Id == currentUserId)?.Id;
                     return dto;
                 });
 
@@ -252,13 +261,12 @@ namespace BusinessLogic.Managers
                 };
             }
 
-            var result = Paginate(filter.CurrentPage, filter.ItemsPerPage, BuildQueryForPool(service), out var itemsCount)
+            var result = Paginate(filter.CurrentPage, filter.ItemsPerPage, BuildQueryForPool(filter, service), out var itemsCount)
                 .ToList()
                 .Select(item =>
                 {
                     var dto = Mapper.Map<ApplicationShortInfoForServiceDto>(item);
-                    dto.IsOfferSended = item.Offers != null && item.Offers.Any(of => !of.IsDeleted && of.Service.ApplicationUser.Id == currentUserId);
-                    dto.IsOfferAccepted = item.Service != null && item.Service.ApplicationUser.Id == currentUserId;
+                    dto.OfferId = item.Offers.FirstOrDefault(of => !of.IsDeleted && of.Service.ApplicationUser.Id == currentUserId)?.Id;
                     return dto;
                 });
 
@@ -405,6 +413,16 @@ namespace BusinessLogic.Managers
             UnitOfWork.SaveChanges();
         }
 
+        public IEnumerable<CarMarkDto> GetAvailableMarksFromPool(string currentUserId)
+        {
+            UserManager.IsUserInCarServiceRole(currentUserId);
+            var service = UnitOfWork.Repository<ICarServiceRepository>().GetByUserId(currentUserId);
+
+            return BuildQueryForPool(new ApplicationsPoolFilter(), service)
+                .Select(x => x.Car.Model.Mark).AsEnumerable()
+                .Select(Mapper.Map<CarMarkDto>);
+        }
+
         #endregion
 
         #region Private methods
@@ -467,6 +485,11 @@ namespace BusinessLogic.Managers
                 query = query.Where(app => app.Created <= filter.CreatedTo.Value);
             }
 
+            if (filter.CarId.HasValue)
+            {
+                query = query.Where(app => app.Car.Id == filter.CarId.Value);
+            }
+
             return query.OrderByDescending(app => app.Created);
         }
 
@@ -483,12 +506,27 @@ namespace BusinessLogic.Managers
             return query.OrderByDescending(app => app.Created);
         }
 
-        private IQueryable<Application> BuildQueryForPool(CarService service)
+        private IQueryable<Application> BuildQueryForPool(ApplicationsPoolFilter filter, CarService service)
         {
             var query = UnitOfWork.Repository<IApplicationRepository>().GetAll(true)
                 .Where(app => !app.IsDeleted && app.State == ApplicationState.InSearch);
 
             query = query.Where(app => app.City.Id == service.City.Id);
+
+            if (filter.CreatedFrom.HasValue)
+            {
+                query = query.Where(app => app.Created >= filter.CreatedFrom.Value);
+            }
+
+            if (filter.CreatedTo.HasValue)
+            {
+                query = query.Where(app => app.Created <= filter.CreatedTo.Value);
+            }
+
+            if (filter.MarkId.HasValue)
+            {
+                query = query.Where(app => app.Car.Model.Mark.Id == filter.MarkId.Value);
+            }
 
             return query.OrderByDescending(app => app.Created);
         }

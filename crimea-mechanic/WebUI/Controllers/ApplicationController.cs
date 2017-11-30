@@ -34,5 +34,11 @@ namespace WebUI.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        [Authorize(Roles = Common.Constants.CommonRoles.CarService)]
+        public ActionResult Pool()
+        {
+            return View();
+        }
     }
 }

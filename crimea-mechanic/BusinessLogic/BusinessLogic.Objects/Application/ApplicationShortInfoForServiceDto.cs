@@ -11,13 +11,8 @@
         public string ContactName { get; set; }
 
         /// <summary>
-        /// Признак - предложение уже отправлено?
+        /// Идентификатор предложения если оно отправлено
         /// </summary>
-        public bool IsOfferSended { get; set; }
-
-        /// <summary>
-        /// Признак - предложение принято?
-        /// </summary>
-        public bool IsOfferAccepted { get; set; }
+        public long? OfferId { get; set; }
     }
 }

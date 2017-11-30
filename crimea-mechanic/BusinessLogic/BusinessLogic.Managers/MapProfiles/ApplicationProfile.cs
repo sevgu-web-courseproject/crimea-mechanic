@@ -31,13 +31,13 @@ namespace BusinessLogic.Managers.MapProfiles
                 .ForMember(d => d.CityName, opt => opt.MapFrom(s => s.City.Name));
 
             CreateMap<Application, ApplicationInfoForUserDto>()
-                .IncludeBase<Application, ApplicationShortInfoForUserDto>();
+                .IncludeBase<Application, ApplicationShortInfoForUserDto>()
+                .ForMember(d => d.Offers, opt => opt.Ignore());
 
             CreateMap<Application, ApplicationShortInfoForServiceDto>()
                 .IncludeBase<Application, ApplicationBaseInfoDto>()
                 .ForMember(d => d.ContactName, opt => opt.MapFrom(s => s.Car.User.Name))
-                .ForMember(d => d.IsOfferSended, opt => opt.Ignore())
-                .ForMember(d => d.IsOfferAccepted, opt => opt.Ignore());
+                .ForMember(d => d.OfferId, opt => opt.Ignore());
 
             CreateMap<Application, ApplicationInfoForServiceDto>()
                 .IncludeBase<Application, ApplicationBaseInfoDto>()

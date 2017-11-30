@@ -8,18 +8,34 @@
         currentPage: ko.observable(1),
         state: ko.observable(null),
         createdFrom: ko.observable(null),
-        createdTo: ko.observable(null)
+        createdTo: ko.observable(null),
+        carId: ko.observable(null)
     };
 
+    var cities = ko.observableArray([]);
+    var cars = ko.observableArray([]);
+
+    var newApplication = {
+        carId: ko.observable().extend({
+            required: { params: true, message: 'Необходимо указать автомобиль' } //TODO перевести
+        }),
+        cityId: ko.observable().extend({
+            required: { params: true, message: 'Необходимо указать город' } //TODO перевести
+        }),
+        description: ko.observable().extend({
+            required: { params: true, message: 'Необходимо указать описание работ' } //TODO перевести
+        })
+    }
+
     var applicationStates = [
-        {Id: 5, Name: "Удалена"},
-        {Id: 10, Name: "В поиске автосервиса"},
-        {Id: 15, Name: "На исполнении"},
-        {Id: 20, Name: "Отклонена"},
-        {Id: 25, Name: "Завершена"}
+        { Id: 5, Name: "Удалена" },  //TODO перевести
+        { Id: 10, Name: "В поиске автосервиса" }, //TODO перевести
+        { Id: 15, Name: "На исполнении" }, //TODO перевести
+        { Id: 20, Name: "Отклонена" }, //TODO перевести
+        { Id: 25, Name: "Завершена" } //TODO перевести
     ];
 
-    var getApplications = function() {
+    var getApplications = function(callback) {
         $(document).trigger("showLoadingPanel");
         var url = window.resource.urls.webApiGetUserApplicationsUrl;
         var data = JSON.stringify({
@@ -27,7 +43,8 @@
             ItemsPerPage: filter.itemsPerPage(),
             State: filter.state(),
             CreatedFrom: filter.createdFrom(),
-            CreatedTo: filter.createdTo()
+            CreatedTo: filter.createdTo(),
+            CarId: filter.carId()
         });
         ajaxHelper.postJson(url, data)
             .then(function(data) {
@@ -36,6 +53,9 @@
                 });
                 itemsCount(data.ItemsCount);
                 applications(data.Items);
+                if (callback) {
+                    callback();
+                }
                 $(document).trigger("hideLoadingPanel");
             }, function($xhr) {
                 $(document).trigger("hideLoadingPanel");
@@ -89,9 +109,90 @@
             itemsPerPage: filter.itemsPerPage(),
             state: filter.state(),
             createdFrom: filter.createdFrom(),
-            createdTo: filter.createdTo()
+            createdTo: filter.createdTo(),
+            carId: filter.carId()
         });
         window.location.href = window.resource.urls.webUiApplicationCard + '/' + application.Id;
+    };
+
+    var getActiveCars = function() {
+        $(document).trigger("showLoadingPanel");
+        ajaxHelper.get(window.resource.urls.webApiGetActiveCarsUrl)
+            .then(function(data) {
+                cars(data);
+                $(document).trigger("hideLoadingPanel");
+            }, function($xhr) {
+                $(document).trigger("hideLoadingPanel");
+                var text = ajaxHelper.extractErrors($xhr);
+                notificationHelper.error(window.resource.texts.error, text);
+            });
+    };
+
+    var createNewApplication = function () {
+        if (cities().length) {
+            return;
+        }
+        $(document).trigger("showLoadingPanel");
+        ajaxHelper.get(window.resource.urls.webApiGetCitiesUrl)
+            .then(function(data) {
+                cities(data);
+                $(document).trigger("hideLoadingPanel");
+            })
+            .catch(function($xhr) {
+                $(document).trigger("hideLoadingPanel");
+                var text = ajaxHelper.extractErrors($xhr);
+                notificationHelper.error(window.resource.texts.error, text);
+            });
+    };
+
+    var clearForm = function() {
+        newApplication.carId(null);
+        newApplication.cityId(null);
+        newApplication.description(null);
+    };
+
+    var sendNewApplication = function () {
+        var validationGroup = ko.validation.group([
+            newApplication.carId,
+            newApplication.cityId,
+            newApplication.description
+        ]);
+        if (validationGroup().length != 0) {
+            validationGroup.showAllMessages();
+            return;
+        }
+        $(document).trigger("showLoadingPanel");
+        var data = JSON.stringify({
+            CarId: newApplication.carId(),
+            CityId: newApplication.cityId(),
+            Description: newApplication.description()
+        });
+        ajaxHelper.postJsonWithoutResult(window.resource.urls.webApiCreateApplicationUrl, data)
+            .then(function() {
+                $('#close-button').click();
+                clearForm();
+                validationGroup.showAllMessages(false);
+                getApplications();
+                $(document).trigger("hideLoadingPanel");
+            }, function($xhr) {
+                $(document).trigger("hideLoadingPanel");
+                var text = ajaxHelper.extractErrors($xhr);
+                notificationHelper.error(window.resource.texts.error, text);
+            });
+    };
+
+    var clearFilter = function() {
+        filter.currentPage(1);
+        filter.itemsPerPage(10);
+        filter.createdFrom(null);
+        filter.createdTo(null);
+        filter.state(null);
+        filter.carId(null);
+        getApplications();
+    };
+
+    var find = function() {
+        getApplications();
     };
 
     var init = function () {
@@ -99,16 +200,8 @@
             ko.mapping.fromJSON(localStorage.userApplicationsFilter, {}, filter);
             localStorage.removeItem("userApplicationsFilter");
         }
-        getApplications();
-
-        filter.state.subscribe(function() {
-            getApplications();
-        });
-        filter.createdFrom.subscribe(function() {
-            getApplications();
-        });
-        filter.createdTo.subscribe(function() {
-            getApplications();
+        getApplications(function() {
+            getActiveCars();
         });
     };
 
@@ -121,9 +214,17 @@
         state: filter.state,
         createdFrom: filter.createdFrom,
         createdTo: filter.createdTo,
+        carId: filter.carId,
         pages: pages,
         changePage: changePage,
         saveFilter: saveFilter,
-        applicationStates: applicationStates
+        applicationStates: applicationStates,
+        cars: cars,
+        cities: cities,
+        createNewApplication: createNewApplication,
+        newApplication: newApplication,
+        sendNewApplication: sendNewApplication,
+        clearFilter: clearFilter,
+        find: find
     };
 };

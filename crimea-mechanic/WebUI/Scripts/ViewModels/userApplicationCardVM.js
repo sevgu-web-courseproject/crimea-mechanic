@@ -27,9 +27,11 @@
             .then(function (data) {
                 ko.mapping.fromJS(data, {}, model);
                 model.Created(timeHelper.toLocalTime(model.Created()));
-                model.Offers().forEach(function(item) {
-                    item.Created(timeHelper.toLocalTime(item.Created()));
-                });
+                if (model.Offers()) {
+                    model.Offers().forEach(function (item) {
+                        item.Created(timeHelper.toLocalTime(item.Created()));
+                    });
+                }
                 $(document).trigger("hideLoadingPanel");
             }, function($xhr) {
                 $(document).trigger("hideLoadingPanel");
