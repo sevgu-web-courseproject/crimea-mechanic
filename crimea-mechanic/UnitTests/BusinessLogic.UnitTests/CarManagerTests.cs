@@ -453,7 +453,8 @@ namespace BusinessLogic.UnitTests
 
             var filter = new FilterUserCar
             {
-                Deleted = showDeleted
+                CurrentPage = 1,
+                ItemsPerPage = 10
             };
 
             var user = new ApplicationUser
@@ -472,20 +473,20 @@ namespace BusinessLogic.UnitTests
             var result = _manager.GetCars(filter, user.Id);
 
             //Assert
-            Assert.AreEqual(result.Count(), 2);
+            Assert.AreEqual(result.ItemsCount, 2);
             if (!showDeleted)
             {
-                Assert.AreEqual(cars[0].Name, result.ElementAt(0).Name);
-                Assert.AreEqual(cars[1].Name, result.ElementAt(1).Name);
-                Assert.AreEqual(cars[0].Model.Name, result.ElementAt(0).Model);
-                Assert.AreEqual(cars[1].Model.Mark.Name, result.ElementAt(1).Mark);
+                Assert.AreEqual(cars[0].Name, result.Items.ElementAt(0).Name);
+                Assert.AreEqual(cars[1].Name, result.Items.ElementAt(1).Name);
+                Assert.AreEqual(cars[0].Model.Name, result.Items.ElementAt(0).Model);
+                Assert.AreEqual(cars[1].Model.Mark.Name, result.Items.ElementAt(1).Mark);
             }
             else
             {
-                Assert.AreEqual(cars[2].Name, result.ElementAt(0).Name);
-                Assert.AreEqual(cars[3].Name, result.ElementAt(1).Name);
-                Assert.AreEqual(cars[2].Model.Name, result.ElementAt(0).Model);
-                Assert.AreEqual(cars[3].Model.Mark.Name, result.ElementAt(1).Mark);
+                Assert.AreEqual(cars[2].Name, result.Items.ElementAt(0).Name);
+                Assert.AreEqual(cars[3].Name, result.Items.ElementAt(1).Name);
+                Assert.AreEqual(cars[2].Model.Name, result.Items.ElementAt(0).Model);
+                Assert.AreEqual(cars[3].Model.Mark.Name, result.Items.ElementAt(1).Mark);
             }
         }
 
