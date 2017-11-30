@@ -348,4 +348,106 @@
   <data name="WorkTags" xml:space="preserve">
     <value>Перечень работ</value>
   </data>
+  <data name="ApplicationAccepted" xml:space="preserve">
+    <value>Заявка принята</value>
+  </data>
+  <data name="ApplicationDeclined" xml:space="preserve">
+    <value>Заявка отклонена</value>
+  </data>
+  <data name="CarAddToGarageSuccess" xml:space="preserve">
+    <value>Машина успешно добавлена вам в гараж</value>
+  </data>
+  <data name="CarEngineRequired" xml:space="preserve">
+    <value>Необходимо указать объем двигателя автомобиля</value>
+  </data>
+  <data name="CarFuelTypeRequired" xml:space="preserve">
+    <value>Необходимо указать тип топлива автомобиля</value>
+  </data>
+  <data name="CarNameIsRequired" xml:space="preserve">
+    <value>Необходимо указать имя автомобиля</value>
+  </data>
+  <data name="CarYearRequired" xml:space="preserve">
+    <value>Необходимо указать год производства автомобиля</value>
+  </data>
+  <data name="Diesel" xml:space="preserve">
+    <value>Дизель</value>
+  </data>
+  <data name="Gasoline" xml:space="preserve">
+    <value>Бензин</value>
+  </data>
+  <data name="ModelSpecify" xml:space="preserve">
+    <value>Необходимо указать модель автомобиля</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Другой</value>
+  </data>
+  <data name="VinCharacters" xml:space="preserve">
+    <value>Vin-номер должен содержать 17 символов</value>
+  </data>
+  <data name="VinSpecify" xml:space="preserve">
+    <value>Необходимо указать vin-номер автомобиля</value>
+  </data>
+  <data name="YearError" xml:space="preserve">
+    <value>Недопустимое значение года</value>
+  </data>
+  <data name="AddACar" xml:space="preserve">
+    <value>Добавить авто</value>
+  </data>
+  <data name="CarAdding" xml:space="preserve">
+    <value>Добавление автомобиля</value>
+  </data>
+  <data name="CarCard" xml:space="preserve">
+    <value>Карточка автомобиля</value>
+  </data>
+  <data name="CarEngine" xml:space="preserve">
+    <value>Объем двигателя:</value>
+  </data>
+  <data name="CarFuelType" xml:space="preserve">
+    <value>Тип топлива:</value>
+  </data>
+  <data name="CarHistory" xml:space="preserve">
+    <value>История работ</value>
+  </data>
+  <data name="CarMark" xml:space="preserve">
+    <value>Марка автомобиля:</value>
+  </data>
+  <data name="CarModel" xml:space="preserve">
+    <value>Модель автомобиля:</value>
+  </data>
+  <data name="CarName" xml:space="preserve">
+    <value>Имя авто (видно только Вам):</value>
+  </data>
+  <data name="CarsNotFound" xml:space="preserve">
+    <value>Машины не найдены</value>
+  </data>
+  <data name="CarSuccessfullyDeleted" xml:space="preserve">
+    <value>Машина успешно удалена</value>
+  </data>
+  <data name="CarSucessfullyRestored" xml:space="preserve">
+    <value>Машина успешно восстановлена</value>
+  </data>
+  <data name="CarYearOfAssembly" xml:space="preserve">
+    <value>Год выпуска:</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Редактировать</value>
+  </data>
+  <data name="Garage" xml:space="preserve">
+    <value>Гараж</value>
+  </data>
+  <data name="MyGarage" xml:space="preserve">
+    <value>Мой гараж</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Восстановить</value>
+  </data>
+  <data name="ShowDeleted" xml:space="preserve">
+    <value>Показывать удаленные</value>
+  </data>
+  <data name="VIN" xml:space="preserve">
+    <value>VIN:</value>
+  </data>
 </root>
