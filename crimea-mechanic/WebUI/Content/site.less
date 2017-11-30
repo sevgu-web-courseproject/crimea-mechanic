@@ -172,10 +172,10 @@ section {
     overflow: hidden;
     height: 50px;
     width: 50px;
-}
 
-.comment-img img {
-    display: block
+    i {
+        font-size: 50px;
+    }
 }
 
 .comment-body {
@@ -187,16 +187,21 @@ section {
     border: 1px solid #e5e5e5;
     border-radius: 5px;
     background: #fff;
-}
 
-.comment .text p:last-child {
-    margin: 0
+    p {
+        word-wrap: break-word;
+    }
+
+    p:last-child {
+        margin: 0
+    }
 }
 
 .comment .attribution {
     margin: 0.5em 0 0;
     font-size: 14px;
     color: #666;
+    display: inline;
 }
 
 .comments, .comment {
@@ -283,7 +288,7 @@ section {
     width: 100%;
     height: 100%;
     background-color: rgba(148, 148, 148, 0.98);
-    z-index: 999;
+    z-index: 9999;
 
     .spinner {
         position: fixed;
@@ -303,4 +308,31 @@ section {
 
 .validation-error-text {
     color: #dc3545;
+}
+
+.car-info {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    .car-name {
+        display: flex;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .pull-right {
+        position: absolute;
+        bottom: 0px;
+        right: 15px;
+    }
+
+    .fa-car {
+        font-size: 64px;
+    }
+}
+
+.deleted {
+    background-color: #cecece;
 }

@@ -1,10 +1,12 @@
-﻿namespace BusinessLogic.Objects.Car
+﻿using BusinessLogic.Objects.Application;
+
+namespace BusinessLogic.Objects.Car
 {
-    public class FilterUserCar
+    public class FilterUserCar : BaseFilter
     {
         /// <summary>
-        /// Флаг показывать только удалённые
+        /// Признак показывать удаленные автомобили
         /// </summary>
-        public bool? Deleted { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

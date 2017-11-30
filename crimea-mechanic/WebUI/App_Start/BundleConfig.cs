@@ -55,6 +55,12 @@ namespace WebUI
 
             bundles.Add(new ScriptBundle("~/Scripts/registrationRequestCardVM").Include(
                 "~/Scripts/ViewModels/registrationRequestCardVM.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/garagePageVM").Include(
+                "~/Scripts/ViewModels/garagePageVM.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/userCarCardVM").Include(
+                "~/Scripts/ViewModels/userCarCardVM.js"));
         }
     }
 }

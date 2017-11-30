@@ -25,6 +25,12 @@
                         <a class="nav-link" href="@Url.Action("RegistrationRequests", "CarService")">@GlobalResources.AppsForRegister</a>
                     </li>
                 }
+                else if (User.IsInRole(Common.Constants.CommonRoles.Regular))
+                {
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@Url.Action("Index", "Garage")">Гараж</a>
+                    </li>
+                }
             }
         </ul>
     </div>

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
+﻿using System.Web.Http;
 using BusinessLogic.Managers.Abstraction;
 using BusinessLogic.Objects.Car;
 using Microsoft.AspNet.Identity;
@@ -42,7 +41,7 @@ namespace WebApi.Controllers
         }
 
         [Authorize(Roles = Common.Constants.CommonRoles.Regular)]
-        [Route("DeleteCar")]
+        [Route("DeleteCar/{id}")]
         [HttpGet]
         public IHttpActionResult DeleteCar(long id)
         {
@@ -50,7 +49,7 @@ namespace WebApi.Controllers
         }
 
         [Authorize(Roles = Common.Constants.CommonRoles.Regular)]
-        [Route("RestoreCar")]
+        [Route("RestoreCar/{id}")]
         [HttpGet]
         public IHttpActionResult RestoreCar(long id)
         {
@@ -58,7 +57,7 @@ namespace WebApi.Controllers
         }
 
         [Authorize(Roles = Common.Constants.CommonRoles.Regular)]
-        [Route("GetCar")]
+        [Route("GetCar/{id}")]
         [HttpGet]
         public IHttpActionResult GetCar(long id)
         {
