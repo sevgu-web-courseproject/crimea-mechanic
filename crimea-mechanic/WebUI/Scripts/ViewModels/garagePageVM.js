@@ -62,8 +62,6 @@
             });
     };
 
-
-
     var getMarks = function () {
         $('#car-year').mask("9999");
         $('#car-engine-capacity').mask("9.9");

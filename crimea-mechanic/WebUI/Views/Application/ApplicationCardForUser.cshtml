@@ -1,0 +1,172 @@
+﻿@using WebUI.App_LocalResources
+@{
+    ViewBag.Title = "Карточка заявки";
+}
+
+<!-- TODO Перевести -->
+
+@section breadcrumbs {
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">@GlobalResources.Home</a></li>
+        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Application")">Мои заявки</a></li>
+        <li class="breadcrumb-item active">Карточка заявки</li>
+    </ol>
+}
+
+<div class="jumbotron">
+    <h3 class="inline">Карточка заявки</h3>
+    
+    <div class="pull-right">
+        <!-- ko if: model.State() == window.resource.applicationStates.inSearch -->
+        <button class="btn btn-success" data-toggle="modal" data-target="#edit-application" data-bind="click: getCities">Редактировать</button>
+        <!-- /ko -->
+        <!-- ko if: model.State() == window.resource.applicationStates.inSearch || model.State() == window.resource.applicationStates.rejected -->
+        <button class="btn btn-danger" data-bind="click: deleteApplication">Удалить</button>
+        <!-- /ko -->
+        <!-- ko if: model.State() == window.resource.applicationStates.inProcessing -->
+        <button class="btn btn-danger" data-bind="click: rejectApplication">Отменить</button>
+        <!-- /ko -->
+    </div>
+
+    <hr/>
+    
+    <div class="row">
+        <div class="col">
+            <div>
+                <h4>Заявка № <span data-bind="text: model.Id"></span></h4>
+            </div>
+            <div>
+                Машина:
+                <a data-bind="attr: {href: window.resource.urls.webUiUserCarCardUrl + '/' + model.Car.Id()}">
+                    <span data-bind="text: model.Car.Mark"></span>
+                    <span data-bind="text: model.Car.Model"></span>
+                    <span data-bind="text: model.Car.Year"></span>
+                    <span data-bind="text: model.Car.EngineCapacity"></span>
+                    <span data-bind="text: model.Car.FuelTypeDescription"></span>
+                </a>
+            </div>
+    
+            <div class="word-wrap">
+                Описание работ:
+                <span data-bind="text: model.Description"></span>
+            </div>
+            <div>
+                Состояние заявки:
+                <span data-bind="text: model.StateDescription"></span>
+            </div>
+            <!-- ko if: model.ServiceName -->
+            <div> 
+                Автосервис:
+                <span data-bind="text: model.ServiceName"></span>
+            </div>
+            <!-- /ko -->
+            <div>
+                Город:
+                <span data-bind="text: model.CityName"></span>
+            </div>
+            <div>
+                Дата подачи заявки:
+                <span data-bind="text: model.Created"></span>
+            </div>
+        </div>
+    </div>
+    <br />
+    
+    <!-- ko if: model.Offers() && model.Offers().length -->
+    <h4>Предложения по заявке</h4>
+    <hr/>
+    <!-- ko foreach: model.Offers-->
+    <div class="offer">
+        <div class="row">
+            <div class="col">
+                Автосервис:
+                <a data-bind="attr: {href: window.resource.urls.webUiCarServiceCardUrl + '/' + $data.ServiceId()}"><span data-bind="text: $data.ServiceName"></span></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Цена:
+                <span data-bind="text: $data.Price"></span> руб.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Содержание:
+                <span data-bind="text: $data.Сontent"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Дата направления
+                <span data-bind="text: $data.Created"></span>
+            </div>
+        </div>
+        <!-- ko if: $root.model.State() == window.resource.applicationStates.inSearch -->
+        <div class="pull-right">
+            <button class="btn btn-success" data-bind="click: $root.acceptOffer">Принять</button>
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko if: !model.Offers() || !model.Offers().length-->
+    <div class="text-center">
+        <h4>Предложения отсутствуют</h4>
+    </div>
+    <!-- /ko -->
+</div>
+
+<div class="modal fade" id="edit-application" role="dialog">
+    <form>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Редактирования заявки</h4>
+                    <button type="button" class="close" id="close-button" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div>
+                                <label for="city-selector">Выберите город:</label>
+                                <select class="form-control" id="city-selector" data-bind="options: cities,
+                                        optionsValue: 'Id',
+                                        optionsText: 'Name',
+                                        value: editApplication.cityId,
+                                        optionsCaption: 'Выберите город'" aria-describedby="city-id-error"></select>
+                                <small id="city-id-error" class="form-text validation-error-text" data-bind="validationMessage: editApplication.cityId"></small>
+                            </div>
+                            <br />
+                            <div>
+                                <label for="work-description">Описание работ:</label>
+                                <textarea class="form-control" id="work-description" rows="3" data-bind="value: editApplication.description" aria-describedby="description-error"></textarea>
+                                <small id="description-error" class="form-text validation-error-text" data-bind="validationMessage: editApplication.description"></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="submit" class="btn btn-success" data-bind="click: sendEditApplication">Отправить</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>    
+
+@section scripts {
+    @Scripts.Render("~/Scripts/userApplicationCardVM")
+    <script>
+        var viewModel = userApplicationCardVM;
+        ko.validation.init({
+            insertMessages: false,
+            decorateInputElement: true,
+            errorElementClass: "is-invalid"
+        }, true);
+        ko.applyBindings(viewModel);
+        $(function () {
+            viewModel.model.Id(@ViewBag.Id);
+            viewModel.init();
+        });
+    </script>
+}

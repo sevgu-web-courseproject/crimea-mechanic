@@ -39,6 +39,22 @@ namespace WebApi.Controllers
             return CallBusinessLogicAction(() => _manager.CreateApplication(dto, User.Identity.GetUserId()));
         }
 
+        [Authorize(Roles = Common.Constants.CommonRoles.Regular)]
+        [Route("Edit")]
+        [HttpPost]
+        public IHttpActionResult Edit(EditApplicationDto dto)
+        {
+            return CallBusinessLogicAction(() => _manager.EditApplication(dto, User.Identity.GetUserId()));
+        }
+
+        [Authorize(Roles = Common.Constants.CommonRoles.Regular)]
+        [Route("Delete/{applicationId}")]
+        [HttpGet]
+        public IHttpActionResult Delete(long applicationId)
+        {
+            return CallBusinessLogicAction(() => _manager.DeleteApplication(applicationId, User.Identity.GetUserId()));
+        }
+
         /// <summary>
         /// Получить информацию о заявке для пользователя
         /// </summary>
@@ -194,6 +210,15 @@ namespace WebApi.Controllers
         {
             return CallBusinessLogicAction(() => _manager.CompleteApplication(applicationId, User.Identity.GetUserId()));
         }
+
+        [Authorize(Roles = Common.Constants.CommonRoles.CarService)]
+        [Route("GetMarksFromPool")]
+        [HttpGet]
+        public IHttpActionResult GetMarksFromPool()
+        {
+            return CallBusinessLogicActionWithResult(() => _manager.GetAvailableMarksFromPool(User.Identity.GetUserId()));
+        }
+
         #endregion
     }
 }

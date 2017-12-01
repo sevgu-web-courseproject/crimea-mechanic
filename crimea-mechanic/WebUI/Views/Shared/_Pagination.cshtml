@@ -1,4 +1,7 @@
 ﻿<!-- ko if: itemsCount() !== 0 -->
+<div class="justify-content-start inline text-muted">
+    Количество записей: <span data-bind="text: itemsCount"></span>
+</div>
 <ul class="pagination justify-content-end">
     <!-- ko foreach: pages-->
         <!-- ko if: $root.currentPage() === $data -->

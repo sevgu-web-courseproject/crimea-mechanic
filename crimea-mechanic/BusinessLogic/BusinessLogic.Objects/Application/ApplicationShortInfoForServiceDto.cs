@@ -1,4 +1,6 @@
-﻿namespace BusinessLogic.Objects.Application
+﻿using Common.Enums;
+
+namespace BusinessLogic.Objects.Application
 {
     /// <summary>
     /// ДТО укороченной информации о заявке
@@ -11,13 +13,18 @@
         public string ContactName { get; set; }
 
         /// <summary>
-        /// Признак - предложение уже отправлено?
+        /// Идентификатор предложения если оно отправлено
         /// </summary>
-        public bool IsOfferSended { get; set; }
+        public long? OfferId { get; set; }
 
         /// <summary>
-        /// Признак - предложение принято?
+        /// Описание состояния предложения
         /// </summary>
-        public bool IsOfferAccepted { get; set; }
+        public string StateDescription { get; set; }
+
+        /// <summary>
+        /// Состояние предложения
+        /// </summary>
+        public ApplicationState State { get; set; }
     }
 }

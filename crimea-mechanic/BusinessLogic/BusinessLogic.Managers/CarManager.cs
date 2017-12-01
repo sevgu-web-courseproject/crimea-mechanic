@@ -175,6 +175,20 @@ namespace BusinessLogic.Managers
             };
         }
 
+        public IEnumerable<UserCarDto> GetActiveCars(string currentUserId)
+        {
+            UserManager.IsUserInRegularRole(currentUserId);
+            return UnitOfWork.Repository<IUserCarRepository>()
+                .GetAll(true)
+                .Include(car => car.User)
+                .Include(car => car.User.ApplicationUser)
+                .Include(car => car.Model)
+                .Include(car => car.Model.Mark)
+                .Where(car => !car.IsDeleted && car.User.ApplicationUser.Id == currentUserId)
+                .ToList()
+                .Select(Mapper.Map<UserCarDto>);
+        }
+
         #endregion
 
         #region Private methods

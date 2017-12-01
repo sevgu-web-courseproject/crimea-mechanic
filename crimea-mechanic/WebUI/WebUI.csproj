@@ -204,6 +204,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CarServiceController.cs" />
     <Compile Include="Controllers\GarageController.cs" />
@@ -273,13 +274,20 @@
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\ViewModels\administratorApplicationCardVM.js" />
+    <Content Include="Scripts\ViewModels\administratorApplicationsVM.js" />
+    <Content Include="Scripts\ViewModels\carServiceApplicationCardVM.js" />
+    <Content Include="Scripts\ViewModels\carServiceApplicationsVM.js" />
     <Content Include="Scripts\ViewModels\carServiceCardVM.js" />
     <Content Include="Scripts\ViewModels\garagePageVM.js" />
     <Content Include="Scripts\ViewModels\homePageVM.js" />
+    <Content Include="Scripts\ViewModels\poolVM.js" />
     <Content Include="Scripts\ViewModels\registrationCarServiceVM.js" />
     <Content Include="Scripts\ViewModels\registrationRequestCardVM.js" />
     <Content Include="Scripts\ViewModels\registrationRequestsVM.js" />
     <Content Include="Scripts\ViewModels\registrationUserVM.js" />
+    <Content Include="Scripts\ViewModels\userApplicationCardVM.js" />
+    <Content Include="Scripts\ViewModels\userApplicationsVM.js" />
     <Content Include="Scripts\ViewModels\userCarCardVM.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -322,11 +330,22 @@
     <Content Include="Scripts\knockout.validation.min.js.map" />
     <Content Include="Views\Garage\Index.cshtml" />
     <Content Include="Views\Garage\Card.cshtml" />
+    <Content Include="Views\Application\ApplicationForUser.cshtml" />
+    <Content Include="Views\Application\ApplicationCardForUser.cshtml" />
+    <Content Include="Views\Application\Pool.cshtml" />
+    <Content Include="Views\Application\ApplicationsForCarService.cshtml" />
+    <Content Include="Views\Application\ApplicationCardForCarService.cshtml" />
+    <Content Include="Views\Application\ApplicationsForAdministrator.cshtml" />
+    <Content Include="Views\Application\ApplicationCardForAdministrator.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.Constants\Common.Constants.csproj">
       <Project>{bcf8b083-3754-49e3-8d48-208c9342ec78}</Project>
       <Name>Common.Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.Enums\Common.Enums.csproj">
+      <Project>{3e10fa50-2cb7-45ee-b004-f1a805dd99b2}</Project>
+      <Name>Common.Enums</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -41,5 +41,39 @@
         public static string WebApiDeleteCarUrl(string carId) => Flurl.Url.Combine(WebApiUri, "api/Car/DeleteCar", carId);
 
         public static string WebApiRestoreCarUrl(string carId) => Flurl.Url.Combine(WebApiUri, "api/Car/RestoreCar", carId);
+
+        public static string WebApiGetUserApplicationsUrl => Flurl.Url.Combine(WebApiUri, "api/Application/GetInfosForUser");
+
+        public static string WebApiGetApplicationCardForUserUrl(string applicationId) => Flurl.Url.Combine(WebApiUri, "api/Application/GetInfoForUser", applicationId);
+
+        public static string WebApiDeleteApplicationUrl(string applicationId) => Flurl.Url.Combine(WebApiUri, "api/Application/Delete", applicationId);
+
+        public static string WebApiAcceptOfferUrl(string offerId) => Flurl.Url.Combine(WebApiUri, "api/Application/AcceptOffer", offerId);
+
+        public static string WebApiRejectApplicationUrl(string applicationId) => Flurl.Url.Combine(WebApiUri, "api/Application/RejectApplication", applicationId);
+
+        public static string WebApiCompleteApplicationUrl(string applicationId) => Flurl.Url.Combine(WebApiUri, "api/Application/CompleteApplication", applicationId);
+
+        public static string WebApiGetPoolUrl => Flurl.Url.Combine(WebApiUri, "api/Application/GetPool");
+
+        public static string WebApiGetMarksFromPoolUrl => Flurl.Url.Combine(WebApiUri, "api/Application/GetMarksFromPool");
+
+        public static string WebApiAddOfferUrl => Flurl.Url.Combine(WebApiUri, "api/Application/AddOffer");
+
+        public static string WebApiDeleteOfferUrl(string offerId) => Flurl.Url.Combine(WebApiUri, "api/Application/DeleteOffer", offerId);
+
+        public static string WebApiGetActiveCarsUrl => Flurl.Url.Combine(WebApiUri, "api/Car/GetActiveCars");
+
+        public static string WebApiCreateApplicationUrl => Flurl.Url.Combine(WebApiUri, "api/Application/Create");
+
+        public static string WebApiEditApplicationUrl => Flurl.Url.Combine(WebApiUri, "api/Application/Edit");
+
+        public static string WebApiGetInfosForServiceUrl => Flurl.Url.Combine(WebApiUri, "api/Application/GetInfosForService");
+
+        public static string WebApiGetInfoForCarServiceUrl(string applicationId) => Flurl.Url.Combine(WebApiUri, "api/Application/GetInfoForCarService", applicationId);
+
+        public static string WebApiGetInfosForAdministratorUrl => Flurl.Url.Combine(WebApiUri, "api/Application/GetInfosForAdministrator");
+
+        public static string WebApiGetInfoForAdminUrl(string applicationId) => Flurl.Url.Combine(WebApiUri, "api/Application/GetInfoForAdmin", applicationId);
     }
 }

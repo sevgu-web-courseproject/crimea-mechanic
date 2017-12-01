@@ -11,5 +11,10 @@ namespace BusinessLogic.Objects.Application
         /// Предложения
         /// </summary>
         public List<OfferInfoDto> Offers { get; set; }
+
+        /// <summary>
+        /// Идентификатор города
+        /// </summary>
+        public long CityId { get; set; }
     }
 }

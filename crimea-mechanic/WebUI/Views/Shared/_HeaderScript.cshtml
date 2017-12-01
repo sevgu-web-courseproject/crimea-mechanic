@@ -1,4 +1,5 @@
-﻿@using WebUI.ProjectConstants
+﻿@using Common.Enums
+@using WebUI.ProjectConstants
 @using WebUI.App_LocalResources
 <script>
 
@@ -18,6 +19,14 @@
     }
 
     window.resource = {
+
+        applicationStates: {
+            inSearch: @((long)ApplicationState.InSearch),  
+            inProcessing: @((long)ApplicationState.InProcessing),  
+            completed: @((long)ApplicationState.Completed),
+            rejected: @((long)ApplicationState.Rejected)
+        },
+
         urls: {
             webApiRegistrationUserUrl: '@ConstantsUrls.WebApiRegistrationUserUrl',
             webApiRegistrationCarServiceUrl: '@ConstantsUrls.WebApiRegistrationCarServiceUrl',
@@ -38,13 +47,32 @@
             webApiEditCarUrl: '@ConstantsUrls.WebApiEditCarUrl',
             webApiDeleteCarUrl: '@ConstantsUrls.WebApiDeleteCarUrl("carId")',
             webApiRestoreCarUrl: '@ConstantsUrls.WebApiRestoreCarUrl("carId")',
+            webApiGetUserApplicationsUrl: '@ConstantsUrls.WebApiGetUserApplicationsUrl',
+            webApiGetApplicationCardForUserUrl: '@ConstantsUrls.WebApiGetApplicationCardForUserUrl("applicationId")',
+            webApiDeleteApplicationUrl: '@ConstantsUrls.WebApiDeleteApplicationUrl("applicationId")',
+            webApiAcceptOfferUrl: '@ConstantsUrls.WebApiAcceptOfferUrl("offerId")',
+            webApiRejectApplicationUrl: '@ConstantsUrls.WebApiRejectApplicationUrl("applicationId")',
+            webApiCompleteApplicationUrl: '@ConstantsUrls.WebApiCompleteApplicationUrl("applicationId")',
+            webApiGetPoolUrl: '@ConstantsUrls.WebApiGetPoolUrl',
+            webApiGetMarksFromPoolUrl: '@ConstantsUrls.WebApiGetMarksFromPoolUrl',
+            webApiAddOfferUrl: '@ConstantsUrls.WebApiAddOfferUrl',
+            webApiDeleteOfferUrl: '@ConstantsUrls.WebApiDeleteOfferUrl("offerId")',
+            webApiGetActiveCarsUrl: '@ConstantsUrls.WebApiGetActiveCarsUrl',
+            webApiCreateApplicationUrl: '@ConstantsUrls.WebApiCreateApplicationUrl',
+            webApiEditApplicationUrl: '@ConstantsUrls.WebApiEditApplicationUrl',
+            webApiGetInfosForServiceUrl: '@ConstantsUrls.WebApiGetInfosForServiceUrl',
+            webApiGetInfoForCarServiceUrl: '@ConstantsUrls.WebApiGetInfoForCarServiceUrl("applicationId")',
+            webApiGetInfosForAdministratorUrl: '@ConstantsUrls.WebApiGetInfosForAdministratorUrl',
+            webApiGetInfoForAdminUrl: '@ConstantsUrls.WebApiGetInfoForAdminUrl("applicationId")',
 
             webUiSignInPageUrl: '@Url.Action("SignIn", "Account")',
             webUiCarServiceCardUrl: '@Url.Action("Card", "CarService")',
             webUiRegistrationRequestCardUrl: '@Url.Action("RegistrationRequestCard", "CarService")',
             webUiRegistrationRequestsUrl: '@Url.Action("RegistrationRequests", "CarService")',
             webUiGarageUrl: '@Url.Action("Index", "Garage")',
-            webUiUserCarCardUrl: '@Url.Action("Card", "Garage")'
+            webUiUserCarCardUrl: '@Url.Action("Card", "Garage")',
+            webUiApplicationCard: '@Url.Action("Card", "Application")',
+            webUiApplicationsUrl: '@Url.Action("Index", "Application")'
         },
 
         texts: {
@@ -52,16 +80,13 @@
             successUserRegistration: '@GlobalResources.SuccessUserRegistration',
             error: '@GlobalResources.Error',
             successCarServiceRegistration: '@GlobalResources.SuccessCarServiceRegistration',
-            applicationAccepted: '@GlobalResources.ApplicationAccepted'
-            applicationDeclined: '@GlobalResources.ApplicationDeclined'
+            applicationAccepted: '@GlobalResources.ApplicationAccepted',
+            applicationDeclined: '@GlobalResources.ApplicationDeclined',
             gasoline: '@GlobalResources.Gasoline',
             diesel : '@GlobalResources.Diesel',
             other: '@GlobalResources.Other',
             carSuccessfullyDeleted: '@GlobalResources.CarSuccessfullyDeleted',
-            carSucessfullyRestored: '@GlobalResources.CarSucessfullyRestored',
-
-
-
+            carSucessfullyRestored: '@GlobalResources.CarSucessfullyRestored'
         },
 
         errors: {
@@ -84,8 +109,7 @@
             carYearRequired: '@GlobalResources.CarYearRequired',
             yearError: '@GlobalResources.YearError',
             carFuelTypeIsRequired: '@GlobalResources.CarFuelTypeRequired',
-            carEngineTypeIsRequired: '@GlobalResources.CarEngineRequired',
-
+            carEngineTypeIsRequired: '@GlobalResources.CarEngineRequired'
         }
     }
 </script>

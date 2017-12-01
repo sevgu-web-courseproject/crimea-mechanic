@@ -22,5 +22,10 @@ namespace BusinessLogic.Objects.Application
         /// Описание состояния предложения
         /// </summary>
         public string StateDescription { get; set; }
+
+        /// <summary>
+        /// Наименнование города
+        /// </summary>
+        public string CityName { get; set; }
     }
 }

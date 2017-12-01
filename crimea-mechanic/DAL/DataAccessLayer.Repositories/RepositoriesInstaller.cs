@@ -15,7 +15,7 @@ namespace DataAccessLayer.Repositories
                 .WithService
                 .FromInterface()
                 .LifestyleTransient());
-            container.Register(Component.For<IUnitOfWork>().ImplementedBy<UnitOfWork>());
+            container.Register(Component.For<IUnitOfWork>().ImplementedBy<UnitOfWork>().LifestylePerWebRequest());
             container.Register(Component.For<IRepositoryFactory>().ImplementedBy<RepositoryFactory>().LifestyleTransient());
         }
     }

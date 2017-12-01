@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Objects;
+﻿using System.Collections.Generic;
+using BusinessLogic.Objects;
 using BusinessLogic.Objects.Application;
 
 namespace BusinessLogic.Managers.Abstraction
@@ -83,5 +84,11 @@ namespace BusinessLogic.Managers.Abstraction
         /// Завершить выполнение заявки
         /// </summary>
         void CompleteApplication(long applicationId, string currentUserId);
+
+        /// <summary>
+        /// Получить список марок автомобилей, которые находятся в пуле
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<CarMarkDto> GetAvailableMarksFromPool(string currentUserId);
     }
 }
