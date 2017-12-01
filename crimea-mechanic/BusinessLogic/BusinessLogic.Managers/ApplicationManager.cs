@@ -159,8 +159,17 @@ namespace BusinessLogic.Managers
             {
                 throw new BusinessFaultException(BusinessLogicExceptionResources.ApplicationNotFound);
             }
+            var dto = Mapper.Map<ApplicationInfoForAdministratorDto>(application);
+            if (application.Offers != null)
+            {
+                dto.Offers = application.Offers
+                    .Where(of => !of.IsDeleted)
+                    .OrderByDescending(of => of.Created)
+                    .Select(Mapper.Map<OfferInfoDto>)
+                    .ToList();
+            }
 
-            return Mapper.Map<ApplicationInfoForAdministratorDto>(application);
+            return dto;
         }
 
         public CollectionResult<ApplicationShortInfoForUserDto> GetApplicationsInfoForUser(ApplicationsFilter filter, string currentUserId)
@@ -420,6 +429,8 @@ namespace BusinessLogic.Managers
 
             return BuildQueryForPool(new ApplicationsPoolFilter(), service)
                 .Select(x => x.Car.Model.Mark).AsEnumerable()
+                .GroupBy(x => x.Name)
+                .Select(x => x.First())
                 .Select(Mapper.Map<CarMarkDto>);
         }
 
@@ -503,6 +514,16 @@ namespace BusinessLogic.Managers
                 query = query.Where(app => app.State == filter.State.Value);
             }
 
+            if (filter.CreatedFrom.HasValue)
+            {
+                query = query.Where(app => app.Created >= filter.CreatedFrom.Value);
+            }
+
+            if (filter.CreatedTo.HasValue)
+            {
+                query = query.Where(app => app.Created <= filter.CreatedTo.Value);
+            }
+
             return query.OrderByDescending(app => app.Created);
         }
 
@@ -533,12 +554,29 @@ namespace BusinessLogic.Managers
 
         private IQueryable<Application> BuildQueryForAdministrator(ApplicationsFilter filter)
         {
-            var query = UnitOfWork.Repository<IApplicationRepository>().GetAll(true)
-                .Where(app => !app.IsDeleted);
+            var query = UnitOfWork.Repository<IApplicationRepository>().GetAll(true);
 
             if (filter.State.HasValue)
             {
+                if (filter.State.Value != ApplicationState.Deleted)
+                {
+                    query = query.Where(app => !app.IsDeleted);
+                }
                 query = query.Where(app => app.State == filter.State.Value);
+            }
+            else
+            {
+                query = query.Where(app => !app.IsDeleted);
+            }
+
+            if (filter.CreatedFrom.HasValue)
+            {
+                query = query.Where(app => app.Created >= filter.CreatedFrom.Value);
+            }
+
+            if (filter.CreatedTo.HasValue)
+            {
+                query = query.Where(app => app.Created <= filter.CreatedTo.Value);
             }
 
             return query.OrderByDescending(app => app.Created);

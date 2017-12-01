@@ -38,6 +38,7 @@ namespace BusinessLogic.Managers.MapProfiles
             CreateMap<Application, ApplicationShortInfoForServiceDto>()
                 .IncludeBase<Application, ApplicationBaseInfoDto>()
                 .ForMember(d => d.ContactName, opt => opt.MapFrom(s => s.Car.User.Name))
+                .ForMember(d => d.StateDescription, opt => opt.MapFrom(s => s.State.GetDescription()))
                 .ForMember(d => d.OfferId, opt => opt.Ignore());
 
             CreateMap<Application, ApplicationInfoForServiceDto>()
@@ -56,7 +57,8 @@ namespace BusinessLogic.Managers.MapProfiles
                 .ForMember(d => d.UserProfileId, opt => opt.MapFrom(s => s.Car.User.Id));
 
             CreateMap<Application, ApplicationInfoForAdministratorDto>()
-                .IncludeBase<Application, ApplicationShortInfoForAdministratorDto>();
+                .IncludeBase<Application, ApplicationShortInfoForAdministratorDto>()
+                .ForMember(d => d.Offers, opt => opt.Ignore());
 
             CreateMap<AddOfferDto, ApplicationOffer>()
                 .ForMember(d => d.Application, opt => opt.Ignore())

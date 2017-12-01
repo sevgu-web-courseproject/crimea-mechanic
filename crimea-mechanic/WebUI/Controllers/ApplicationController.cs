@@ -15,6 +15,14 @@ namespace WebUI.Controllers
             {
                 return View("ApplicationForUser");
             }
+            if (User.IsInRole(Common.Constants.CommonRoles.CarService))
+            {
+                return View("ApplicationsForCarService");
+            }
+            if (User.IsInRole(Common.Constants.CommonRoles.Administrator))
+            {
+                return View("ApplicationsForAdministrator");
+            }
 
             return RedirectToAction("Index", "Home");
         }
@@ -30,6 +38,14 @@ namespace WebUI.Controllers
             if (User.IsInRole(Common.Constants.CommonRoles.Regular))
             {
                 return View("ApplicationCardForUser");
+            }
+            if (User.IsInRole(Common.Constants.CommonRoles.CarService))
+            {
+                return View("ApplicationCardForCarService");
+            }
+            if (User.IsInRole(Common.Constants.CommonRoles.Administrator))
+            {
+                return View("ApplicationCardForAdministrator");
             }
 
             return RedirectToAction("Index", "Home");

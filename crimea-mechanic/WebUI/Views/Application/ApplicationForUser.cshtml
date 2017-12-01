@@ -67,7 +67,7 @@
     <div class="row application-info">
         <div class="col">
             <div>
-                <h4>Заявка № <span data-bind="text: $data.Id"></span></h4>
+                <h4 data-bind="css: {'success-application': $data.State == window.resource.applicationStates.completed, 'error-application': $data.State == window.resource.applicationStates.rejected}">Заявка № <span data-bind="text: $data.Id"></span></h4>
             </div>
             <div>
                 Машина:

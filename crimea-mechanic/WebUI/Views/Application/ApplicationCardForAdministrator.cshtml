@@ -1,0 +1,114 @@
+﻿@using WebUI.App_LocalResources
+@{
+    ViewBag.Title = "Карточка заявки";
+}
+
+<!-- TODO Перевести -->
+
+@section breadcrumbs {
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">@GlobalResources.Home</a></li>
+        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Application")">Заявки</a></li>
+        <li class="breadcrumb-item active">Карточка заявки</li>
+    </ol>
+}
+
+<div class="jumbotron">
+    <h3 class="inline">Карточка заявки</h3>
+    <hr />
+
+    <div class="row">
+        <div class="col">
+            <div>
+                <h4>Заявка № <span data-bind="text: model.Id"></span></h4>
+            </div>
+            <div>
+                Автор:
+                <span data-bind="text: model.UserContactName"></span>
+            </div>
+            <div>
+                Машина:
+                <span data-bind="text: model.Car.Mark"></span>
+                <span data-bind="text: model.Car.Model"></span>
+                <span data-bind="text: model.Car.Year"></span>
+                <span data-bind="text: model.Car.EngineCapacity"></span>
+                <span data-bind="text: model.Car.FuelTypeDescription"></span>
+            </div>
+
+            <div class="word-wrap">
+                Описание работ:
+                <span data-bind="text: model.Description"></span>
+            </div>
+            <div>
+                Состояние заявки:
+                <span data-bind="text: model.StateDescription"></span>
+            </div>
+            <!-- ko if: model.CarServiceId -->
+            <div>
+                Автосервис:
+                <a data-bind="text: model.CarServiceName, attr: {href: window.resource.urls.webUiCarServiceCardUrl + '/' + model.CarServiceId()}"></a>
+            </div>
+            <!-- /ko -->
+            <div>
+                Город:
+                <span data-bind="text: model.CityName"></span>
+            </div>
+            <div>
+                Дата подачи заявки:
+                <span data-bind="text: model.Created"></span>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <!-- ko if: model.Offers() && model.Offers().length -->
+    <h4>Предложения по заявке</h4>
+    <hr />
+        <!-- ko foreach: model.Offers-->
+        <div class="offer">
+            <div class="row">
+                <div class="col">
+                    Автосервис:
+                    <a data-bind="attr: {href: window.resource.urls.webUiCarServiceCardUrl + '/' + $data.ServiceId()}"><span data-bind="text: $data.ServiceName"></span></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    Цена:
+                    <span data-bind="text: $data.Price"></span> руб.
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    Содержание:
+                    <span data-bind="text: $data.Сontent"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    Дата направления
+                    <span data-bind="text: $data.Created"></span>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko if: !model.Offers() || !model.Offers().length-->
+    <div class="text-center">
+        <h4>Предложения отсутствуют</h4>
+    </div>
+    <!-- /ko -->
+</div>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/administratorApplicationCardVM")
+    <script>
+        var viewModel = administratorApplicationCardVM;
+        ko.applyBindings(viewModel);
+        $(function () {
+            viewModel.model.Id(@ViewBag.Id);
+            viewModel.init();
+        });
+    </script>
+}

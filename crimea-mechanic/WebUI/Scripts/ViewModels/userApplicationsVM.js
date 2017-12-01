@@ -191,7 +191,8 @@
         getApplications();
     };
 
-    var find = function() {
+    var find = function () {
+        filter.currentPage(1);
         getApplications();
     };
 

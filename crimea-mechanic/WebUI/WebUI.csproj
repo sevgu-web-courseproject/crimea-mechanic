@@ -274,6 +274,10 @@
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\ViewModels\administratorApplicationCardVM.js" />
+    <Content Include="Scripts\ViewModels\administratorApplicationsVM.js" />
+    <Content Include="Scripts\ViewModels\carServiceApplicationCardVM.js" />
+    <Content Include="Scripts\ViewModels\carServiceApplicationsVM.js" />
     <Content Include="Scripts\ViewModels\carServiceCardVM.js" />
     <Content Include="Scripts\ViewModels\garagePageVM.js" />
     <Content Include="Scripts\ViewModels\homePageVM.js" />
@@ -329,6 +333,10 @@
     <Content Include="Views\Application\ApplicationForUser.cshtml" />
     <Content Include="Views\Application\ApplicationCardForUser.cshtml" />
     <Content Include="Views\Application\Pool.cshtml" />
+    <Content Include="Views\Application\ApplicationsForCarService.cshtml" />
+    <Content Include="Views\Application\ApplicationCardForCarService.cshtml" />
+    <Content Include="Views\Application\ApplicationsForAdministrator.cshtml" />
+    <Content Include="Views\Application\ApplicationCardForAdministrator.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.Constants\Common.Constants.csproj">
