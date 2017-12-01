@@ -45,7 +45,7 @@ namespace WebApi.Controllers
         [Route("GetCarServiceCard/{carServiceId:long}")]
         public IHttpActionResult GetCarServiceCard(long carServiceId)
         {
-            return CallBusinessLogicActionWithResult(() => _manager.GetInfo(carServiceId));
+            return CallBusinessLogicActionWithResult(() => _manager.GetInfo(carServiceId, User.Identity.GetUserId()));
         }
 
         /// <summary>
@@ -113,6 +113,17 @@ namespace WebApi.Controllers
         public IHttpActionResult BlockCarService(long carServiceId)
         {
             return CallBusinessLogicAction(() => _manager.BlockCarService(carServiceId, User.Identity.GetUserId()));
+        }
+
+        /// <summary>
+        /// Разблокирование автосервиса
+        /// </summary>
+        [HttpGet]
+        [Authorize(Roles = Common.Constants.CommonRoles.Administrator)]
+        [Route("UnBlockCarService/{carServiceId:long}")]
+        public IHttpActionResult UnBlockCarService(long carServiceId)
+        {
+            return CallBusinessLogicAction(() => _manager.UnBlockCarService(carServiceId, User.Identity.GetUserId()));
         }
 
         #endregion

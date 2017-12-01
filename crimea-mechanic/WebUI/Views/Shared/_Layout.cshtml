@@ -16,7 +16,7 @@
         <img src="@Url.Content("~/Content/Images/gear.svg")" width="32" height="32" class="d-inline-block align-top" alt=""> Crimean-Mechanic
     </a>
     <div class="collapse navbar-collapse">
-            @if(User.Identity.IsAuthenticated)
+            @if (User.Identity.IsAuthenticated)
             {
                 if (User.IsInRole(Common.Constants.CommonRoles.Administrator))
                 {
@@ -26,6 +26,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index", "Application")">@GlobalResources.Applications</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "CarService")">Автосервисы</a>
                         </li>
                     </ul>
                 }
@@ -38,6 +41,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index", "Application")">@GlobalResources.MyApplications</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "CarService")">Автосервисы</a>
+                        </li>
                     </ul>
                 }
                 else
@@ -49,8 +55,19 @@
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index", "Application")">@GlobalResources.ServiceApplications</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "CarService")">Автосервисы</a>
+                        </li>
                     </ul>
                 }
+            }
+            else
+            {
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "CarService")">Автосервисы</a>
+                    </li>
+                </ul>
             }
     </div>
     

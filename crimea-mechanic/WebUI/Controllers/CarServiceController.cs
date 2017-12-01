@@ -4,7 +4,14 @@ namespace WebUI.Controllers
 {
     public class CarServiceController : BaseController
     {
-        // GET: CarServive Card
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Card(long id)

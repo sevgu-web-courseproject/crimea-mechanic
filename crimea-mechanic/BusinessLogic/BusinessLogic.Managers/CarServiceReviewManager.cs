@@ -95,9 +95,9 @@ namespace BusinessLogic.Managers
 
         public void Delete(long reviewId, string currentUserId)
         {
-            var isRegular = UserManager.IsUserInRole(Common.Constants.CommonRoles.Regular, currentUserId);
+            var isRegular = UserManager.IsUserInRole(currentUserId, Common.Constants.CommonRoles.Regular);
             if (!isRegular &&
-                !UserManager.IsUserInRole(Common.Constants.CommonRoles.Administrator, currentUserId))
+                !UserManager.IsUserInRole(currentUserId, Common.Constants.CommonRoles.Administrator))
             {
                 throw new BusinessFaultException(BusinessLogicExceptionResources.UserHasDifferentRole);
             }

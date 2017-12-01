@@ -5,6 +5,7 @@ using AutoMapper;
 using BusinessLogic.Managers.Abstraction;
 using BusinessLogic.Objects;
 using BusinessLogic.Objects.CarService;
+using BusinessLogic.Objects.Review;
 using BusinessLogic.Resources;
 using Common.Enums;
 using Common.Exceptions;
@@ -65,11 +66,16 @@ namespace BusinessLogic.Managers
             UnitOfWork.SaveChanges();
         }
 
-        public CarServiceInfoDto GetInfo(long carServiceId)
+        public CarServiceInfoDto GetInfo(long carServiceId, string currentUserId)
         {
             var service = GetCarService(carServiceId);
 
             var infoDto = Mapper.Map<CarServiceInfoDto>(service);
+            infoDto.Reviews = service.Reviews
+                .Where(r => !r.IsDeleted)
+                .OrderByDescending(r => r.Created)
+                .Select(Mapper.Map<ReviewInfoDto>)
+                .ToList();
             infoDto.PhotosId = service.Files
                 .Where(file => file.Type == FileType.Photo)
                 .Select(file => file.Id)
@@ -77,9 +83,14 @@ namespace BusinessLogic.Managers
             infoDto.Phones = service.Phones
                 .Select(p => p.Number)
                 .ToList();
-            infoDto.AverageMark = service.Reviews.Count == 0
+            infoDto.AverageMark = service.Reviews.Count(r => !r.IsDeleted) == 0
                 ? 0
-                : service.Points / service.Reviews.Count;
+                : service.Points / service.Reviews.Count(r => !r.IsDeleted);
+
+            if (!string.IsNullOrEmpty(currentUserId) && UserManager.IsUserInRole(currentUserId, Common.Constants.CommonRoles.Regular))
+            {
+                infoDto.ReviewId = service.Reviews.SingleOrDefault(x => !x.IsDeleted && x.User.ApplicationUser.Id == currentUserId)?.Id;
+            }
 
             return infoDto;
         }
@@ -114,9 +125,9 @@ namespace BusinessLogic.Managers
                 .Select(item =>
                 {
                     var dto = Mapper.Map<CarServiceShortInfoDto>(item);
-                    dto.AverageMark = item.Reviews.Count == 0
+                    dto.AverageMark = item.Reviews.Count(r => !r.IsDeleted) == 0
                         ? 0
-                        : item.Points / item.Reviews.Count;
+                        : item.Points / item.Reviews.Count(r => !r.IsDeleted);
                     return dto;
                 })
                 .ToList();
@@ -205,6 +216,22 @@ namespace BusinessLogic.Managers
             UnitOfWork.SaveChanges();
         }
 
+        public void UnBlockCarService(long carServiceId, string currentUserId)
+        {
+            UserManager.IsUserInAdministrationRole(currentUserId);
+            var service = GetCarService(carServiceId);
+
+            if (service.State != CarServiceState.Blocked)
+            {
+                throw new BusinessFaultException(BusinessLogicExceptionResources.CarServiceIncorrectState);
+            }
+
+            service.State = CarServiceState.Active;
+            service.Updated = DateTime.UtcNow;
+
+            UnitOfWork.SaveChanges();
+        }
+
         #endregion
 
         #region Private methods
@@ -226,10 +253,33 @@ namespace BusinessLogic.Managers
                 .Include(q => q.Reviews)
                 .Include(q => q.City)
                 .Include(q => q.Files)
-                .Where(cr => cr.State == CarServiceState.Active)
-                .OrderByDescending(cr => cr.Points);
+                .Include(q => q.Reviews);
 
-            return query;
+            if (filter.ShowBlocked.HasValue && filter.ShowBlocked.Value)
+            {
+                query = query.Where(q => q.State == CarServiceState.Active || q.State == CarServiceState.Blocked);
+            }
+            else
+            {
+                query = query.Where(q => q.State == CarServiceState.Active);
+            }
+
+            if (!string.IsNullOrEmpty(filter.Name))
+            {
+                query = query.Where(q => q.Name.Contains(filter.Name));
+            }
+
+            if (filter.CityId.HasValue)
+            {
+                query = query.Where(q => q.City.Id == filter.CityId.Value);
+            }
+
+            if (filter.Stars.HasValue)
+            {
+                query = query.Where(q => q.Reviews.Count(r => !r.IsDeleted) != 0 && q.Points / q.Reviews.Count(r => !r.IsDeleted) == filter.Stars.Value);
+            }
+
+            return query.OrderByDescending(cr => cr.Points);
         }
 
         private IQueryable<CarService> BuildQueryForRegistrationRequests(CarServiceRegistrationsFilter filter)
