@@ -88,11 +88,38 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить авто.
+        /// </summary>
+        public static string AddACar {
+            get {
+                return ResourceManager.GetString("AddACar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Адрес автосервиса.
         /// </summary>
         public static string AddressCarService {
             get {
                 return ResourceManager.GetString("AddressCarService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Заявка принята.
+        /// </summary>
+        public static string ApplicationAccepted {
+            get {
+                return ResourceManager.GetString("ApplicationAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Заявка отклонена.
+        /// </summary>
+        public static string ApplicationDeclined {
+            get {
+                return ResourceManager.GetString("ApplicationDeclined", resourceCulture);
             }
         }
         
@@ -138,6 +165,114 @@ namespace WebUI.App_LocalResources {
         public static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавление автомобиля.
+        /// </summary>
+        public static string CarAdding {
+            get {
+                return ResourceManager.GetString("CarAdding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Машина успешно добавлена вам в гараж.
+        /// </summary>
+        public static string CarAddToGarageSuccess {
+            get {
+                return ResourceManager.GetString("CarAddToGarageSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Карточка автомобиля.
+        /// </summary>
+        public static string CarCard {
+            get {
+                return ResourceManager.GetString("CarCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Объем двигателя:.
+        /// </summary>
+        public static string CarEngine {
+            get {
+                return ResourceManager.GetString("CarEngine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Необходимо указать объем двигателя автомобиля.
+        /// </summary>
+        public static string CarEngineRequired {
+            get {
+                return ResourceManager.GetString("CarEngineRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Тип топлива:.
+        /// </summary>
+        public static string CarFuelType {
+            get {
+                return ResourceManager.GetString("CarFuelType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Необходимо указать тип топлива автомобиля.
+        /// </summary>
+        public static string CarFuelTypeRequired {
+            get {
+                return ResourceManager.GetString("CarFuelTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на История работ.
+        /// </summary>
+        public static string CarHistory {
+            get {
+                return ResourceManager.GetString("CarHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Марка автомобиля:.
+        /// </summary>
+        public static string CarMark {
+            get {
+                return ResourceManager.GetString("CarMark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Модель автомобиля:.
+        /// </summary>
+        public static string CarModel {
+            get {
+                return ResourceManager.GetString("CarModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Имя авто (видно только Вам):.
+        /// </summary>
+        public static string CarName {
+            get {
+                return ResourceManager.GetString("CarName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Необходимо указать имя автомобиля.
+        /// </summary>
+        public static string CarNameIsRequired {
+            get {
+                return ResourceManager.GetString("CarNameIsRequired", resourceCulture);
             }
         }
         
@@ -237,6 +372,51 @@ namespace WebUI.App_LocalResources {
         public static string CarServiceWorkTime {
             get {
                 return ResourceManager.GetString("CarServiceWorkTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Машины не найдены.
+        /// </summary>
+        public static string CarsNotFound {
+            get {
+                return ResourceManager.GetString("CarsNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Машина успешно удалена.
+        /// </summary>
+        public static string CarSuccessfullyDeleted {
+            get {
+                return ResourceManager.GetString("CarSuccessfullyDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Машина успешно восстановлена.
+        /// </summary>
+        public static string CarSucessfullyRestored {
+            get {
+                return ResourceManager.GetString("CarSucessfullyRestored", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Год выпуска:.
+        /// </summary>
+        public static string CarYearOfAssembly {
+            get {
+                return ResourceManager.GetString("CarYearOfAssembly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Необходимо указать год производства автомобиля.
+        /// </summary>
+        public static string CarYearRequired {
+            get {
+                return ResourceManager.GetString("CarYearRequired", resourceCulture);
             }
         }
         
@@ -349,6 +529,33 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалить.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дизель.
+        /// </summary>
+        public static string Diesel {
+            get {
+                return ResourceManager.GetString("Diesel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Редактировать.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Введите имя.
         /// </summary>
         public static string EnterName {
@@ -381,6 +588,24 @@ namespace WebUI.App_LocalResources {
         public static string FooterText {
             get {
                 return ResourceManager.GetString("FooterText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Гараж.
+        /// </summary>
+        public static string Garage {
+            get {
+                return ResourceManager.GetString("Garage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Бензин.
+        /// </summary>
+        public static string Gasoline {
+            get {
+                return ResourceManager.GetString("Gasoline", resourceCulture);
             }
         }
         
@@ -538,11 +763,38 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Необходимо указать модель автомобиля.
+        /// </summary>
+        public static string ModelSpecify {
+            get {
+                return ResourceManager.GetString("ModelSpecify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Мой гараж.
+        /// </summary>
+        public static string MyGarage {
+            get {
+                return ResourceManager.GetString("MyGarage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Записи не найдены.
         /// </summary>
         public static string NoRecordsFound {
             get {
                 return ResourceManager.GetString("NoRecordsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Другой.
+        /// </summary>
+        public static string Other {
+            get {
+                return ResourceManager.GetString("Other", resourceCulture);
             }
         }
         
@@ -655,6 +907,15 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Восстановить.
+        /// </summary>
+        public static string Restore {
+            get {
+                return ResourceManager.GetString("Restore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Отзывы.
         /// </summary>
         public static string Reviews {
@@ -696,6 +957,15 @@ namespace WebUI.App_LocalResources {
         public static string ServiceRegister {
             get {
                 return ResourceManager.GetString("ServiceRegister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Показывать удаленные.
+        /// </summary>
+        public static string ShowDeleted {
+            get {
+                return ResourceManager.GetString("ShowDeleted", resourceCulture);
             }
         }
         
@@ -745,11 +1015,47 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на VIN:.
+        /// </summary>
+        public static string VIN {
+            get {
+                return ResourceManager.GetString("VIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Vin-номер должен содержать 17 символов.
+        /// </summary>
+        public static string VinCharacters {
+            get {
+                return ResourceManager.GetString("VinCharacters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Необходимо указать vin-номер автомобиля.
+        /// </summary>
+        public static string VinSpecify {
+            get {
+                return ResourceManager.GetString("VinSpecify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Перечень работ.
         /// </summary>
         public static string WorkTags {
             get {
                 return ResourceManager.GetString("WorkTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Недопустимое значение года.
+        /// </summary>
+        public static string YearError {
+            get {
+                return ResourceManager.GetString("YearError", resourceCulture);
             }
         }
     }

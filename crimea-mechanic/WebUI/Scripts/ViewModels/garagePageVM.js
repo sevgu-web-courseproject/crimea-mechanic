@@ -12,32 +12,33 @@
     var models = ko.observableArray([]);
 
     var fuelTypes = [
-        { Id: 10, Name: "Бензин" }, //TODO перевести
-        { Id: 20, Name: "Дизель" }, //TODO перевести
-        { Id: 30, Name: "Другой" } //TODO перевести
+        { Id: 10, Name: window.resource.texts.gasoline }, 
+        { Id: 20, Name: window.resource.texts.diesel }, 
+        { Id: 30, Name: window.resource.texts.other }
     ];
 
     var newCar = {
         Name: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать имя автомобиля' } //TODO перевести
+            required: {
+                params: true, message: window.resource.errors.carNameIsRequired } 
         }),
         ModelId: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать модель автомобиля' } //TODO перевести
+            required: { params: true, message: window.resource.errors.modelSpecify}
         }),
         Vin: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать vin-номер автомобиля' }, //TODO перевести
-            minLength: { params: 17, message: 'Vin-номер должен содержать 17 символов' } //TODO перевести
+            required: { params: true, message: window.resource.errors.vinSpecify }, 
+            minLength: { params: 17, message: window.resource.errors.vinCharacters } 
         }),
         Year: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать год производства автомобиля' }, //TODO перевести
-            max: { params: 2017, message: 'Недопустимое значение года' }, //TODO перевести
-            min: { params: 1930, message: 'Недопустимое значение года' } //TODO перевести
+            required: { params: true, message: window.resource.errors.carYearRequired },
+            max: { params: 2017, message: window.resource.errors.yearError }, 
+            min: { params: 1930, message: window.resource.errors.yearError } 
         }),
         FuelType: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать тип топлива автомобиля' } //TODO перевести
+            required: { params: true, message: window.resource.errors.carFuelTypeIsRequired } 
         }),
         EngineCapacity: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать объем двигателя автомобиля' } //TODO перевести
+            required: { params: true, message: window.resource.errors.carEngineTypeIsRequired } 
         })
     };
 
@@ -178,7 +179,7 @@
                 clearNewCarFiels();
                 validationGroup.showAllMessages(false);
                 getCars();
-                notificationHelper.success(window.resource.texts.success, "Машина успешно добавлена вам в гараж"); //TODO перевести
+                notificationHelper.success(window.resource.texts.success, window.resource.texts.carAddToGarageSuccess); 
             }, function($xhr) {
                 $(document).trigger("hideLoadingPanel");
                 var text = ajaxHelper.extractErrors($xhr);

@@ -3,34 +3,34 @@
     var model = {
         Id: ko.observable(),
         Name: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать имя автомобиля' } //TODO перевести
+            required: { params: true, message: window.resource.errors.carNameIsRequired } 
         }),
         Mark: ko.observable(),
         Model: ko.observable(),
         Vin: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать vin-номер автомобиля' }, //TODO перевести
-            minLength: { params: 17, message: 'Vin-номер должен содержать 17 символов' } //TODO перевести
+            required: { params: true, message: window.resource.errors.vinSpecify },
+            minLength: { params: 17, message: window.resource.errors.vinCharacters } 
         }),
         Year: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать год производства автомобиля' }, //TODO перевести
-            max: { params: 2017, message: 'Недопустимое значение года' }, //TODO перевести
-            min: { params: 1930, message: 'Недопустимое значение года' } //TODO перевести
+            required: { params: true, message: window.resource.errors.carYearRequired }, 
+            max: { params: 2017, message: window.resource.errors.yearError }, 
+            min: { params: 1930, message: window.resource.errors.yearError } 
         }),
         FuelType: ko.observable().extend({ 
-            required: { params: true, message: 'Необходимо указать тип топлива автомобиля' } //TODO перевести
+            required: { params: true, message: window.resource.errors.carFuelTypeIsRequired } 
         }),
         FuelTypeDescription: ko.observable(),
         EngineCapacity: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать объем двигателя автомобиля' } //TODO перевести
+            required: { params: true, message: window.resource.errors.carEngineTypeIsRequired } 
         }),
         Applications: ko.observableArray([]),
         IsDeleted: ko.observable()
     };
 
     var fuelTypes = [
-        { Id: 10, Name: "Бензин" }, //TODO перевести
-        { Id: 20, Name: "Дизель" }, //TODO перевести
-        { Id: 30, Name: "Другой" } //TODO перевести
+        { Id: 10, Name: window.resource.texts.gasoline }, 
+        { Id: 20, Name: window.resource.texts.disel }, 
+        { Id: 30, Name: window.resource.texts.other } 
     ];
 
     var getCard = function() {
@@ -92,7 +92,7 @@
         var url = window.resource.urls.webApiDeleteCarUrl.replace("carId", model.Id());
         ajaxHelper.getWithoutResult(url)
             .then(function () {
-                localStorage.success = "Машина успешно удалена"; //TODO перевести
+                localStorage.success = window.resource.texts.carSuccessfullyDeleted; 
                 window.location.href = window.resource.urls.webUiGarageUrl;
             }, function($xhr) {
                 $(document).trigger("hideLoadingPanel");
@@ -106,7 +106,7 @@
         var url = window.resource.urls.webApiRestoreCarUrl.replace("carId", model.Id());
         ajaxHelper.getWithoutResult(url)
             .then(function () {
-                localStorage.success = "Машина успешно восстановлена"; //TODO перевести
+                localStorage.success = window.resource.texts.carSucessfullyRestored; 
                 window.location.href = window.resource.urls.webUiGarageUrl;
             }, function ($xhr) {
                 $(document).trigger("hideLoadingPanel");
