@@ -450,4 +450,148 @@
   <data name="YearError" xml:space="preserve">
     <value>Invalid year value</value>
   </data>
+  <data name="ApplicationCard" xml:space="preserve">
+    <value>Application card</value>
+  </data>
+  <data name="ApplicationCreating" xml:space="preserve">
+    <value>Application for repair creating</value>
+  </data>
+  <data name="ApplicationDate" xml:space="preserve">
+    <value>Application date:</value>
+  </data>
+  <data name="ApplicationEdit" xml:space="preserve">
+    <value>Application editing</value>
+  </data>
+  <data name="ApplicationExecutionCancelled" xml:space="preserve">
+    <value>Application execution cancelled</value>
+  </data>
+  <data name="ApplicationExecutionCompleted" xml:space="preserve">
+    <value>Application execution completed</value>
+  </data>
+  <data name="ApplicationN" xml:space="preserve">
+    <value>Application №</value>
+  </data>
+  <data name="ApplicationOffers" xml:space="preserve">
+    <value>Application offers</value>
+  </data>
+  <data name="ApplicationStatus" xml:space="preserve">
+    <value>Application status:</value>
+  </data>
+  <data name="ApplicationSuccessfullyDeleted" xml:space="preserve">
+    <value>Application was sucessfully deleted</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>Author:</value>
+  </data>
+  <data name="Car" xml:space="preserve">
+    <value>Car:</value>
+  </data>
+  <data name="CarEdit" xml:space="preserve">
+    <value>Car editing</value>
+  </data>
+  <data name="ChooseACar" xml:space="preserve">
+    <value>Choose a car</value>
+  </data>
+  <data name="ChooseAMark" xml:space="preserve">
+    <value>Choose a mark</value>
+  </data>
+  <data name="ClearFilter" xml:space="preserve">
+    <value>Clear filter</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="ContactNumber" xml:space="preserve">
+    <value>Contact number:</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Content:</value>
+  </data>
+  <data name="CreateApplication" xml:space="preserve">
+    <value>Create application</value>
+  </data>
+  <data name="Declined" xml:space="preserve">
+    <value>Declined</value>
+  </data>
+  <data name="Deleted" xml:space="preserve">
+    <value>Deleted</value>
+  </data>
+  <data name="DeleteOffer" xml:space="preserve">
+    <value>Delete offer</value>
+  </data>
+  <data name="DirectionDate" xml:space="preserve">
+    <value>Direction date:</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="ExecutionCancelled" xml:space="preserve">
+    <value>Execution of application was cancelled</value>
+  </data>
+  <data name="Find" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="InSearch" xml:space="preserve">
+    <value>In search of service</value>
+  </data>
+  <data name="MyApplications" xml:space="preserve">
+    <value>My applications</value>
+  </data>
+  <data name="NoOffers" xml:space="preserve">
+    <value>There is no offers yet</value>
+  </data>
+  <data name="OfferAccepted" xml:space="preserve">
+    <value>Offer was sucessfully accepted</value>
+  </data>
+  <data name="OfferAdd" xml:space="preserve">
+    <value>Offer adding </value>
+  </data>
+  <data name="OfferDeleted" xml:space="preserve">
+    <value>Your offer was deleted</value>
+  </data>
+  <data name="OfferWasSended" xml:space="preserve">
+    <value>Your offer was sended sucessfully</value>
+  </data>
+  <data name="OnWork" xml:space="preserve">
+    <value>On work</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price:</value>
+  </data>
+  <data name="RepairApplications" xml:space="preserve">
+    <value>Applications for repair</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="SendApplication" xml:space="preserve">
+    <value>Send application</value>
+  </data>
+  <data name="SendOffer" xml:space="preserve">
+    <value>Send offer</value>
+  </data>
+  <data name="Service" xml:space="preserve">
+    <value>Service:</value>
+  </data>
+  <data name="ServiceApplications" xml:space="preserve">
+    <value>Service applications</value>
+  </data>
+  <data name="SpecifyCar" xml:space="preserve">
+    <value>Please specify the car</value>
+  </data>
+  <data name="SpecifyCity" xml:space="preserve">
+    <value>Please specify the city</value>
+  </data>
+  <data name="SpecifyWorkDescription" xml:space="preserve">
+    <value>Please specify works description</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="WorksDescription" xml:space="preserve">
+    <value>Works description:</value>
+  </data>
 </root>

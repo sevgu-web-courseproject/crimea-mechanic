@@ -25,10 +25,10 @@
 
     var editApplication = {
         cityId: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать город' } //TODO перевести
+            required: { params: true, message: window.resource.errors.specifyCity } 
         }),
         description: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать описание работ' } //TODO перевести
+            required: { params: true, message: window.resource.errors.specifyWorksDescription } 
         })
     }
 
@@ -76,7 +76,7 @@
         var url = window.resource.urls.webApiDeleteApplicationUrl.replace("applicationId", model.Id());
         ajaxHelper.getWithoutResult(url)
             .then(function() {
-                localStorage.success = "Заявка успешно была удалена"; //TODO перевести
+                localStorage.success = window.resource.texts.applicationSuccessfullyDeleted; 
                 window.location.href = window.resource.urls.webUiApplicationsUrl;
             }, function($xhr) {
                 $(document).trigger("hideLoadingPanel");
@@ -91,7 +91,7 @@
         ajaxHelper.getWithoutResult(url)
             .then(function () {
                 getCard();
-                notificationHelper.success(window.resource.texts.success, "Предложение успешно принято"); //TODO перевести
+                notificationHelper.success(window.resource.texts.success, window.resource.texts.offerAccepted); 
             }, function ($xhr) {
                 $(document).trigger("hideLoadingPanel");
                 var text = ajaxHelper.extractErrors($xhr);
@@ -104,7 +104,7 @@
         var url = window.resource.urls.webApiRejectApplicationUrl.replace("applicationId", model.Id());
         ajaxHelper.getWithoutResult(url)
             .then(function () {
-                localStorage.success = "Выполнение заявки отменено"; //TODO перевести
+                localStorage.success = window.resource.texts.executionCancelled; 
                 window.location.href = window.resource.urls.webUiApplicationsUrl;
             }, function ($xhr) {
                 $(document).trigger("hideLoadingPanel");

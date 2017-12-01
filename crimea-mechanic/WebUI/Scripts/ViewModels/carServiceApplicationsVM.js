@@ -12,9 +12,9 @@
     var itemsCount = ko.observable();
 
     var applicationStates = [
-        { Id: 15, Name: "На исполнении" }, //TODO перевести
-        { Id: 20, Name: "Отклонена" }, //TODO перевести
-        { Id: 25, Name: "Завершена" } //TODO перевести
+        { Id: 15, Name: window.resource.text.onWork }, 
+        { Id: 20, Name: window.resource.text.declined }, 
+        { Id: 25, Name: window.resource.text.completed }
     ];
 
     var getApplications = function() {
