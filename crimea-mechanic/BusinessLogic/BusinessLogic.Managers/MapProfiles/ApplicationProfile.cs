@@ -32,6 +32,7 @@ namespace BusinessLogic.Managers.MapProfiles
 
             CreateMap<Application, ApplicationInfoForUserDto>()
                 .IncludeBase<Application, ApplicationShortInfoForUserDto>()
+                .ForMember(d => d.CityId, opt => opt.MapFrom(s => s.City.Id))
                 .ForMember(d => d.Offers, opt => opt.Ignore());
 
             CreateMap<Application, ApplicationShortInfoForServiceDto>()

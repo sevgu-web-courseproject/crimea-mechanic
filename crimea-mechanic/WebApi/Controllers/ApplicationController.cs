@@ -40,6 +40,14 @@ namespace WebApi.Controllers
         }
 
         [Authorize(Roles = Common.Constants.CommonRoles.Regular)]
+        [Route("Edit")]
+        [HttpPost]
+        public IHttpActionResult Edit(EditApplicationDto dto)
+        {
+            return CallBusinessLogicAction(() => _manager.EditApplication(dto, User.Identity.GetUserId()));
+        }
+
+        [Authorize(Roles = Common.Constants.CommonRoles.Regular)]
         [Route("Delete/{applicationId}")]
         [HttpGet]
         public IHttpActionResult Delete(long applicationId)

@@ -65,5 +65,7 @@
         public static string WebApiGetActiveCarsUrl => Flurl.Url.Combine(WebApiUri, "api/Car/GetActiveCars");
 
         public static string WebApiCreateApplicationUrl => Flurl.Url.Combine(WebApiUri, "api/Application/Create");
+
+        public static string WebApiEditApplicationUrl => Flurl.Url.Combine(WebApiUri, "api/Application/Edit");
     }
 }
