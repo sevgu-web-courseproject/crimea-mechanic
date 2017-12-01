@@ -450,4 +450,148 @@
   <data name="VIN" xml:space="preserve">
     <value>VIN:</value>
   </data>
+  <data name="ApplicationCard" xml:space="preserve">
+    <value>Карточка заявки</value>
+  </data>
+  <data name="ApplicationCreating" xml:space="preserve">
+    <value>Создание заявки на ремонт</value>
+  </data>
+  <data name="ApplicationDate" xml:space="preserve">
+    <value>Дата подачи заявки:</value>
+  </data>
+  <data name="ApplicationEdit" xml:space="preserve">
+    <value>Редактирование заявки</value>
+  </data>
+  <data name="ApplicationExecutionCancelled" xml:space="preserve">
+    <value>Выполнение заявки отменено</value>
+  </data>
+  <data name="ApplicationExecutionCompleted" xml:space="preserve">
+    <value>Выполнение заявки завершено</value>
+  </data>
+  <data name="ApplicationN" xml:space="preserve">
+    <value>Заявка №</value>
+  </data>
+  <data name="ApplicationOffers" xml:space="preserve">
+    <value>Предложения по заявке</value>
+  </data>
+  <data name="ApplicationStatus" xml:space="preserve">
+    <value>Состояние заявки:</value>
+  </data>
+  <data name="ApplicationSuccessfullyDeleted" xml:space="preserve">
+    <value>Заявка успешно была удалена</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>Автор:</value>
+  </data>
+  <data name="Car" xml:space="preserve">
+    <value>Машина:</value>
+  </data>
+  <data name="CarEdit" xml:space="preserve">
+    <value>Редактирование автомобиля</value>
+  </data>
+  <data name="ChooseACar" xml:space="preserve">
+    <value>Выберите машину:</value>
+  </data>
+  <data name="ChooseAMark" xml:space="preserve">
+    <value>Выберите марку машины</value>
+  </data>
+  <data name="ClearFilter" xml:space="preserve">
+    <value>Очистить фильтр</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Завершена</value>
+  </data>
+  <data name="ContactNumber" xml:space="preserve">
+    <value>Контактный номер:</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Содержание:</value>
+  </data>
+  <data name="CreateApplication" xml:space="preserve">
+    <value>Создать заявку</value>
+  </data>
+  <data name="Declined" xml:space="preserve">
+    <value>Отклонена</value>
+  </data>
+  <data name="Deleted" xml:space="preserve">
+    <value>Удалена</value>
+  </data>
+  <data name="DeleteOffer" xml:space="preserve">
+    <value>Удалить предложение</value>
+  </data>
+  <data name="DirectionDate" xml:space="preserve">
+    <value>Дата направления:</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>Завершить</value>
+  </data>
+  <data name="ExecutionCancelled" xml:space="preserve">
+    <value>Выполнение заявки отменено</value>
+  </data>
+  <data name="Find" xml:space="preserve">
+    <value>Найти</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>С</value>
+  </data>
+  <data name="InSearch" xml:space="preserve">
+    <value>В поиске автосервиса</value>
+  </data>
+  <data name="MyApplications" xml:space="preserve">
+    <value>Мои заявки</value>
+  </data>
+  <data name="NoOffers" xml:space="preserve">
+    <value>Предложения отсутствуют</value>
+  </data>
+  <data name="OfferAccepted" xml:space="preserve">
+    <value>Предложение успешно принято</value>
+  </data>
+  <data name="OfferAdd" xml:space="preserve">
+    <value>Добавление предложения</value>
+  </data>
+  <data name="OfferDeleted" xml:space="preserve">
+    <value>Предложение удалено</value>
+  </data>
+  <data name="OfferWasSended" xml:space="preserve">
+    <value>Предложение успешно направлено клиенту</value>
+  </data>
+  <data name="OnWork" xml:space="preserve">
+    <value>На исполнении</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Цена:</value>
+  </data>
+  <data name="RepairApplications" xml:space="preserve">
+    <value>Заявки на ремонт</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Отправить</value>
+  </data>
+  <data name="SendApplication" xml:space="preserve">
+    <value>Отправить заявку</value>
+  </data>
+  <data name="SendOffer" xml:space="preserve">
+    <value>Отправить предложение</value>
+  </data>
+  <data name="Service" xml:space="preserve">
+    <value>Автосервис:</value>
+  </data>
+  <data name="ServiceApplications" xml:space="preserve">
+    <value>Заявки автосервиса</value>
+  </data>
+  <data name="SpecifyCar" xml:space="preserve">
+    <value>Необходимо указать автомобиль</value>
+  </data>
+  <data name="SpecifyCity" xml:space="preserve">
+    <value>Необходимо указать город</value>
+  </data>
+  <data name="SpecifyWorkDescription" xml:space="preserve">
+    <value>Необходимо указать описание работ</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>По</value>
+  </data>
+  <data name="WorksDescription" xml:space="preserve">
+    <value>Описание работ:</value>
+  </data>
 </root>

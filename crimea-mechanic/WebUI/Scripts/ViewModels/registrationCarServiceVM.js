@@ -90,7 +90,7 @@
             }, function ($xhr) {
                 $(document).trigger("hideLoadingPanel");
                 var text = ajaxHelper.extractErrors($xhr);
-                notificationHelper.error("Ошибка", text);
+                notificationHelper.error(window.resource.errors.error, text);
             });
     };
 
@@ -123,7 +123,7 @@
                 model.Cities(results[0]);
             }, function (errors) {
                 console.log(errors);
-                notificationHelper.error("Ошибка", text);
+                notificationHelper.error(window.resource.errors.error, text);
             });
     };
 

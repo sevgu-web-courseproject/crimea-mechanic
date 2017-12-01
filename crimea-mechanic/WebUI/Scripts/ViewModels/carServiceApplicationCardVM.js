@@ -22,7 +22,7 @@
         var url = window.resource.urls.webApiRejectApplicationUrl.replace("applicationId", model.Id());
         ajaxHelper.getWithoutResult(url)
             .then(function () {
-                localStorage.success = "Выполнение заявки отменено"; //TODO перевести
+                localStorage.success = window.resource.texts.applicationExecutionCancelled; 
                 window.location.href = window.resource.urls.webUiApplicationsUrl;
             }, function ($xhr) {
                 $(document).trigger("hideLoadingPanel");
@@ -36,7 +36,7 @@
         var url = window.resource.urls.webApiCompleteApplicationUrl.replace("applicationId", model.Id());
         ajaxHelper.getWithoutResult(url)
             .then(function () {
-                localStorage.success = "Выполнение заявки завершено"; //TODO перевести
+                localStorage.success = window.resource.texts.applicationExecutionCompleted;
                 window.location.href = window.resource.urls.webUiApplicationsUrl;
             }, function ($xhr) {
                 $(document).trigger("hideLoadingPanel");

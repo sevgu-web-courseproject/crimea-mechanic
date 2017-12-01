@@ -115,11 +115,83 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Карточка заявки.
+        /// </summary>
+        public static string ApplicationCard {
+            get {
+                return ResourceManager.GetString("ApplicationCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Создание заявки на ремонт.
+        /// </summary>
+        public static string ApplicationCreating {
+            get {
+                return ResourceManager.GetString("ApplicationCreating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дата подачи заявки:.
+        /// </summary>
+        public static string ApplicationDate {
+            get {
+                return ResourceManager.GetString("ApplicationDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Заявка отклонена.
         /// </summary>
         public static string ApplicationDeclined {
             get {
                 return ResourceManager.GetString("ApplicationDeclined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Редактирование заявки.
+        /// </summary>
+        public static string ApplicationEdit {
+            get {
+                return ResourceManager.GetString("ApplicationEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выполнение заявки отменено.
+        /// </summary>
+        public static string ApplicationExecutionCancelled {
+            get {
+                return ResourceManager.GetString("ApplicationExecutionCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выполнение заявки завершено.
+        /// </summary>
+        public static string ApplicationExecutionCompleted {
+            get {
+                return ResourceManager.GetString("ApplicationExecutionCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Заявка №.
+        /// </summary>
+        public static string ApplicationN {
+            get {
+                return ResourceManager.GetString("ApplicationN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Предложения по заявке.
+        /// </summary>
+        public static string ApplicationOffers {
+            get {
+                return ResourceManager.GetString("ApplicationOffers", resourceCulture);
             }
         }
         
@@ -133,11 +205,38 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Состояние заявки:.
+        /// </summary>
+        public static string ApplicationStatus {
+            get {
+                return ResourceManager.GetString("ApplicationStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Заявка успешно была удалена.
+        /// </summary>
+        public static string ApplicationSuccessfullyDeleted {
+            get {
+                return ResourceManager.GetString("ApplicationSuccessfullyDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Заявки на регистрацию.
         /// </summary>
         public static string AppsForRegister {
             get {
                 return ResourceManager.GetString("AppsForRegister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автор:.
+        /// </summary>
+        public static string Author {
+            get {
+                return ResourceManager.GetString("Author", resourceCulture);
             }
         }
         
@@ -169,6 +268,15 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Машина:.
+        /// </summary>
+        public static string Car {
+            get {
+                return ResourceManager.GetString("Car", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Добавление автомобиля.
         /// </summary>
         public static string CarAdding {
@@ -192,6 +300,15 @@ namespace WebUI.App_LocalResources {
         public static string CarCard {
             get {
                 return ResourceManager.GetString("CarCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Редактирование автомобиля.
+        /// </summary>
+        public static string CarEdit {
+            get {
+                return ResourceManager.GetString("CarEdit", resourceCulture);
             }
         }
         
@@ -421,6 +538,24 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Выберите машину:.
+        /// </summary>
+        public static string ChooseACar {
+            get {
+                return ResourceManager.GetString("ChooseACar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выберите марку машины.
+        /// </summary>
+        public static string ChooseAMark {
+            get {
+                return ResourceManager.GetString("ChooseAMark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Выберите город.
         /// </summary>
         public static string ChooseCity {
@@ -444,6 +579,15 @@ namespace WebUI.App_LocalResources {
         public static string CityIsNotSelected {
             get {
                 return ResourceManager.GetString("CityIsNotSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Очистить фильтр.
+        /// </summary>
+        public static string ClearFilter {
+            get {
+                return ResourceManager.GetString("ClearFilter", resourceCulture);
             }
         }
         
@@ -475,6 +619,15 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Завершена.
+        /// </summary>
+        public static string Completed {
+            get {
+                return ResourceManager.GetString("Completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Контакнтый e-mail автосервиса.
         /// </summary>
         public static string ContactEmailCarService {
@@ -502,6 +655,15 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Контактный номер:.
+        /// </summary>
+        public static string ContactNumber {
+            get {
+                return ResourceManager.GetString("ContactNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Контактный номер телефона.
         /// </summary>
         public static string ContactPhoneNumber {
@@ -520,11 +682,38 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Содержание:.
+        /// </summary>
+        public static string Content {
+            get {
+                return ResourceManager.GetString("Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Создать заявку.
+        /// </summary>
+        public static string CreateApplication {
+            get {
+                return ResourceManager.GetString("CreateApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Отклонить.
         /// </summary>
         public static string Decline {
             get {
                 return ResourceManager.GetString("Decline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Отклонена.
+        /// </summary>
+        public static string Declined {
+            get {
+                return ResourceManager.GetString("Declined", resourceCulture);
             }
         }
         
@@ -538,6 +727,24 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалена.
+        /// </summary>
+        public static string Deleted {
+            get {
+                return ResourceManager.GetString("Deleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалить предложение.
+        /// </summary>
+        public static string DeleteOffer {
+            get {
+                return ResourceManager.GetString("DeleteOffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Дизель.
         /// </summary>
         public static string Diesel {
@@ -547,11 +754,29 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Дата направления:.
+        /// </summary>
+        public static string DirectionDate {
+            get {
+                return ResourceManager.GetString("DirectionDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Редактировать.
         /// </summary>
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Завершить.
+        /// </summary>
+        public static string End {
+            get {
+                return ResourceManager.GetString("End", resourceCulture);
             }
         }
         
@@ -583,11 +808,38 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Выполнение заявки отменено.
+        /// </summary>
+        public static string ExecutionCancelled {
+            get {
+                return ResourceManager.GetString("ExecutionCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Найти.
+        /// </summary>
+        public static string Find {
+            get {
+                return ResourceManager.GetString("Find", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Илья Мжачев &amp; Федор Костюченко.
         /// </summary>
         public static string FooterText {
             get {
                 return ResourceManager.GetString("FooterText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на С.
+        /// </summary>
+        public static string From {
+            get {
+                return ResourceManager.GetString("From", resourceCulture);
             }
         }
         
@@ -691,6 +943,15 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на В поиске автосервиса.
+        /// </summary>
+        public static string InSearch {
+            get {
+                return ResourceManager.GetString("InSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Местоположение.
         /// </summary>
         public static string Location {
@@ -772,6 +1033,15 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Мои заявки.
+        /// </summary>
+        public static string MyApplications {
+            get {
+                return ResourceManager.GetString("MyApplications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Мой гараж.
         /// </summary>
         public static string MyGarage {
@@ -781,11 +1051,65 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Предложения отсутствуют.
+        /// </summary>
+        public static string NoOffers {
+            get {
+                return ResourceManager.GetString("NoOffers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Записи не найдены.
         /// </summary>
         public static string NoRecordsFound {
             get {
                 return ResourceManager.GetString("NoRecordsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Предложение успешно принято.
+        /// </summary>
+        public static string OfferAccepted {
+            get {
+                return ResourceManager.GetString("OfferAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавление предложения.
+        /// </summary>
+        public static string OfferAdd {
+            get {
+                return ResourceManager.GetString("OfferAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Предложение удалено.
+        /// </summary>
+        public static string OfferDeleted {
+            get {
+                return ResourceManager.GetString("OfferDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Предложение успешно направлено клиенту.
+        /// </summary>
+        public static string OfferWasSended {
+            get {
+                return ResourceManager.GetString("OfferWasSended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на На исполнении.
+        /// </summary>
+        public static string OnWork {
+            get {
+                return ResourceManager.GetString("OnWork", resourceCulture);
             }
         }
         
@@ -844,6 +1168,15 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Цена:.
+        /// </summary>
+        public static string Price {
+            get {
+                return ResourceManager.GetString("Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Карточка заявки регистрации автосервиса.
         /// </summary>
         public static string RegApplicationCard {
@@ -885,6 +1218,15 @@ namespace WebUI.App_LocalResources {
         public static string RememberMe {
             get {
                 return ResourceManager.GetString("RememberMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Заявки на ремонт.
+        /// </summary>
+        public static string RepairApplications {
+            get {
+                return ResourceManager.GetString("RepairApplications", resourceCulture);
             }
         }
         
@@ -943,6 +1285,51 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Отправить.
+        /// </summary>
+        public static string Send {
+            get {
+                return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Отправить заявку.
+        /// </summary>
+        public static string SendApplication {
+            get {
+                return ResourceManager.GetString("SendApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Отправить предложение.
+        /// </summary>
+        public static string SendOffer {
+            get {
+                return ResourceManager.GetString("SendOffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Автосервис:.
+        /// </summary>
+        public static string Service {
+            get {
+                return ResourceManager.GetString("Service", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Заявки автосервиса.
+        /// </summary>
+        public static string ServiceApplications {
+            get {
+                return ResourceManager.GetString("ServiceApplications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Редактирование данных автосервиса.
         /// </summary>
         public static string ServiceInformationEdit {
@@ -970,6 +1357,33 @@ namespace WebUI.App_LocalResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Необходимо указать автомобиль.
+        /// </summary>
+        public static string SpecifyCar {
+            get {
+                return ResourceManager.GetString("SpecifyCar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Необходимо указать город.
+        /// </summary>
+        public static string SpecifyCity {
+            get {
+                return ResourceManager.GetString("SpecifyCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Необходимо указать описание работ.
+        /// </summary>
+        public static string SpecifyWorkDescription {
+            get {
+                return ResourceManager.GetString("SpecifyWorkDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Успех.
         /// </summary>
         public static string Success {
@@ -993,6 +1407,15 @@ namespace WebUI.App_LocalResources {
         public static string SuccessUserRegistration {
             get {
                 return ResourceManager.GetString("SuccessUserRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на По.
+        /// </summary>
+        public static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
             }
         }
         
@@ -1038,6 +1461,15 @@ namespace WebUI.App_LocalResources {
         public static string VinSpecify {
             get {
                 return ResourceManager.GetString("VinSpecify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Описание работ:.
+        /// </summary>
+        public static string WorksDescription {
+            get {
+                return ResourceManager.GetString("WorksDescription", resourceCulture);
             }
         }
         

@@ -18,14 +18,13 @@
         </text>
     }
 
-    window.resource = {
-
-        applicationStates: {
-            inSearch: @((long)ApplicationState.InSearch),  
-            inProcessing: @((long)ApplicationState.InProcessing),  
-            completed: @((long)ApplicationState.Completed),
-            rejected: @((long)ApplicationState.Rejected)
-        },
+            window.resource = {
+                applicationStates: {
+                    inSearch: @((long)ApplicationState.InSearch),
+                    inProcessing: @((long)ApplicationState.InProcessing),
+                    completed: @((long)ApplicationState.Completed),
+                    rejected: @((long)ApplicationState.Rejected)
+                },
 
         carServiceStates: {
             active: @((long)CarServiceState.Active),
@@ -73,28 +72,40 @@
             WebApiAddReviewUrl: '@ConstantsUrls.WebApiAddReviewUrl',
             WebApiDeleteReviewUrl: '@ConstantsUrls.WebApiDeleteReviewUrl("reviewId")',
 
-            webUiSignInPageUrl: '@Url.Action("SignIn", "Account")',
-            webUiCarServiceCardUrl: '@Url.Action("Card", "CarService")',
-            webUiRegistrationRequestCardUrl: '@Url.Action("RegistrationRequestCard", "CarService")',
-            webUiRegistrationRequestsUrl: '@Url.Action("RegistrationRequests", "CarService")',
-            webUiGarageUrl: '@Url.Action("Index", "Garage")',
-            webUiUserCarCardUrl: '@Url.Action("Card", "Garage")',
-            webUiApplicationCard: '@Url.Action("Card", "Application")',
-            webUiApplicationsUrl: '@Url.Action("Index", "Application")'
-        },
+                    webUiSignInPageUrl: '@Url.Action("SignIn", "Account")',
+                    webUiCarServiceCardUrl: '@Url.Action("Card", "CarService")',
+                    webUiRegistrationRequestCardUrl: '@Url.Action("RegistrationRequestCard", "CarService")',
+                    webUiRegistrationRequestsUrl: '@Url.Action("RegistrationRequests", "CarService")',
+                    webUiGarageUrl: '@Url.Action("Index", "Garage")',
+                    webUiUserCarCardUrl: '@Url.Action("Card", "Garage")',
+                    webUiApplicationCard: '@Url.Action("Card", "Application")',
+                    webUiApplicationsUrl: '@Url.Action("Index", "Application")'
+                },
 
-        texts: {
-            success: '@GlobalResources.Success',
-            successUserRegistration: '@GlobalResources.SuccessUserRegistration',
-            error: '@GlobalResources.Error',
-            successCarServiceRegistration: '@GlobalResources.SuccessCarServiceRegistration',
-            applicationAccepted: '@GlobalResources.ApplicationAccepted',
-            applicationDeclined: '@GlobalResources.ApplicationDeclined',
-            gasoline: '@GlobalResources.Gasoline',
-            diesel : '@GlobalResources.Diesel',
-            other: '@GlobalResources.Other',
-            carSuccessfullyDeleted: '@GlobalResources.CarSuccessfullyDeleted',
-            carSucessfullyRestored: '@GlobalResources.CarSucessfullyRestored'
+                texts: {
+                    success: '@GlobalResources.Success',
+                    successUserRegistration: '@GlobalResources.SuccessUserRegistration',
+                    error: '@GlobalResources.Error',
+                    successCarServiceRegistration: '@GlobalResources.SuccessCarServiceRegistration',
+                    applicationAccepted: '@GlobalResources.ApplicationAccepted',
+                    applicationDeclined: '@GlobalResources.ApplicationDeclined',
+                    gasoline: '@GlobalResources.Gasoline',
+                    diesel: '@GlobalResources.Diesel',
+                    other: '@GlobalResources.Other',
+                    carSuccessfullyDeleted: '@GlobalResources.CarSuccessfullyDeleted',
+                    carSucessfullyRestored: '@GlobalResources.CarSucessfullyRestored',
+                    deleted: '@GlobalResources.Deleted',
+                    inSearch: '@GlobalResources.InSearch',
+                    onWork: '@GlobalResources.OnWork',
+                    declined: '@GlobalResources.Declined',
+                    completed: '@GlobalResources.Completed',
+                    applicationSuccessfullyDeleted: '@GlobalResources.ApplicationSuccessfullyDeleted',
+                    offerAccepted: '@GlobalResources.OfferAccepted',
+                    executionCancelled: '@GlobalResources.ExecutionCancelled',
+                    offerWasSended: '@GlobalResources.OfferWasSended',
+                    offerDeleted: '@GlobalResources.OfferDeleted',
+                    applicationExecutionCancelled: '@GlobalResources.ApplicationExecutionCancelled',
+                    applicationExecutionCompleted: '@GlobalResources.ApplicationExecutionCompleted',
         },
 
         errors: {
@@ -117,7 +128,11 @@
             carYearRequired: '@GlobalResources.CarYearRequired',
             yearError: '@GlobalResources.YearError',
             carFuelTypeIsRequired: '@GlobalResources.CarFuelTypeRequired',
-            carEngineTypeIsRequired: '@GlobalResources.CarEngineRequired'
+            carEngineTypeIsRequired: '@GlobalResources.CarEngineRequired',
+            specifyCar: '@GlobalResources.SpecifyCar',
+            specifyCity: '@GlobalResources.SpecifyCity',
+            specifyWorksDescription: '@GlobalResources.SpecifyWorkDescription',
+
         }
     }
 </script>
