@@ -1,4 +1,5 @@
 ﻿using System;
+using Common.Enums;
 
 namespace BusinessLogic.Objects.CarService
 {
@@ -46,5 +47,10 @@ namespace BusinessLogic.Objects.CarService
         /// Текстовое поле "Об автосервисе"
         /// </summary>
         public string About { get; set; }
+
+        /// <summary>
+        /// Состояние автосервиса
+        /// </summary>
+        public CarServiceState State { get; set; }
     }
 }

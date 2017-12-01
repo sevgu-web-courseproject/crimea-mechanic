@@ -4,23 +4,48 @@
 }
 
 @section breadcrumbs {
-    @if (!User.Identity.IsAuthenticated)
-    {
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">@GlobalResources.Home</a></li>
-            <li class="breadcrumb-item active">@GlobalResources.AutoserviceCard</li>
-        </ol>
-    }
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">@GlobalResources.Home</a></li>
+        <li class="breadcrumb-item"><a href="@Url.Action("Index", "CarService")">Автосервисы</a></li>
+        <li class="breadcrumb-item active">@GlobalResources.AutoserviceCard</li>
+    </ol>
 }
 
 <div class="jumbotron">
-    <h3><span>@GlobalResources.AutoserviceCard</span></h3>
-    <h4>
+    <h4 class="inline">
         <span data-bind="text: model.Name"></span>
-        <a class="btn pull-right" href="#" data-toggle="modal" data-target="#myModal">
-            <i class="fa fa-cog pull-right"></i>
-        </a>
+        <span class="gold">
+            <!-- ko foreach: new Array(model.AverageMark())-->
+            <i class="fa fa-star"></i>
+            <!-- /ko -->
+        </span>
     </h4>
+    
+    <div class="pull-right">
+        @if (User.IsInRole(Common.Constants.CommonRoles.Regular))
+        {
+            <!-- ko if: model.State() == window.resource.carServiceStates.active -->
+            <!-- ko if: !model.ReviewId() -->
+            <button class="btn btn-success" data-toggle="modal" data-target="#add-review">Добавить отзыв</button>
+            <!-- /ko -->
+            <!-- ko if: model.ReviewId() -->
+            <button class="btn btn-success" data-bind="click: deleteReview">Удалить отзыв</button>
+            <!-- /ko -->
+            <!-- /ko -->
+        }
+        @if (User.IsInRole(Common.Constants.CommonRoles.Administrator))
+        {
+            <!-- ko if: model.State() == window.resource.carServiceStates.blocked -->
+            <button class="btn btn-success" data-bind="click: function() { changeCarServiceState (false) }">Разблокировать</button>
+            <!-- /ko -->
+            <!-- ko if: model.State() == window.resource.carServiceStates.active -->
+            <button class="btn btn-danger" data-bind="click: function() { changeCarServiceState (true) }">Блокировать</button>
+            <!-- /ko -->
+        }
+    </div>
+    <!--<div class="pull-right" data-toggle="modal" data-target="#myModal">
+        <i class="fa fa-cog pull-right"></i>
+    </div> -->
     <hr />
 
     <div class="row">
@@ -89,8 +114,8 @@
     </div>
     <!-- /ko -->
 
-
     <br/>
+
     <div class="row">
         <div class="col">
             <p data-bind="text: model.About"></p>
@@ -109,10 +134,10 @@
     <section class="comments">
         <!-- ko foreach: model.Reviews -->
         <article class="comment">
-            <a class="comment-img" href="#non">
+            <a class="comment-img">
             </a>
             <div class="comment-body">
-                <div class="text">
+                <div class="text gold">
                     <!-- ko foreach: new Array($data.Mark())-->
                     <i class="fa fa-star"></i>
                     <!-- /ko -->
@@ -129,10 +154,40 @@
     <!-- /ko -->
 </div>
 
-<div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade" id="add-review" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Добавление отзыва</h4> <!-- TODO -->
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <label for="mark-review">Оценка</label>
+                        <select id="mark-review" class="form-control" data-bind="options: availableMarks, value: newReview.mark, optionsCaption: 'Выберите оценку'" aria-describedby="mark-error"></select>
+                        <small id="mark-error" class="form-text validation-error-text" data-bind="validationMessage: newReview.mark"></small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="review-content">Отзыв</label>
+                        <textarea id="review-content" class="form-control" cols="3" data-bind="value: newReview.review" aria-describedby="review-error"></textarea>
+                        <small id="review-error" class="form-text validation-error-text" data-bind="validationMessage: newReview.review"></small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-success" data-bind="click: addReview">Отправить</button> <!-- TODO -->
+                <button type="button" class="btn btn-default" data-dismiss="modal">@GlobalResources.Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
 
-        <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">@GlobalResources.ServiceInformationEdit</h4>
@@ -196,7 +251,7 @@
         </div>
 
     </div>
-</div>
+</div> -->
 
 @section scripts {
     @Scripts.Render("~/Scripts/carServiceCard")
@@ -206,6 +261,11 @@
             $(document).trigger("showLoadingPanel");
             viewModel.model.Id(@ViewBag.Id);
             viewModel.init();
+            ko.validation.init({
+                insertMessages: false,
+                decorateInputElement: true,
+                errorElementClass: "is-invalid"
+            }, true);
             ko.applyBindings(viewModel);
         });
     </script>

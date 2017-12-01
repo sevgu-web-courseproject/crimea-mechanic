@@ -82,6 +82,9 @@ namespace WebUI
 
             bundles.Add(new ScriptBundle("~/Scripts/administratorApplicationCardVM").Include(
                 "~/Scripts/ViewModels/administratorApplicationCardVM.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/carServicesVM").Include(
+                "~/Scripts/ViewModels/carServicesVM.js"));
         }
     }
 }

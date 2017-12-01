@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BusinessLogic.Objects.Review;
+using Common.Enums;
 
 namespace BusinessLogic.Objects.CarService
 {
@@ -42,5 +43,10 @@ namespace BusinessLogic.Objects.CarService
         /// Идентификаторы фотографии автосервиса
         /// </summary>
         public List<long> PhotosId { get; set; }
+
+        /// <summary>
+        /// Id отзыва пользователя
+        /// </summary>
+        public long? ReviewId { get; set; }
     }
 }

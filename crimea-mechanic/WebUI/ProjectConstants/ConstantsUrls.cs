@@ -75,5 +75,11 @@
         public static string WebApiGetInfosForAdministratorUrl => Flurl.Url.Combine(WebApiUri, "api/Application/GetInfosForAdministrator");
 
         public static string WebApiGetInfoForAdminUrl(string applicationId) => Flurl.Url.Combine(WebApiUri, "api/Application/GetInfoForAdmin", applicationId);
+
+        public static string WebApiUnBlockCarServiceUrl(string carServiceId) => Flurl.Url.Combine(WebApiUri, "api/CarService/UnBlockCarService", carServiceId);
+
+        public static string WebApiAddReviewUrl => Flurl.Url.Combine(WebApiUri, "api/CarServiceReview/Add");
+
+        public static string WebApiDeleteReviewUrl(string reviewId) => Flurl.Url.Combine(WebApiUri, "api/CarServiceReview/Delete", reviewId);
     }
 }

@@ -13,7 +13,7 @@ namespace BusinessLogic.Managers.Abstraction
         /// <summary>
         /// Получить информацию об автосервисе
         /// </summary>
-        CarServiceInfoDto GetInfo(long carServiceId);
+        CarServiceInfoDto GetInfo(long carServiceId, string currentUserId);
 
         /// <summary>
         /// Получить информацию об регистрации автосервиса
@@ -44,5 +44,10 @@ namespace BusinessLogic.Managers.Abstraction
         /// Заблокировать автосервис
         /// </summary>
         void BlockCarService(long carServiceId, string currentUserId);
+
+        /// <summary>
+        /// Разблокировать автосервис
+        /// </summary>
+        void UnBlockCarService(long carServiceId, string currentUserId);
     }
 }
