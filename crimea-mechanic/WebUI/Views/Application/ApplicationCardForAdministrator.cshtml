@@ -1,20 +1,18 @@
 ﻿@using WebUI.App_LocalResources
 @{
-    ViewBag.Title = "Карточка заявки";
+    ViewBag.Title = @GlobalResources.ApplicationCard;
 }
-
-<!-- TODO Перевести -->
 
 @section breadcrumbs {
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">@GlobalResources.Home</a></li>
-        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Application")">Заявки</a></li>
-        <li class="breadcrumb-item active">Карточка заявки</li>
+        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Application")">@GlobalResources.Applications</a></li>
+        <li class="breadcrumb-item active">@GlobalResources.ApplicationCard</li>
     </ol>
 }
 
 <div class="jumbotron">
-    <h3 class="inline">Карточка заявки</h3>
+    <h3 class="inline">@GlobalResources.ApplicationCard</h3>
     <hr />
 
     <div class="row">
@@ -23,11 +21,11 @@
                 <h4>Заявка № <span data-bind="text: model.Id"></span></h4>
             </div>
             <div>
-                Автор:
+                @GlobalResources.Author
                 <span data-bind="text: model.UserContactName"></span>
             </div>
             <div>
-                Машина:
+                @GlobalResources.Car
                 <span data-bind="text: model.Car.Mark"></span>
                 <span data-bind="text: model.Car.Model"></span>
                 <span data-bind="text: model.Car.Year"></span>
@@ -36,25 +34,25 @@
             </div>
 
             <div class="word-wrap">
-                Описание работ:
+                @GlobalResources.WorksDescription
                 <span data-bind="text: model.Description"></span>
             </div>
             <div>
-                Состояние заявки:
+                @GlobalResources.ApplicationStatus
                 <span data-bind="text: model.StateDescription"></span>
             </div>
             <!-- ko if: model.CarServiceId -->
             <div>
-                Автосервис:
+                @GlobalResources.Service
                 <a data-bind="text: model.CarServiceName, attr: {href: window.resource.urls.webUiCarServiceCardUrl + '/' + model.CarServiceId()}"></a>
             </div>
             <!-- /ko -->
             <div>
-                Город:
+                @GlobalResources.City:
                 <span data-bind="text: model.CityName"></span>
             </div>
             <div>
-                Дата подачи заявки:
+                @GlobalResources.ApplicationDate
                 <span data-bind="text: model.Created"></span>
             </div>
         </div>
@@ -63,31 +61,31 @@
     <br />
 
     <!-- ko if: model.Offers() && model.Offers().length -->
-    <h4>Предложения по заявке</h4>
+    <h4>@GlobalResources.ApplicationOffers</h4>
     <hr />
         <!-- ko foreach: model.Offers-->
         <div class="offer">
             <div class="row">
                 <div class="col">
-                    Автосервис:
+                    @GlobalResources.Service
                     <a data-bind="attr: {href: window.resource.urls.webUiCarServiceCardUrl + '/' + $data.ServiceId()}"><span data-bind="text: $data.ServiceName"></span></a>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    Цена:
+                    @GlobalResources.Price
                     <span data-bind="text: $data.Price"></span> руб.
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    Содержание:
+                    @GlobalResources.Content
                     <span data-bind="text: $data.Сontent"></span>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    Дата направления
+                    @GlobalResources.DirectionDate
                     <span data-bind="text: $data.Created"></span>
                 </div>
             </div>
@@ -96,7 +94,7 @@
     <!-- /ko -->
     <!-- ko if: !model.Offers() || !model.Offers().length-->
     <div class="text-center">
-        <h4>Предложения отсутствуют</h4>
+        <h4>@GlobalResources.NoOffers</h4>
     </div>
     <!-- /ko -->
 </div>

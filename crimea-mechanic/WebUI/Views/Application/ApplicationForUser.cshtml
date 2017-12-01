@@ -1,49 +1,48 @@
 ﻿@using WebUI.App_LocalResources
 @{
-    ViewBag.Title = "Мои заявки";
+    ViewBag.Title = @GlobalResources.MyApplications;
 }
 
-<!-- TODO Перевести -->
 
 @section breadcrumbs {
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">@GlobalResources.Home</a></li>
-        <li class="breadcrumb-item active">Мои заявки</li>
+        <li class="breadcrumb-item active">@GlobalResources.MyApplications</li>
     </ol>
 }
 
 <div class="jumbotron">
-    <h3 class="inline">Мои заявки</h3>
+    <h3 class="inline">@GlobalResources.MyApplications</h3>
     <div class="pull-right">
-        <button class="btn btn-success" data-toggle="modal" data-target="#create-application" data-bind="click: createNewApplication">Создать заявку</button>
+        <button class="btn btn-success" data-toggle="modal" data-target="#create-application" data-bind="click: createNewApplication">@GlobalResources.CreateApplication</button>
     </div>
 
     <hr/>
 
     <div class="row">
         <div class="col">
-            <label for="created-to">C</label>
+            <label for="created-to">@GlobalResources.From</label>
             <input type="date" id="created-from" class="form-control" placeholder="01.01.2018" data-bind="value: createdFrom"/>
         </div>
         <div class="col">
-            <label for="created-from">По</label>
+            <label for="created-from">@GlobalResources.To</label>
             <input type="date" id="created-to" class="form-control" placeholder="01.01.2018" data-bind="value: createdTo"/>
         </div>
     </div>
     
     <div class="row">
         <div class="col">
-            <label for="state">Состояние заявки</label>
+            <label for="state">@GlobalResources.ApplicationStatus</label>
             <select id="state" class="form-control" data-bind="options: applicationStates, optionsValue: 'Id', optionsText: 'Name', value: state, optionsCaption: 'Выберите состояние заявки'"></select>
         </div>
         <div class="col">
-            <label for="filter-car">Машина</label>
+            <label for="filter-car">@GlobalResources.Car</label>
             <select id="filter-car" class="form-control" data-bind="options: cars, optionsValue: 'Id',
                                         optionsText: function(item) {
                                             return item.Mark + ' ' + item.Model + ' (' + ' ' + item.Name + ' )';
                                         },
                                         value: carId,
-                                        optionsCaption: 'Выберите машину'"></select>
+                                        optionsCaption: '@GlobalResources.ChooseACar'"></select>
         </div>
     </div>
     
@@ -52,8 +51,8 @@
     <div class="row">
         <div class="col">
             <div class="pull-right">
-                <button class="btn btn-success" data-bind="click: find">Найти</button>
-                <button class="btn btn-info" data-bind="click: clearFilter">Очистить фильтр</button>
+                <button class="btn btn-success" data-bind="click: find">@GlobalResources.Find</button>
+                <button class="btn btn-info" data-bind="click: clearFilter">@GlobalResources.ClearFilter</button>
             </div>
         </div>
     </div>
@@ -70,7 +69,7 @@
                 <h4 data-bind="css: {'success-application': $data.State == window.resource.applicationStates.completed, 'error-application': $data.State == window.resource.applicationStates.rejected}">Заявка № <span data-bind="text: $data.Id"></span></h4>
             </div>
             <div>
-                Машина:
+                @GlobalResources.Car
                 <span data-bind="text: $data.Car.Mark"></span>
                 <span data-bind="text: $data.Car.Model"></span>
                 <span data-bind="text: $data.Car.Year"></span>
@@ -78,25 +77,25 @@
                 <span data-bind="text: $data.Car.FuelTypeDescription"></span>
             </div>
             <div class="word-wrap">
-                Описание работ:
+                @GlobalResources.WorksDescription
                 <span data-bind="text: $data.Description"></span>
             </div>
             <div>
-                Состояние заявки:
+                @GlobalResources.ApplicationStatus
                 <span data-bind="text: $data.StateDescription"></span>
             </div>
             <!-- ko if: $data.ServiceName -->
             <div>
-                Автосервис:
+                @GlobalResources.Service
                 <span data-bind="text: $data.ServiceName"></span>
             </div>
             <!-- /ko -->
             <div>
-                Город:
+                @GlobalResources.City:
                 <span data-bind="text: $data.CityName"></span>
             </div>
             <div>
-                Дата подачи заявки:
+                @GlobalResources.ApplicationDate
                 <span data-bind="text: $data.Created"></span>
             </div>
             <div class="row pull-right">
@@ -118,38 +117,38 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Создание заявки на ремонт</h4>
+                    <h4 class="modal-title">@GlobalResources.ApplicationCreating</h4>
                     <button type="button" class="close" id="close-button" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col">
                             <div>
-                                <label for="car-selector">Выберите автомобиль:</label>
+                                <label for="car-selector">@GlobalResources.ChooseACar</label>
                                 <select class="form-control" id="car-selector" data-bind="options: cars,
                                         optionsValue: 'Id',
                                         optionsText: function(item) {
                                             return item.Mark + ' ' + item.Model + ' (' + ' ' + item.Name + ' )';
                                         },
                                         value: newApplication.carId,
-                                        optionsCaption: 'Выберите машину'" aria-describedby="car-id-error">
+                                        optionsCaption: '@GlobalResources.ChooseACar'" aria-describedby="car-id-error">
                                 </select>
                                 <small id="car-id-error" class="form-text validation-error-text" data-bind="validationMessage: newApplication.carId"></small>
                             </div>
                             <br/>
                             <div>
-                                <label for="city-selector">Выберите город:</label>
+                                <label for="city-selector">@GlobalResources.ChooseCity</label>
                                 <select class="form-control" id="city-selector" data-bind="options: cities,
                                         optionsValue: 'Id',
                                         optionsText: 'Name',
                                         value: newApplication.cityId,
-                                        optionsCaption: 'Выберите город'" aria-describedby="city-id-error">
+                                        optionsCaption: '@GlobalResources.ChooseCity'" aria-describedby="city-id-error">
                                 </select>
                                 <small id="city-id-error" class="form-text validation-error-text" data-bind="validationMessage: newApplication.cityId"></small>
                             </div>
                             <br/>
                             <div>
-                                <label for="work-description">Описание работ:</label>
+                                <label for="work-description">@GlobalResources.WorksDescription</label>
                                 <textarea class="form-control" id="work-description" rows="3" data-bind="value: newApplication.description" aria-describedby="description-error"></textarea>
                                 <small id="description-error" class="form-text validation-error-text" data-bind="validationMessage: newApplication.description"></small>
                             </div>
@@ -157,8 +156,8 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="submit" class="btn btn-success" data-bind="click: sendNewApplication">Отправить заявку</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-success" data-bind="click: sendNewApplication">@GlobalResources.SendApplication</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">@GlobalResources.Cancel</button>
                 </div>
             </div>
         </div>

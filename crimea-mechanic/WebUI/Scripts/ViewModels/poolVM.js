@@ -110,7 +110,7 @@
             .then(function () {
                 $('#close-button').click();
                 $(document).trigger("hideLoadingPanel");
-                notificationHelper.success(window.resource.texts.success, "Предложение успешно направлено клиенту"); //TODO перевести
+                notificationHelper.success(window.resource.texts.success, window.resource.text.offerWasSended); 
                 getApplications();
             }, function ($xhr) {
                 var text = ajaxHelper.extractErrors($xhr);
@@ -129,7 +129,7 @@
         ajaxHelper.getWithoutResult(url)
             .then(function () {
                 $(document).trigger("hideLoadingPanel");
-                notificationHelper.success(window.resource.texts.success, "Предложение удалено"); //TODO перевести
+                notificationHelper.success(window.resource.texts.success, window.resource.texts.offerDeleted); 
                 getApplications();
             }, function($xhr) {
                 var text = ajaxHelper.extractErrors($xhr);

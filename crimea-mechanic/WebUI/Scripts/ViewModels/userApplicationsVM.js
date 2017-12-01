@@ -17,22 +17,22 @@
 
     var newApplication = {
         carId: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать автомобиль' } //TODO перевести
+            required: { params: true, message: window.resource.errors.specifyCar } 
         }),
         cityId: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать город' } //TODO перевести
+            required: { params: true, message: window.resource.errors.specifyCity } 
         }),
         description: ko.observable().extend({
-            required: { params: true, message: 'Необходимо указать описание работ' } //TODO перевести
+            required: { params: true, message: window.resource.errors.specifyWorksDescription } 
         })
     }
 
     var applicationStates = [
-        { Id: 5, Name: "Удалена" },  //TODO перевести
-        { Id: 10, Name: "В поиске автосервиса" }, //TODO перевести
-        { Id: 15, Name: "На исполнении" }, //TODO перевести
-        { Id: 20, Name: "Отклонена" }, //TODO перевести
-        { Id: 25, Name: "Завершена" } //TODO перевести
+        { Id: 5, Name: window.resource.texts.deleted },  
+        { Id: 10, Name: window.resource.texts.inSearch }, 
+        { Id: 15, Name: window.resource.texts.onWork }, 
+        { Id: 20, Name: window.resource.texts.declined }, 
+        { Id: 25, Name: window.resource.texts.completed } 
     ];
 
     var getApplications = function(callback) {
