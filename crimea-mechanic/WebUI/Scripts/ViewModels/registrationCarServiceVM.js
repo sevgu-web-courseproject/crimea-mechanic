@@ -90,7 +90,7 @@
             }, function ($xhr) {
                 $(document).trigger("hideLoadingPanel");
                 var text = ajaxHelper.extractErrors($xhr);
-                notificationHelper.error(window.resource.errors.error, text);
+                notificationHelper.error("Error", text);
             });
     };
 

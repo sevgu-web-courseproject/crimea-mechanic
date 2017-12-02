@@ -13,8 +13,13 @@
 
     var newOffer = {
         applicationId: ko.observable(),
-        price: ko.observable(),
-        content: ko.observable()
+        price: ko.observable().extend({
+            required: { params: true, message: window.resource.errors.priceRequired },
+            min: { params: 1, message: window.resource.errors.pricePositiveNumber }
+        }),
+        content: ko.observable().extend({
+            required: {params: true, message: window.resource.errors.contentRequired }
+        })
     }
 
     var getApplications = function (callback) {
@@ -99,6 +104,14 @@
     };
 
     var sendOffer = function () {
+        var validationGroup = ko.validation.group([
+            newOffer.content,
+            newOffer.price
+        ]);
+        if (validationGroup().length != 0) {
+            validationGroup.showAllMessages();
+            return;
+        }
         $(document).trigger("showLoadingPanel");
         var url = window.resource.urls.webApiAddOfferUrl;
         var data = JSON.stringify({
@@ -110,7 +123,7 @@
             .then(function () {
                 $('#close-button').click();
                 $(document).trigger("hideLoadingPanel");
-                notificationHelper.success(window.resource.texts.success, window.resource.text.offerWasSended); 
+                notificationHelper.success(window.resource.texts.success, window.resource.texts.offerWasSended); 
                 getApplications();
             }, function ($xhr) {
                 var text = ajaxHelper.extractErrors($xhr);

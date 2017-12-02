@@ -29,7 +29,7 @@
         url = url.replace("carServiceId", model.Id());
         ajaxHelper.getWithoutResult(url)
             .then(function () {
-                localStorage.success = "Статус автосервиса успешно изменен"; //TODO
+                localStorage.success = window.resource.texts.stateOfCarServiceChanged;
                 window.location.reload();
             }, function($xhr) {
                 $(document).trigger("hideLoadingPanel");
@@ -41,12 +41,12 @@
     var newReview = {
         mark: ko.observable().extend({
             required: {
-                params: true, message: "Необходимо указать оценку" //TODO
+                params: true, message: window.resource.errors.markRequired
             }
         }),
         review: ko.observable().extend({
             required: {
-                params: true, message: "Необходимо указать содержание отзыва" //TODO
+                params: true, message: window.resource.errors.reviewRequired
             }
         })
     };
@@ -68,7 +68,7 @@
         });
         ajaxHelper.postJsonWithoutResult(window.resource.urls.WebApiAddReviewUrl, data)
             .then(function () {
-                localStorage.success = "Отзыв успешно добавлен"; //TODO
+                localStorage.success = window.resource.texts.reviewSuccessAdd;
                 window.location.reload();
             }, function ($xhr) {
                 $(document).trigger("hideLoadingPanel");
@@ -77,12 +77,12 @@
             });
     };
 
-    var deleteReview = function () {
+    var deleteReview = function (reviewId) {
         $(document).trigger("showLoadingPanel");
-        var url = window.resource.urls.WebApiDeleteReviewUrl.replace("reviewId", model.ReviewId());
+        var url = window.resource.urls.WebApiDeleteReviewUrl.replace("reviewId", reviewId);
         ajaxHelper.getWithoutResult(url)
             .then(function () {
-                localStorage.success = "Отзыв успешно удален"; //TODO
+                localStorage.success = window.resource.texts.reviewSuccessDelete;
                 window.location.reload();
             }, function($xhr) {
                 $(document).trigger("hideLoadingPanel");

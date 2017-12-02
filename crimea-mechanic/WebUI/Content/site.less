@@ -68,14 +68,14 @@ body {
 
 .card {
     padding: 10px;
-    margin: 10px 0 20px 0;
+    margin: 10px;
     background-color: #ffffff;
     border: 1px solid #d8d8d8;
     border-top-width: 0;
     border-bottom-width: 2px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
-    border-radius: 3px;
+    border-radius: 10px;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
@@ -161,7 +161,14 @@ section {
 }
 
 .comment-body {
-    overflow: hidden
+    overflow: hidden;
+
+    .button-delete {
+        display: inline;
+        position: absolute;
+        right: 0px;
+        padding-top: 5px;
+    }
 }
 
 .comment .text {

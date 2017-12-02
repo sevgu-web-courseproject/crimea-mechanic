@@ -594,4 +594,73 @@
   <data name="WorksDescription" xml:space="preserve">
     <value>Описание работ:</value>
   </data>
+  <data name="AddReview" xml:space="preserve">
+    <value>Добавить отзыв</value>
+  </data>
+  <data name="Block" xml:space="preserve">
+    <value>Блокировать</value>
+  </data>
+  <data name="CarServiceRaiting" xml:space="preserve">
+    <value>Рейтинг автосервисов</value>
+  </data>
+  <data name="CarServices" xml:space="preserve">
+    <value>Автосервисы</value>
+  </data>
+  <data name="ChooseCarModel" xml:space="preserve">
+    <value>Выберите модель автомобиля</value>
+  </data>
+  <data name="ChooseCountStars" xml:space="preserve">
+    <value>Выберите количество звезд</value>
+  </data>
+  <data name="ChooseFuelType" xml:space="preserve">
+    <value>Выберите тип топлива</value>
+  </data>
+  <data name="ChooseStateOfApplication" xml:space="preserve">
+    <value>Выберите состояние заявки</value>
+  </data>
+  <data name="ContentRequired" xml:space="preserve">
+    <value>Необходимо указать содержание</value>
+  </data>
+  <data name="CountRecords" xml:space="preserve">
+    <value>Количество записей</value>
+  </data>
+  <data name="CountStars" xml:space="preserve">
+    <value>Количество звезд</value>
+  </data>
+  <data name="DeleteReview" xml:space="preserve">
+    <value>Удалить отзыв</value>
+  </data>
+  <data name="Mark" xml:space="preserve">
+    <value>Оценка</value>
+  </data>
+  <data name="MarkRequired" xml:space="preserve">
+    <value>Необходимо указать оценку</value>
+  </data>
+  <data name="PricePositiveNumber" xml:space="preserve">
+    <value>Цена не может быть отрицательной</value>
+  </data>
+  <data name="PriceRequired" xml:space="preserve">
+    <value>Необходимо указать цену</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>Отзыв</value>
+  </data>
+  <data name="ReviewRequired" xml:space="preserve">
+    <value>Необходимо указать отзыв</value>
+  </data>
+  <data name="ReviewSuccessAdd" xml:space="preserve">
+    <value>Отзыв успешно добавлен</value>
+  </data>
+  <data name="ReviewSuccessDelete" xml:space="preserve">
+    <value>Отзыв успешно удален</value>
+  </data>
+  <data name="ShowBlocked" xml:space="preserve">
+    <value>Показывать заблокированные</value>
+  </data>
+  <data name="StateOfCarServiceChanged" xml:space="preserve">
+    <value>Состояние автосервиса успешно изменено</value>
+  </data>
+  <data name="Unblock" xml:space="preserve">
+    <value>Разблокировать</value>
+  </data>
 </root>

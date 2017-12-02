@@ -101,7 +101,7 @@
                             </div>
                             <div>
                                 <label>@GlobalResources.CarModel</label>
-                                <select class="form-control" data-bind="options: models, optionsValue: 'Id', optionsText: 'Name', value: newCar.ModelId, optionsCaption: 'Выберите модель машины'" aria-describedby="model-error">
+                                <select class="form-control" data-bind="options: models, optionsValue: 'Id', optionsText: 'Name', value: newCar.ModelId, optionsCaption: '@GlobalResources.ChooseCarModel'" aria-describedby="model-error">
                                 </select>
                                 <small id="model-error" class="form-text validation-error-text" data-bind="validationMessage: newCar.ModelId"></small>
                             </div>
@@ -117,7 +117,7 @@
                             </div>
                             <div>
                                 <label>@GlobalResources.CarFuelType</label>
-                                <select class="form-control" data-bind="options: fuelTypes, optionsValue: 'Id', optionsText: 'Name', value: newCar.FuelType, optionsCaption: 'Выберите тип топлива'" aria-describedby="fuel-type-error">
+                                <select class="form-control" data-bind="options: fuelTypes, optionsValue: 'Id', optionsText: 'Name', value: newCar.FuelType, optionsCaption: '@GlobalResources.ChooseFuelType'" aria-describedby="fuel-type-error">
                                 </select>
                                 <small id="fuel-type-error" class="form-text validation-error-text" data-bind="validationMessage: newCar.FuelType"></small>
                             </div>

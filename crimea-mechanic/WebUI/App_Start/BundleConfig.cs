@@ -85,6 +85,9 @@ namespace WebUI
 
             bundles.Add(new ScriptBundle("~/Scripts/carServicesVM").Include(
                 "~/Scripts/ViewModels/carServicesVM.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/profileVM").Include(
+                "~/Scripts/ViewModels/profileVM.js"));
         }
     }
 }

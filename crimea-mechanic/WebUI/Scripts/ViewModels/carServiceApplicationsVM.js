@@ -12,9 +12,9 @@
     var itemsCount = ko.observable();
 
     var applicationStates = [
-        { Id: 15, Name: window.resource.text.onWork }, 
-        { Id: 20, Name: window.resource.text.declined }, 
-        { Id: 25, Name: window.resource.text.completed }
+        { Id: 15, Name: window.resource.texts.onWork }, 
+        { Id: 20, Name: window.resource.texts.declined }, 
+        { Id: 25, Name: window.resource.texts.completed }
     ];
 
     var getApplications = function() {

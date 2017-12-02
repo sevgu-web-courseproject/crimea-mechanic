@@ -6,7 +6,7 @@
 @section breadcrumbs {
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">@GlobalResources.Home</a></li>
-        <li class="breadcrumb-item"><a href="@Url.Action("Index", "CarService")">Автосервисы</a></li>
+        <li class="breadcrumb-item"><a href="@Url.Action("Index", "CarService")">@GlobalResources.CarServices</a></li>
         <li class="breadcrumb-item active">@GlobalResources.AutoserviceCard</li>
     </ol>
 }
@@ -26,20 +26,20 @@
         {
             <!-- ko if: model.State() == window.resource.carServiceStates.active -->
             <!-- ko if: !model.ReviewId() -->
-            <button class="btn btn-success" data-toggle="modal" data-target="#add-review">Добавить отзыв</button>
+            <button class="btn btn-success" data-toggle="modal" data-target="#add-review">@GlobalResources.AddReview</button>
             <!-- /ko -->
             <!-- ko if: model.ReviewId() -->
-            <button class="btn btn-success" data-bind="click: deleteReview">Удалить отзыв</button>
+            <button class="btn btn-success" data-bind="click: function() {deleteReview(model.ReviewId())}">@GlobalResources.DeleteReview</button>
             <!-- /ko -->
             <!-- /ko -->
         }
         @if (User.IsInRole(Common.Constants.CommonRoles.Administrator))
         {
             <!-- ko if: model.State() == window.resource.carServiceStates.blocked -->
-            <button class="btn btn-success" data-bind="click: function() { changeCarServiceState (false) }">Разблокировать</button>
+            <button class="btn btn-success" data-bind="click: function() { changeCarServiceState (false) }">@GlobalResources.Unblock</button>
             <!-- /ko -->
             <!-- ko if: model.State() == window.resource.carServiceStates.active -->
-            <button class="btn btn-danger" data-bind="click: function() { changeCarServiceState (true) }">Блокировать</button>
+            <button class="btn btn-danger" data-bind="click: function() { changeCarServiceState (true) }">@GlobalResources.Block</button>
             <!-- /ko -->
         }
     </div>
@@ -147,6 +147,12 @@
                 </div>
                 <p class="attribution"><span data-bind="text: $data.Author"></span> <span data-bind="text: $data.Created"></span>
                 </p>
+                @if (User.IsInRole(Common.Constants.CommonRoles.Administrator))
+                {
+                    <div class="button-delete">
+                        <button class="btn btn-sm btn-danger" data-bind="click: function() { $root.deleteReview($data.Id()) }">@GlobalResources.Delete</button>
+                    </div>
+                }
             </div>
         </article>
         <!-- /ko -->
@@ -158,27 +164,27 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Добавление отзыва</h4> <!-- TODO -->
+                <h4 class="modal-title">@GlobalResources.AddReview</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col">
-                        <label for="mark-review">Оценка</label>
+                        <label for="mark-review">@GlobalResources.Mark</label>
                         <select id="mark-review" class="form-control" data-bind="options: availableMarks, value: newReview.mark, optionsCaption: 'Выберите оценку'" aria-describedby="mark-error"></select>
                         <small id="mark-error" class="form-text validation-error-text" data-bind="validationMessage: newReview.mark"></small>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <label for="review-content">Отзыв</label>
+                        <label for="review-content">@GlobalResources.Review</label>
                         <textarea id="review-content" class="form-control" cols="3" data-bind="value: newReview.review" aria-describedby="review-error"></textarea>
                         <small id="review-error" class="form-text validation-error-text" data-bind="validationMessage: newReview.review"></small>
                     </div>
                 </div>
             </div>
             <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-success" data-bind="click: addReview">Отправить</button> <!-- TODO -->
+                <button type="button" class="btn btn-success" data-bind="click: addReview">@GlobalResources.Send</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">@GlobalResources.Cancel</button>
             </div>
         </div>
