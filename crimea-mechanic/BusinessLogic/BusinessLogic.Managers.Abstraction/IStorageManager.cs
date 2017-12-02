@@ -23,12 +23,6 @@ namespace BusinessLogic.Managers.Abstraction
         IEnumerable<CarModelDto> GetModels(long markId);
 
         /// <summary>
-        /// Получить все виды работ
-        /// </summary>
-        /// <returns></returns>
-        IEnumerable<WorkTagDto> GetWorkTags();
-
-        /// <summary>
         /// Получить список городов
         /// </summary>
         /// <returns></returns>

@@ -222,16 +222,6 @@ namespace BusinessLogic.Managers
 
             carService.Phones = Mapper.Map<List<CarServicePhone>>(dto.Phones);
 
-            if (dto.WorkTags != null && dto.WorkTags.Any())
-            {
-                var repository = _unitOfWork.Repository<IWorkTagsRepository>();
-                carService.WorkTags = new List<WorkTag>();
-                foreach (var tagId in dto.WorkTags)
-                {
-                    carService.WorkTags.Add(repository.Get(tagId));
-                }
-            }
-
             if (dto.CarTags != null && dto.CarTags.Any())
             {
                 var repository = _unitOfWork.Repository<ICarMarksRepository>();

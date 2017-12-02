@@ -72,7 +72,6 @@
     <Compile Include="Utils\CarModelUtils.cs" />
     <Compile Include="Utils\CityUtils.cs" />
     <Compile Include="Utils\UserCarUtils.cs" />
-    <Compile Include="Utils\WorkTagsUtils.cs" />
     <Compile Include="ValidationManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>

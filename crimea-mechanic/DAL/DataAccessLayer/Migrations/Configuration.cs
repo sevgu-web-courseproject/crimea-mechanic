@@ -290,28 +290,16 @@ namespace DataAccessLayer.Migrations
 
             #endregion
 
-            #region WorkTags
+            #region WorkClass and WorkTypes
 
-            CheckAndCreateWorkTag(context, "Топливные (бензиновые) работы");
-            CheckAndCreateWorkTag(context, "Топливные (дизельные) работы");
-            CheckAndCreateWorkTag(context, "Кузовные работы");
-            CheckAndCreateWorkTag(context, "Малярные работы");
-            CheckAndCreateWorkTag(context, "Ремонт подвески");
-            CheckAndCreateWorkTag(context, "Ремонт двигателя");
-            CheckAndCreateWorkTag(context, "Стекольные работы");
-            CheckAndCreateWorkTag(context, "Ремонт АКПП");
-            CheckAndCreateWorkTag(context, "Ремонт МКПП");
-            CheckAndCreateWorkTag(context, "Шиномонтажные работы");
-            CheckAndCreateWorkTag(context, "Ремонт тормозной системы");
-            CheckAndCreateWorkTag(context, "Сварочные работы");
-            CheckAndCreateWorkTag(context, "Работа с электроникой");
-            CheckAndCreateWorkTag(context, "Ремонт дисков");
-            CheckAndCreateWorkTag(context, "Ремонт климатических установок"); 
-            CheckAndCreateWorkTag(context, "Ремонт глушителей"); 
-            CheckAndCreateWorkTag(context, "Салонные работы"); 
-            CheckAndCreateWorkTag(context, "Диагностические работы"); 
-            CheckAndCreateWorkTag(context, "Тюннинг");
-
+            CheckAndCreateWorkClassWithWorkTypes(context, "Общие", "Плановое техническое обслуживание");
+            CheckAndCreateWorkClassWithWorkTypes(context, "Ремонт двигатель", "Диагностика", "Полная переборка двигателя", "Замена опор двигателя (подушек)", "Замена прокладки поддона картера", "Замена прокладки клапанной крышки", "Замена роликов и ремня ГРМ", "Регулировка клапанов", "Замена масляного насоса");
+            CheckAndCreateWorkClassWithWorkTypes(context, "Шиномонтаж", "Балансировка", "Замена шин", "Вулканизация шин", "Ремонт проколов, порезов, грыж", "Установка вентилей", "Герметизация бортов", "Ремонт дисков", "Точка дисков");
+            CheckAndCreateWorkClassWithWorkTypes(context, "Ремонт глушителей", "Ремонт пробоин", "Замена гофры глушителя", "Устранение коррозии и ржавчины", "Ремонт креплений глушителя", "Сварка", "Замена глушителя либо отдельных элементов выхлопной системы");
+            CheckAndCreateWorkClassWithWorkTypes(context, "Кузовной ремонт", "Покраска", "Лакировка", "Устранение вмятин", "Сварка кузова", "Ремонт лонжеронов");
+            CheckAndCreateWorkClassWithWorkTypes(context, "Ремонт топливной системы", "Замена топливного насоса", "Замена топливного фильтра", "Промывка инжектора");
+            CheckAndCreateWorkClassWithWorkTypes(context, "Ремонт ходовой части", "Диагностика", "Замена амортизаторов", "Замена шаравой", "Замена рулевой тяги", "Замена наконечников", "Замена ступечных подшибников", "Замена гранаты", "Шприцовка");
+            
             #endregion
 
             #region Cities
@@ -460,26 +448,6 @@ namespace DataAccessLayer.Migrations
         }
 
         /// <summary>
-        /// Создать вид работы
-        /// </summary>
-        private void CheckAndCreateWorkTag(DatabaseContext context, string name)
-        {
-            var work = context.WorkTags.FirstOrDefault(u => u.Name == name);
-            if (work == null)
-            {
-                work = new WorkTag
-                {
-                    Created = DateTime.UtcNow,
-                    Updated = DateTime.UtcNow,
-                    IsDeleted = false,
-                    Name = name
-                };
-                context.WorkTags.Add(work);
-                context.SaveChanges();
-            }
-        }
-
-        /// <summary>
         /// Создать город
         /// </summary>
         private void CheckAndCreateCity(DatabaseContext context, string name)
@@ -497,6 +465,46 @@ namespace DataAccessLayer.Migrations
                 context.Cities.Add(city);
                 context.SaveChanges();
             }
+        }
+
+
+        /// <summary>
+        /// Создать класс и типы работ
+        /// </summary>
+        private void CheckAndCreateWorkClassWithWorkTypes(DatabaseContext context, string className, params string[] typesName)
+        {
+            var workClass = context.WorkClasses.FirstOrDefault(x => x.Name == className);
+            if (workClass == null)
+            {
+                workClass = new WorkClass
+                {
+                    Created = DateTime.UtcNow,
+                    Updated = DateTime.UtcNow,
+                    IsDeleted = false,
+                    Name = className,
+                    WorkTypes = new List<WorkType>()
+                };
+                context.WorkClasses.Add(workClass);
+            }
+            if (typesName != null)
+            {
+                foreach (var typeName in typesName)
+                {
+                    var workType = context.WorkTypes.FirstOrDefault(x => x.Name == typeName);
+                    if (workType == null)
+                    {
+                        workType = new WorkType
+                        {
+                            Created = DateTime.UtcNow,
+                            Updated = DateTime.UtcNow,
+                            IsDeleted = false,
+                            Name = typeName
+                        };
+                        workClass.WorkTypes.Add(workType);
+                    }
+                }
+            }
+            context.SaveChanges();
         }
 
         #endregion Private methods

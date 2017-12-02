@@ -67,7 +67,6 @@
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="IUserCarRepository.cs" />
     <Compile Include="IUserProfileRepository.cs" />
-    <Compile Include="IWorkTagsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -78,7 +78,6 @@
     <Compile Include="UnitOfWork.cs" />
     <Compile Include="UserCarRepository.cs" />
     <Compile Include="UserProfileRepository.cs" />
-    <Compile Include="WorkTagsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\GlobalContainer\GlobalContainer.csproj">

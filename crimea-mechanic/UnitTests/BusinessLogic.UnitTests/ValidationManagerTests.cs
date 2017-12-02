@@ -160,10 +160,6 @@ namespace BusinessLogic.UnitTests
                 About = "test"
             };
 
-            var workTagsRepository = new Mock<IWorkTagsRepository>();
-            workTagsRepository.Setup(act => act.Get(It.IsAny<long>())).Returns(new WorkTag());
-            _unitOfWorkMock.Setup(act => act.Repository<IWorkTagsRepository>()).Returns(workTagsRepository.Object);
-
             var marksRepository = new Mock<ICarMarksRepository>();
             marksRepository.Setup(act => act.Get(It.IsAny<long>())).Returns(new CarMark());
             _unitOfWorkMock.Setup(act => act.Repository<ICarMarksRepository>()).Returns(marksRepository.Object);
@@ -223,10 +219,6 @@ namespace BusinessLogic.UnitTests
                     }
                 }
             };
-
-            var workTagsRepository = new Mock<IWorkTagsRepository>();
-            workTagsRepository.Setup(act => act.Get(It.IsAny<long>())).Returns((WorkTag) null);
-            _unitOfWorkMock.Setup(act => act.Repository<IWorkTagsRepository>()).Returns(workTagsRepository.Object);
 
             var marksRepository = new Mock<ICarMarksRepository>();
             marksRepository.Setup(act => act.Get(It.IsAny<long>())).Returns((CarMark) null);

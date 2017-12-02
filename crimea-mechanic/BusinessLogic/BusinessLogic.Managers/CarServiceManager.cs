@@ -119,7 +119,6 @@ namespace BusinessLogic.Managers
                     ItemsPerPage = Common.Constants.FilterConstants.DefaultItemsPerPage
                 };
             }
-
             var infos = Paginate(filter.CurrentPage, filter.ItemsPerPage, BuildQueryForCarServices(filter), out var itemsCount)
                 .ToList()
                 .Select(item =>

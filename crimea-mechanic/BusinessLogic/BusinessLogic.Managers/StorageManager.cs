@@ -50,14 +50,6 @@ namespace BusinessLogic.Managers
             return Mapper.Map<IEnumerable<CarModelDto>>(models);
         }
 
-        public IEnumerable<WorkTagDto> GetWorkTags()
-        {
-            return UnitOfWork.Repository<IWorkTagsRepository>().GetAll(true)
-                .Where(tag => !tag.IsDeleted)
-                .ToList()
-                .Select(Mapper.Map<WorkTagDto>);
-        }
-
         public IEnumerable<CityDto> GetCities()
         {
             return UnitOfWork.Repository<ICityRepository>().GetAll(true)

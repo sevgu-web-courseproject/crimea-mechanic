@@ -80,7 +80,6 @@
     <Compile Include="User\RegistrationDto.cs" />
     <Compile Include="User\RegistrationCarServiceDto.cs" />
     <Compile Include="User\RegistrationUserDto.cs" />
-    <Compile Include="WorkTagDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Common.Enums\Common.Enums.csproj">

@@ -50,9 +50,9 @@ namespace DataAccessLayer.Models
         public string TimetableWorks { get; set; }
 
         /// <summary>
-        /// Теги характера работ
+        /// Типы выполняемых работ
         /// </summary>
-        public virtual ICollection<WorkTag> WorkTags { get; set; }
+        public virtual ICollection<WorkType> WorkTypes { get; set; }
 
         /// <summary>
         /// Теги марок автомобилей

@@ -13,7 +13,6 @@ namespace DependencyInjector
                 new RegistrationProfile(),
                 new CarMarkProfile(),
                 new CarModelProfile(),
-                new WorkTagProfile(),
                 new CityProfile(),
                 new UserCarProfile(),
                 new ApplicationProfile(),

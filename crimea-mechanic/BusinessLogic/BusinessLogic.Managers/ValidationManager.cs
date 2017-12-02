@@ -128,19 +128,6 @@ namespace BusinessLogic.Managers
                 }
             }
 
-            if (dto.WorkTags != null && dto.WorkTags.Any())
-            {
-                var repository = _unitOfWork.Repository<IWorkTagsRepository>();
-                foreach (var workTagId in dto.WorkTags)
-                {
-                    var workTag = repository.Get(workTagId);
-                    if (workTag == null)
-                    {
-                        validationResult.AddError(string.Format(ValidationErrorResources.WorkTagNotFound, workTagId));
-                    }
-                }
-            }
-
             if (dto.Logo != null && !IsImage(dto.Logo.Name))
             {
                 validationResult.AddError(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Logo.Name));
@@ -323,19 +310,6 @@ namespace BusinessLogic.Managers
                     if (mark == null)
                     {
                         validationResult.AddError(string.Format(ValidationErrorResources.CarMarkNotFound, carTagId));
-                    }
-                }
-            }
-
-            if (dto.WorkTags != null && dto.WorkTags.Any())
-            {
-                var repository = _unitOfWork.Repository<IWorkTagsRepository>();
-                foreach (var workTagId in dto.WorkTags)
-                {
-                    var workTag = repository.Get(workTagId);
-                    if (workTag == null)
-                    {
-                        validationResult.AddError(string.Format(ValidationErrorResources.WorkTagNotFound, workTagId));
                     }
                 }
             }
