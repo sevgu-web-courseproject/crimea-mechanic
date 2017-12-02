@@ -103,6 +103,7 @@
     <Compile Include="MapProfiles\CityProfile.cs" />
     <Compile Include="MapProfiles\RegistrationProfile.cs" />
     <Compile Include="MapProfiles\UserCarProfile.cs" />
+    <Compile Include="MapProfiles\WorksProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StorageManager.cs" />
     <Compile Include="UserManager.cs" />

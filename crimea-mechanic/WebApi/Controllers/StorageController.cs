@@ -35,5 +35,12 @@ namespace WebApi.Controllers
         {
             return CallBusinessLogicActionWithResult(() => _manager.GetCities());
         }
+
+        [HttpGet]
+        [Route("GetWorkClasses")]
+        public IHttpActionResult GetWorkClasses()
+        {
+            return CallBusinessLogicActionWithResult(() => _manager.GetWorkClasses());
+        }
     }
 }

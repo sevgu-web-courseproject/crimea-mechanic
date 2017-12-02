@@ -81,5 +81,7 @@
         public static string WebApiAddReviewUrl => Flurl.Url.Combine(WebApiUri, "api/CarServiceReview/Add");
 
         public static string WebApiDeleteReviewUrl(string reviewId) => Flurl.Url.Combine(WebApiUri, "api/CarServiceReview/Delete", reviewId);
+
+        public static string WebApiGetWorkClassesUrl => Flurl.Url.Combine(WebApiUri, "api/Storage/GetWorkClasses");
     }
 }
