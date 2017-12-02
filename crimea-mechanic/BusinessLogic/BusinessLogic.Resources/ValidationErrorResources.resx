@@ -180,6 +180,9 @@
   <data name="PhoneNumberIsIncorrect" xml:space="preserve">
     <value>Неправильный номер мобильного телефона</value>
   </data>
+  <data name="PhotosToMuch" xml:space="preserve">
+    <value>Превышен лимит количества фотографий, доступно только 5</value>
+  </data>
   <data name="ReviewContentIsEmpty" xml:space="preserve">
     <value>Отзыв не задан</value>
   </data>
@@ -192,7 +195,10 @@
   <data name="VinNumberIsIncorrect" xml:space="preserve">
     <value>Неправильный VIN номер автомобиля</value>
   </data>
-  <data name="WorkTagNotFound" xml:space="preserve">
-    <value>Вид работы с номером {0} не найден</value>
+  <data name="WorkTypeNotFound" xml:space="preserve">
+    <value>Тип работы с номером {0} не найден</value>
+  </data>
+  <data name="WorkTypeRequired" xml:space="preserve">
+    <value>Необходимо указать хотя бы один вид работы</value>
   </data>
 </root>

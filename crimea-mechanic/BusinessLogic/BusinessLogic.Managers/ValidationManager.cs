@@ -115,6 +115,23 @@ namespace BusinessLogic.Managers
                 validationResult.AddError(ValidationErrorResources.CarServiceSiteIsIncorrect);
             }
 
+            if (dto.WorkTypes != null && dto.WorkTypes.Any())
+            {
+                var repository = _unitOfWork.Repository<IWorkTypeRepository>();
+                foreach (var workType in dto.WorkTypes)
+                {
+                    var type = repository.Get(workType);
+                    if (type == null)
+                    {
+                        validationResult.AddError(string.Format(ValidationErrorResources.WorkTypeNotFound, workType));
+                    }
+                }
+            }
+            else
+            {
+                validationResult.AddError(ValidationErrorResources.WorkTypeRequired);
+            }
+
             if (dto.CarTags != null && dto.CarTags.Any())
             {
                 var repository = _unitOfWork.Repository<ICarMarksRepository>();
@@ -135,6 +152,10 @@ namespace BusinessLogic.Managers
 
             if (dto.Photos != null && dto.Photos.Any())
             {
+                if (dto.Photos.Count > 5)
+                {
+                    validationResult.AddError(ValidationErrorResources.PhotosToMuch);
+                }
                 foreach (var photo in dto.Photos)
                 {
                     if (!IsImage(photo.Name))

@@ -70,7 +70,7 @@ namespace WebApi.Controllers
                 ManagerName = GetStringFromRequest("ManagerName"),
                 Site = GetStringFromRequest("Site"),
                 TimetableWorks = GetStringFromRequest("TimetableWorks"),
-                WorkTags = GetList<long>("WorkTags"),
+                WorkTypes = GetList<long>("WorkTypes"),
                 CarTags = GetList<long>("CarTags"),
                 About = GetStringFromRequest("About"),
                 Logo = SaveFile("Logo", directory),

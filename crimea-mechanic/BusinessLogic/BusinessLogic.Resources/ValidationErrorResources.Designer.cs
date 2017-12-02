@@ -250,6 +250,15 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Превышен лимит количества фотографий, доступно только 5.
+        /// </summary>
+        public static string PhotosToMuch {
+            get {
+                return ResourceManager.GetString("PhotosToMuch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отзыв не задан.
         /// </summary>
         public static string ReviewContentIsEmpty {
@@ -286,11 +295,20 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вид работы с номером {0} не найден.
+        ///   Looks up a localized string similar to Тип работы с номером {0} не найден.
         /// </summary>
-        public static string WorkTagNotFound {
+        public static string WorkTypeNotFound {
             get {
-                return ResourceManager.GetString("WorkTagNotFound", resourceCulture);
+                return ResourceManager.GetString("WorkTypeNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Необходимо указать хотя бы один вид работы.
+        /// </summary>
+        public static string WorkTypeRequired {
+            get {
+                return ResourceManager.GetString("WorkTypeRequired", resourceCulture);
             }
         }
     }

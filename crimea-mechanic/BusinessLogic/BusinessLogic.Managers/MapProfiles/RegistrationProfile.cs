@@ -43,7 +43,8 @@ namespace BusinessLogic.Managers.MapProfiles
                 .ForMember(d => d.Applications, opt => opt.Ignore())
                 .ForMember(d => d.Offers, opt => opt.Ignore())
                 .ForMember(d => d.Points, opt => opt.UseValue(0))
-                .ForMember(d => d.Reviews, opt => opt.Ignore());
+                .ForMember(d => d.Reviews, opt => opt.Ignore())
+                .ForMember(d => d.WorkTypes, opt => opt.Ignore());
 
             CreateMap<string, CarServicePhone>()
                 .ForMember(d => d.Number, opt => opt.MapFrom(s => s))

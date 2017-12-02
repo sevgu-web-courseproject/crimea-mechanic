@@ -131,7 +131,7 @@ namespace BusinessLogic.UnitTests
                 ManagerName = "Test",
                 Site = "https://test.com",
                 TimetableWorks = "Test",
-                WorkTags = new List<long>
+                WorkTypes = new List<long>
                 {
                     1, 2
                 },
@@ -199,7 +199,7 @@ namespace BusinessLogic.UnitTests
                 ManagerName = "",
                 Site = "http12s://test.com",
                 CarTags = new List<long> { 1 },
-                WorkTags = new List<long> { 1 },
+                WorkTypes = new List<long> { 1 },
                 Logo = new FileDto
                 {
                     Name = "Test.exe",

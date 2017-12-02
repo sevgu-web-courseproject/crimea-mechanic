@@ -20,7 +20,8 @@ namespace BusinessLogic.Managers.MapProfiles
                 .ForMember(d => d.IsDeleted, opt => opt.UseValue(false))
                 .ForMember(d => d.Created, opt => opt.MapFrom(s => DateTime.UtcNow))
                 .ForMember(d => d.Updated, opt => opt.MapFrom(s => DateTime.UtcNow))
-                .ForMember(d => d.State, opt => opt.UseValue(ApplicationState.InSearch));
+                .ForMember(d => d.State, opt => opt.UseValue(ApplicationState.InSearch))
+                .ForMember(d => d.WorkType, opt => opt.Ignore());
 
             CreateMap<Application, ApplicationBaseInfoDto>();
 
