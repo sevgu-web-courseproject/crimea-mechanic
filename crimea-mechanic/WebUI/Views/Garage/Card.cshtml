@@ -114,7 +114,7 @@
                             </div>
                             <div>
                                 <label>@GlobalResources.CarFuelType</label>
-                                <select class="form-control" data-bind="options: fuelTypes, optionsValue: 'Id', optionsText: 'Name', value: model.FuelType, optionsCaption: 'Выберите тип топлива'" aria-describedby="fuel-type-error"></select>
+                                <select class="form-control" data-bind="options: fuelTypes, optionsValue: 'Id', optionsText: 'Name', value: model.FuelType, optionsCaption: '@GlobalResources.ChooseFuelType'" aria-describedby="fuel-type-error"></select>
                                 <small id="fuel-type-error" class="form-text validation-error-text" data-bind="validationMessage: model.FuelType"></small>
                             </div>
                             <div>

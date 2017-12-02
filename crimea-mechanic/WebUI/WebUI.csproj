@@ -283,6 +283,7 @@
     <Content Include="Scripts\ViewModels\garagePageVM.js" />
     <Content Include="Scripts\ViewModels\homePageVM.js" />
     <Content Include="Scripts\ViewModels\poolVM.js" />
+    <Content Include="Scripts\ViewModels\profileVM.js" />
     <Content Include="Scripts\ViewModels\registrationCarServiceVM.js" />
     <Content Include="Scripts\ViewModels\registrationRequestCardVM.js" />
     <Content Include="Scripts\ViewModels\registrationRequestsVM.js" />
@@ -339,6 +340,7 @@
     <Content Include="Views\Application\ApplicationsForAdministrator.cshtml" />
     <Content Include="Views\Application\ApplicationCardForAdministrator.cshtml" />
     <Content Include="Views\CarService\Index.cshtml" />
+    <Content Include="Views\Home\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.Constants\Common.Constants.csproj">

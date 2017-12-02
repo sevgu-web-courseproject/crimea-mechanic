@@ -1,33 +1,31 @@
 ﻿@using WebUI.App_LocalResources
 @{
-    ViewBag.Title = "Автосервисы";
+    ViewBag.Title = GlobalResources.CarServices;
 }
-
-<!-- TODO Перевести -->
 
 @section breadcrumbs {
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">@GlobalResources.Home</a></li>
-        <li class="breadcrumb-item active">Автосервисы</li>
+        <li class="breadcrumb-item active">@GlobalResources.CarServices</li>
     </ol>
 }
 
 <div class="jumbotron">
-    <h3>Рейтинг автосервисов</h3>
+    <h3>@GlobalResources.CarServiceRaiting</h3>
     <hr/>
     
     <div class="row">
         <div class="col">
-            <label for="name-service">Наименнование автосервиса</label>
-            <input type="text" id="name-service" class="form-control" placeholder="Крымский механик" data-bind="value: name"/>
+            <label for="name-service">@GlobalResources.CarServiceName</label>
+            <input type="text" id="name-service" class="form-control" placeholder="@GlobalResources.CarServiceName" data-bind="value: name"/>
         </div>
         <div class="col">
-            <label for="city-service">Город</label>
-            <select id="city-service" class="form-control" data-bind="options: cities, optionsValue: 'Id', optionsText: 'Name', value: cityId, optionsCaption: 'Выберите город'"></select>
+            <label for="city-service">@GlobalResources.City</label>
+            <select id="city-service" class="form-control" data-bind="options: cities, optionsValue: 'Id', optionsText: 'Name', value: cityId, optionsCaption: '@GlobalResources.ChooseCity'"></select>
         </div>
         <div class="col">
-            <label for="star-service">Количество звезд</label>
-            <select id="star-service" class="form-control" data-bind="options: starsCount, value: stars, optionsCaption: 'Выберите количество звезд'"></select>
+            <label for="star-service">@GlobalResources.CountStars</label>
+            <select id="star-service" class="form-control" data-bind="options: starsCount, value: stars, optionsCaption: '@GlobalResources.ChooseCountStars'"></select>
         </div>
     </div>
     @if (User.IsInRole(Common.Constants.CommonRoles.Administrator))
@@ -37,7 +35,7 @@
                 <div class="form-check">
                     <label class="form-check-label">
                         <input type="checkbox" class="form-check-input" data-bind="checked: showBlocked">
-                        Показывать заблокированные
+                        @GlobalResources.ShowBlocked
                     </label>
                 </div>
             </div>
@@ -72,7 +70,7 @@
                     <span>@GlobalResources.AddressCarService:</span><span data-bind="text: $data.Address"></span>
                 </div>
                 <div class="row">
-                    <span>Об автосервисе:</span><span class="word-wrap" data-bind="text: $data.About"></span>
+                    <span>@GlobalResources.AboutCarService:</span><span class="word-wrap" data-bind="text: $data.About"></span>
                 </div>
                 <div class="row">
                     <span>@GlobalResources.RegistrationDate:</span><span data-bind="text: $data.Created"></span>

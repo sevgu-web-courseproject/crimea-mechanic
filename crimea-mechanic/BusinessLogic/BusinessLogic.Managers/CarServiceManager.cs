@@ -279,7 +279,9 @@ namespace BusinessLogic.Managers
                 query = query.Where(q => q.Reviews.Count(r => !r.IsDeleted) != 0 && q.Points / q.Reviews.Count(r => !r.IsDeleted) == filter.Stars.Value);
             }
 
-            return query.OrderByDescending(cr => cr.Points);
+            return query.OrderByDescending(q => q.Reviews.Count(r => !r.IsDeleted) == 0 
+                ? 0
+                : q.Points / q.Reviews.Count(r => !r.IsDeleted));
         }
 
         private IQueryable<CarService> BuildQueryForRegistrationRequests(CarServiceRegistrationsFilter filter)

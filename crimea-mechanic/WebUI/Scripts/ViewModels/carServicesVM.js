@@ -16,7 +16,7 @@
         1, 2, 3 ,4 ,5
     ];
 
-    var getCarServices = function() {
+    var getCarServices = function(callback) {
         $(document).trigger("showLoadingPanel");
         var data = JSON.stringify({
             CurrentPage: filter.currentPage(),
@@ -33,6 +33,9 @@
                 });
                 itemsCount(data.ItemsCount);
                 carServices(data.Items);
+                if (callback) {
+                    callback();
+                }
                 $(document).trigger("hideLoadingPanel");
             }, function($xhr) {
                 var text = ajaxHelper.extractErrors($xhr);
@@ -112,8 +115,9 @@
             localStorage.removeItem("carServiceFilter");
         }
 
-        getCarServices();
-        getCities();
+        getCarServices(function() {
+            getCities();
+        });
 
         filter.name.subscribe(function() {
             filter.currentPage(1);

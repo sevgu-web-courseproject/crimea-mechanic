@@ -8,5 +8,12 @@ namespace WebUI.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        [Authorize(Roles = Common.Constants.CommonRoles.Regular)]
+        public ActionResult MyProfile()
+        {
+            return View("Profile");
+        }
     }
 }

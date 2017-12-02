@@ -29,7 +29,7 @@
 
     var fuelTypes = [
         { Id: 10, Name: window.resource.texts.gasoline }, 
-        { Id: 20, Name: window.resource.texts.disel }, 
+        { Id: 20, Name: window.resource.texts.diesel }, 
         { Id: 30, Name: window.resource.texts.other } 
     ];
 

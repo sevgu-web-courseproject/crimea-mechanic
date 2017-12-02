@@ -7,8 +7,8 @@
 
     var pages = ko.pureComputed(function () {
         var pagesCount = itemsCount() % itemsPerPage() !== 0
-            ? Math.round((itemsCount()) / itemsPerPage()) + 1
-            : (itemsCount()) / itemsPerPage();
+            ? itemsCount() / itemsPerPage() + 1
+            : itemsCount() / itemsPerPage();
         if (pagesCount === 1) {
             return [];
         }
