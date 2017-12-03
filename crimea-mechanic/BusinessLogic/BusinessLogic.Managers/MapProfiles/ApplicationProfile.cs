@@ -23,11 +23,20 @@ namespace BusinessLogic.Managers.MapProfiles
                 .ForMember(d => d.State, opt => opt.UseValue(ApplicationState.InSearch))
                 .ForMember(d => d.WorkType, opt => opt.Ignore());
 
-            CreateMap<Application, ApplicationBaseInfoDto>();
+            CreateMap<Application, ApplicationBaseInfoDto>()
+                .ForMember(d => d.WorkClassDescription, opt => opt.MapFrom(s => s.WorkType != null
+                    ? s.WorkType.Class != null
+                        ? s.WorkType.Class.Name
+                        : null
+                    : null))
+                .ForMember(d => d.WorkTypeDescription, opt => opt.MapFrom(s => s.WorkType != null
+                    ? s.WorkType.Name
+                    : null));
 
             CreateMap<Application, ApplicationShortInfoForUserDto>()
                 .IncludeBase<Application, ApplicationBaseInfoDto>()
                 .ForMember(d => d.ServiceName, opt => opt.MapFrom(s => s.Service != null ? s.Service.Name : string.Empty))
+                .ForMember(d => d.ServiceId, opt => opt.MapFrom(s => s.Service != null ? s.Service.Id : (long?) null))
                 .ForMember(d => d.StateDescription, opt => opt.MapFrom(s => s.State.GetDescription()))
                 .ForMember(d => d.CityName, opt => opt.MapFrom(s => s.City.Name));
 
@@ -39,6 +48,7 @@ namespace BusinessLogic.Managers.MapProfiles
             CreateMap<Application, ApplicationShortInfoForServiceDto>()
                 .IncludeBase<Application, ApplicationBaseInfoDto>()
                 .ForMember(d => d.ContactName, opt => opt.MapFrom(s => s.Car.User.Name))
+                .ForMember(d => d.ContactPhone, opt => opt.MapFrom(s => s.Car.User.Phone))
                 .ForMember(d => d.StateDescription, opt => opt.MapFrom(s => s.State.GetDescription()))
                 .ForMember(d => d.OfferId, opt => opt.Ignore());
 

@@ -59,6 +59,11 @@ namespace BusinessLogic.Managers
                 application.Car.Applications = new List<Application>();
             }
 
+            if (dto.WorkTypeId.HasValue)
+            {
+                application.WorkType = UnitOfWork.Repository<IWorkTypeRepository>().Get(dto.WorkTypeId.Value);
+            }
+
             application.Car.Applications.Add(application);
             UnitOfWork.SaveChanges();
         }
@@ -84,23 +89,8 @@ namespace BusinessLogic.Managers
                 throw new BusinessFaultException(BusinessLogicExceptionResources.ApplicationIncorrectState);
             }
 
-            var isChanged = false;
-            if (application.City.Id != dto.CityId)
-            {
-                application.City = UnitOfWork.Repository<ICityRepository>().Get(dto.CityId);
-                isChanged = true;
-            }
-
-            if (!application.Description.Equals(dto.Description))
-            {
-                application.Description = dto.Description;
-                isChanged = true;
-            }
-
-            if (isChanged)
-            {
-                UnitOfWork.SaveChanges();
-            }
+            application.Description = dto.Description;
+            UnitOfWork.SaveChanges();
         }
 
         public void DeleteApplication(long applicationId, string currentUserId)

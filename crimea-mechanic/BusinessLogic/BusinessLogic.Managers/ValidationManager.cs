@@ -213,6 +213,15 @@ namespace BusinessLogic.Managers
                 validationResult.AddError(ValidationErrorResources.ApplicationDescriptionIsEmpty);
             }
 
+            if (dto.WorkTypeId.HasValue)
+            {
+                var workType = _unitOfWork.Repository<IWorkTypeRepository>().Get(dto.WorkTypeId.Value);
+                if (workType == null)
+                {
+                    validationResult.AddError(string.Format(ValidationErrorResources.WorkTypeNotFound, dto.WorkTypeId.Value));
+                }
+            }
+
             return validationResult;
         }
 
@@ -228,12 +237,6 @@ namespace BusinessLogic.Managers
             if (application == null)
             {
                 validationResult.AddError(ValidationErrorResources.ApplicationNotFound);
-            }
-
-            var city = _unitOfWork.Repository<ICityRepository>().Get(dto.CityId);
-            if (city == null)
-            {
-                validationResult.AddError(ValidationErrorResources.CityNotFound);
             }
 
             if (string.IsNullOrEmpty(dto.Description))

@@ -14,6 +14,11 @@ namespace BusinessLogic.Objects.Application
         public string ServiceName { get; set; }
 
         /// <summary>
+        /// Идентификатор автосервиса
+        /// </summary>
+        public long? ServiceId { get; set; }
+
+        /// <summary>
         /// Состояние предложения
         /// </summary>
         public ApplicationState State { get; set; }

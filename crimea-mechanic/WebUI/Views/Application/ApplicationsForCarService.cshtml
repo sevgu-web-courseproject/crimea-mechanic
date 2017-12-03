@@ -50,15 +50,26 @@
                     <span data-bind="text: $data.ContactName"></span>
                 </div>
                 <div>
+                    Мобильный номер: <!-- TODO -->
+                    <span data-bind="text: $data.ContactPhone"></span>
+                </div>
+                <div>
                     @GlobalResources.Car
                     <span data-bind="text: $data.Car.Mark"></span>
                     <span data-bind="text: $data.Car.Model"></span>
                     <span data-bind="text: $data.Car.Year"></span>
                     <span data-bind="text: $data.Car.EngineCapacity"></span>
                     <span data-bind="text: $data.Car.FuelTypeDescription"></span>
+                    (VIN: <span data-bind="text: $data.Car.Vin"></span>)
                 </div>
+                <!-- ko if: $data.WorkClassDescription -->
+                <div>
+                    Тип работы: <!-- TODO -->
+                    <span data-bind="text: $data.WorkTypeDescription"></span> (<span data-bind="text: $data.WorkClassDescription"></span>)
+                </div>
+                <!-- /ko -->
                 <div class="word-wrap">
-                    @GlobalResources.WorksDescription
+                    Дополнительная информация: <!-- TODO -->
                     <span data-bind="text: $data.Description"></span>
                 </div>
                 <div>

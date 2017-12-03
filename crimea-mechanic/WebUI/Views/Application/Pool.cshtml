@@ -55,9 +55,16 @@
                 <span data-bind="text: $data.Car.Year"></span>
                 <span data-bind="text: $data.Car.EngineCapacity"></span>
                 <span data-bind="text: $data.Car.FuelTypeDescription"></span>
+                (VIN: <span data-bind="text: $data.Car.Vin"></span>)
             </div>
+            <!-- ko if: $data.WorkClassDescription -->
+            <div>
+                Тип работы: <!-- TODO -->
+                <span data-bind="text: $data.WorkTypeDescription"></span> (<span data-bind="text: $data.WorkClassDescription"></span>)
+            </div>
+            <!-- /ko -->
             <div class="word-wrap">
-                @GlobalResources.WorksDescription
+                Дополнительная информация: <!-- TODO -->
                 <span data-bind="text: $data.Description"></span>
             </div>
             <div>

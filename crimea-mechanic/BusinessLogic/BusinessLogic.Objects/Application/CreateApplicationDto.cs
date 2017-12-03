@@ -16,6 +16,11 @@
         public long CityId { get; set; }
 
         /// <summary>
+        /// Тип работы
+        /// </summary>
+        public long? WorkTypeId { get; set; }
+
+        /// <summary>
         /// Описание необходимых работы
         /// </summary>
         public string Description { get; set; }

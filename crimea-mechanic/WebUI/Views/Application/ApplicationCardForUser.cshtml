@@ -13,11 +13,11 @@
 }
 
 <div class="jumbotron">
-    <h3 class="inline">Карточка заявки</h3>
+    <h3 class="inline">Карточка заявки</h3> <!-- TODO -->
     
     <div class="pull-right">
         <!-- ko if: model.State() == window.resource.applicationStates.inSearch -->
-        <button class="btn btn-success" data-toggle="modal" data-target="#edit-application" data-bind="click: getCities">@GlobalResources.Edit</button>
+        <button class="btn btn-success" data-toggle="modal" data-target="#edit-application">@GlobalResources.Edit</button>
         <!-- /ko -->
         <!-- ko if: model.State() == window.resource.applicationStates.inSearch || model.State() == window.resource.applicationStates.rejected -->
         <button class="btn btn-danger" data-bind="click: deleteApplication">@GlobalResources.Delete</button>
@@ -44,7 +44,12 @@
                     <span data-bind="text: model.Car.FuelTypeDescription"></span>
                 </a>
             </div>
-    
+            <!-- ko if: model.WorkClassDescription() -->
+            <div>
+                Тип работы: <!-- TODO -->
+                <span data-bind="text: model.WorkTypeDescription"></span> (<span data-bind="text: model.WorkClassDescription"></span>)
+            </div>
+            <!-- /ko -->
             <div class="word-wrap">
                 @GlobalResources.WorksDescription
                 <span data-bind="text: model.Description"></span>
@@ -53,10 +58,10 @@
                 @GlobalResources.ApplicationStatus
                 <span data-bind="text: model.StateDescription"></span>
             </div>
-            <!-- ko if: model.ServiceName -->
+            <!-- ko if: model.ServiceId() -->
             <div> 
                 @GlobalResources.Service
-                <span data-bind="text: model.ServiceName"></span>
+                <a data-bind="text: model.ServiceName, attr: { href: window.resource.urls.webUiCarServiceCardUrl + '/' + model.ServiceId()}"></a>
             </div>
             <!-- /ko -->
             <div>
@@ -127,17 +132,7 @@
                     <div class="row">
                         <div class="col">
                             <div>
-                                <label for="city-selector">@GlobalResources.ChooseCity:</label>
-                                <select class="form-control" id="city-selector" data-bind="options: cities,
-                                        optionsValue: 'Id',
-                                        optionsText: 'Name',
-                                        value: editApplication.cityId,
-                                        optionsCaption: 'Выберите город'" aria-describedby="city-id-error"></select>
-                                <small id="city-id-error" class="form-text validation-error-text" data-bind="validationMessage: editApplication.cityId"></small>
-                            </div>
-                            <br />
-                            <div>
-                                <label for="work-description">@GlobalResources.WorksDescription</label>
+                                <label for="work-description">Дополнительная информация: </label> <!-- TODO -->
                                 <textarea class="form-control" id="work-description" rows="3" data-bind="value: editApplication.description" aria-describedby="description-error"></textarea>
                                 <small id="description-error" class="form-text validation-error-text" data-bind="validationMessage: editApplication.description"></small>
                             </div>

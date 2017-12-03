@@ -1,4 +1,5 @@
 ﻿using System;
+using Common.Enums;
 
 namespace BusinessLogic.Objects.Car
 {
@@ -8,6 +9,16 @@ namespace BusinessLogic.Objects.Car
         /// Идентификатор заявки
         /// </summary>
         public long Id { get; set; }
+
+        /// <summary>
+        /// Наименнование класса работ
+        /// </summary>
+        public string WorkClassDescription { get; set; }
+
+        /// <summary>
+        /// Наименнование типа работы
+        /// </summary>
+        public string WorkTypeDescription { get; set; }
 
         /// <summary>
         /// Описание заявки
@@ -23,5 +34,10 @@ namespace BusinessLogic.Objects.Car
         /// Описание состояния
         /// </summary>
         public string StateDescription { get; set; }
+
+        /// <summary>
+        /// Состояние заявки
+        /// </summary>
+        public ApplicationState State { get; set; }
     }
 }

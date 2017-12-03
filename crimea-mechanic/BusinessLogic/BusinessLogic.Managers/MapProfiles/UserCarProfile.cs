@@ -26,7 +26,15 @@ namespace BusinessLogic.Managers.MapProfiles
                 .ForMember(d => d.Year, opt => opt.MapFrom(s => s.Year.ToString()));
 
             CreateMap<Application, ApplicationForCarHistoryDto>()
-                .ForMember(d => d.StateDescription, opt => opt.MapFrom(s => s.State.GetDescription()));
+                .ForMember(d => d.StateDescription, opt => opt.MapFrom(s => s.State.GetDescription()))
+                .ForMember(d => d.WorkClassDescription, opt => opt.MapFrom(s => s.WorkType != null
+                    ? s.WorkType.Class != null
+                        ? s.WorkType.Class.Name
+                        : null
+                    : null))
+                .ForMember(d => d.WorkTypeDescription, opt => opt.MapFrom(s => s.WorkType != null
+                    ? s.WorkType.Name
+                    : null));
 
             CreateMap<UserCar, UserCarFullDto>()
                 .IncludeBase<UserCar, UserCarDto>()

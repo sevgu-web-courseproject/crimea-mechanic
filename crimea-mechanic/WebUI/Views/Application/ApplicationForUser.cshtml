@@ -69,6 +69,10 @@
                 <h4 data-bind="css: {'success-application': $data.State == window.resource.applicationStates.completed, 'error-application': $data.State == window.resource.applicationStates.rejected}">@GlobalResources.ApplicationN <span data-bind="text: $data.Id"></span></h4>
             </div>
             <div>
+                @GlobalResources.ApplicationStatus
+                <span data-bind="text: $data.StateDescription"></span>
+            </div>
+            <div>
                 @GlobalResources.Car
                 <span data-bind="text: $data.Car.Mark"></span>
                 <span data-bind="text: $data.Car.Model"></span>
@@ -76,13 +80,19 @@
                 <span data-bind="text: $data.Car.EngineCapacity"></span>
                 <span data-bind="text: $data.Car.FuelTypeDescription"></span>
             </div>
-            <div class="word-wrap">
-                @GlobalResources.WorksDescription
-                <span data-bind="text: $data.Description"></span>
-            </div>
             <div>
-                @GlobalResources.ApplicationStatus
-                <span data-bind="text: $data.StateDescription"></span>
+                @GlobalResources.City:
+                <span data-bind="text: $data.CityName"></span>
+            </div>
+            <!-- ko if: $data.WorkClassDescription -->
+            <div>
+                Тип работы: <!-- TODO -->
+                <span data-bind="text: $data.WorkTypeDescription"></span> (<span data-bind="text: $data.WorkClassDescription"></span>)
+            </div>
+            <!-- /ko -->
+            <div class="word-wrap">
+                Дополнительная информация: <!-- TODO -->
+                <span data-bind="text: $data.Description"></span>
             </div>
             <!-- ko if: $data.ServiceName -->
             <div>
@@ -90,10 +100,6 @@
                 <span data-bind="text: $data.ServiceName"></span>
             </div>
             <!-- /ko -->
-            <div>
-                @GlobalResources.City:
-                <span data-bind="text: $data.CityName"></span>
-            </div>
             <div>
                 @GlobalResources.ApplicationDate
                 <span data-bind="text: $data.Created"></span>
@@ -148,7 +154,25 @@
                             </div>
                             <br/>
                             <div>
-                                <label for="work-description">@GlobalResources.WorksDescription</label>
+                                <label for="work-class-selector">Класс работ</label> <!-- TODO -->
+                                <select class="form-control" id="work-class-selector" data-bind="options: workClasses,
+                                        optionsText: 'Name',
+                                        value: currentWorkClass,
+                                        optionsCaption: 'Выберите класс работ'"></select> <!-- TODO -->
+                            </div>
+                            <br/>
+                            <div>
+                                <label for="work-type-selector">Тип работ</label> <!-- TODO -->
+                                <select class="form-control" id="work-type-selector" data-bind="options: workTypes,
+                                        optionsValue: 'Id',
+                                        optionsText: 'Name',
+                                        value: newApplication.workTypeId,
+                                        optionsCaption: 'Выберите тип работы'"></select> <!-- TODO -->
+                                <small class="form-text text-muted">Не обязательно поле к заполнению</small> <!-- TODO -->
+                            </div>
+                            <br/>
+                            <div>
+                                <label for="work-description">Дополнительная информация</label> <!-- TODO -->
                                 <textarea class="form-control" id="work-description" rows="3" data-bind="value: newApplication.description" aria-describedby="description-error"></textarea>
                                 <small id="description-error" class="form-text validation-error-text" data-bind="validationMessage: newApplication.description"></small>
                             </div>
