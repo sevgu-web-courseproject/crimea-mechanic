@@ -323,7 +323,7 @@
     <None Include="packages.config" />
     <Content Include="Views\Account\SignIn.cshtml" />
     <Content Include="Views\Account\RegistrationUser.cshtml" />
-    <Content Include="Views\Account\RegistrationCarService.cshtml" />
+    <Content Include="Views\Account\OperateCarService.cshtml" />
     <Content Include="Views\Shared\_HeaderScript.cshtml" />
     <Content Include="Views\CarService\Card.cshtml" />
     <Content Include="Views\CarService\RegistrationRequests.cshtml" />
@@ -340,7 +340,7 @@
     <Content Include="Views\Application\ApplicationsForAdministrator.cshtml" />
     <Content Include="Views\Application\ApplicationCardForAdministrator.cshtml" />
     <Content Include="Views\CarService\Index.cshtml" />
-    <Content Include="Views\Home\Profile.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.Constants\Common.Constants.csproj">

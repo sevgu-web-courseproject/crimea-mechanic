@@ -75,7 +75,6 @@
     var validationGroup = null;
 
     var submit = function () {
-
         validationGroup = ko.validation.group([
             model.Login,
             model.Password,

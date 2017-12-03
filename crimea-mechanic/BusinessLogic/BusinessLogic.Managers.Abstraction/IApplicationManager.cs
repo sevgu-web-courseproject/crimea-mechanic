@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BusinessLogic.Objects;
 using BusinessLogic.Objects.Application;
+using BusinessLogic.Objects.Works;
 
 namespace BusinessLogic.Managers.Abstraction
 {
@@ -88,7 +89,11 @@ namespace BusinessLogic.Managers.Abstraction
         /// <summary>
         /// Получить список марок автомобилей, которые находятся в пуле
         /// </summary>
-        /// <returns></returns>
         IEnumerable<CarMarkDto> GetAvailableMarksFromPool(string currentUserId);
+
+        /// <summary>
+        /// Получить список типо работ, которые находятся в пуле
+        /// </summary>
+        IEnumerable<WorkTypeDto> GetAvailableWorkTypesFromPool(string currentUserId);
     }
 }

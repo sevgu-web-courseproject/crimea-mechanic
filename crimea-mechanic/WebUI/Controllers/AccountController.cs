@@ -103,6 +103,10 @@ namespace WebUI.Controllers
         [HttpGet]
         public ActionResult RegistrationUser()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -110,7 +114,26 @@ namespace WebUI.Controllers
         [HttpGet]
         public ActionResult RegistrationCarService()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View("OperateCarService");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult MyProfile()
+        {
+            if (User.IsInRole(Common.Constants.CommonRoles.Regular))
+            {
+                return View("Profile");
+            }
+            if (User.IsInRole(Common.Constants.CommonRoles.CarService))
+            {
+                return View("Profile"); // TODO
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         [Authorize]
@@ -119,7 +142,7 @@ namespace WebUI.Controllers
             await WebApiService.Instance.LogOutAsync(Token);
             IdentitySignout();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("SignIn", "Account");
         }
 
         #endregion

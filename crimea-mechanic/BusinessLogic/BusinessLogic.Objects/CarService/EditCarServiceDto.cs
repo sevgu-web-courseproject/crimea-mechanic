@@ -53,9 +53,9 @@ namespace BusinessLogic.Objects.CarService
         public string TimetableWorks { get; set; }
 
         /// <summary>
-        /// Теги характера работ
+        /// Теги типов работ
         /// </summary>
-        public List<long> WorkTags { get; set; }
+        public List<long> WorkTypes { get; set; }
 
         /// <summary>
         /// Теги марок автомобилей

@@ -69,4 +69,18 @@
             </div>
         </div>
     </form>
+
 </div>
+
+@section scripts {
+    <script>
+        $(function() {
+            @if (ViewContext.ViewData.ModelState.ContainsKey(""))
+            {
+            <text>
+                notificationHelper.error(window.resource.texts.error,'@ViewContext.ViewData.ModelState[""].Errors[0].ErrorMessage');
+            </text>
+            }
+        });
+    </script>
+}
