@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using AutoMapper;
@@ -6,6 +7,7 @@ using BusinessLogic.Managers.Abstraction;
 using BusinessLogic.Objects;
 using BusinessLogic.Objects.CarService;
 using BusinessLogic.Objects.Review;
+using BusinessLogic.Objects.Works;
 using BusinessLogic.Resources;
 using Common.Enums;
 using Common.Exceptions;
@@ -86,6 +88,15 @@ namespace BusinessLogic.Managers
             infoDto.AverageMark = service.Reviews.Count(r => !r.IsDeleted) == 0
                 ? 0
                 : service.Points / service.Reviews.Count(r => !r.IsDeleted);
+            infoDto.WorkClasses = service.WorkTypes
+                .GroupBy(x => x.Class)
+                .Select(x =>
+                {
+                    var dto = Mapper.Map<WorkClassDto>(x.Key);
+                    dto.Types = Mapper.Map<IEnumerable<WorkTypeDto>>(x.ToList());
+                    return dto;
+                })
+                .ToList();
 
             if (!string.IsNullOrEmpty(currentUserId) && UserManager.IsUserInRole(currentUserId, Common.Constants.CommonRoles.Regular))
             {

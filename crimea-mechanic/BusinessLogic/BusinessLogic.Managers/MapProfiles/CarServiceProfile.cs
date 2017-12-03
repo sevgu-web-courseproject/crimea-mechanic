@@ -20,7 +20,8 @@ namespace BusinessLogic.Managers.MapProfiles
                 .ForMember(d => d.PhotosId, opt => opt.Ignore())
                 .ForMember(d => d.Phones, opt => opt.Ignore())
                 .ForMember(d => d.ReviewId, opt => opt.Ignore())
-                .ForMember(d => d.Reviews, opt => opt.Ignore());
+                .ForMember(d => d.Reviews, opt => opt.Ignore())
+                .ForMember(d => d.WorkClasses, opt => opt.Ignore());
 
             CreateMap<CarService, RegistrationRequestShortInfoDto>()
                 .ForMember(d => d.CityName, opt => opt.MapFrom(s => s.City.Name))

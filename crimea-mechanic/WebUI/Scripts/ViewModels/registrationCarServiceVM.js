@@ -36,9 +36,9 @@
                 params: 1
             }
         }),
-        Site: ko.observable(),
-        TimetableWorks: ko.observable(),
-        About: ko.observable(),
+        Site: ko.observable(null),
+        TimetableWorks: ko.observable(null),
+        About: ko.observable(null),
         WorkTypes: ko.observableArray([]).extend({
             validation: {
                 validator: function (val, someOtherVal) {

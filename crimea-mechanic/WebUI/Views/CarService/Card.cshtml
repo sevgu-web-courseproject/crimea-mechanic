@@ -75,10 +75,12 @@
                 <span data-bind="text: model.Email"></span>
             </div>
 
+            <!-- ko if: model.Site() -->
             <div>
                 @GlobalResources.CarServiceSite:
                 <a data-bind="text: model.Site, attr: {href: model.Site}"></a>
             </div>
+            <!-- /ko -->
 
             <div>
                 @GlobalResources.ContactPhoneNumbers:
@@ -86,19 +88,50 @@
                 <span data-bind="text: $data"></span>
                 <!-- /ko -->
             </div>
+
+            <!-- ko if: model.TimetableWorks() -->
             <div>
                 @GlobalResources.CarServiceWorkTime:
                 <span data-bind="text: model.TimetableWorks"></span>
             </div>
+            <!-- /ko -->
         </div>
     </div>
+    
     <br />
-
-    <div class="section">
+    
+    <!-- ko if: model.About() -->
         <h4>@GlobalResources.AboutCarService</h4>
         <hr />
+    
+        <div class="row">
+            <div class="col">
+                <p data-bind="text: model.About"></p>
+            </div>
+        </div>
+    <!-- /ko -->
+    
+    <!-- ko if: model.WorkClasses().length -->
+    <h4>Виды работ</h4> <!--TODO-->
+    <hr />
+    
+    <div class="row justify-content-center">
+        <!-- ko foreach: model.WorkClasses -->
+        <div class="col-4">
+            <span class="header-text" data-bind="text: $data.Name"></span>
+            <ul>
+                <!-- ko foreach: $data.Types -->
+                <li data-bind="text: $data.Name"></li>
+                <!-- /ko -->
+            </ul>
+        </div>
+        <!-- /ko -->
     </div>
+    <!-- /ko -->
+
     <!-- ko if: model.PhotosId().length-->
+    <h4>@GlobalResources.Photos</h4>
+    <hr/>
     <div class="row justify-content-center">
         <!-- ko foreach: model.PhotosId-->
         <div class='list-group gallery'>
@@ -115,21 +148,11 @@
     <!-- /ko -->
 
     <br/>
-
-    <div class="row">
-        <div class="col">
-            <p data-bind="text: model.About"></p>
-        </div>
-    </div>
-
-    <br/>
-
+    
     <!-- ko if: model.Reviews().length-->
-    <div class="section">
-        <h4>@GlobalResources.Reviews</h4>
-        <hr/>
-        <br/>
-    </div>
+    <h4>@GlobalResources.Reviews</h4>
+    <hr/>
+    <br/>
     
     <section class="comments">
         <!-- ko foreach: model.Reviews -->
@@ -171,7 +194,7 @@
                 <div class="row">
                     <div class="col">
                         <label for="mark-review">@GlobalResources.Mark</label>
-                        <select id="mark-review" class="form-control" data-bind="options: availableMarks, value: newReview.mark, optionsCaption: 'Выберите оценку'" aria-describedby="mark-error"></select>
+                        <select id="mark-review" class="form-control" data-bind="options: availableMarks, value: newReview.mark, optionsCaption: '@GlobalResources.Mark'" aria-describedby="mark-error"></select>
                         <small id="mark-error" class="form-text validation-error-text" data-bind="validationMessage: newReview.mark"></small>
                     </div>
                 </div>

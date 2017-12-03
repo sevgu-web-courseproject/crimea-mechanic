@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BusinessLogic.Objects.Review;
+using BusinessLogic.Objects.Works;
 using Common.Enums;
 
 namespace BusinessLogic.Objects.CarService
@@ -48,5 +49,10 @@ namespace BusinessLogic.Objects.CarService
         /// Id отзыва пользователя
         /// </summary>
         public long? ReviewId { get; set; }
+
+        /// <summary>
+        /// Список классов работ автосервиса
+        /// </summary>
+        public IEnumerable<WorkClassDto> WorkClasses { get; set; }
     }
 }
