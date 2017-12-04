@@ -37,14 +37,14 @@ namespace BusinessLogic.Managers.MapProfiles
                 .ForMember(d => d.Phones, opt => opt.Ignore())
                 .ForMember(d => d.Id, opt => opt.Ignore())
                 .ForMember(d => d.ApplicationUser, opt => opt.Ignore())
-                .ForMember(d => d.WorkTags, opt => opt.Ignore())
                 .ForMember(d => d.CarTags, opt => opt.Ignore())
                 .ForMember(d => d.Files, opt => opt.Ignore())
                 .ForMember(d => d.City, opt => opt.Ignore())
                 .ForMember(d => d.Applications, opt => opt.Ignore())
                 .ForMember(d => d.Offers, opt => opt.Ignore())
                 .ForMember(d => d.Points, opt => opt.UseValue(0))
-                .ForMember(d => d.Reviews, opt => opt.Ignore());
+                .ForMember(d => d.Reviews, opt => opt.Ignore())
+                .ForMember(d => d.WorkTypes, opt => opt.Ignore());
 
             CreateMap<string, CarServicePhone>()
                 .ForMember(d => d.Number, opt => opt.MapFrom(s => s))
@@ -61,6 +61,9 @@ namespace BusinessLogic.Managers.MapProfiles
                 .ForMember(d => d.Created, opt => opt.MapFrom(s => DateTime.UtcNow))
                 .ForMember(d => d.Type, opt => opt.UseValue(FileType.Photo))
                 .ForAllOtherMembers(opt => opt.Ignore());
+
+            CreateMap<UserProfile, UserProfileDto>()
+                .ForMember(d => d.Email, opt => opt.MapFrom(s => s.ApplicationUser.Email));
         }
     }
 }

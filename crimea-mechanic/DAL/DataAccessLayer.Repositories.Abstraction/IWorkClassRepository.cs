@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.Repositories.Abstraction
 {
-    public interface IWorkTagsRepository : IRepositoryBase<WorkTag, long>
+    public interface IWorkClassRepository : IRepositoryBase<WorkClass, long>
     {
     }
 }

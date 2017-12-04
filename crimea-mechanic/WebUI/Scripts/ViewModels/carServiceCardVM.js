@@ -16,7 +16,8 @@
         About: ko.observable(),
         Reviews: ko.observableArray([]),
         ReviewId: ko.observable(),
-        State: ko.observable()
+        State: ko.observable(),
+        WorkClasses: ko.observableArray([])
     };
 
     var availableMarks = [1, 2, 3, 4, 5];
@@ -101,9 +102,8 @@
                 });
                 $(document).trigger("hideLoadingPanel");
             }, function ($xhr) {
-                $(document).trigger("hideLoadingPanel");
                 var text = ajaxHelper.extractErrors($xhr);
-                notificationHelper.error(window.resource.texts.error, text);
+                localStorage.error = text;
             });
     };
 

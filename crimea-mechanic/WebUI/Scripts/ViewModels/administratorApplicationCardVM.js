@@ -10,14 +10,17 @@
             Model: ko.observable(),
             Year: ko.observable(),
             EngineCapacity: ko.observable(),
-            FuelTypeDescription: ko.observable()
+            FuelTypeDescription: ko.observable(),
+            Vin: ko.observable()
         },
         Description: ko.observable(),
         State: ko.observable(),
         StateDescription: ko.observable(),
         CityName: ko.observable(),
         Created: ko.observable(),
-        Offers: ko.observableArray([])
+        Offers: ko.observableArray([]),
+        WorkClassDescription: ko.observable(),
+        WorkTypeDescription: ko.observable()
     };
 
     var getCard = function () {

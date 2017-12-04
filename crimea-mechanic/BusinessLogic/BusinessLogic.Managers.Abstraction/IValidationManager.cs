@@ -17,5 +17,6 @@ namespace BusinessLogic.Managers.Abstraction
         ValidationResult ValidateAddOfferDto(AddOfferDto dto);
         ValidationResult ValidateEditCarServiceDto(EditCarServiceDto dto);
         ValidationResult ValidateOperateReviewDto(OperateReviewDto dto);
+        ValidationResult ValidateEditUserProfileDto(EditUserProfileDto dto);
     }
 }

@@ -19,6 +19,11 @@ namespace DataAccessLayer.Models
         public virtual CarService Service { get; set; }
 
         /// <summary>
+        /// Тип работ
+        /// </summary>
+        public virtual WorkType WorkType { get; set; }
+
+        /// <summary>
         /// Город
         /// </summary>
         public virtual City City { get; set; }

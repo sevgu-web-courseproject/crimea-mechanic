@@ -142,6 +142,49 @@
             <label for="photos">@GlobalResources.CarServicePhotos</label>
             <input type="file" class="form-control-file" id="photos" multiple accept=".png, .jpeg, .jpg">
         </div>
+        
+        <br/>
+        <h4>Виды работ</h4> <!-- TODO -->
+        <hr/>
+        
+        
+        <div aria-describedby="work-types-error">
+            <!-- ko foreach: workClasses -->
+            <div id="accordion" role="tablist" data-bind="attr: {id: 'accordion' + $index()}">
+                <div class="card">
+                    <div class="card-header" role="tab" data-bind="attr: {id: 'heading' + $index()}">
+                        <h5 class="mb-0">
+                            <a data-toggle="collapse" aria-expanded="true" data-bind="attr: {'aria-controls': 'collapse' + $index(), href: '#collapse' + $index()}, text: $data.Name"></a>
+                        </h5>
+                    </div>
+                    <div class="collapse" role="tabpanel" data-parent="#accordion" data-bind="attr: {id: 'collapse' + $index(), 'aria-labelledby': 'heading' + $index(), 'data-parent': '#accordion' + $index()}">
+                        <div class="card-body">
+                            <!-- ko if: $data.Types.length !== 1 -->
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" data-bind="event: {change: $root.checkWorkClass }">
+                                    Выбрать все <!-- TODO -->
+                                </label>
+                            </div>
+                            <hr />
+                            <!-- /ko -->
+                            <!-- ko foreach: $data.Types -->
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" data-bind="event: {change: $root.checkWorkType }, checked: $root.model.WorkTypes.indexOf($data.Id) >= 0">
+                                    <!-- ko text: $data.Name --> <!-- /ko -->
+                                </label>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <small id="work-types-error" class="form-text validation-error-text" data-bind="validationMessage: model.WorkTypes"></small>
+        
+        <br />
             
         <div class="row justify-content-center items-center">
             <div class="col">

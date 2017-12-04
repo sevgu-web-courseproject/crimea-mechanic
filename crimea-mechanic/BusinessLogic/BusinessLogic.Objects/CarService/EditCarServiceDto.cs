@@ -18,11 +18,6 @@ namespace BusinessLogic.Objects.CarService
         public string Name { get; set; }
 
         /// <summary>
-        /// Идентификатор города
-        /// </summary>
-        public long CityId { get; set; }
-
-        /// <summary>
         /// Адрес автосервиса
         /// </summary>
         public string Address { get; set; }
@@ -53,14 +48,9 @@ namespace BusinessLogic.Objects.CarService
         public string TimetableWorks { get; set; }
 
         /// <summary>
-        /// Теги характера работ
+        /// Теги типов работ
         /// </summary>
-        public List<long> WorkTags { get; set; }
-
-        /// <summary>
-        /// Теги марок автомобилей
-        /// </summary>
-        public List<long> CarTags { get; set; }
+        public List<long> WorkTypes { get; set; }
 
         /// <summary>
         /// Логотип автосервиса

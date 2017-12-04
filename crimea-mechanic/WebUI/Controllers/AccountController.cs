@@ -103,12 +103,42 @@ namespace WebUI.Controllers
         [HttpGet]
         public ActionResult RegistrationUser()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
         // GET /Account/RegistrationCarService
         [HttpGet]
         public ActionResult RegistrationCarService()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult MyProfile()
+        {
+            if (User.IsInRole(Common.Constants.CommonRoles.Regular))
+            {
+                return View("ClientProfile");
+            }
+            if (User.IsInRole(Common.Constants.CommonRoles.CarService))
+            {
+                return View("CarServiceProfile");
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = Common.Constants.CommonRoles.CarService)]
+        public ActionResult EditCarService()
         {
             return View();
         }
@@ -119,7 +149,7 @@ namespace WebUI.Controllers
             await WebApiService.Instance.LogOutAsync(Token);
             IdentitySignout();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("SignIn", "Account");
         }
 
         #endregion

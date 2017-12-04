@@ -163,39 +163,6 @@ namespace BusinessLogic.UnitTests
 
         #endregion
 
-        #region GetWorkTags
-
-        [Test(Description = "GetWorkTags должен вернуть все виды работы без ошибок")]
-        public void GetWorkTags_Must_Return_All_Work_Tags_Without_Errors()
-        {
-            //Arrange
-            var workTags = new List<WorkTag>
-            {
-                WorkTagsUtils.Create(0, "Aaaa", true),
-                WorkTagsUtils.Create(1, "Bbbb", true),
-                WorkTagsUtils.Create(2, "Cccc"),
-                WorkTagsUtils.Create(3, "Dddd"),
-                WorkTagsUtils.Create(4, "Eeee")
-            };
-
-            var repository = new Mock<IWorkTagsRepository>();
-            repository.Setup(act => act.GetAll(true)).Returns(workTags.AsQueryable);
-            _unitOfWorkMock.Setup(act => act.Repository<IWorkTagsRepository>()).Returns(repository.Object);
-
-            //Act
-            IEnumerable<WorkTagDto> result = null;
-            Assert.DoesNotThrow(() => result = _manager.GetWorkTags());
-
-            //Assert
-            Assert.NotNull(result);
-            Assert.AreEqual(3, result.Count());
-            Assert.AreEqual(workTags[2].Name, result.ElementAt(0).Name);
-            Assert.AreEqual(workTags[3].Name, result.ElementAt(1).Name);
-            Assert.AreEqual(workTags[4].Name, result.ElementAt(2).Name);
-        }
-
-        #endregion
-
         #region GetCities
 
         [Test(Description = "GetCities должен вернуть список всех городов")]

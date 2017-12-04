@@ -137,6 +137,31 @@ namespace BusinessLogic.Managers
             await CreateUser(user, dto.Password, CommonRoles.CarService);
         }
 
+        public UserProfileDto GetUserProfile(string currentUserId)
+        {
+            IsUserInRegularRole(currentUserId);
+            var profile = CheckAndGet(currentUserId).UserProfile;
+            return Mapper.Map<UserProfileDto>(profile);
+        }
+
+        public void EditUserProfile(EditUserProfileDto dto, string currentUserId)
+        {
+            IsUserInRegularRole(currentUserId);
+            var profile = CheckAndGet(currentUserId).UserProfile;
+
+            var validationResult = _validationManager.ValidateEditUserProfileDto(dto);
+            if (validationResult.HasErrors)
+            {
+                throw new BusinessFaultException(validationResult.GetErrors());
+            }
+
+            profile.Name = dto.Name;
+            profile.Phone = dto.Phone;
+            profile.Updated = DateTime.UtcNow;
+
+            _unitOfWork.SaveChanges();
+        }
+
         #endregion
 
         #region Implementation of IUserInternalManager
@@ -222,13 +247,13 @@ namespace BusinessLogic.Managers
 
             carService.Phones = Mapper.Map<List<CarServicePhone>>(dto.Phones);
 
-            if (dto.WorkTags != null && dto.WorkTags.Any())
+            if (dto.WorkTypes != null && dto.WorkTypes.Any())
             {
-                var repository = _unitOfWork.Repository<IWorkTagsRepository>();
-                carService.WorkTags = new List<WorkTag>();
-                foreach (var tagId in dto.WorkTags)
+                var repository = _unitOfWork.Repository<IWorkTypeRepository>();
+                carService.WorkTypes = new List<WorkType>();
+                foreach (var workTypeId in dto.WorkTypes)
                 {
-                    carService.WorkTags.Add(repository.Get(tagId));
+                    carService.WorkTypes.Add(repository.Get(workTypeId));
                 }
             }
 

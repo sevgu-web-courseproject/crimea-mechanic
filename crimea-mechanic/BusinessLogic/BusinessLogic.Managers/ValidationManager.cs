@@ -115,6 +115,23 @@ namespace BusinessLogic.Managers
                 validationResult.AddError(ValidationErrorResources.CarServiceSiteIsIncorrect);
             }
 
+            if (dto.WorkTypes != null && dto.WorkTypes.Any())
+            {
+                var repository = _unitOfWork.Repository<IWorkTypeRepository>();
+                foreach (var workType in dto.WorkTypes)
+                {
+                    var type = repository.Get(workType);
+                    if (type == null)
+                    {
+                        validationResult.AddError(string.Format(ValidationErrorResources.WorkTypeNotFound, workType));
+                    }
+                }
+            }
+            else
+            {
+                validationResult.AddError(ValidationErrorResources.WorkTypeRequired);
+            }
+
             if (dto.CarTags != null && dto.CarTags.Any())
             {
                 var repository = _unitOfWork.Repository<ICarMarksRepository>();
@@ -128,19 +145,6 @@ namespace BusinessLogic.Managers
                 }
             }
 
-            if (dto.WorkTags != null && dto.WorkTags.Any())
-            {
-                var repository = _unitOfWork.Repository<IWorkTagsRepository>();
-                foreach (var workTagId in dto.WorkTags)
-                {
-                    var workTag = repository.Get(workTagId);
-                    if (workTag == null)
-                    {
-                        validationResult.AddError(string.Format(ValidationErrorResources.WorkTagNotFound, workTagId));
-                    }
-                }
-            }
-
             if (dto.Logo != null && !IsImage(dto.Logo.Name))
             {
                 validationResult.AddError(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Logo.Name));
@@ -148,6 +152,10 @@ namespace BusinessLogic.Managers
 
             if (dto.Photos != null && dto.Photos.Any())
             {
+                if (dto.Photos.Count > 5)
+                {
+                    validationResult.AddError(ValidationErrorResources.PhotosToMuch);
+                }
                 foreach (var photo in dto.Photos)
                 {
                     if (!IsImage(photo.Name))
@@ -205,6 +213,15 @@ namespace BusinessLogic.Managers
                 validationResult.AddError(ValidationErrorResources.ApplicationDescriptionIsEmpty);
             }
 
+            if (dto.WorkTypeId.HasValue)
+            {
+                var workType = _unitOfWork.Repository<IWorkTypeRepository>().Get(dto.WorkTypeId.Value);
+                if (workType == null)
+                {
+                    validationResult.AddError(string.Format(ValidationErrorResources.WorkTypeNotFound, dto.WorkTypeId.Value));
+                }
+            }
+
             return validationResult;
         }
 
@@ -220,12 +237,6 @@ namespace BusinessLogic.Managers
             if (application == null)
             {
                 validationResult.AddError(ValidationErrorResources.ApplicationNotFound);
-            }
-
-            var city = _unitOfWork.Repository<ICityRepository>().Get(dto.CityId);
-            if (city == null)
-            {
-                validationResult.AddError(ValidationErrorResources.CityNotFound);
             }
 
             if (string.IsNullOrEmpty(dto.Description))
@@ -272,12 +283,6 @@ namespace BusinessLogic.Managers
                 validationResult.AddError(ValidationErrorResources.CarServiceNameIsEmpty);
             }
 
-            var city = _unitOfWork.Repository<ICityRepository>().Get(dto.CityId);
-            if (city == null)
-            {
-                validationResult.AddError(ValidationErrorResources.CityNotFound);
-            }
-
             if (string.IsNullOrEmpty(dto.Address))
             {
                 validationResult.AddError(ValidationErrorResources.CarServiceAddressIsEmpty);
@@ -314,32 +319,6 @@ namespace BusinessLogic.Managers
                 validationResult.AddError(ValidationErrorResources.CarServiceSiteIsIncorrect);
             }
 
-            if (dto.CarTags != null && dto.CarTags.Any())
-            {
-                var repository = _unitOfWork.Repository<ICarMarksRepository>();
-                foreach (var carTagId in dto.CarTags)
-                {
-                    var mark = repository.Get(carTagId);
-                    if (mark == null)
-                    {
-                        validationResult.AddError(string.Format(ValidationErrorResources.CarMarkNotFound, carTagId));
-                    }
-                }
-            }
-
-            if (dto.WorkTags != null && dto.WorkTags.Any())
-            {
-                var repository = _unitOfWork.Repository<IWorkTagsRepository>();
-                foreach (var workTagId in dto.WorkTags)
-                {
-                    var workTag = repository.Get(workTagId);
-                    if (workTag == null)
-                    {
-                        validationResult.AddError(string.Format(ValidationErrorResources.WorkTagNotFound, workTagId));
-                    }
-                }
-            }
-
             if (dto.Logo != null && !IsImage(dto.Logo.Name))
             {
                 validationResult.AddError(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Logo.Name));
@@ -347,6 +326,10 @@ namespace BusinessLogic.Managers
 
             if (dto.Photos != null && dto.Photos.Any())
             {
+                if (dto.Photos.Count > 5)
+                {
+                    validationResult.AddError(ValidationErrorResources.PhotosToMuch);
+                }
                 foreach (var photo in dto.Photos)
                 {
                     if (!IsImage(photo.Name))
@@ -369,6 +352,20 @@ namespace BusinessLogic.Managers
             if (string.IsNullOrEmpty(dto.Review))
             {
                 validationResult.AddError(ValidationErrorResources.ReviewContentIsEmpty);
+            }
+            return validationResult;
+        }
+
+        public ValidationResult ValidateEditUserProfileDto(EditUserProfileDto dto)
+        {
+            var validationResult = new ValidationResult("Редиктирование профайла пользователя");
+            if (string.IsNullOrEmpty(dto.Name))
+            {
+                validationResult.AddError(ValidationErrorResources.ContactNameIsEmpty);
+            }
+            if (string.IsNullOrEmpty(dto.Phone) || IsInvalidPhoneNumber(dto.Phone))
+            {
+                validationResult.AddError(ValidationErrorResources.PhoneNumberIsIncorrect);
             }
             return validationResult;
         }

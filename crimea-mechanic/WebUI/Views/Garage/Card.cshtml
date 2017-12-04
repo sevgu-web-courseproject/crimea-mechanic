@@ -13,7 +13,6 @@
 }
 
 <div class="jumbotron">
-    <h3>@GlobalResources.CarCard</h3>
     <h4 class="inline">
         <span data-bind="text: model.Name"></span>
     </h4>
@@ -71,11 +70,20 @@
         <!-- ko foreach: model.Applications -->
         <article class="comment">
             <div class="comment-img">
-                <i class="fa fa-cog"></i>
+                <a data-bind="attr: {href: window.resource.urls.webUiApplicationCard + '/' + $data.Id()}">
+                <i class="fa fa-cog" data-bind="css: {'text-success': $data.State() == window.resource.applicationStates.completed,
+                   'text-danger': $data.State() == window.resource.applicationStates.rejected,
+                   'text-warning': $data.State() == window.resource.applicationStates.inSearch,
+                   'text-primary': $data.State() == window.resource.applicationStates.inProcessing}"></i>
+                </a>
             </div>
             <div class="comment-body">
                 <div class="text">
                     <p data-bind="text: $data.Description"></p>
+                    <!-- ko if: $data.WorkClassDescription() -->
+                    <span data-bind="text: $data.WorkTypeDescription"></span>
+                    (<span data-bind="text: $data.WorkClassDescription"></span>)
+                    <!-- /ko -->
                 </div>
                 <p class="attribution" data-bind="text: $data.Created"></p>
                 <p class="attribution" data-bind="text: $data.StateDescription"></p>

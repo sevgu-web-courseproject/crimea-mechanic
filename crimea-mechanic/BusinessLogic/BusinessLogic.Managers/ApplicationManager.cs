@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using AutoMapper;
 using BusinessLogic.Managers.Abstraction;
 using BusinessLogic.Objects;
 using BusinessLogic.Objects.Application;
+using BusinessLogic.Objects.Works;
 using BusinessLogic.Resources;
 using Common.Enums;
 using Common.Exceptions;
@@ -59,6 +61,11 @@ namespace BusinessLogic.Managers
                 application.Car.Applications = new List<Application>();
             }
 
+            if (dto.WorkTypeId.HasValue)
+            {
+                application.WorkType = UnitOfWork.Repository<IWorkTypeRepository>().Get(dto.WorkTypeId.Value);
+            }
+
             application.Car.Applications.Add(application);
             UnitOfWork.SaveChanges();
         }
@@ -84,23 +91,8 @@ namespace BusinessLogic.Managers
                 throw new BusinessFaultException(BusinessLogicExceptionResources.ApplicationIncorrectState);
             }
 
-            var isChanged = false;
-            if (application.City.Id != dto.CityId)
-            {
-                application.City = UnitOfWork.Repository<ICityRepository>().Get(dto.CityId);
-                isChanged = true;
-            }
-
-            if (!application.Description.Equals(dto.Description))
-            {
-                application.Description = dto.Description;
-                isChanged = true;
-            }
-
-            if (isChanged)
-            {
-                UnitOfWork.SaveChanges();
-            }
+            application.Description = dto.Description;
+            UnitOfWork.SaveChanges();
         }
 
         public void DeleteApplication(long applicationId, string currentUserId)
@@ -434,6 +426,39 @@ namespace BusinessLogic.Managers
                 .Select(Mapper.Map<CarMarkDto>);
         }
 
+        public IEnumerable<WorkTypeDto> GetAvailableWorkTypesFromPool(string currentUserId)
+        {
+            UserManager.IsUserInCarServiceRole(currentUserId);
+            var service = UnitOfWork.Repository<ICarServiceRepository>().GetByUserId(currentUserId);
+
+            if (service.State == CarServiceState.Blocked)
+            {
+                return new List<WorkTypeDto>();
+            }
+
+            var query = UnitOfWork.Repository<IApplicationRepository>()
+                .GetAll(true)
+                .Include(app => app.WorkType)
+                .Include(app => app.WorkType.Class)
+                .Include(app => app.City)
+                .Where(app => !app.IsDeleted && app.State == ApplicationState.InSearch);
+
+            var result = query.Where(app => app.City.Id == service.City.Id && app.WorkType != null)
+                .Select(x => x.WorkType)
+                .ToList()
+                .GroupBy(x => x.Name)
+                .Select(x => x.First())
+                .Select(x =>
+                {
+                    var dto = Mapper.Map<WorkTypeDto>(x);
+                    dto.Name += $" ({x.Class.Name})";
+                    return dto;
+                })
+                .ToList();
+
+            return result;
+        }
+
         #endregion
 
         #region Private methods
@@ -529,10 +554,29 @@ namespace BusinessLogic.Managers
 
         private IQueryable<Application> BuildQueryForPool(ApplicationsPoolFilter filter, CarService service)
         {
-            var query = UnitOfWork.Repository<IApplicationRepository>().GetAll(true)
+            if (service.State == CarServiceState.Blocked)
+            {
+                return new List<Application>().AsQueryable();
+            }
+
+            var query = UnitOfWork.Repository<IApplicationRepository>()
+                .GetAll(true)
+                .Include(app => app.WorkType)
+                .Include(app => app.City)
+                .Include(app => app.Car)
+                .Include(app => app.Car.Model)
+                .Include(app => app.Car.Model.Mark)
                 .Where(app => !app.IsDeleted && app.State == ApplicationState.InSearch);
 
             query = query.Where(app => app.City.Id == service.City.Id);
+
+            var workTypesId = service.WorkTypes.Select(s => s.Id).ToList();
+            query = query.Where(app => app.WorkType == null || workTypesId.Contains(app.WorkType.Id));
+
+            if (filter.WorkTypeId.HasValue)
+            {
+                query = query.Where(app => app.WorkType.Id == filter.WorkTypeId.Value);
+            }
 
             if (filter.CreatedFrom.HasValue)
             {

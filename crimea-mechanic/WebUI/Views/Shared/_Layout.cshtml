@@ -77,7 +77,7 @@
     }
     else
     {
-        <span class="user-name">@User.Identity.Name</span>
+        <a class="user-name" href="@Url.Action("MyProfile", "Account")">@User.Identity.Name</a>
         <a class="btn btn-outline-success" href="@Url.Action("SignOut", "Account")">@GlobalResources.LogOut</a>
     }
 

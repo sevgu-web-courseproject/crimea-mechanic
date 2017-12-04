@@ -59,6 +59,7 @@
     <Compile Include="CarModelDto.cs" />
     <Compile Include="CarService\CarServiceFilter.cs" />
     <Compile Include="CarService\CarServiceInfoDto.cs" />
+    <Compile Include="CarService\CarServiceInfoForEditDto.cs" />
     <Compile Include="CarService\CarServiceRegistrationsFilter.cs" />
     <Compile Include="CarService\CarServiceShortInfoDto.cs" />
     <Compile Include="CarService\EditCarServiceDto.cs" />
@@ -77,10 +78,13 @@
     <Compile Include="Review\EditReviewDto.cs" />
     <Compile Include="Review\OperateReviewDto.cs" />
     <Compile Include="Review\ReviewInfoDto.cs" />
+    <Compile Include="User\EditUserProfileDto.cs" />
     <Compile Include="User\RegistrationDto.cs" />
     <Compile Include="User\RegistrationCarServiceDto.cs" />
     <Compile Include="User\RegistrationUserDto.cs" />
-    <Compile Include="WorkTagDto.cs" />
+    <Compile Include="User\UserProfileDto.cs" />
+    <Compile Include="Works\WorkClassDto.cs" />
+    <Compile Include="Works\WorkTypeDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Common.Enums\Common.Enums.csproj">

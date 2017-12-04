@@ -18,9 +18,10 @@ namespace DataAccessLayer
         public DbSet<CarServicePhone> CarServicePhones { get; set; }
         public DbSet<CarServiceFile> CarServiceFiles { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
-        public DbSet<WorkTag> WorkTags { get; set; }
         public DbSet<CarMark> CarMarks { get; set; }
         public DbSet<CarModel> CarModels { get; set; }
+        public DbSet<WorkClass> WorkClasses { get; set; }
+        public DbSet<WorkType> WorkTypes { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<UserCar> UserCars { get; set; }
         public DbSet<Application> Applications { get; set; }
@@ -48,6 +49,9 @@ namespace DataAccessLayer
             modelBuilder.Entity<UserProfile>()
                 .HasRequired(c => c.ApplicationUser)
                 .WithOptional(c => c.UserProfile);
+
+            modelBuilder.Entity<Application>()
+                .HasOptional(c => c.WorkType);
         }
 
         #endregion

@@ -19,6 +19,16 @@ namespace BusinessLogic.Objects.Application
         public UserCarDto Car { get; set; }
 
         /// <summary>
+        /// Наименнование класса работ
+        /// </summary>
+        public string WorkClassDescription { get; set; }
+
+        /// <summary>
+        /// Наименнование типа работы
+        /// </summary>
+        public string WorkTypeDescription { get; set; }
+
+        /// <summary>
         /// Описание заявки
         /// </summary>
         public string Description { get; set; }

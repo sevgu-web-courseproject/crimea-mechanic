@@ -8,7 +8,17 @@ namespace BusinessLogic.Managers.Abstraction
         /// <summary>
         /// Редактировать автосервис
         /// </summary>
-        void Edit(EditCarServiceDto dto, string currentUserId);
+        void Edit(EditCarServiceDto dto, string directory, string currentUserId);
+
+        /// <summary>
+        /// Получить информацию для редактирования автосервиса
+        /// </summary>
+        CarServiceInfoForEditDto GetInfoForEdit(string currentUserId);
+
+        /// <summary>
+        /// Получить профиль автосервиса
+        /// </summary>
+        CarServiceInfoDto GetProfile(string currentUserId);
 
         /// <summary>
         /// Получить информацию об автосервисе

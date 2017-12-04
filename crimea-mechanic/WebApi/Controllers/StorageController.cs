@@ -30,17 +30,17 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("GetWorkTags")]
-        public IHttpActionResult GetWorkTags()
-        {
-            return CallBusinessLogicActionWithResult(() => _manager.GetWorkTags());
-        }
-
-        [HttpGet]
         [Route("GetCities")]
         public IHttpActionResult GetCities()
         {
             return CallBusinessLogicActionWithResult(() => _manager.GetCities());
+        }
+
+        [HttpGet]
+        [Route("GetWorkClasses")]
+        public IHttpActionResult GetWorkClasses()
+        {
+            return CallBusinessLogicActionWithResult(() => _manager.GetWorkClasses());
         }
     }
 }

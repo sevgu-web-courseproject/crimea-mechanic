@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using BusinessLogic.Managers.Abstraction;
 using BusinessLogic.Objects;
+using BusinessLogic.Objects.Works;
 using BusinessLogic.Resources;
 using Common.Exceptions;
 using DataAccessLayer.Repositories.Abstraction;
@@ -50,20 +51,29 @@ namespace BusinessLogic.Managers
             return Mapper.Map<IEnumerable<CarModelDto>>(models);
         }
 
-        public IEnumerable<WorkTagDto> GetWorkTags()
-        {
-            return UnitOfWork.Repository<IWorkTagsRepository>().GetAll(true)
-                .Where(tag => !tag.IsDeleted)
-                .ToList()
-                .Select(Mapper.Map<WorkTagDto>);
-        }
-
         public IEnumerable<CityDto> GetCities()
         {
             return UnitOfWork.Repository<ICityRepository>().GetAll(true)
                 .Where(city => !city.IsDeleted)
                 .ToList()
                 .Select(Mapper.Map<CityDto>);
+        }
+
+        public IEnumerable<WorkClassDto> GetWorkClasses()
+        {
+            return UnitOfWork.Repository<IWorkClassRepository>()
+                .GetAll(true)
+                .Include(p => p.WorkTypes)
+                .Where(p => !p.IsDeleted)
+                .ToList()
+                .Select(workClass =>
+                {
+                    var dto = Mapper.Map<WorkClassDto>(workClass);
+                    dto.Types = workClass.WorkTypes
+                        .Where(p => !p.IsDeleted)
+                        .Select(Mapper.Map<WorkTypeDto>);
+                    return dto;
+                });
         }
 
         #endregion

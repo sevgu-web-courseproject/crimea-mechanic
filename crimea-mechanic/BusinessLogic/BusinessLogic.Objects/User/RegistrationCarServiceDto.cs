@@ -50,7 +50,7 @@ namespace BusinessLogic.Objects.User
         /// <summary>
         /// Теги характера работ
         /// </summary>
-        public List<long> WorkTags { get; set; }
+        public List<long> WorkTypes { get; set; }
 
         /// <summary>
         /// Теги марок автомобилей

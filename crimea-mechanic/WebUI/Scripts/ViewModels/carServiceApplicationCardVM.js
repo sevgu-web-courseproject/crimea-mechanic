@@ -14,7 +14,9 @@
         StateDescription: ko.observable(),
         CityName: ko.observable(),
         Created: ko.observable(),
-        State: ko.observable()
+        State: ko.observable(),
+        WorkClassDescription: ko.observable(),
+        WorkTypeDescription: ko.observable()
     };
 
     var rejectApplication = function() {

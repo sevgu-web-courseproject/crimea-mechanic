@@ -74,7 +74,7 @@ namespace WebUI.Controllers
 
                     //When an error occurs while signing in, Error equals "invalid_grant" and ErrorDescription will contain more detail.
                     //This error is being set in the Web API project in the WebApi.Providers.ApplicationOAuthProvider class
-                    if (string.Equals(badRequestData.Error, "invalid_grant"))
+                    if (string.Equals(badRequestData.Error, "Неверные права"))
                     {
                         ModelState.AddModelError("", badRequestData.ErrorDescription);
                     }

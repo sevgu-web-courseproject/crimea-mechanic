@@ -53,6 +53,22 @@ namespace WebApi.Controllers
             return CallBusinessLogicActionAsync(() => _userManager.RegistrationCarService(dto, directory));
         }
 
+        [HttpGet]
+        [Route("GetProfile")]
+        [Authorize(Roles = Common.Constants.CommonRoles.Regular)]
+        public IHttpActionResult GetProfile()
+        {
+            return CallBusinessLogicActionWithResult(() => _userManager.GetUserProfile(User.Identity.GetUserId()));
+        }
+
+        [HttpPost]
+        [Authorize(Roles = Common.Constants.CommonRoles.Regular)]
+        [Route("EditProfile")]
+        public IHttpActionResult EditProfile(EditUserProfileDto dto)
+        {
+            return CallBusinessLogicAction(() => _userManager.EditUserProfile(dto, User.Identity.GetUserId()));
+        }
+
         #region Private methods
 
         private RegistrationCarServiceDto GetRegistrationServiceDto(string directory)
@@ -70,7 +86,7 @@ namespace WebApi.Controllers
                 ManagerName = GetStringFromRequest("ManagerName"),
                 Site = GetStringFromRequest("Site"),
                 TimetableWorks = GetStringFromRequest("TimetableWorks"),
-                WorkTags = GetList<long>("WorkTags"),
+                WorkTypes = GetList<long>("WorkTypes"),
                 CarTags = GetList<long>("CarTags"),
                 About = GetStringFromRequest("About"),
                 Logo = SaveFile("Logo", directory),

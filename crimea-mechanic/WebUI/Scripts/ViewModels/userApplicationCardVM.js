@@ -13,42 +13,22 @@
         Description: ko.observable(),
         Created: ko.observable(),
         IsDeleted: ko.observable(),
+        ServiceId: ko.observable(),
         ServiceName: ko.observable(),
         State: ko.observable(),
         StateDescription: ko.observable(),
         CityName: ko.observable(),
         CityId: ko.observable(),
-        Offers: ko.observableArray([])
+        Offers: ko.observableArray([]),
+        WorkClassDescription: ko.observable(),
+        WorkTypeDescription: ko.observable()
     };
 
-    var cities = ko.observableArray([]);
-
     var editApplication = {
-        cityId: ko.observable().extend({
-            required: { params: true, message: window.resource.errors.specifyCity } 
-        }),
         description: ko.observable().extend({
-            required: { params: true, message: window.resource.errors.specifyWorksDescription } 
+            required: { params: true, message: window.resource.errors.specifyWorksDescription },
+            notEqual: { params: model.Description, message: "Дополнительная информацию совпадает с текущей"} //TODO
         })
-    }
-
-    var getCities = function() {
-        if (cities().length) {
-            return;
-        }
-        $(document).trigger("showLoadingPanel");
-        ajaxHelper.get(window.resource.urls.webApiGetCitiesUrl)
-            .then(function (data) {
-                cities(data);
-                editApplication.cityId(model.CityId());
-                editApplication.description(model.Description());
-                $(document).trigger("hideLoadingPanel");
-            })
-            .catch(function ($xhr) {
-                $(document).trigger("hideLoadingPanel");
-                var text = ajaxHelper.extractErrors($xhr);
-                notificationHelper.error(window.resource.texts.error, text);
-            });
     }
 
     var getCard = function () {
@@ -58,6 +38,11 @@
             .then(function (data) {
                 ko.mapping.fromJS(data, {}, model);
                 model.Created(timeHelper.toLocalTime(model.Created()));
+                editApplication.description(model.Description());
+                var validationGroup = ko.validation.group([
+                    editApplication.description
+                ]);
+                validationGroup.showAllMessages(false);
                 if (model.Offers()) {
                     model.Offers().forEach(function (item) {
                         item.Created(timeHelper.toLocalTime(item.Created()));
@@ -115,7 +100,6 @@
 
     var sendEditApplication = function () {
         var validationGroup = ko.validation.group([
-            editApplication.cityId,
             editApplication.description
         ]);
         if (validationGroup().length != 0) {
@@ -125,7 +109,6 @@
         $(document).trigger("showLoadingPanel");
         var data = JSON.stringify({
             ApplicationId: model.Id(),
-            CityId: editApplication.cityId(),
             Description: editApplication.description()
         });
         ajaxHelper.postJsonWithoutResult(window.resource.urls.webApiEditApplicationUrl, data)
@@ -150,8 +133,6 @@
         acceptOffer: acceptOffer,
         rejectApplication: rejectApplication,
         editApplication: editApplication,
-        getCities: getCities,
-        cities: cities,
         sendEditApplication: sendEditApplication
     };
 };

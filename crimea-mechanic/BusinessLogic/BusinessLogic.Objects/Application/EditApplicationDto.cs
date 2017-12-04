@@ -11,11 +11,6 @@
         public long ApplicationId { get; set; }
 
         /// <summary>
-        /// Идентификатор города
-        /// </summary>
-        public long CityId { get; set; }
-
-        /// <summary>
         /// Новое описание
         /// </summary>
         public string Description { get; set; }

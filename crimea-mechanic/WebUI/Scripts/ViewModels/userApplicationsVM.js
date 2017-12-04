@@ -14,6 +14,9 @@
 
     var cities = ko.observableArray([]);
     var cars = ko.observableArray([]);
+    var workClasses = ko.observableArray([]);
+    var currentWorkClass = ko.observable();
+    var workTypes = ko.observableArray([]);
 
     var newApplication = {
         carId: ko.observable().extend({
@@ -22,6 +25,7 @@
         cityId: ko.observable().extend({
             required: { params: true, message: window.resource.errors.specifyCity } 
         }),
+        workTypeId: ko.observable(null),
         description: ko.observable().extend({
             required: { params: true, message: window.resource.errors.specifyWorksDescription } 
         })
@@ -136,6 +140,10 @@
         ajaxHelper.get(window.resource.urls.webApiGetCitiesUrl)
             .then(function(data) {
                 cities(data);
+                return ajaxHelper.get(window.resource.urls.webApiGetWorkClassesUrl);
+            })
+            .then(function(data) {
+                workClasses(data);
                 $(document).trigger("hideLoadingPanel");
             })
             .catch(function($xhr) {
@@ -149,6 +157,9 @@
         newApplication.carId(null);
         newApplication.cityId(null);
         newApplication.description(null);
+        newApplication.workTypeId(null);
+        currentWorkClass(null);
+        workTypes([]);
     };
 
     var sendNewApplication = function () {
@@ -165,7 +176,8 @@
         var data = JSON.stringify({
             CarId: newApplication.carId(),
             CityId: newApplication.cityId(),
-            Description: newApplication.description()
+            Description: newApplication.description(),
+            WorkTypeId: newApplication.workTypeId()
         });
         ajaxHelper.postJsonWithoutResult(window.resource.urls.webApiCreateApplicationUrl, data)
             .then(function() {
@@ -204,6 +216,14 @@
         getApplications(function() {
             getActiveCars();
         });
+
+        currentWorkClass.subscribe(function(newValue) {
+            if (newValue) {
+                workTypes(newValue.Types);
+            } else {
+                workTypes([]);
+            }
+        });
     };
 
     return {
@@ -222,6 +242,9 @@
         applicationStates: applicationStates,
         cars: cars,
         cities: cities,
+        workClasses: workClasses,
+        currentWorkClass: currentWorkClass,
+        workTypes: workTypes,
         createNewApplication: createNewApplication,
         newApplication: newApplication,
         sendNewApplication: sendNewApplication,

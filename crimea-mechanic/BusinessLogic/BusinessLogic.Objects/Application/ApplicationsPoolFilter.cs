@@ -21,5 +21,10 @@ namespace BusinessLogic.Objects.Application
         /// Идентификатор марки
         /// </summary>
         public long? MarkId { get; set; }
+
+        /// <summary>
+        /// Идентификатор типа работы
+        /// </summary>
+        public long? WorkTypeId { get; set; }
     }
 }

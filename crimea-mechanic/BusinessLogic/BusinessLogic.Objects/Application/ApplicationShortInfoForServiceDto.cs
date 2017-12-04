@@ -13,6 +13,11 @@ namespace BusinessLogic.Objects.Application
         public string ContactName { get; set; }
 
         /// <summary>
+        /// Контактный номер мобильного телефона
+        /// </summary>
+        public string ContactPhone { get; set; }
+
+        /// <summary>
         /// Идентификатор предложения если оно отправлено
         /// </summary>
         public long? OfferId { get; set; }

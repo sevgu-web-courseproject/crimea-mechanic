@@ -36,15 +36,47 @@
                 params: 1
             }
         }),
-        Site: ko.observable(),
-        TimetableWorks: ko.observable(),
-        About: ko.observable()
+        Site: ko.observable(null),
+        TimetableWorks: ko.observable(null),
+        About: ko.observable(null),
+        WorkTypes: ko.observableArray([]).extend({
+            validation: {
+                validator: function (val, someOtherVal) {
+                    return val.length >= someOtherVal;
+                },
+                message: "Необходимо указать хотя бы один тип работы", //TODO
+                params: 1
+            }
+        })
+    };
+
+    var workClasses = ko.observableArray([]);
+
+    var checkWorkType = function (data, event) {
+        if (!event.target.checked) {
+            model.WorkTypes.remove(data.Id);
+        } else {
+            model.WorkTypes.push(data.Id);
+        }
+    };
+
+    var checkWorkClass = function (data, event) {
+        if (event.target.checked) {
+            data.Types.forEach(function(item) {
+                if (model.WorkTypes.indexOf(item.Id) < 0) {
+                    model.WorkTypes.push(item.Id);
+                }
+            });
+        } else {
+            data.Types.forEach(function (item) {
+                model.WorkTypes.remove(item.Id);
+            });
+        }
     };
 
     var validationGroup = null;
 
     var submit = function () {
-
         validationGroup = ko.validation.group([
             model.Login,
             model.Password,
@@ -54,7 +86,8 @@
             model.CityId,
             model.Address,
             model.Email,
-            model.Phones
+            model.Phones,
+            model.WorkTypes
         ]);
         if (validationGroup().length != 0) {
             validationGroup.showAllMessages();
@@ -75,7 +108,7 @@
         formData.append("TimetableWorks", model.TimetableWorks());
         formData.append("About", model.About());
         formData.append("Phones", ko.toJSON(model.Phones));
-        formData.append("WorkTags", "[]");
+        formData.append("WorkTypes", ko.toJSON(model.WorkTypes));
         formData.append("CarTags", "[]");
         formData.append("Logo", $('#logo')[0].files[0]);
         var photos = $('#photos')[0].files;
@@ -117,13 +150,18 @@
     var init = function () {
         $('#phone-number').mask('+7(999) 999-99-99');
         var getCities = ajaxHelper.get(window.resource.urls.webApiGetCitiesUrl);
+        var getWorkClasses = ajaxHelper.get(window.resource.urls.webApiGetWorkClassesUrl);
 
-        Promise.all([getCities])
+        $(document).trigger("showLoadingPanel");
+        Promise.all([getCities, getWorkClasses])
             .then(function(results) {
                 model.Cities(results[0]);
+                workClasses(results[1]);
+                $(document).trigger("hideLoadingPanel");
             }, function (errors) {
                 console.log(errors);
-                notificationHelper.error(window.resource.errors.error, text);
+                $(document).trigger("hideLoadingPanel");
+                notificationHelper.error(window.resource.errors.error, "Ошибка при получении данных");
             });
     };
 
@@ -133,6 +171,9 @@
         init: init,
         addPhone: addPhone,
         removePhone: removePhone,
-        clearForm: clearForm
+        clearForm: clearForm,
+        workClasses: workClasses,
+        checkWorkType: checkWorkType,
+        checkWorkClass: checkWorkClass
     };
 };

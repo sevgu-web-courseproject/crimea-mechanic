@@ -131,7 +131,7 @@ namespace BusinessLogic.UnitTests
                 ManagerName = "Test",
                 Site = "https://test.com",
                 TimetableWorks = "Test",
-                WorkTags = new List<long>
+                WorkTypes = new List<long>
                 {
                     1, 2
                 },
@@ -159,10 +159,6 @@ namespace BusinessLogic.UnitTests
                 },
                 About = "test"
             };
-
-            var workTagsRepository = new Mock<IWorkTagsRepository>();
-            workTagsRepository.Setup(act => act.Get(It.IsAny<long>())).Returns(new WorkTag());
-            _unitOfWorkMock.Setup(act => act.Repository<IWorkTagsRepository>()).Returns(workTagsRepository.Object);
 
             var marksRepository = new Mock<ICarMarksRepository>();
             marksRepository.Setup(act => act.Get(It.IsAny<long>())).Returns(new CarMark());
@@ -203,7 +199,7 @@ namespace BusinessLogic.UnitTests
                 ManagerName = "",
                 Site = "http12s://test.com",
                 CarTags = new List<long> { 1 },
-                WorkTags = new List<long> { 1 },
+                WorkTypes = new List<long> { 1 },
                 Logo = new FileDto
                 {
                     Name = "Test.exe",
@@ -223,10 +219,6 @@ namespace BusinessLogic.UnitTests
                     }
                 }
             };
-
-            var workTagsRepository = new Mock<IWorkTagsRepository>();
-            workTagsRepository.Setup(act => act.Get(It.IsAny<long>())).Returns((WorkTag) null);
-            _unitOfWorkMock.Setup(act => act.Repository<IWorkTagsRepository>()).Returns(workTagsRepository.Object);
 
             var marksRepository = new Mock<ICarMarksRepository>();
             marksRepository.Setup(act => act.Get(It.IsAny<long>())).Returns((CarMark) null);
@@ -255,7 +247,6 @@ namespace BusinessLogic.UnitTests
                 Assert.AreEqual(ValidationErrorResources.CarServiceManagerNameIsEmpty, result.Errors[8]);
                 Assert.AreEqual(ValidationErrorResources.CarServiceSiteIsIncorrect, result.Errors[9]);
                 Assert.AreEqual(string.Format(ValidationErrorResources.CarMarkNotFound, "1"), result.Errors[10]);
-                Assert.AreEqual(string.Format(ValidationErrorResources.WorkTagNotFound, "1"), result.Errors[11]);
                 Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Logo.Name), result.Errors[12]);
                 Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Photos[0].Name), result.Errors[13]);
                 Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Photos[1].Name), result.Errors[14]);
@@ -266,7 +257,6 @@ namespace BusinessLogic.UnitTests
                 Assert.AreEqual(ValidationErrorResources.CarServiceManagerNameIsEmpty, result.Errors[7]);
                 Assert.AreEqual(ValidationErrorResources.CarServiceSiteIsIncorrect, result.Errors[8]);
                 Assert.AreEqual(string.Format(ValidationErrorResources.CarMarkNotFound, "1"), result.Errors[9]);
-                Assert.AreEqual(string.Format(ValidationErrorResources.WorkTagNotFound, "1"), result.Errors[10]);
                 Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Logo.Name), result.Errors[11]);
                 Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Photos[0].Name), result.Errors[12]);
                 Assert.AreEqual(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Photos[1].Name), result.Errors[13]);

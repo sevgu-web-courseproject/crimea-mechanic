@@ -11,5 +11,9 @@ namespace BusinessLogic.Managers.Abstraction
         Task RegistrationUser(RegistrationUserDto dto);
 
         Task RegistrationCarService(RegistrationCarServiceDto dto, string directory);
+
+        UserProfileDto GetUserProfile(string currentUserId);
+
+        void EditUserProfile(EditUserProfileDto dto, string currentUserId);
     }
 }

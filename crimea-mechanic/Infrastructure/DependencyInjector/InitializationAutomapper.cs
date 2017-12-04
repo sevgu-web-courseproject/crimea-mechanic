@@ -13,12 +13,12 @@ namespace DependencyInjector
                 new RegistrationProfile(),
                 new CarMarkProfile(),
                 new CarModelProfile(),
-                new WorkTagProfile(),
                 new CityProfile(),
                 new UserCarProfile(),
                 new ApplicationProfile(),
                 new CarServiceProfile(),
-                new CarServiceReviewProfile()
+                new CarServiceReviewProfile(),
+                new WorksProfile()
             };
             Mapper.Initialize(cfg =>
             {

@@ -4,11 +4,10 @@ using DataAccessLayer.Repositories.Abstraction;
 
 namespace DataAccessLayer.Repositories
 {
-    public class WorkTagsRepository : RepositoryBase<WorkTag, long>, IWorkTagsRepository
+    public class WorkClassRepository : RepositoryBase<WorkClass, long>, IWorkClassRepository
     {
-        public WorkTagsRepository(DbContext context) : base(context)
+        public WorkClassRepository(DbContext dbContext) : base(dbContext)
         {
-            
         }
     }
 }

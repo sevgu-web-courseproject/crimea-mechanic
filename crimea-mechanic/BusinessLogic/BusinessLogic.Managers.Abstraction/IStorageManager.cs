@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BusinessLogic.Objects;
+using BusinessLogic.Objects.Works;
 
 namespace BusinessLogic.Managers.Abstraction
 {
@@ -23,15 +24,15 @@ namespace BusinessLogic.Managers.Abstraction
         IEnumerable<CarModelDto> GetModels(long markId);
 
         /// <summary>
-        /// Получить все виды работ
-        /// </summary>
-        /// <returns></returns>
-        IEnumerable<WorkTagDto> GetWorkTags();
-
-        /// <summary>
         /// Получить список городов
         /// </summary>
         /// <returns></returns>
         IEnumerable<CityDto> GetCities();
+
+        /// <summary>
+        /// Получить список классов работ
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<WorkClassDto> GetWorkClasses();
     }
 }

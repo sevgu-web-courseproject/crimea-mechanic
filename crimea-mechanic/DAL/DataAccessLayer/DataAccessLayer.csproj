@@ -105,6 +105,14 @@
     <Compile Include="Migrations\201711201831505_AddRatingPointsAndReviewsForCarService.Designer.cs">
       <DependentUpon>201711201831505_AddRatingPointsAndReviewsForCarService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712021908109_RemoveWorkTags.cs" />
+    <Compile Include="Migrations\201712021908109_RemoveWorkTags.Designer.cs">
+      <DependentUpon>201712021908109_RemoveWorkTags.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712021910230_AddWorkClassesWithWorkTypes.cs" />
+    <Compile Include="Migrations\201712021910230_AddWorkClassesWithWorkTypes.Designer.cs">
+      <DependentUpon>201712021910230_AddWorkClassesWithWorkTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -164,6 +172,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711201831505_AddRatingPointsAndReviewsForCarService.resx">
       <DependentUpon>201711201831505_AddRatingPointsAndReviewsForCarService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712021908109_RemoveWorkTags.resx">
+      <DependentUpon>201712021908109_RemoveWorkTags.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712021910230_AddWorkClassesWithWorkTypes.resx">
+      <DependentUpon>201712021910230_AddWorkClassesWithWorkTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

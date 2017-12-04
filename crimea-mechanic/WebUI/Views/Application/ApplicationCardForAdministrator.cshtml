@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col">
             <div>
-                <h4>Заявка № <span data-bind="text: model.Id"></span></h4>
+                <h4>@GlobalResources.ApplicationN <span data-bind="text: model.Id"></span></h4>
             </div>
             <div>
                 @GlobalResources.Author
@@ -31,10 +31,16 @@
                 <span data-bind="text: model.Car.Year"></span>
                 <span data-bind="text: model.Car.EngineCapacity"></span>
                 <span data-bind="text: model.Car.FuelTypeDescription"></span>
+                (VIN: <span data-bind="text: model.Car.Vin"></span>)
             </div>
-
+            <!-- ko if: model.WorkClassDescription() -->
+            <div>
+                Тип работы: <!-- TODO -->
+                <span data-bind="text: model.WorkTypeDescription"></span> (<span data-bind="text: model.WorkClassDescription"></span>)
+            </div>
+            <!-- /ko -->
             <div class="word-wrap">
-                @GlobalResources.WorksDescription
+                Дополнительная информация: <!-- TODO -->
                 <span data-bind="text: model.Description"></span>
             </div>
             <div>
