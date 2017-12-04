@@ -1,0 +1,211 @@
+﻿@using WebUI.App_LocalResources
+@{
+    ViewBag.Title = "Редактирование автосервиса"; <!-- TODO -->
+}
+
+@section breadcrumbs {
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">@GlobalResources.Home</a></li>
+        <li class="breadcrumb-item"><a href="@Url.Action("MyProfile", "Account")">Профиль автосервиса</a></li> <!-- TODO -->
+        <li class="breadcrumb-item active">Редактирование автосервиса</li> <!-- TODO -->
+    </ol>
+}
+
+<div class="jumbotron">
+    <h3 aria-describedby="help-block">Редактирование автосервиса</h3> <!-- TODO -->
+    <small id="help-block" class="form-text text-muted">
+        @GlobalResources.RequiredFields
+    </small>
+    <hr />
+    <br />
+
+    <form>
+        <h4>@GlobalResources.Location</h4>
+        <hr />
+
+        <div class="row">
+            <div class="col">
+                <label for="address">@GlobalResources.AddressCarService*</label>
+                <input type="text" class="form-control" id="address" placeholder="@GlobalResources.SampleAddress" data-bind="value: model.Address" aria-describedby="address-error">
+                <small id="address-error" class="form-text validation-error-text" data-bind="validationMessage: model.Address"></small>
+            </div>
+        </div>
+
+        <br />
+        <h4>@GlobalResources.ContactInformation</h4>
+        <hr />
+
+        <div class="row">
+            <div class="col">
+                <label for="carservice-name">@GlobalResources.CarServiceName*</label>
+                <input class="form-control" id="carservice-name" placeholder="@GlobalResources.CarServiceName" data-bind="value: model.Name" aria-describedby="carservice-name-error">
+                <small id="carservice-name-error" class="form-text validation-error-text" data-bind="validationMessage: model.Name"></small>
+            </div>
+
+            <div class="col">
+                <label for="contact-name">@GlobalResources.ManagerName*</label>
+                <input class="form-control" id="contact-name" placeholder="@GlobalResources.SampleName" data-bind="value: model.ManagerName" aria-describedby="contact-name-error">
+                <small id="contact-name-error" class="form-text validation-error-text" data-bind="validationMessage: model.ManagerName"></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="contact-email">@GlobalResources.ContactEmailCarService*</label>
+                <input type="email" class="form-control" id="contact-email" placeholder="example@example.com" data-bind="value: model.Email" aria-describedby="contact-email-error">
+                <small id="contact-email-error" class="form-text validation-error-text" data-bind="validationMessage: model.Email"></small>
+            </div>
+
+            <div class="col">
+                <label for="phone-number">@GlobalResources.ContactPhoneNumbers*</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="phone-number" placeholder="+7(999) 999-99-99" data-bind="value: phoneNumber" aria-describedby="phone-number-error">
+                    <div class="input-group-addon" data-bind="click: addPhone">
+                        <i class="fa fa-plus"></i>
+                    </div>
+                </div>
+                <small id="phone-number-error" class="form-text validation-error-text" data-bind="validationMessage: model.Phones"></small>
+                <!-- ko if: model.Phones() -->
+                <ul class="marks-none">
+                    <!-- ko foreach: model.Phones -->
+                    <li>
+                        <i class="fa fa-phone"></i>
+                        <span data-bind="text: $data"></span>
+                        <i class="fa fa-trash" data-bind="click: function() { viewModel.removePhone($data) }"></i>
+                    </li>
+                    <!-- /ko -->
+                </ul>
+                <!-- /ko -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="site-link">@GlobalResources.CarServiceSite</label>
+                <input type="text" class="form-control" id="site-link" placeholder="http://my-site.com" data-bind="value: model.Site" aria-describedby="site-error">
+                <small id="site-error" class="form-text validation-error-text" data-bind="validationMessage: model.Site"></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="timetable-works">@GlobalResources.CarServiceWorkTime</label>
+                <input type="text" class="form-control" id="timetable-works" placeholder="@GlobalResources.CarServiceWorkTime" data-bind="value: model.TimetableWorks">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="about">@GlobalResources.AboutCarService</label>
+                <textarea class="form-control" id="about" placeholder="@GlobalResources.AboutCarService" data-bind="value: model.About"></textarea>
+            </div>
+        </div>
+
+        <br />
+        <h4>@GlobalResources.Photos</h4>
+        <hr />
+        
+        <div class="row">
+            <!-- ko if: model.LogoId() -->
+            <div class="col">
+                <div class="thumbnail">
+                    <img class="img-responsive car-service-logo" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + model.LogoId() }">
+                </div>
+            </div>
+            <!-- /ko -->
+            <div class="col">
+                <div class="form-group">
+                    <label for="logo">@GlobalResources.CarServiceLogo</label>
+                    <input type="file" class="form-control-file" id="logo" accept=".png, .jpeg, .jpg">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- ko if: model.Photos().length -->
+            <div class="col">
+                <div class="row justify-content-center">
+                    <!-- ko foreach: model.Photos-->
+                    <div class='list-group gallery'>
+                        <div class='col'>
+                            <div class="thumbnail">
+                                <img class="img-responsive car-service-photo-edit" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + $data}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <!-- /ko -->
+            <div class="col">
+                <div class="form-group">
+                    <label for="photos">@GlobalResources.CarServicePhotos</label>
+                    <input type="file" class="form-control-file" id="photos" multiple accept=".png, .jpeg, .jpg">
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <h4>Виды работ</h4> <!-- TODO -->
+        <hr />
+
+        <div aria-describedby="work-types-error">
+            <!-- ko foreach: workClasses -->
+            <div id="accordion" role="tablist" data-bind="attr: {id: 'accordion' + $index()}">
+                <div class="card">
+                    <div class="card-header" role="tab" data-bind="attr: {id: 'heading' + $index()}">
+                        <h5 class="mb-0">
+                            <a data-toggle="collapse" aria-expanded="true" data-bind="attr: {'aria-controls': 'collapse' + $index(), href: '#collapse' + $index()}, text: $data.Name"></a>
+                        </h5>
+                    </div>
+                    <div class="collapse" role="tabpanel" data-parent="#accordion" data-bind="attr: {id: 'collapse' + $index(), 'aria-labelledby': 'heading' + $index(), 'data-parent': '#accordion' + $index()}">
+                        <div class="card-body">
+                            <!-- ko if: $data.Types.length !== 1 -->
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" data-bind="event: {change: $root.checkWorkClass }">
+                                    Выбрать все <!-- TODO -->
+                                </label>
+                            </div>
+                            <hr />
+                            <!-- /ko -->
+                            <!-- ko foreach: $data.Types -->
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" data-bind="event: {change: $root.checkWorkType }, checked: $root.model.WorkTypes.indexOf($data.Id) >= 0">
+                                    <!-- ko text: $data.Name --> <!-- /ko -->
+                                </label>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <small id="work-types-error" class="form-text validation-error-text" data-bind="validationMessage: model.WorkTypes"></small>
+
+        <br />
+
+        <div class="row justify-content-center items-center">
+            <div class="col">
+                <button class="btn btn-success" data-bind="click: submit">@GlobalResources.Send</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/editCarServiceVM")
+    <script>
+        var viewModel = editCarServiceVM;
+        $(function() {
+            viewModel.init();
+            ko.validation.init({
+                insertMessages: false,
+                decorateInputElement: true,
+                errorElementClass: "is-invalid"
+            }, true);
+            ko.applyBindings(viewModel);
+        });
+    </script>
+}

@@ -1,0 +1,134 @@
+﻿@using WebUI.App_LocalResources
+
+<div class="row">
+    <!-- ko if: model.Id() && model.LogoPhotoId() -->
+    <div>
+        <img class="car-service-logo" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + model.LogoPhotoId() }">
+    </div>
+    <!-- /ko -->
+    <div class="col-9">
+        <div>
+            @GlobalResources.City:
+            <span data-bind="text: model.CityName"></span>
+        </div>
+
+        <div>
+            @GlobalResources.AddressCarService:
+            <span data-bind="text: model.Address"></span>
+        </div>
+
+        <div>
+            @GlobalResources.ManagerName:
+            <span data-bind="text: model.ManagerName"></span>
+        </div>
+
+        <div>
+            @GlobalResources.ContactEmailCarService:
+            <span data-bind="text: model.Email"></span>
+        </div>
+
+        <!-- ko if: model.Site() -->
+        <div>
+            @GlobalResources.CarServiceSite:
+            <a data-bind="text: model.Site, attr: {href: model.Site}"></a>
+        </div>
+        <!-- /ko -->
+
+        <div>
+            @GlobalResources.ContactPhoneNumbers:
+            <!--ko foreach: model.Phones-->
+            <span data-bind="text: $data"></span>
+            <!-- /ko -->
+        </div>
+
+        <!-- ko if: model.TimetableWorks() -->
+        <div>
+            @GlobalResources.CarServiceWorkTime:
+            <span data-bind="text: model.TimetableWorks"></span>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<br />
+
+<!-- ko if: model.About() -->
+<h4>@GlobalResources.AboutCarService</h4>
+<hr />
+
+<div class="row">
+    <div class="col">
+        <p data-bind="text: model.About"></p>
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko if: model.WorkClasses().length -->
+<h4>Виды работ</h4> <!--TODO-->
+<hr />
+
+<div class="row justify-content-center">
+    <!-- ko foreach: model.WorkClasses -->
+    <div class="col-4">
+        <span class="header-text" data-bind="text: $data.Name"></span>
+        <ul>
+            <!-- ko foreach: $data.Types -->
+            <li data-bind="text: $data.Name"></li>
+            <!-- /ko -->
+        </ul>
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->
+<!-- ko if: model.PhotosId().length-->
+<h4>@GlobalResources.Photos</h4>
+<hr />
+<div class="row justify-content-center">
+    <!-- ko foreach: model.PhotosId-->
+    <div class='list-group gallery'>
+        <div class='col-3'>
+            <div class="thumbnail">
+                <img class="img-responsive car-service-photo" data-bind="attr: {src: window.resource.urls.webApiGetPhotoUrl + '/' + $data}" />
+                <div class='text-right'>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->
+
+<br />
+
+<!-- ko if: model.Reviews().length-->
+<h4>@GlobalResources.Reviews</h4>
+<hr />
+<br />
+
+<section class="comments">
+    <!-- ko foreach: model.Reviews -->
+    <article class="comment">
+        <a class="comment-img">
+        </a>
+        <div class="comment-body">
+            <div class="text gold">
+                <!-- ko foreach: new Array($data.Mark())-->
+                <i class="fa fa-star"></i>
+                <!-- /ko -->
+            </div>
+            <div class="text">
+                <p data-bind="text: $data.Review"></p>
+            </div>
+            <p class="attribution">
+                <span data-bind="text: $data.Author"></span> <span data-bind="text: $data.Created"></span>
+            </p>
+            @if (User.IsInRole(Common.Constants.CommonRoles.Administrator))
+            {
+                <div class="button-delete">
+                    <button class="btn btn-sm btn-danger" data-bind="click: function() { $root.deleteReview($data.Id()) }">@GlobalResources.Delete</button>
+                </div>
+            }
+        </div>
+    </article>
+    <!-- /ko -->
+</section>
+<!-- /ko -->

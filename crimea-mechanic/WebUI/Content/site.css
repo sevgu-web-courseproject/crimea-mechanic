@@ -103,6 +103,10 @@ a {
   max-width: 350px;
   max-height: 350px;
 }
+.car-service-photo-edit {
+  max-width: 200px;
+  max-height: 200px;
+}
 section {
   background: #e9ecef;
   padding-right: 85px;

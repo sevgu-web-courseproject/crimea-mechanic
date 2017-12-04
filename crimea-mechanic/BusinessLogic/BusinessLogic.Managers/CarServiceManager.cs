@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using AutoMapper;
 using BusinessLogic.Managers.Abstraction;
@@ -36,28 +37,75 @@ namespace BusinessLogic.Managers
 
         #region Implemetation of ICarServiceManager
 
-        public void Edit(EditCarServiceDto dto, string currentUserId)
+        public void Edit(EditCarServiceDto dto, string directory, string currentUserId)
         {
             UserManager.IsUserInCarServiceRole(currentUserId);
 
             var service = GetCarService(dto.Id);
             if (service.ApplicationUser.Id != currentUserId)
             {
+                DeleteDirectoryWithFiles(directory);
                 throw new BusinessFaultException(BusinessLogicExceptionResources.CarServiceDoesNotBelongToUser);
             }
 
             var validationResult = _validationManager.ValidateEditCarServiceDto(dto);
             if (validationResult.HasErrors)
             {
+                DeleteDirectoryWithFiles(directory);
                 throw new BusinessFaultException(validationResult.GetErrors());
             }
 
             service.Name = dto.Name;
-            service.City = UnitOfWork.Repository<ICityRepository>().Get(dto.CityId);
             service.Address = dto.Address;
             service.Email = dto.Email;
 
-            //TODO Телефоны и фотки
+            if (dto.Logo != null)
+            {
+                var logo = service.Files.SingleOrDefault(file => !file.IsDeleted && file.Type == FileType.Logo);
+                if (logo != null)
+                {
+                    logo.IsDeleted = true;
+                    logo.Updated = DateTime.UtcNow;
+                }
+                logo = Mapper.Map<CarServiceFile>(dto.Logo);
+                logo.Type = FileType.Logo;
+                service.Files.Add(logo);
+            }
+
+            if (dto.Photos != null && dto.Photos.Any())
+            {
+                var photos = service.Files.Where(file => !file.IsDeleted && file.Type == FileType.Photo).ToList();
+                if (photos.Any())
+                {
+                    foreach (var photo in photos)
+                    {
+                        photo.IsDeleted = true;
+                        photo.Updated = DateTime.UtcNow;
+                    }
+                }
+                foreach (var photo in dto.Photos)
+                {
+                    var file = Mapper.Map<CarServiceFile>(photo);
+                    service.Files.Add(file);
+                }
+            }
+
+            foreach (var phone in service.Phones)
+            {
+                phone.IsDeleted = true;
+                phone.Updated = DateTime.UtcNow;
+            }
+            service.Phones = Mapper.Map<List<CarServicePhone>>(dto.Phones);
+
+            if (dto.WorkTypes != null && dto.WorkTypes.Any())
+            {
+                var repository = UnitOfWork.Repository<IWorkTypeRepository>();
+                service.WorkTypes.Clear();
+                foreach (var workTypeId in dto.WorkTypes)
+                {
+                    service.WorkTypes.Add(repository.Get(workTypeId));
+                }
+            }
 
             service.ManagerName = dto.ManagerName;
             service.Site = dto.Site;
@@ -68,35 +116,26 @@ namespace BusinessLogic.Managers
             UnitOfWork.SaveChanges();
         }
 
+        public CarServiceInfoForEditDto GetInfoForEdit(string currentUserId)
+        {
+            UserManager.IsUserInCarServiceRole(currentUserId);
+            var service = UserManager.CheckAndGet(currentUserId).CarService;
+            return Mapper.Map<CarServiceInfoForEditDto>(service);
+        }
+
+        public CarServiceInfoDto GetProfile(string currentUserId)
+        {
+            UserManager.IsUserInCarServiceRole(currentUserId);
+            var service = UserManager.CheckAndGet(currentUserId).CarService;
+
+            return GetCarServiceInfo(service);
+        }
+
         public CarServiceInfoDto GetInfo(long carServiceId, string currentUserId)
         {
             var service = GetCarService(carServiceId);
 
-            var infoDto = Mapper.Map<CarServiceInfoDto>(service);
-            infoDto.Reviews = service.Reviews
-                .Where(r => !r.IsDeleted)
-                .OrderByDescending(r => r.Created)
-                .Select(Mapper.Map<ReviewInfoDto>)
-                .ToList();
-            infoDto.PhotosId = service.Files
-                .Where(file => file.Type == FileType.Photo)
-                .Select(file => file.Id)
-                .ToList();
-            infoDto.Phones = service.Phones
-                .Select(p => p.Number)
-                .ToList();
-            infoDto.AverageMark = service.Reviews.Count(r => !r.IsDeleted) == 0
-                ? 0
-                : service.Points / service.Reviews.Count(r => !r.IsDeleted);
-            infoDto.WorkClasses = service.WorkTypes
-                .GroupBy(x => x.Class)
-                .Select(x =>
-                {
-                    var dto = Mapper.Map<WorkClassDto>(x.Key);
-                    dto.Types = Mapper.Map<IEnumerable<WorkTypeDto>>(x.ToList());
-                    return dto;
-                })
-                .ToList();
+            var infoDto = GetCarServiceInfo(service);
 
             if (!string.IsNullOrEmpty(currentUserId) && UserManager.IsUserInRole(currentUserId, Common.Constants.CommonRoles.Regular))
             {
@@ -304,6 +343,45 @@ namespace BusinessLogic.Managers
                 .OrderByDescending(cr => cr.Created);
 
             return query;
+        }
+
+        private CarServiceInfoDto GetCarServiceInfo(CarService service)
+        {
+            var infoDto = Mapper.Map<CarServiceInfoDto>(service);
+            infoDto.Reviews = service.Reviews
+                .Where(r => !r.IsDeleted)
+                .OrderByDescending(r => r.Created)
+                .Select(Mapper.Map<ReviewInfoDto>)
+                .ToList();
+            infoDto.PhotosId = service.Files
+                .Where(file => file.Type == FileType.Photo)
+                .Select(file => file.Id)
+                .ToList();
+            infoDto.Phones = service.Phones
+                .Select(p => p.Number)
+                .ToList();
+            infoDto.AverageMark = service.Reviews.Count(r => !r.IsDeleted) == 0
+                ? 0
+                : service.Points / service.Reviews.Count(r => !r.IsDeleted);
+            infoDto.WorkClasses = service.WorkTypes
+                .GroupBy(x => x.Class)
+                .Select(x =>
+                {
+                    var dto = Mapper.Map<WorkClassDto>(x.Key);
+                    dto.Types = Mapper.Map<IEnumerable<WorkTypeDto>>(x.ToList());
+                    return dto;
+                })
+                .ToList();
+            return infoDto;
+        }
+
+        private void DeleteDirectoryWithFiles(string directory)
+        {
+            var filesDirInfo = new DirectoryInfo(directory);
+            if (filesDirInfo.Exists)
+            {
+                filesDirInfo.Delete(true);
+            }
         }
 
         #endregion

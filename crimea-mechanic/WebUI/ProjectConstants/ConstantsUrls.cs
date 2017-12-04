@@ -85,5 +85,11 @@
         public static string WebApiGetWorkClassesUrl => Flurl.Url.Combine(WebApiUri, "api/Storage/GetWorkClasses");
 
         public static string WebApiGetWorkTypesFromPool => Flurl.Url.Combine(WebApiUri, "api/Application/GetWorkTypesFromPool");
+
+        public static string WebApiGetCarServiceProfileUrl => Flurl.Url.Combine(WebApiUri, "api/CarService/GetProfile");
+
+        public static string WebApiGetCarServiceInfoForEditUrl => Flurl.Url.Combine(WebApiUri, "api/CarService/GetInfoForEdit");
+
+        public static string WebApiEditCarServiceUrl => Flurl.Url.Combine(WebApiUri, "api/CarService/Edit");
     }
 }

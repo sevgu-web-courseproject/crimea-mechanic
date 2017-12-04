@@ -283,12 +283,6 @@ namespace BusinessLogic.Managers
                 validationResult.AddError(ValidationErrorResources.CarServiceNameIsEmpty);
             }
 
-            var city = _unitOfWork.Repository<ICityRepository>().Get(dto.CityId);
-            if (city == null)
-            {
-                validationResult.AddError(ValidationErrorResources.CityNotFound);
-            }
-
             if (string.IsNullOrEmpty(dto.Address))
             {
                 validationResult.AddError(ValidationErrorResources.CarServiceAddressIsEmpty);
@@ -325,19 +319,6 @@ namespace BusinessLogic.Managers
                 validationResult.AddError(ValidationErrorResources.CarServiceSiteIsIncorrect);
             }
 
-            if (dto.CarTags != null && dto.CarTags.Any())
-            {
-                var repository = _unitOfWork.Repository<ICarMarksRepository>();
-                foreach (var carTagId in dto.CarTags)
-                {
-                    var mark = repository.Get(carTagId);
-                    if (mark == null)
-                    {
-                        validationResult.AddError(string.Format(ValidationErrorResources.CarMarkNotFound, carTagId));
-                    }
-                }
-            }
-
             if (dto.Logo != null && !IsImage(dto.Logo.Name))
             {
                 validationResult.AddError(string.Format(ValidationErrorResources.InvalidFileExtension, dto.Logo.Name));
@@ -345,6 +326,10 @@ namespace BusinessLogic.Managers
 
             if (dto.Photos != null && dto.Photos.Any())
             {
+                if (dto.Photos.Count > 5)
+                {
+                    validationResult.AddError(ValidationErrorResources.PhotosToMuch);
+                }
                 foreach (var photo in dto.Photos)
                 {
                     if (!IsImage(photo.Name))

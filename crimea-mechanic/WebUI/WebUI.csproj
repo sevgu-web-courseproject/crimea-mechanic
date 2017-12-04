@@ -279,7 +279,9 @@
     <Content Include="Scripts\ViewModels\carServiceApplicationCardVM.js" />
     <Content Include="Scripts\ViewModels\carServiceApplicationsVM.js" />
     <Content Include="Scripts\ViewModels\carServiceCardVM.js" />
+    <Content Include="Scripts\ViewModels\carServiceProfileVM.js" />
     <Content Include="Scripts\ViewModels\carServicesVM.js" />
+    <Content Include="Scripts\ViewModels\editCarServiceVM.js" />
     <Content Include="Scripts\ViewModels\garagePageVM.js" />
     <Content Include="Scripts\ViewModels\homePageVM.js" />
     <Content Include="Scripts\ViewModels\poolVM.js" />
@@ -323,7 +325,7 @@
     <None Include="packages.config" />
     <Content Include="Views\Account\SignIn.cshtml" />
     <Content Include="Views\Account\RegistrationUser.cshtml" />
-    <Content Include="Views\Account\OperateCarService.cshtml" />
+    <Content Include="Views\Account\RegistrationCarService.cshtml" />
     <Content Include="Views\Shared\_HeaderScript.cshtml" />
     <Content Include="Views\CarService\Card.cshtml" />
     <Content Include="Views\CarService\RegistrationRequests.cshtml" />
@@ -340,7 +342,10 @@
     <Content Include="Views\Application\ApplicationsForAdministrator.cshtml" />
     <Content Include="Views\Application\ApplicationCardForAdministrator.cshtml" />
     <Content Include="Views\CarService\Index.cshtml" />
-    <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Account\ClientProfile.cshtml" />
+    <Content Include="Views\CarService\_CarServiceCard.cshtml" />
+    <Content Include="Views\Account\CarServiceProfile.cshtml" />
+    <Content Include="Views\Account\EditCarService.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.Constants\Common.Constants.csproj">

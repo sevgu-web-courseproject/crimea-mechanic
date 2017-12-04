@@ -118,7 +118,7 @@ namespace WebUI.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            return View("OperateCarService");
+            return View();
         }
 
         [HttpGet]
@@ -127,13 +127,20 @@ namespace WebUI.Controllers
         {
             if (User.IsInRole(Common.Constants.CommonRoles.Regular))
             {
-                return View("Profile");
+                return View("ClientProfile");
             }
             if (User.IsInRole(Common.Constants.CommonRoles.CarService))
             {
-                return View("Profile"); // TODO
+                return View("CarServiceProfile");
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = Common.Constants.CommonRoles.CarService)]
+        public ActionResult EditCarService()
+        {
+            return View();
         }
 
         [Authorize]
