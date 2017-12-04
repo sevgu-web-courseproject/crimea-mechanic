@@ -61,6 +61,9 @@ namespace BusinessLogic.Managers.MapProfiles
                 .ForMember(d => d.Created, opt => opt.MapFrom(s => DateTime.UtcNow))
                 .ForMember(d => d.Type, opt => opt.UseValue(FileType.Photo))
                 .ForAllOtherMembers(opt => opt.Ignore());
+
+            CreateMap<UserProfile, UserProfileDto>()
+                .ForMember(d => d.Email, opt => opt.MapFrom(s => s.ApplicationUser.Email));
         }
     }
 }

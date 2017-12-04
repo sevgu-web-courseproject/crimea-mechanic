@@ -55,6 +55,11 @@ namespace BusinessLogic.Managers
                 throw new BusinessFaultException(validationResult.GetErrors());
             }
 
+            if (service.State == CarServiceState.Rejected)
+            {
+                service.State = CarServiceState.UnderСonsideration;
+            }
+
             service.Name = dto.Name;
             service.Address = dto.Address;
             service.Email = dto.Email;

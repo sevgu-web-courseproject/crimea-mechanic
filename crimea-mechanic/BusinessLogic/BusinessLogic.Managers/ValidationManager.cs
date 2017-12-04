@@ -356,6 +356,20 @@ namespace BusinessLogic.Managers
             return validationResult;
         }
 
+        public ValidationResult ValidateEditUserProfileDto(EditUserProfileDto dto)
+        {
+            var validationResult = new ValidationResult("Редиктирование профайла пользователя");
+            if (string.IsNullOrEmpty(dto.Name))
+            {
+                validationResult.AddError(ValidationErrorResources.ContactNameIsEmpty);
+            }
+            if (string.IsNullOrEmpty(dto.Phone) || IsInvalidPhoneNumber(dto.Phone))
+            {
+                validationResult.AddError(ValidationErrorResources.PhoneNumberIsIncorrect);
+            }
+            return validationResult;
+        }
+
         #endregion
 
         #region Private methods

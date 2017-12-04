@@ -78,9 +78,11 @@
     <Compile Include="Review\EditReviewDto.cs" />
     <Compile Include="Review\OperateReviewDto.cs" />
     <Compile Include="Review\ReviewInfoDto.cs" />
+    <Compile Include="User\EditUserProfileDto.cs" />
     <Compile Include="User\RegistrationDto.cs" />
     <Compile Include="User\RegistrationCarServiceDto.cs" />
     <Compile Include="User\RegistrationUserDto.cs" />
+    <Compile Include="User\UserProfileDto.cs" />
     <Compile Include="Works\WorkClassDto.cs" />
     <Compile Include="Works\WorkTypeDto.cs" />
   </ItemGroup>

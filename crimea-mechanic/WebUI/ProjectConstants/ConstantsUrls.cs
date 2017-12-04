@@ -91,5 +91,9 @@
         public static string WebApiGetCarServiceInfoForEditUrl => Flurl.Url.Combine(WebApiUri, "api/CarService/GetInfoForEdit");
 
         public static string WebApiEditCarServiceUrl => Flurl.Url.Combine(WebApiUri, "api/CarService/Edit");
+
+        public static string WebApiGetClientProfileUrl => Flurl.Url.Combine(WebApiUri, "api/Account/GetProfile");
+
+        public static string WebApiEditClientProfileUrl => Flurl.Url.Combine(WebApiUri, "api/Account/EditProfile");
     }
 }
