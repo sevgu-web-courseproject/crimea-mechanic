@@ -228,6 +228,14 @@ namespace BusinessLogic.Managers
                 {ClaimsConstants.ClaimUserName, user.UserName},
                 {ClaimsConstants.ClaimRole, string.Join("|", roles)}
             };
+            if (IsUserInRole(user.Id, CommonRoles.CarService))
+            {
+                var service = _unitOfWork.Repository<ICarServiceRepository>().GetByUserId(user.Id);
+                if (service.State == CarServiceState.Rejected)
+                {
+                    data.Add(new KeyValuePair<string, string>(ClaimsConstants.ClaimDeclineReason, service.DeclineReason));
+                }
+            }
             return new AuthenticationProperties(data);
         }
 

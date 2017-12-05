@@ -99,12 +99,12 @@ namespace WebApi.Controllers
         /// <summary>
         /// Отменить регистрацию автосервиса
         /// </summary>
-        [HttpGet]
+        [HttpPost]
         [Authorize(Roles = Common.Constants.CommonRoles.Administrator)]
-        [Route("RejectCarService/{carServiceId:long}")]
-        public IHttpActionResult RejectCarService(long carServiceId)
+        [Route("RejectCarService")]
+        public IHttpActionResult RejectCarService(RejectDto dto)
         {
-            return CallBusinessLogicAction(() => _manager.RejectCarService(carServiceId, User.Identity.GetUserId()));
+            return CallBusinessLogicAction(() => _manager.RejectCarService(dto, User.Identity.GetUserId()));
         }
 
         /// <summary>

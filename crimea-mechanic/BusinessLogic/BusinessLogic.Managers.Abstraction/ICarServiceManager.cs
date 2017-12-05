@@ -48,7 +48,7 @@ namespace BusinessLogic.Managers.Abstraction
         /// <summary>
         /// Отклонить регистрацию автосервиса
         /// </summary>
-        void RejectCarService(long carServiceId, string currentUserId);
+        void RejectCarService(RejectDto dto, string currentUserId);
 
         /// <summary>
         /// Заблокировать автосервис

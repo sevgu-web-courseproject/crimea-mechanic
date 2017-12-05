@@ -80,7 +80,7 @@
     <h4>@GlobalResources.ApplicationOffers</h4>
     <hr/>
     <!-- ko foreach: model.Offers-->
-    <div class="offer">
+    <div class="offer" data-bind="css: {'border-green': $root.model.ServiceName() == $data.ServiceName()}">
         <div class="row">
             <div class="col">
                 @GlobalResources.Service

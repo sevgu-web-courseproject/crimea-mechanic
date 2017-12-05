@@ -554,7 +554,7 @@ namespace BusinessLogic.Managers
 
         private IQueryable<Application> BuildQueryForPool(ApplicationsPoolFilter filter, CarService service)
         {
-            if (service.State == CarServiceState.Blocked)
+            if (service.State == CarServiceState.Blocked || service.State == CarServiceState.Rejected)
             {
                 return new List<Application>().AsQueryable();
             }

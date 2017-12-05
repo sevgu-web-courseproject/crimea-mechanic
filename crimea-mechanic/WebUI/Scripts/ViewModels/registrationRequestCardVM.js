@@ -13,14 +13,15 @@
         TimetableWorks: ko.observable(),
         PhotosId: ko.observableArray([]),
         About: ko.observable(),
-        IsApproveButtonVisible: ko.observable(true),
-        IsRejectButtonVisible: ko.observable(true)
+        WorkClasses: ko.observableArray([])
     };
+
+    var reason = ko.observable().extend({
+        required: { params: true, message: "Необходимо указать причину отказа" } //TODO
+    });
 
     var approve = function () {
         $(document).trigger("showLoadingPanel");
-        model.IsApproveButtonVisible(false);
-        model.IsRejectButtonVisible(false);
         var url = window.resource.urls.webApiApproveCarServiceUrl.replace("carServiceId", model.Id());
         ajaxHelper.getWithoutResult(url)
             .then(function () {
@@ -34,11 +35,17 @@
     };
 
     var reject = function () {
+        var validationGroup = ko.validation.group([reason]);
+        if (validationGroup().length !== 0) {
+            validationGroup.showAllMessages();
+            return;
+        }
         $(document).trigger("showLoadingPanel");
-        model.IsApproveButtonVisible(false);
-        model.IsRejectButtonVisible(false);
-        var url = window.resource.urls.webApiRejectCarServiceUrl.replace("carServiceId", model.Id());
-        ajaxHelper.getWithoutResult(url)
+        var data = JSON.stringify({
+            CarServiceId: model.Id(),
+            Reason: reason()
+        });
+        ajaxHelper.postJsonWithoutResult(window.resource.urls.webApiRejectCarServiceUrl, data)
             .then(function () {
                 localStorage.success = window.resource.texts.applicationDeclined;
                 window.location.href = window.resource.urls.webUiRegistrationRequestsUrl;
@@ -65,6 +72,7 @@
         init: init,
         model: model,
         approve: approve,
-        reject: reject
+        reject: reject,
+        reason: reason
     };
 };

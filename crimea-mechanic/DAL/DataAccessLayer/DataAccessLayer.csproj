@@ -113,6 +113,10 @@
     <Compile Include="Migrations\201712021910230_AddWorkClassesWithWorkTypes.Designer.cs">
       <DependentUpon>201712021910230_AddWorkClassesWithWorkTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712051616473_AddFieldDeclineReasonIntoCarService.cs" />
+    <Compile Include="Migrations\201712051616473_AddFieldDeclineReasonIntoCarService.Designer.cs">
+      <DependentUpon>201712051616473_AddFieldDeclineReasonIntoCarService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -178,6 +182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712021910230_AddWorkClassesWithWorkTypes.resx">
       <DependentUpon>201712021910230_AddWorkClassesWithWorkTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712051616473_AddFieldDeclineReasonIntoCarService.resx">
+      <DependentUpon>201712051616473_AddFieldDeclineReasonIntoCarService.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
