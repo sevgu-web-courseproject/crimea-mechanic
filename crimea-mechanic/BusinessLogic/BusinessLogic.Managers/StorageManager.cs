@@ -59,7 +59,8 @@ namespace BusinessLogic.Managers
             return UnitOfWork.Repository<ICityRepository>().GetAll(true)
                 .Where(city => !city.IsDeleted)
                 .ToList()
-                .Select(Mapper.Map<CityDto>);
+                .Select(Mapper.Map<CityDto>)
+                .OrderBy(city => city.Name);
         }
 
         public IEnumerable<WorkClassDto> GetWorkClasses()
