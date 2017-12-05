@@ -95,5 +95,25 @@
         public static string WebApiGetClientProfileUrl => Flurl.Url.Combine(WebApiUri, "api/Account/GetProfile");
 
         public static string WebApiEditClientProfileUrl => Flurl.Url.Combine(WebApiUri, "api/Account/EditProfile");
+
+        public static string WebApiAddCityUrl => Flurl.Url.Combine(WebApiUri, "api/Storage/AddCity");
+
+        public static string WebApiAddCarMarkUrl => Flurl.Url.Combine(WebApiUri, "api/Storage/AddCarMark");
+
+        public static string WebApiAddCarModelUrl => Flurl.Url.Combine(WebApiUri, "api/Storage/AddCarModel");
+
+        public static string WebApiAddWorkClassUrl => Flurl.Url.Combine(WebApiUri, "api/Storage/AddWorkClass");
+
+        public static string WebApiAddWorkTypeUrl => Flurl.Url.Combine(WebApiUri, "api/Storage/AddWorkType");
+
+        public static string WebApiDeleteCityUrl(string cityId) => Flurl.Url.Combine(WebApiUri, "api/Storage/DeleteCity", cityId);
+
+        public static string WebApiDeleteMarkUrl(string markId) => Flurl.Url.Combine(WebApiUri, "api/Storage/DeleteMark", markId);
+
+        public static string WebApiDeleteModelUrl(string modelId) => Flurl.Url.Combine(WebApiUri, "api/Storage/DeleteModel", modelId);
+
+        public static string WebApiDeleteWorkClassUrl(string workClassId) => Flurl.Url.Combine(WebApiUri, "api/Storage/DeleteWorkClass", workClassId);
+
+        public static string WebApiDeleteWorkTypeUrl(string workTypeId) => Flurl.Url.Combine(WebApiUri, "api/Storage/DeleteWorkType", workTypeId);
     }
 }
