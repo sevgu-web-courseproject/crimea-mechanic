@@ -112,7 +112,7 @@ namespace BusinessLogic.Managers
         {
             UserManager.IsUserInAdministrationRole(currentUserId);
             var repository = UnitOfWork.Repository<ICarMarksRepository>();
-            var mark = repository.Get(dto.MardId);
+            var mark = repository.Get(dto.MarkId);
             if (mark == null)
             {
                 throw new BusinessFaultException(BusinessLogicExceptionResources.CarMarkNotFound);

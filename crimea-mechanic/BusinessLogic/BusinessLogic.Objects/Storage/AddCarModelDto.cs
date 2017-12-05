@@ -8,7 +8,7 @@
         /// <summary>
         /// Марка автомобиля
         /// </summary>
-        public long MardId { get; set; }
+        public long MarkId { get; set; }
 
         /// <summary>
         /// Наименнование модели

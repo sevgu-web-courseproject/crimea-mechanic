@@ -14,14 +14,113 @@
     <h4 class="inline">Справочник марок и моделей</h4> <!-- TODO -->
     <div class="pull-right">
         <button class="btn btn-success" data-toggle="modal" data-target="#add-mark">Добавить марку</button> <!-- TODO -->
+        <!-- ko if: mark() -->
+        <button class="btn btn-danger" data-bind="click: deleteMark">Удалить марку</button> <!-- TODO -->
+        <!-- /ko -->
     </div>
     <hr />
 
     <div class="row">
         <div class="col">
-
+            <label>@GlobalResources.CarMark</label>
+            <input type="text" class="form-control" list="marks" data-bind="value: mark" placeholder="BMW"/>
+            <datalist id="marks" data-bind="foreach: marks">
+                <option data-bind="value: $data.Name"></option>
+            </datalist>
         </div>
     </div>
+    
+    <hr/>
+    
+    <!-- ko if: mark()-->
+    <div class="row">
+        <div class="col">
+            <div class="pull-right">
+                <button class="btn btn-success" data-toggle="modal" data-target="#add-model">Добавить модель</button> <!-- TODO -->
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if: models().length -->
+    <div class="row">
+        <div class="col">
+            <!-- ko foreach: models -->
+            <div class="row">
+                <div class="col storage-item">
+                    <div>
+                        <span data-bind="text: $index() + 1"></span>. <span data-bind="text: $data.Name"></span>
+                    </div>
+                    <div class="pull-right">
+                        <button class="btn btn-danger btn-sm" data-bind="click: $root.deleteModel">@GlobalResources.Delete</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: !models().length -->
+    <div class="text-center">
+        <h2>@GlobalResources.NoRecordsFound</h2>
+    </div>
+    <!-- /ko -->
+</div>
+
+<div class="modal fade" id="add-mark" role="dialog">
+    <form>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Добавление марки автомобиля</h4> <!-- TODO -->
+                    <button type="button" class="close" id="close-button-mark" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div>
+                                <label>Наименнование марки:</label> <!-- TODO -->
+                                <input type="text" class="form-control" data-bind="value: markName" aria-describedby="mark-error">
+                                <small id="mark-error" class="form-text validation-error-text" data-bind="validationMessage: markName"></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button class="btn btn-success" data-bind="click: addMark">@GlobalResources.Send</button>
+                    <button class="btn btn-danger" data-dismiss="modal">@GlobalResources.Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="add-model" role="dialog">
+    <form>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Добавление модели автомобиля</h4> <!-- TODO -->
+                    <button type="button" class="close" id="close-button-model" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div>
+                                <label>Наименнование модели:</label> <!-- TODO -->
+                                <input type="text" class="form-control" data-bind="value: modelName" aria-describedby="model-error">
+                                <small id="model-error" class="form-text validation-error-text" data-bind="validationMessage: modelName"></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button class="btn btn-success" data-bind="click: addModel">@GlobalResources.Send</button>
+                    <button class="btn btn-danger" data-dismiss="modal">@GlobalResources.Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
 @section scripts {
