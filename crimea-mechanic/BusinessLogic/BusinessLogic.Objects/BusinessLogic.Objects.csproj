@@ -79,6 +79,11 @@
     <Compile Include="Review\EditReviewDto.cs" />
     <Compile Include="Review\OperateReviewDto.cs" />
     <Compile Include="Review\ReviewInfoDto.cs" />
+    <Compile Include="Storage\AddCarMarkDto.cs" />
+    <Compile Include="Storage\AddCarModelDto.cs" />
+    <Compile Include="Storage\AddCityDto.cs" />
+    <Compile Include="Storage\AddWorkClassDto.cs" />
+    <Compile Include="Storage\AddWorkTypeDto.cs" />
     <Compile Include="User\EditUserProfileDto.cs" />
     <Compile Include="User\RegistrationDto.cs" />
     <Compile Include="User\RegistrationCarServiceDto.cs" />

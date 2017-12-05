@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using BusinessLogic.Managers.Abstraction;
 using BusinessLogic.Objects;
+using BusinessLogic.Objects.Storage;
 using BusinessLogic.Objects.Works;
 using BusinessLogic.Resources;
 using Common.Exceptions;
@@ -74,6 +75,56 @@ namespace BusinessLogic.Managers
                         .Select(Mapper.Map<WorkTypeDto>);
                     return dto;
                 });
+        }
+
+        public void AddCity(AddCityDto dto, string currentUserId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void AddCarMark(AddCarMarkDto dto, string currentUserId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void AddCarModel(AddCarModelDto dto, string currentUserId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void AddWorkClass(AddWorkClassDto dto, string currentUserId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void AddWorkType(AddWorkTypeDto dto, string currentUserId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DeleteCity(long cityId, string currentUserId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DeleteMark(long markId, string currentUserId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DeleteModel(long modelId, string currentUserId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DeleteWorkClass(long workClassId, string currentUserId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DeleteWorkType(long workTypeId, string currentUserId)
+        {
+            throw new System.NotImplementedException();
         }
 
         #endregion
