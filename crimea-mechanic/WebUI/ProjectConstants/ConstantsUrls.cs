@@ -22,7 +22,7 @@
 
         public static string WebApiApproveCarServiceUrl(string carServiceId) => Flurl.Url.Combine(WebApiUri, "api/CarService/ApproveCarService", carServiceId);
 
-        public static string WebApiRejectCarServiceUrl(string carServiceId) => Flurl.Url.Combine(WebApiUri, "api/CarService/RejectCarService", carServiceId);
+        public static string WebApiRejectCarServiceUrl => Flurl.Url.Combine(WebApiUri, "api/CarService/RejectCarService");
 
         public static string WebApiBlockCarServiceUrl(string carServiceId) => Flurl.Url.Combine(WebApiUri, "api/CarService/BlockCarService", carServiceId);
 

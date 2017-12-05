@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BusinessLogic.Objects.Works;
 
 namespace BusinessLogic.Objects.CarService
 {
@@ -36,5 +37,10 @@ namespace BusinessLogic.Objects.CarService
         /// Список фотографий
         /// </summary>
         public IEnumerable<long> PhotosId { get; set; }
+
+        /// <summary>
+        /// Классы работ
+        /// </summary>
+        public IEnumerable<WorkClassDto> WorkClasses { get; set; }
     }
 }

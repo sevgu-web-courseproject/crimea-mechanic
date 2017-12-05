@@ -58,6 +58,7 @@ namespace BusinessLogic.Managers
             if (service.State == CarServiceState.Rejected)
             {
                 service.State = CarServiceState.UnderСonsideration;
+                service.DeclineReason = null;
             }
 
             service.Name = dto.Name;
@@ -161,7 +162,18 @@ namespace BusinessLogic.Managers
                 throw new BusinessFaultException(BusinessLogicExceptionResources.CarServiceIncorrectState);
             }
 
-            return Mapper.Map<RegistrationRequestInfoDto>(service);
+            var info = Mapper.Map<RegistrationRequestInfoDto>(service);
+            info.WorkClasses = service.WorkTypes
+                .GroupBy(x => x.Class)
+                .Select(x =>
+                {
+                    var dto = Mapper.Map<WorkClassDto>(x.Key);
+                    dto.Types = Mapper.Map<IEnumerable<WorkTypeDto>>(x.ToList());
+                    return dto;
+                })
+                .ToList();
+
+            return info;
         }
 
         public CollectionResult<CarServiceShortInfoDto> GetInfos(CarServiceFilter filter)
@@ -238,10 +250,15 @@ namespace BusinessLogic.Managers
             UnitOfWork.SaveChanges();
         }
 
-        public void RejectCarService(long carServiceId, string currentUserId)
+        public void RejectCarService(RejectDto dto, string currentUserId)
         {
             UserManager.IsUserInAdministrationRole(currentUserId);
-            var service = GetCarService(carServiceId);
+            var service = GetCarService(dto.CarServiceId);
+
+            if (string.IsNullOrEmpty(dto.Reason))
+            {
+                throw new BusinessFaultException("Необходимо указать причину отказа"); //TODO
+            }
 
             if (service.State != CarServiceState.UnderСonsideration)
             {
@@ -249,6 +266,7 @@ namespace BusinessLogic.Managers
             }
 
             service.State = CarServiceState.Rejected;
+            service.DeclineReason = dto.Reason;
             service.Updated = DateTime.UtcNow;
 
             UnitOfWork.SaveChanges();
@@ -359,7 +377,7 @@ namespace BusinessLogic.Managers
                 .Select(Mapper.Map<ReviewInfoDto>)
                 .ToList();
             infoDto.PhotosId = service.Files
-                .Where(file => file.Type == FileType.Photo)
+                .Where(file => !file.IsDeleted && file.Type == FileType.Photo)
                 .Select(file => file.Id)
                 .ToList();
             infoDto.Phones = service.Phones

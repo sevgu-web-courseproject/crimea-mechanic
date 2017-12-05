@@ -13,13 +13,12 @@
 }
 
 <div class="jumbotron">
-    <h3><span>@GlobalResources.RegApplicationCard</span></h3>
     <h4 class="inline">
         <span data-bind="text: model.Name"></span>
     </h4>
     <div class="pull-right">
-        <button class="btn btn-success" data-bind="click: approve, visible: model.IsApproveButtonVisible()">@GlobalResources.Accept</button>
-        <button class="btn btn-danger" data-bind="click: reject, visible: model.IsRejectButtonVisible()">@GlobalResources.Decline</button>
+        <button class="btn btn-success" data-bind="click: approve">@GlobalResources.Accept</button>
+        <button class="btn btn-danger" data-toggle="modal" data-target="#decline-window">@GlobalResources.Decline</button>
     </div>
     <hr />
 
@@ -62,17 +61,47 @@
                 <!-- /ko -->
             </div>
             <div>
-                @GlobalResources.WorkTags:
+                @GlobalResources.CarServiceWorkTime:
                 <span data-bind="text: model.TimetableWorks"></span>
             </div>
         </div>
     </div>
     <br />
 
+    <!-- ko if: model.About() -->
     <h4>@GlobalResources.AboutCarService</h4>
     <hr />
 
+    <div class="row">
+        <div class="col">
+            <p data-bind="text: model.About"></p>
+        </div>
+    </div>
+    <br />
+    <!-- /ko -->
+    
+    <!-- ko if: model.WorkClasses().length -->
+    <h4>Виды работ</h4> <!--TODO-->
+    <hr />
+
+    <div class="row justify-content-center">
+        <!-- ko foreach: model.WorkClasses -->
+        <div class="col-4">
+            <span class="header-text" data-bind="text: $data.Name"></span>
+            <ul>
+                <!-- ko foreach: $data.Types -->
+                <li data-bind="text: $data.Name"></li>
+                <!-- /ko -->
+            </ul>
+        </div>
+        <!-- /ko -->
+    </div>
+    <br />
+    <!-- /ko -->
+    
     <!-- ko if: model.PhotosId().length-->
+    <h4>@GlobalResources.Photos</h4>
+    <hr />
     <div class="row justify-content-center">
         <!-- ko foreach: model.PhotosId-->
         <div class='list-group gallery'>
@@ -87,16 +116,31 @@
         <!-- /ko -->
     </div>
     <!-- /ko -->
+</div>
 
-    <br />
-
-    <div class="row">
-        <div class="col">
-            <p data-bind="text: model.About"></p>
+<div class="modal fade" id="decline-window" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Причина отказа</h4> <!-- TODO -->
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <label for="decline-reason">Причина:</label> <!-- TODO -->
+                        <textarea id="decline-reason" class="form-control" placeholder="Потому что..."data-bind="value: reason" aria-describedby="reason-error"></textarea> <!-- TODO -->
+                        <small id="reason-error" class="form-text validation-error-text" data-bind="validationMessage: reason"></small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-success" data-bind="click: reject">@GlobalResources.Send</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">@GlobalResources.Cancel</button>
+            </div>
         </div>
     </div>
 </div>
-
 
 @section scripts {
     @Scripts.Render("~/Scripts/registrationRequestCardVM")
@@ -106,6 +150,11 @@
             $(document).trigger("showLoadingPanel");
             viewModel.model.Id(@ViewBag.Id);
             viewModel.init();
+            ko.validation.init({
+                insertMessages: false,
+                decorateInputElement: true,
+                errorElementClass: "is-invalid"
+            }, true);
             ko.applyBindings(viewModel);
         });
     </script>

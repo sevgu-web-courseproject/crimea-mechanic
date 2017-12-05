@@ -103,5 +103,10 @@ namespace DataAccessLayer.Models
         /// Набранные очки рейтинга
         /// </summary>
         public long Points { get; set; }
+
+        /// <summary>
+        /// Причина отказа
+        /// </summary>
+        public string DeclineReason { get; set; }
     }
 }

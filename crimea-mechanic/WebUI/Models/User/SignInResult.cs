@@ -23,6 +23,9 @@ namespace WebUI.Models.User
         [JsonProperty(ClaimsConstants.ClaimUserId)]
         public string UserId { get; set; }
 
+        [JsonProperty(ClaimsConstants.ClaimDeclineReason)]
+        public string DeclineReason { get; set; }
+
         [JsonProperty(".issued")]
         public DateTimeOffset Issued { get; set; }
 

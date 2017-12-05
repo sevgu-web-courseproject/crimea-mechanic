@@ -103,5 +103,15 @@
 @Scripts.Render("~/Scripts/knockout")
 @Scripts.Render("~/Scripts/helpers")
 @RenderSection("scripts", required: false)
+@if (User.IsInRole(Common.Constants.CommonRoles.CarService) && !string.IsNullOrEmpty(User.Identity.GetDeclineReason()))
+{
+    <script>
+        $(function () {
+            notificationHelper.error('@GlobalResources.Error', 'Ваша заяка на регистрацию была отклонена, причина: ' +
+                '"@User.Identity.GetDeclineReason()"' +
+                '. Необходимо произвести <a href="' + '@Url.Action("EditCarService", "Account")' + '">редактирование</a> заявки.');
+        });
+    </script>
+}
 </body>
 </html>

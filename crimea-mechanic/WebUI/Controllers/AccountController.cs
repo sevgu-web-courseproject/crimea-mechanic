@@ -38,6 +38,11 @@ namespace WebUI.Controllers
                 new Claim(ClaimsConstants.ClaimToken, signInResult.AccessToken, ClaimsConstants.XmlSchemaString, authenticationType)
             };
 
+            if (!string.IsNullOrEmpty(signInResult.DeclineReason))
+            {
+                claims.Add(new Claim(ClaimsConstants.ClaimDeclineReason, signInResult.DeclineReason, ClaimsConstants.XmlSchemaString, authenticationType));
+            }
+
             if (!string.IsNullOrEmpty(signInResult.Roles))
             {
                 claims.AddRange(signInResult.Roles.Split(new[] { "|" }, StringSplitOptions.RemoveEmptyEntries).Select(role => new Claim(ClaimTypes.Role, role, ClaimsConstants.XmlSchemaString, authenticationType)));
