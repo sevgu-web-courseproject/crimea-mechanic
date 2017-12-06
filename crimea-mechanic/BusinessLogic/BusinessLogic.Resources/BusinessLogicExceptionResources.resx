@@ -141,8 +141,17 @@
   <data name="CarDoesNotBelongToUser" xml:space="preserve">
     <value>Машина не принадлежит пользователю</value>
   </data>
+  <data name="CarMarkAlreadyContains" xml:space="preserve">
+    <value>Данная марка автомобилей уже добавлена</value>
+  </data>
   <data name="CarMarkNotFound" xml:space="preserve">
     <value>Марка автомобиля не найдена</value>
+  </data>
+  <data name="CarModelAlreadyContains" xml:space="preserve">
+    <value>Данная модель уже добавлена</value>
+  </data>
+  <data name="CarModelNotFound" xml:space="preserve">
+    <value>Модель автомобиля не найдена</value>
   </data>
   <data name="CarServiceDoesNotBelongToUser" xml:space="preserve">
     <value>Автосервис не принадлежит пользователю</value>
@@ -152,6 +161,12 @@
   </data>
   <data name="CarServiceNotFound" xml:space="preserve">
     <value>Автосервис не найден</value>
+  </data>
+  <data name="CityAlreadyContains" xml:space="preserve">
+    <value>Такой город уже добавлен</value>
+  </data>
+  <data name="CityNotFound" xml:space="preserve">
+    <value>Город не найден</value>
   </data>
   <data name="FileNotFound" xml:space="preserve">
     <value>Файл автосервиса не найден</value>
@@ -176,5 +191,17 @@
   </data>
   <data name="UserNotFound" xml:space="preserve">
     <value>Пользователь не найден</value>
+  </data>
+  <data name="WorkClassAlreadyContains" xml:space="preserve">
+    <value>Данный класс работ уже добавлен</value>
+  </data>
+  <data name="WorkClassNotFound" xml:space="preserve">
+    <value>Класс работ не найден</value>
+  </data>
+  <data name="WorkTypeAlreadyContains" xml:space="preserve">
+    <value>Данный тип работы уже добавлен</value>
+  </data>
+  <data name="WorkTypeNotFound" xml:space="preserve">
+    <value>Тип работы не найден</value>
   </data>
 </root>

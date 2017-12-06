@@ -94,6 +94,15 @@ namespace WebUI
 
             bundles.Add(new ScriptBundle("~/Scripts/editCarServiceVM").Include(
                 "~/Scripts/ViewModels/editCarServiceVM.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/operateCitiesVM").Include(
+                "~/Scripts/ViewModels/operateCitiesVM.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/operateMarksAndModelsVM").Include(
+                "~/Scripts/ViewModels/operateMarksAndModelsVM.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/operateWorkClassesAndTypesVM").Include(
+                "~/Scripts/ViewModels/operateWorkClassesAndTypesVM.js"));
         }
     }
 }

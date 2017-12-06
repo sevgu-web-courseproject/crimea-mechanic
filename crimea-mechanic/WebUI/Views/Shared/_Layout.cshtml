@@ -30,6 +30,18 @@
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Index", "CarService")">@GlobalResources.CarServices</a>
                         </li>
+                        <li class="nav-item">
+                            <div class="dropdown inline">
+                                <a class="nav-link" id="dropdown-menu-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Справочники <!-- TODO -->
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown-menu-link">
+                                    <a class="dropdown-item" href="@Url.Action("Cities", "Storage")">Города</a> <!-- TODO -->
+                                    <a class="dropdown-item" href="@Url.Action("MarksAndModels", "Storage")">Марки и модели</a> <!-- TODO -->
+                                    <a class="dropdown-item" href="@Url.Action("WorkClassesAndTypes", "Storage")">Классы и типы работ</a> <!-- TODO -->
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 }
                 else if (User.IsInRole(Common.Constants.CommonRoles.Regular))

@@ -133,11 +133,38 @@ namespace BusinessLogic.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Данная марка автомобилей уже добавлена.
+        /// </summary>
+        public static string CarMarkAlreadyContains {
+            get {
+                return ResourceManager.GetString("CarMarkAlreadyContains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Марка автомобиля не найдена.
         /// </summary>
         public static string CarMarkNotFound {
             get {
                 return ResourceManager.GetString("CarMarkNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Данная модель уже добавлена.
+        /// </summary>
+        public static string CarModelAlreadyContains {
+            get {
+                return ResourceManager.GetString("CarModelAlreadyContains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Модель автомобиля не найдена.
+        /// </summary>
+        public static string CarModelNotFound {
+            get {
+                return ResourceManager.GetString("CarModelNotFound", resourceCulture);
             }
         }
         
@@ -165,6 +192,24 @@ namespace BusinessLogic.Resources {
         public static string CarServiceNotFound {
             get {
                 return ResourceManager.GetString("CarServiceNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Такой город уже добавлен.
+        /// </summary>
+        public static string CityAlreadyContains {
+            get {
+                return ResourceManager.GetString("CityAlreadyContains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Город не найден.
+        /// </summary>
+        public static string CityNotFound {
+            get {
+                return ResourceManager.GetString("CityNotFound", resourceCulture);
             }
         }
         
@@ -237,6 +282,42 @@ namespace BusinessLogic.Resources {
         public static string UserNotFound {
             get {
                 return ResourceManager.GetString("UserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Данный класс работ уже добавлен.
+        /// </summary>
+        public static string WorkClassAlreadyContains {
+            get {
+                return ResourceManager.GetString("WorkClassAlreadyContains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Класс работ не найден.
+        /// </summary>
+        public static string WorkClassNotFound {
+            get {
+                return ResourceManager.GetString("WorkClassNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Данный тип работы уже добавлен.
+        /// </summary>
+        public static string WorkTypeAlreadyContains {
+            get {
+                return ResourceManager.GetString("WorkTypeAlreadyContains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тип работы не найден.
+        /// </summary>
+        public static string WorkTypeNotFound {
+            get {
+                return ResourceManager.GetString("WorkTypeNotFound", resourceCulture);
             }
         }
     }

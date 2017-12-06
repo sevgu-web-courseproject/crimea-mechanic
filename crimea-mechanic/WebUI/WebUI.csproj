@@ -209,6 +209,7 @@
     <Compile Include="Controllers\CarServiceController.cs" />
     <Compile Include="Controllers\GarageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StorageController.cs" />
     <Compile Include="Exception\ApiException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -285,6 +286,9 @@
     <Content Include="Scripts\ViewModels\editCarServiceVM.js" />
     <Content Include="Scripts\ViewModels\garagePageVM.js" />
     <Content Include="Scripts\ViewModels\homePageVM.js" />
+    <Content Include="Scripts\ViewModels\operateCitiesVM.js" />
+    <Content Include="Scripts\ViewModels\operateMarksAndModelsVM.js" />
+    <Content Include="Scripts\ViewModels\operateWorkClassesAndTypesVM.js" />
     <Content Include="Scripts\ViewModels\poolVM.js" />
     <Content Include="Scripts\ViewModels\profileVM.js" />
     <Content Include="Scripts\ViewModels\registrationCarServiceVM.js" />
@@ -347,6 +351,9 @@
     <Content Include="Views\CarService\_CarServiceCard.cshtml" />
     <Content Include="Views\Account\CarServiceProfile.cshtml" />
     <Content Include="Views\Account\EditCarService.cshtml" />
+    <Content Include="Views\Storage\Cities.cshtml" />
+    <Content Include="Views\Storage\MarksAndModels.cshtml" />
+    <Content Include="Views\Storage\WorkClassesAndTypes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.Constants\Common.Constants.csproj">

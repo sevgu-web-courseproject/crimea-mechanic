@@ -1,0 +1,87 @@
+﻿@using WebUI.App_LocalResources
+@{
+    ViewBag.Title = "Справочник городов"; //TODO
+}
+
+@section breadcrumbs {
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">@GlobalResources.Home</a></li>
+        <li class="breadcrumb-item active">Справочник городов</li> <!-- TODO -->
+    </ol>
+}
+
+<div class="jumbotron">
+    <h4 class="inline">Справочник городов</h4> <!-- TODO -->
+    <div class="pull-right">
+        <button class="btn btn-success" data-toggle="modal" data-target="#add-city">Добавить город</button> <!-- TODO -->
+    </div>
+    <hr/>
+
+    <div class="row">
+        <div class="col">
+            <!-- ko if: cities().length -->
+            <!-- ko foreach: cities -->
+            <div class="row">
+                <div class="col storage-item">
+                    <div>
+                        <span data-bind="text: $index() + 1"></span>. <span data-bind="text: $data.Name"></span>
+                    </div>
+                    <div class="pull-right">
+                        <button class="btn btn-danger btn-sm" data-bind="click: $root.deleteCity">@GlobalResources.Delete</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: !cities().length -->
+            <div class="text-center">
+                <h2>@GlobalResources.NoRecordsFound</h2>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="add-city" role="dialog">
+<form>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Добавление города</h4> <!-- TODO -->
+                <button type="button" class="close" id="close-button" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <div>
+                            <label>Наименнование города:</label> <!-- TODO -->
+                            <input type="text" class="form-control" data-bind="value: cityName" aria-describedby="name-error">
+                            <small id="name-error" class="form-text validation-error-text" data-bind="validationMessage: cityName"></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button class="btn btn-success" data-bind="click: addCity">@GlobalResources.Send</button>
+                <button class="btn btn-danger" data-dismiss="modal">@GlobalResources.Cancel</button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/operateCitiesVM")
+    <script>
+        var viewModel = operateCitiesVM;
+        $(function() {
+            viewModel.init();
+            ko.validation.init({
+                insertMessages: false,
+                decorateInputElement: true,
+                errorElementClass: "is-invalid"
+            }, true);
+            ko.applyBindings(viewModel);
+        });
+    </script>
+}
