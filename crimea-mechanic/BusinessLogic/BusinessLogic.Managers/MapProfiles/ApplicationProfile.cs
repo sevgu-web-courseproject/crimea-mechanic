@@ -21,17 +21,10 @@ namespace BusinessLogic.Managers.MapProfiles
                 .ForMember(d => d.Created, opt => opt.MapFrom(s => DateTime.UtcNow))
                 .ForMember(d => d.Updated, opt => opt.MapFrom(s => DateTime.UtcNow))
                 .ForMember(d => d.State, opt => opt.UseValue(ApplicationState.InSearch))
-                .ForMember(d => d.WorkType, opt => opt.Ignore());
+                .ForMember(d => d.WorkTypes, opt => opt.Ignore());
 
             CreateMap<Application, ApplicationBaseInfoDto>()
-                .ForMember(d => d.WorkClassDescription, opt => opt.MapFrom(s => s.WorkType != null
-                    ? s.WorkType.Class != null
-                        ? s.WorkType.Class.Name
-                        : null
-                    : null))
-                .ForMember(d => d.WorkTypeDescription, opt => opt.MapFrom(s => s.WorkType != null
-                    ? s.WorkType.Name
-                    : null));
+                .ForMember(d => d.WorkClasses, opt => opt.Ignore());
 
             CreateMap<Application, ApplicationShortInfoForUserDto>()
                 .IncludeBase<Application, ApplicationBaseInfoDto>()

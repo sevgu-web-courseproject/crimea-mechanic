@@ -49,9 +49,6 @@ namespace DataAccessLayer
             modelBuilder.Entity<UserProfile>()
                 .HasRequired(c => c.ApplicationUser)
                 .WithOptional(c => c.UserProfile);
-
-            modelBuilder.Entity<Application>()
-                .HasOptional(c => c.WorkType);
         }
 
         #endregion

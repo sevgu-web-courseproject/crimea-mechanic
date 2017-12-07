@@ -20,8 +20,7 @@
         CityName: ko.observable(),
         CityId: ko.observable(),
         Offers: ko.observableArray([]),
-        WorkClassDescription: ko.observable(),
-        WorkTypeDescription: ko.observable()
+        WorkClasses: ko.observableArray([])
     };
 
     var editApplication = {

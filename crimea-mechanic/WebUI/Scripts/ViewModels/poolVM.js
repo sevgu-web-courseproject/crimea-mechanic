@@ -6,12 +6,10 @@
         itemsPerPage: ko.observable(10),
         createdFrom: ko.observable(null),
         createdTo: ko.observable(null),
-        mark: ko.observable(null),
-        workTypeId: ko.observable(null)
+        mark: ko.observable(null)
     };
     var itemsCount = ko.observable(0);
     var marks = ko.observableArray([]);
-    var workTypes = ko.observableArray([]);
 
     var newOffer = {
         applicationId: ko.observable(),
@@ -32,8 +30,7 @@
             ItemsPerPage: filter.itemsPerPage(),
             MarkId: filter.mark(),
             CreatedFrom: filter.createdFrom(),
-            CreatedTo: filter.createdTo(),
-            WorkTypeId: filter.workTypeId()
+            CreatedTo: filter.createdTo()
         });
         ajaxHelper.postJson(url, data)
             .then(function (data) {
@@ -58,10 +55,6 @@
         ajaxHelper.get(window.resource.urls.webApiGetMarksFromPoolUrl)
             .then(function (data) {
                 marks(data);
-                return ajaxHelper.get(window.resource.urls.webApiGetWorkTypesFromPool);
-            })
-            .then(function(data) {
-                workTypes(data);
                 $(document).trigger("hideLoadingPanel");
             })
             .catch(function($xhr) {
@@ -174,10 +167,6 @@
         filter.mark.subscribe(function() {
             getApplications();
         });
-
-        filter.workTypeId.subscribe(function() {
-            getApplications();
-        });
     };
 
     return {
@@ -188,12 +177,10 @@
         createdFrom: filter.createdFrom,
         createdTo: filter.createdTo,
         mark: filter.mark,
-        workTypeId: filter.workTypeId,
         itemsCount: itemsCount,
         pages: pages,
         changePage: changePage,
         marks: marks,
-        workTypes: workTypes,
         sendOffer: sendOffer,
         deleteOffer: deleteOffer,
         saveApplicationId: saveApplicationId,

@@ -1,4 +1,6 @@
-﻿namespace BusinessLogic.Objects.Application
+﻿using System.Collections.Generic;
+
+namespace BusinessLogic.Objects.Application
 {
     /// <summary>
     /// ДТО для создание новой заявки
@@ -16,9 +18,9 @@
         public long CityId { get; set; }
 
         /// <summary>
-        /// Тип работы
+        /// Типы работы
         /// </summary>
-        public long? WorkTypeId { get; set; }
+        public IEnumerable<long> WorkTypes { get; set; }
 
         /// <summary>
         /// Описание необходимых работы

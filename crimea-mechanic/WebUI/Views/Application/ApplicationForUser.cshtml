@@ -84,10 +84,21 @@
                 @GlobalResources.City:
                 <span data-bind="text: $data.CityName"></span>
             </div>
-            <!-- ko if: $data.WorkClassDescription -->
+            <!-- ko if: $data.WorkClasses.length -->
             <div>
-                Тип работы: <!-- TODO -->
-                <span data-bind="text: $data.WorkTypeDescription"></span> (<span data-bind="text: $data.WorkClassDescription"></span>)
+                Работы:
+                <div class="row justify-content-center">
+                    <!-- ko foreach: $data.WorkClasses -->
+                    <div class="col-4">
+                        <span class="header-text" data-bind="text: $data.Name"></span>
+                        <ul>
+                            <!-- ko foreach: $data.Types -->
+                            <li data-bind="text: $data.Name"></li>
+                            <!-- /ko -->
+                        </ul>
+                    </div>
+                    <!-- /ko -->
+                </div>
             </div>
             <!-- /ko -->
             <div class="word-wrap">
@@ -164,11 +175,33 @@
                             <div>
                                 <label for="work-type-selector">Тип работ</label> <!-- TODO -->
                                 <select class="form-control" id="work-type-selector" data-bind="options: workTypes,
-                                        optionsValue: 'Id',
                                         optionsText: 'Name',
-                                        value: newApplication.workTypeId,
+                                        value: workType,
                                         optionsCaption: 'Выберите тип работы'"></select> <!-- TODO -->
                                 <small class="form-text text-muted">Не обязательно поле к заполнению</small> <!-- TODO -->
+                                <div class="pull-right">
+                                    <button class="btn btn-success" data-bind="click: addType, enable: workType()">Добавить</button>
+                                </div>
+                            </div>
+                            <br/>
+                            <div>
+                                <!-- ko if: applicationWorkTypes().length -->
+                                <div class="row">
+                                    <div class="col">
+                                        Работы:
+                                    </div>
+                                </div>
+                                <!-- ko foreach: applicationWorkTypes -->
+                                <div class="row">
+                                    <div class="col">
+                                        <span data-bind="text: $data.WorkTypeName"></span> (<span data-bind="text: $data.WorkClassName"></span>)
+                                        <div class="pull-right">
+                                            <button class="btn btn-danger btn-sm" data-bind="click: $root.deleteType">Удалить</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /ko -->
+                                <!-- /ko -->
                             </div>
                             <br/>
                             <div>
@@ -197,9 +230,9 @@
             decorateInputElement: true,
             errorElementClass: "is-invalid"
         }, true);
-        ko.applyBindings(viewModel);
         $(function() {
             viewModel.init();
+            ko.applyBindings(viewModel);
         });
     </script>
 }

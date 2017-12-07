@@ -80,9 +80,22 @@
             <div class="comment-body">
                 <div class="text">
                     <p data-bind="text: $data.Description"></p>
-                    <!-- ko if: $data.WorkClassDescription() -->
-                    <span data-bind="text: $data.WorkTypeDescription"></span>
-                    (<span data-bind="text: $data.WorkClassDescription"></span>)
+                    <!-- ko if: $data.WorkClasses().length -->
+                    <hr />
+                    <div>
+                        <div class="row justify-content-center">
+                            <!-- ko foreach: $data.WorkClasses -->
+                            <div class="col-4">
+                                <span class="header-text" data-bind="text: $data.Name"></span>
+                                <ul>
+                                    <!-- ko foreach: $data.Types -->
+                                    <li data-bind="text: $data.Name"></li>
+                                    <!-- /ko -->
+                                </ul>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
                     <!-- /ko -->
                 </div>
                 <p class="attribution" data-bind="text: $data.Created"></p>

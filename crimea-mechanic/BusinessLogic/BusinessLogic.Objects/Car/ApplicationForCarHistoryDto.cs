@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using BusinessLogic.Objects.Works;
 using Common.Enums;
 
 namespace BusinessLogic.Objects.Car
@@ -11,14 +13,9 @@ namespace BusinessLogic.Objects.Car
         public long Id { get; set; }
 
         /// <summary>
-        /// Наименнование класса работ
+        /// Классы работ
         /// </summary>
-        public string WorkClassDescription { get; set; }
-
-        /// <summary>
-        /// Наименнование типа работы
-        /// </summary>
-        public string WorkTypeDescription { get; set; }
+        public IEnumerable<WorkClassDto> WorkClasses { get; set; }
 
         /// <summary>
         /// Описание заявки
