@@ -33,10 +33,21 @@
                 <span data-bind="text: model.Car.FuelTypeDescription"></span>
                 (VIN: <span data-bind="text: model.Car.Vin"></span>)
             </div>
-            <!-- ko if: model.WorkClassDescription() -->
+            <!-- ko if: model.WorkClasses().length -->
             <div>
-                Тип работы: <!-- TODO -->
-                <span data-bind="text: model.WorkTypeDescription"></span> (<span data-bind="text: model.WorkClassDescription"></span>)
+                Работы:
+                <div class="row justify-content-center">
+                    <!-- ko foreach: model.WorkClasses -->
+                    <div class="col-4">
+                        <span class="header-text" data-bind="text: $data.Name"></span>
+                        <ul>
+                            <!-- ko foreach: $data.Types -->
+                            <li data-bind="text: $data.Name"></li>
+                            <!-- /ko -->
+                        </ul>
+                    </div>
+                    <!-- /ko -->
+                </div>
             </div>
             <!-- /ko -->
             <div class="word-wrap">

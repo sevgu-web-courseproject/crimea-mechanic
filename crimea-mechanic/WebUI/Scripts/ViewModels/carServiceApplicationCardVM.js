@@ -8,15 +8,15 @@
             Model: ko.observable(),
             Year: ko.observable(),
             EngineCapacity: ko.observable(),
-            FuelTypeDescription: ko.observable()
+            FuelTypeDescription: ko.observable(),
+            Vin: ko.observable()
         },
         Description: ko.observable(),
         StateDescription: ko.observable(),
         CityName: ko.observable(),
         Created: ko.observable(),
         State: ko.observable(),
-        WorkClassDescription: ko.observable(),
-        WorkTypeDescription: ko.observable()
+        WorkClasses: ko.observableArray([])
     };
 
     var rejectApplication = function() {

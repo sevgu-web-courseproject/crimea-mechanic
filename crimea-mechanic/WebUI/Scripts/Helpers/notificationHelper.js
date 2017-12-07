@@ -12,5 +12,12 @@
             message: message,
             position: 'bottomRight'
         });
+    },
+    warning: function(title, message) {
+        iziToast.warning({
+            title: title,
+            message: message,
+            position: 'bottomRight'
+        });
     }
 };

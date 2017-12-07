@@ -135,14 +135,13 @@ namespace BusinessLogic.Managers
                     .ToList();
             }
             dto.WorkClasses = application.WorkTypes
-                    .GroupBy(x => x.Class)
-                    .Select(x =>
-                    {
-                        var info = Mapper.Map<WorkClassDto>(x.Key);
-                        info.Types = Mapper.Map<IEnumerable<WorkTypeDto>>(x.ToList());
-                        return info;
-                    })
-                    .ToList();
+                .GroupBy(y => y.Class.Name)
+                .Select(y => new WorkClassDto
+                {
+                    Name = y.Key,
+                    Types = Mapper.Map<IEnumerable<WorkTypeDto>>(y.ToList())
+                })
+                .ToList();
 
             return dto;
         }
@@ -155,12 +154,11 @@ namespace BusinessLogic.Managers
 
             var dto = Mapper.Map<ApplicationInfoForServiceDto>(application);
             dto.WorkClasses = application.WorkTypes
-                .GroupBy(x => x.Class)
-                .Select(x =>
+                .GroupBy(y => y.Class.Name)
+                .Select(y => new WorkClassDto
                 {
-                    var info = Mapper.Map<WorkClassDto>(x.Key);
-                    info.Types = Mapper.Map<IEnumerable<WorkTypeDto>>(x.ToList());
-                    return info;
+                    Name = y.Key,
+                    Types = Mapper.Map<IEnumerable<WorkTypeDto>>(y.ToList())
                 })
                 .ToList();
             return  dto;
@@ -185,12 +183,11 @@ namespace BusinessLogic.Managers
                     .ToList();
             }
             dto.WorkClasses = application.WorkTypes
-                .GroupBy(x => x.Class)
-                .Select(x =>
+                .GroupBy(y => y.Class.Name)
+                .Select(y => new WorkClassDto
                 {
-                    var info = Mapper.Map<WorkClassDto>(x.Key);
-                    info.Types = Mapper.Map<IEnumerable<WorkTypeDto>>(x.ToList());
-                    return info; 
+                    Name = y.Key,
+                    Types = Mapper.Map<IEnumerable<WorkTypeDto>>(y.ToList())
                 })
                 .ToList();
 
@@ -216,12 +213,11 @@ namespace BusinessLogic.Managers
                 {
                     var dto = Mapper.Map<ApplicationShortInfoForUserDto>(x);
                     dto.WorkClasses = x.WorkTypes
-                        .GroupBy(y => y.Class)
-                        .Select(y =>
+                        .GroupBy(y => y.Class.Name)
+                        .Select(y => new WorkClassDto
                         {
-                            var info = Mapper.Map<WorkClassDto>(y.Key);
-                            info.Types = Mapper.Map<IEnumerable<WorkTypeDto>>(y.ToList());
-                            return info;
+                            Name = y.Key,
+                            Types = Mapper.Map<IEnumerable<WorkTypeDto>>(y.ToList())
                         })
                         .ToList();
                     return dto;
@@ -257,12 +253,11 @@ namespace BusinessLogic.Managers
                     var dto = Mapper.Map<ApplicationShortInfoForServiceDto>(item);
                     dto.OfferId = item.Offers.FirstOrDefault(of => !of.IsDeleted && of.Service.ApplicationUser.Id == currentUserId)?.Id;
                     dto.WorkClasses = item.WorkTypes
-                        .GroupBy(y => y.Class)
-                        .Select(y =>
+                        .GroupBy(y => y.Class.Name)
+                        .Select(y => new WorkClassDto
                         {
-                            var info = Mapper.Map<WorkClassDto>(y.Key);
-                            info.Types = Mapper.Map<IEnumerable<WorkTypeDto>>(y.ToList());
-                            return info;
+                            Name = y.Key,
+                            Types = Mapper.Map<IEnumerable<WorkTypeDto>>(y.ToList())
                         })
                         .ToList();
                     return dto;
@@ -296,12 +291,11 @@ namespace BusinessLogic.Managers
                 {
                     var dto = Mapper.Map<ApplicationShortInfoForAdministratorDto>(x);
                     dto.WorkClasses = x.WorkTypes
-                        .GroupBy(y => y.Class)
-                        .Select(y =>
+                        .GroupBy(y => y.Class.Name)
+                        .Select(y => new WorkClassDto
                         {
-                            var info = Mapper.Map<WorkClassDto>(y.Key);
-                            info.Types = Mapper.Map<IEnumerable<WorkTypeDto>>(y.ToList());
-                            return info;
+                            Name = y.Key,
+                            Types = Mapper.Map<IEnumerable<WorkTypeDto>>(y.ToList())
                         })
                         .ToList();
                     return dto;
@@ -337,12 +331,11 @@ namespace BusinessLogic.Managers
                     var dto = Mapper.Map<ApplicationShortInfoForServiceDto>(item);
                     dto.OfferId = item.Offers.FirstOrDefault(of => !of.IsDeleted && of.Service.ApplicationUser.Id == currentUserId)?.Id;
                     dto.WorkClasses = item.WorkTypes
-                        .GroupBy(y => y.Class)
-                        .Select(y =>
+                        .GroupBy(y => y.Class.Name)
+                        .Select(y => new WorkClassDto
                         {
-                            var info = Mapper.Map<WorkClassDto>(y.Key);
-                            info.Types = Mapper.Map<IEnumerable<WorkTypeDto>>(y.ToList());
-                            return info;
+                            Name = y.Key,
+                            Types = Mapper.Map<IEnumerable<WorkTypeDto>>(y.ToList())
                         })
                         .ToList();
                     return dto;
@@ -573,6 +566,7 @@ namespace BusinessLogic.Managers
         private IQueryable<Application> BuildQueryForUser(ApplicationsFilter filter, string currentUserId)
         {
             var query = UnitOfWork.Repository<IApplicationRepository>().GetAll(true)
+                .Include(app => app.WorkTypes)
                 .Where(app => app.Car.User.ApplicationUser.Id == currentUserId);
 
             if (filter.State.HasValue)

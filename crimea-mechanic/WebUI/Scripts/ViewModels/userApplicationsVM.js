@@ -32,6 +32,8 @@
         })
     }
 
+    var applicationWorkTypes = ko.observableArray([]);
+
     var applicationStates = [
         { Id: 5, Name: window.resource.texts.deleted },  
         { Id: 10, Name: window.resource.texts.inSearch }, 
@@ -158,7 +160,7 @@
         newApplication.carId(null);
         newApplication.cityId(null);
         newApplication.description(null);
-        newApplication.workTypeId(null);
+        applicationWorkTypes([]);
         currentWorkClass(null);
         workTypes([]);
     };
@@ -174,11 +176,15 @@
             return;
         }
         $(document).trigger("showLoadingPanel");
+        var types = [];
+        applicationWorkTypes().forEach(function (item) {
+            types.push(item.Id);
+        });
         var data = JSON.stringify({
             CarId: newApplication.carId(),
             CityId: newApplication.cityId(),
             Description: newApplication.description(),
-            WorkTypes: newApplication.workTypes()
+            WorkTypes: types
         });
         ajaxHelper.postJsonWithoutResult(window.resource.urls.webApiCreateApplicationUrl, data)
             .then(function() {
@@ -209,8 +215,41 @@
         getApplications();
     };
 
-    var addType = function() {
-        newApplication.workTypes().push(workType);
+    var isShowWarning = false;
+    var addType = function () {
+        var obj = {
+            Id: workType().Id,
+            WorkTypeName: workType().Name,
+            WorkClassId: currentWorkClass().Id,
+            WorkClassName: currentWorkClass().Name
+        };
+        var isExist = false;
+        var classes = {};
+        applicationWorkTypes().forEach(function(item) {
+            if (item.Id === obj.Id) {
+                isExist = true;
+                return;
+            }
+            classes[obj.WorkClassName] = true;
+            classes[item.WorkClassName] = true;
+        });
+        var count = 0;
+        for (var key in classes) {
+            count++;
+        }
+        if (count > 1 && !isShowWarning) {
+            notificationHelper.warning("Предупреждение", "Вы добавляете работы из разных классов, нахождение автосервиса будет затруднено");
+            isShowWarning = true;
+        }
+        if (!isExist) {
+            applicationWorkTypes.push(obj);
+        } else {
+            notificationHelper.error(window.resource.texts.error, "Данный тип работы уже добавлен");
+        }
+    };
+
+    var deleteType = function(workType) {
+        applicationWorkTypes.remove(workType);
     };
 
     var init = function () {
@@ -257,5 +296,7 @@
         find: find,
         addType: addType,
         workType: workType,
+        applicationWorkTypes: applicationWorkTypes,
+        deleteType: deleteType
     };
 };

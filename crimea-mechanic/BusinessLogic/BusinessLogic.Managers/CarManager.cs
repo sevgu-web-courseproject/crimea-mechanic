@@ -6,6 +6,7 @@ using AutoMapper;
 using BusinessLogic.Managers.Abstraction;
 using BusinessLogic.Objects;
 using BusinessLogic.Objects.Car;
+using BusinessLogic.Objects.Works;
 using BusinessLogic.Resources;
 using Common.Enums;
 using Common.Exceptions;
@@ -144,7 +145,19 @@ namespace BusinessLogic.Managers
             var userCar = CheckAndGetUserCar(repository, userCarId, currentUserId);
             var dto = Mapper.Map<UserCarFullDto>(userCar);
             var applications = userCar.Applications.Where(app => !app.IsDeleted).OrderByDescending(app => app.Created).ToList();
-            dto.Applications = Mapper.Map<IEnumerable<ApplicationForCarHistoryDto>>(applications);
+            dto.Applications = applications.Select(app =>
+            {
+                var info = Mapper.Map<ApplicationForCarHistoryDto>(app);
+                info.WorkClasses = app.WorkTypes
+                    .GroupBy(y => y.Class.Name)
+                    .Select(y => new WorkClassDto
+                    {
+                        Name = y.Key,
+                        Types = Mapper.Map<IEnumerable<WorkTypeDto>>(y.ToList())
+                    })
+                    .ToList();
+                return info;
+            });
             return dto;
         }
 

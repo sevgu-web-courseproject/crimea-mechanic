@@ -32,10 +32,6 @@
             <label for="mark">@GlobalResources.CarMark</label>
             <select id="mark" class="form-control" data-bind="options: marks, optionsValue: 'Id', optionsText: 'Name', value: mark, optionsCaption: '@GlobalResources.ChooseAMark'"></select>
         </div>
-        <div class="col">
-            <label for="work-type">Тип работы</label> <!-- TODO -->
-            <select id="work-type" class="form-control" data-bind="options: workTypes, optionsValue: 'Id', optionsText: 'Name', value: workTypeId, optionsCaption: 'Выберите тип работ'"></select> <!-- TODO -->
-        </div>
     </div>
     
     <hr />
@@ -62,10 +58,21 @@
                 <span data-bind="text: $data.Car.FuelTypeDescription"></span>
                 (VIN: <span data-bind="text: $data.Car.Vin"></span>)
             </div>
-            <!-- ko if: $data.WorkClassDescription -->
+            <!-- ko if: $data.WorkClasses.length -->
             <div>
-                Тип работы: <!-- TODO -->
-                <span data-bind="text: $data.WorkTypeDescription"></span> (<span data-bind="text: $data.WorkClassDescription"></span>)
+                Работы:
+                <div class="row justify-content-center">
+                    <!-- ko foreach: $data.WorkClasses -->
+                    <div class="col-4">
+                        <span class="header-text" data-bind="text: $data.Name"></span>
+                        <ul>
+                            <!-- ko foreach: $data.Types -->
+                            <li data-bind="text: $data.Name"></li>
+                            <!-- /ko -->
+                        </ul>
+                    </div>
+                    <!-- /ko -->
+                </div>
             </div>
             <!-- /ko -->
             <div class="word-wrap">

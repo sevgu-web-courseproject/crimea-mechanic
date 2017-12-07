@@ -19,8 +19,7 @@
         CityName: ko.observable(),
         Created: ko.observable(),
         Offers: ko.observableArray([]),
-        WorkClassDescription: ko.observable(),
-        WorkTypeDescription: ko.observable()
+        WorkClasses: ko.observableArray([])
     };
 
     var getCard = function () {
