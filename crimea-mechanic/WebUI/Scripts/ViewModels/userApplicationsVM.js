@@ -17,6 +17,7 @@
     var workClasses = ko.observableArray([]);
     var currentWorkClass = ko.observable();
     var workTypes = ko.observableArray([]);
+    var workType = ko.observable();
 
     var newApplication = {
         carId: ko.observable().extend({
@@ -25,7 +26,7 @@
         cityId: ko.observable().extend({
             required: { params: true, message: window.resource.errors.specifyCity } 
         }),
-        workTypeId: ko.observable(null),
+        workTypes: ko.observableArray([]),
         description: ko.observable().extend({
             required: { params: true, message: window.resource.errors.specifyWorksDescription } 
         })
@@ -177,7 +178,7 @@
             CarId: newApplication.carId(),
             CityId: newApplication.cityId(),
             Description: newApplication.description(),
-            WorkTypeId: newApplication.workTypeId()
+            WorkTypes: newApplication.workTypes()
         });
         ajaxHelper.postJsonWithoutResult(window.resource.urls.webApiCreateApplicationUrl, data)
             .then(function() {
@@ -206,6 +207,10 @@
     var find = function () {
         filter.currentPage(1);
         getApplications();
+    };
+
+    var addType = function() {
+        newApplication.workTypes().push(workType);
     };
 
     var init = function () {
@@ -249,6 +254,8 @@
         newApplication: newApplication,
         sendNewApplication: sendNewApplication,
         clearFilter: clearFilter,
-        find: find
+        find: find,
+        addType: addType,
+        workType: workType,
     };
 };

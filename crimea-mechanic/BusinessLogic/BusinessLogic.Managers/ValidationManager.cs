@@ -213,12 +213,16 @@ namespace BusinessLogic.Managers
                 validationResult.AddError(ValidationErrorResources.ApplicationDescriptionIsEmpty);
             }
 
-            if (dto.WorkTypeId.HasValue)
+            if (dto.WorkTypes != null && dto.WorkTypes.Any())
             {
-                var workType = _unitOfWork.Repository<IWorkTypeRepository>().Get(dto.WorkTypeId.Value);
-                if (workType == null)
+                var repository = _unitOfWork.Repository<IWorkTypeRepository>();
+                foreach (var workTypeId in dto.WorkTypes)
                 {
-                    validationResult.AddError(string.Format(ValidationErrorResources.WorkTypeNotFound, dto.WorkTypeId.Value));
+                    var workType = repository.Get(workTypeId);
+                    if (workType == null)
+                    {
+                        validationResult.AddError(string.Format(ValidationErrorResources.WorkTypeNotFound, workType));
+                    }
                 }
             }
 

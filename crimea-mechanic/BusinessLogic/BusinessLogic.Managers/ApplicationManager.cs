@@ -61,9 +61,14 @@ namespace BusinessLogic.Managers
                 application.Car.Applications = new List<Application>();
             }
 
-            if (dto.WorkTypeId.HasValue)
+            if (dto.WorkTypes != null && dto.WorkTypes.Any())
             {
-                application.WorkType = UnitOfWork.Repository<IWorkTypeRepository>().Get(dto.WorkTypeId.Value);
+                var repository = UnitOfWork.Repository<IWorkTypeRepository>();
+                application.WorkTypes = new List<WorkType>();
+                foreach (var work in dto.WorkTypes)
+                {
+                    application.WorkTypes.Add(repository.Get(work));
+                }
             }
 
             application.Car.Applications.Add(application);
@@ -129,6 +134,15 @@ namespace BusinessLogic.Managers
                     .Select(Mapper.Map<OfferInfoDto>)
                     .ToList();
             }
+            dto.WorkClasses = application.WorkTypes
+                    .GroupBy(x => x.Class)
+                    .Select(x =>
+                    {
+                        var info = Mapper.Map<WorkClassDto>(x.Key);
+                        info.Types = Mapper.Map<IEnumerable<WorkTypeDto>>(x.ToList());
+                        return info;
+                    })
+                    .ToList();
 
             return dto;
         }
@@ -139,7 +153,17 @@ namespace BusinessLogic.Managers
 
             var application = CheckAndGetApplicationForCarService(applicationId, currentUserId);
 
-            return  Mapper.Map<ApplicationInfoForServiceDto>(application);
+            var dto = Mapper.Map<ApplicationInfoForServiceDto>(application);
+            dto.WorkClasses = application.WorkTypes
+                .GroupBy(x => x.Class)
+                .Select(x =>
+                {
+                    var info = Mapper.Map<WorkClassDto>(x.Key);
+                    info.Types = Mapper.Map<IEnumerable<WorkTypeDto>>(x.ToList());
+                    return info;
+                })
+                .ToList();
+            return  dto;
         }
 
         public ApplicationInfoForAdministratorDto GetApplicationInfoForAdministrator(long applicationId, string currentUserId)
@@ -160,6 +184,15 @@ namespace BusinessLogic.Managers
                     .Select(Mapper.Map<OfferInfoDto>)
                     .ToList();
             }
+            dto.WorkClasses = application.WorkTypes
+                .GroupBy(x => x.Class)
+                .Select(x =>
+                {
+                    var info = Mapper.Map<WorkClassDto>(x.Key);
+                    info.Types = Mapper.Map<IEnumerable<WorkTypeDto>>(x.ToList());
+                    return info; 
+                })
+                .ToList();
 
             return dto;
         }
@@ -179,7 +212,20 @@ namespace BusinessLogic.Managers
 
             var result = Paginate(filter.CurrentPage, filter.ItemsPerPage, BuildQueryForUser(filter, currentUserId), out var itemsCount)
                 .ToList()
-                .Select(Mapper.Map<ApplicationShortInfoForUserDto>);
+                .Select(x =>
+                {
+                    var dto = Mapper.Map<ApplicationShortInfoForUserDto>(x);
+                    dto.WorkClasses = x.WorkTypes
+                        .GroupBy(y => y.Class)
+                        .Select(y =>
+                        {
+                            var info = Mapper.Map<WorkClassDto>(y.Key);
+                            info.Types = Mapper.Map<IEnumerable<WorkTypeDto>>(y.ToList());
+                            return info;
+                        })
+                        .ToList();
+                    return dto;
+                });
 
             return new CollectionResult<ApplicationShortInfoForUserDto>
             {
@@ -210,6 +256,15 @@ namespace BusinessLogic.Managers
                 {
                     var dto = Mapper.Map<ApplicationShortInfoForServiceDto>(item);
                     dto.OfferId = item.Offers.FirstOrDefault(of => !of.IsDeleted && of.Service.ApplicationUser.Id == currentUserId)?.Id;
+                    dto.WorkClasses = item.WorkTypes
+                        .GroupBy(y => y.Class)
+                        .Select(y =>
+                        {
+                            var info = Mapper.Map<WorkClassDto>(y.Key);
+                            info.Types = Mapper.Map<IEnumerable<WorkTypeDto>>(y.ToList());
+                            return info;
+                        })
+                        .ToList();
                     return dto;
                 });
 
@@ -237,7 +292,20 @@ namespace BusinessLogic.Managers
 
             var result = Paginate(filter.CurrentPage, filter.ItemsPerPage, BuildQueryForAdministrator(filter), out var itemsCount)
                 .ToList()
-                .Select(Mapper.Map<ApplicationShortInfoForAdministratorDto>);
+                .Select(x =>
+                {
+                    var dto = Mapper.Map<ApplicationShortInfoForAdministratorDto>(x);
+                    dto.WorkClasses = x.WorkTypes
+                        .GroupBy(y => y.Class)
+                        .Select(y =>
+                        {
+                            var info = Mapper.Map<WorkClassDto>(y.Key);
+                            info.Types = Mapper.Map<IEnumerable<WorkTypeDto>>(y.ToList());
+                            return info;
+                        })
+                        .ToList();
+                    return dto;
+                });
 
             return new CollectionResult<ApplicationShortInfoForAdministratorDto>
             {
@@ -268,6 +336,15 @@ namespace BusinessLogic.Managers
                 {
                     var dto = Mapper.Map<ApplicationShortInfoForServiceDto>(item);
                     dto.OfferId = item.Offers.FirstOrDefault(of => !of.IsDeleted && of.Service.ApplicationUser.Id == currentUserId)?.Id;
+                    dto.WorkClasses = item.WorkTypes
+                        .GroupBy(y => y.Class)
+                        .Select(y =>
+                        {
+                            var info = Mapper.Map<WorkClassDto>(y.Key);
+                            info.Types = Mapper.Map<IEnumerable<WorkTypeDto>>(y.ToList());
+                            return info;
+                        })
+                        .ToList();
                     return dto;
                 });
 
@@ -428,7 +505,8 @@ namespace BusinessLogic.Managers
 
         public IEnumerable<WorkTypeDto> GetAvailableWorkTypesFromPool(string currentUserId)
         {
-            UserManager.IsUserInCarServiceRole(currentUserId);
+            return new List<WorkTypeDto>();
+            /*UserManager.IsUserInCarServiceRole(currentUserId);
             var service = UnitOfWork.Repository<ICarServiceRepository>().GetByUserId(currentUserId);
 
             if (service.State == CarServiceState.Blocked)
@@ -438,12 +516,11 @@ namespace BusinessLogic.Managers
 
             var query = UnitOfWork.Repository<IApplicationRepository>()
                 .GetAll(true)
-                .Include(app => app.WorkType)
-                .Include(app => app.WorkType.Class)
+                .Include(app => app.WorkTypes)
                 .Include(app => app.City)
-                .Where(app => !app.IsDeleted && app.State == ApplicationState.InSearch);
+                .Where(app => !app.IsDeleted && app.State == ApplicationState.InSearch);*/
 
-            var result = query.Where(app => app.City.Id == service.City.Id && app.WorkType != null)
+            /*var result = query.Where(app => app.City.Id == service.City.Id && app.WorkTypes.Contains())
                 .Select(x => x.WorkType)
                 .ToList()
                 .GroupBy(x => x.Name)
@@ -456,7 +533,7 @@ namespace BusinessLogic.Managers
                 })
                 .ToList();
 
-            return result;
+            return result;*/
         }
 
         #endregion
@@ -561,7 +638,7 @@ namespace BusinessLogic.Managers
 
             var query = UnitOfWork.Repository<IApplicationRepository>()
                 .GetAll(true)
-                .Include(app => app.WorkType)
+                .Include(app => app.WorkTypes)
                 .Include(app => app.City)
                 .Include(app => app.Car)
                 .Include(app => app.Car.Model)
@@ -571,12 +648,7 @@ namespace BusinessLogic.Managers
             query = query.Where(app => app.City.Id == service.City.Id);
 
             var workTypesId = service.WorkTypes.Select(s => s.Id).ToList();
-            query = query.Where(app => app.WorkType == null || workTypesId.Contains(app.WorkType.Id));
-
-            if (filter.WorkTypeId.HasValue)
-            {
-                query = query.Where(app => app.WorkType.Id == filter.WorkTypeId.Value);
-            }
+            query = query.Where(app => app.WorkTypes.Any() && app.WorkTypes.All(p => workTypesId.Contains(p.Id)));
 
             if (filter.CreatedFrom.HasValue)
             {

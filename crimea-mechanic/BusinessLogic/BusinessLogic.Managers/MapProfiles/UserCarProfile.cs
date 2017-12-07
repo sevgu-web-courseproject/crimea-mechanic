@@ -27,14 +27,7 @@ namespace BusinessLogic.Managers.MapProfiles
 
             CreateMap<Application, ApplicationForCarHistoryDto>()
                 .ForMember(d => d.StateDescription, opt => opt.MapFrom(s => s.State.GetDescription()))
-                .ForMember(d => d.WorkClassDescription, opt => opt.MapFrom(s => s.WorkType != null
-                    ? s.WorkType.Class != null
-                        ? s.WorkType.Class.Name
-                        : null
-                    : null))
-                .ForMember(d => d.WorkTypeDescription, opt => opt.MapFrom(s => s.WorkType != null
-                    ? s.WorkType.Name
-                    : null));
+                .ForMember(d => d.WorkClasses, opt => opt.Ignore());
 
             CreateMap<UserCar, UserCarFullDto>()
                 .IncludeBase<UserCar, UserCarDto>()
